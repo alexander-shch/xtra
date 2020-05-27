@@ -1,32 +1,67 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import { sign, verify } from 'jsonwebtoken';
+import { createHash } from 'crypto';
+import { querySingle } from '../db/helper';
+import { User } from '../models';
 
-type RequestExtend = Request & {
+export type RequestExtend = Request & {
   user?: any;
 };
 
 const authRouter = Router();
 
-authRouter.post('/login', (req, res) => {
-  const { username, password } = req.body;
-  if (username === 'bob' && password === '1234') {
-    return res.status(200).json({
-      expiresIn: 3600,
-      token: sign(
-        {
-          username,
-          id: '1',
-        },
-        process.env.ACCESS_TOKEN_SECRET as string,
-        {
-          expiresIn: 3600,
-        }
-      ),
+authRouter.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({
+      message: 'both email and password are required',
     });
   }
-  return res.status(404).json({
-    message: 'user was not found',
-  });
+
+  const pass = createHash('sha256')
+    .update(password as string)
+    .digest('base64');
+
+  const query = `SELECT 
+  users.id,
+  CONCAT(users.fname,' ',users.lname) as fullname,
+  users.role,
+  users.type_of_cource,
+  role.permissions
+  FROM
+  users
+  INNER JOIN role ON role.id = users.role
+  WHERE
+  role.onsite = 1
+  AND users.onsite = 1
+  AND users.email = '${email}'
+  AND users.password = '${pass}'`;
+
+  return querySingle<User>(query)
+    .then((user) => {
+      if (!user) {
+        return res.sendStatus(404);
+      }
+      console.log(user);
+
+      return res.status(200).json({
+        expiresIn: 3600,
+        token: sign(
+          {
+            ...user,
+            permissions: JSON.parse((user.permissions as unknown) as string),
+          },
+          process.env.ACCESS_TOKEN_SECRET as string,
+          {
+            expiresIn: 3600,
+          }
+        ),
+      });
+    })
+    .catch((err) => {
+      console.error(err);
+      return res.sendStatus(500);
+    });
 });
 
 export function authenticateToken(
