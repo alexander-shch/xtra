@@ -1,0 +1,52 @@
+// imports
+@import './assets/scss/colors';
+@import 'bulma';
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#root,
+#app-container,
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.page-content-wrapper {
+  display: flex;
+  height: 100%;
+}
+
+.selectable {
+  user-select: all;
+}
+
+.content .tabs ul {
+  margin: 0;
+}
+
+.react-notification-root {
+  left: 0;
+}
+
+// Create classes for height {.height-10%/100%}
+@for $i from 1 through 10 {
+  .height-#{$i+'0'} {
+    height: #{$i+'0%'};
+    max-height: #{$i+'0%'};
+  }
+}
