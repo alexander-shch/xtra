@@ -7,12 +7,10 @@ function hasPermission(
   scope: PermissionsScope,
   permission: PermissionOptions
 ): boolean {
-  console.log(user);
-
   return (
-    user?.permissions &&
-    user?.permissions[scope] &&
-    user?.permissions[scope][permission]
+    user?.role.permissions &&
+    user?.role.permissions[scope] &&
+    user?.role.permissions[scope][permission]
   );
 }
 

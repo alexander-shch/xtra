@@ -1,39 +1,34 @@
-import UserModel from './model';
+import UserModel, { IUser } from './model';
 import { User } from '../../../models';
 
-export async function FindUser(
-  queryObject: Partial<User & { password: string }>
-) {
+export async function FindUser(queryObject: Partial<IUser>) {
   return UserModel.findOne(queryObject).select('-password');
 }
 
-export async function FindUserFull(
-  queryObject: Partial<User & { password: string }>
-) {
+export async function FindUserFull(queryObject: Partial<IUser>) {
   return UserModel.aggregate<User>([
     {
       $match: queryObject,
     },
     {
       $lookup: {
-        from: 'Roles',
+        from: 'roles',
         localField: 'role',
         foreignField: '_id',
-        as: 'roles',
+        as: 'role',
       },
     },
     {
-      $unwind: '$roles',
+      $unwind: '$role',
     },
     {
       $project: {
-        password: -1,
+        password: 0,
       },
     },
   ])
     .limit(1)
-    .then((userList) => userList[0])
-    .then((singleUser) => singleUser);
+    .then((singleUser) => singleUser[0]);
 }
 
 export async function CreateUser(user: User) {

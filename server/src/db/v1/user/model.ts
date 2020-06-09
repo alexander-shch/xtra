@@ -2,7 +2,6 @@ import mongoose, { Schema, Document } from 'mongoose';
 import { createHash } from 'crypto';
 
 export interface IUser extends Document {
-  id: string;
   name: string;
   lastName: string;
   email: string;
