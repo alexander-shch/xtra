@@ -6,7 +6,10 @@ import mongoConnect from './db/v1';
 
 const app = express();
 
-app.use(express.json());
+// Simple check if body contains well defined content
+app.use((req, res, next) =>
+  express.json()(req, res, (err) => (err ? res.sendStatus(400) : next()))
+);
 
 app.use(authRouter);
 app.use(appRouter);

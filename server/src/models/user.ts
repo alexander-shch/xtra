@@ -1,10 +1,11 @@
-import { PermissionList } from './permissions';
+import { Role } from './permissions';
 
 export interface User {
-  id: string;
+  _id: string;
   fullName: string;
   name: string;
   lastName: string;
   email: string;
-  permissions: PermissionList;
+  role: Role;
+  password?: string;
 }

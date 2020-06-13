@@ -1,4 +1,6 @@
 import mongoose from 'mongoose';
+import { CreateRole, FindRole } from './permissions/controller';
+import { DefaultPermissionsSuperUser } from '../../settings/permissions';
 
 export default () => {
   const connect = () => {
@@ -12,6 +14,7 @@ export default () => {
         }
       )
       .then(() => {
+        populate();
         return console.info(`Successfully connected to ${process.env.DB_NAME}`);
       })
       .catch((error) => {
@@ -24,3 +27,18 @@ export default () => {
   // In case of disconnection reconnect
   mongoose.connection.on('disconnected', connect);
 };
+
+function createRole() {
+  FindRole({ name: 'admin' }).then((role) => {
+    if (!role) {
+      CreateRole({
+        name: 'admin',
+        permissions: DefaultPermissionsSuperUser,
+      });
+    }
+  });
+}
+
+function populate() {
+  createRole();
+}
