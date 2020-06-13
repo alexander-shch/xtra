@@ -5,7 +5,7 @@ export async function FindUser(queryObject: Partial<IUser>) {
   return UserModel.findOne(queryObject).select('-password');
 }
 
-export async function FindUserFull(queryObject: Partial<IUser>) {
+export async function FindUserFull(queryObject: Partial<User>) {
   return UserModel.aggregate<User>([
     {
       $match: queryObject,
@@ -31,7 +31,7 @@ export async function FindUserFull(queryObject: Partial<IUser>) {
     .then((singleUser) => singleUser[0]);
 }
 
-export async function CreateUser(user: User) {
+export async function CreateUser(user: IUser) {
   const newUser = new UserModel(user);
-  return newUser.save().then((user) => user);
+  return newUser.save();
 }

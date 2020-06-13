@@ -2,7 +2,7 @@ import { Router, Response } from 'express';
 import { RequestExtend } from '../../auth';
 import allow from '../../helper/user-permission';
 import { CreateUser, FindUserFull } from '../../db/v1/user/controller';
-import { Types, isValidObjectId } from 'mongoose';
+import { isValidObjectId } from 'mongoose';
 
 const userRouter = Router();
 const scope = 'user';
@@ -37,7 +37,7 @@ userRouter.get(
       return res.sendStatus(400);
     }
     return FindUserFull({
-      _id: Types.ObjectId(req.params.id),
+      _id: req.params.id,
     })
       .then((user) => {
         if (!user) {
