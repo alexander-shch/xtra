@@ -2,7 +2,7 @@ import RoleModel, { IRole, IRoleDOC } from './model';
 
 export async function CreateRole(role: IRole) {
   const roleModel = new RoleModel(role);
-  return roleModel.save();
+  return roleModel.save().then((role) => role.toObject());
 }
 
 export async function FindRole(query: Partial<IRoleDOC>) {

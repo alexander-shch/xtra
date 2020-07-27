@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 import { CreateRole, FindRole } from './permissions/controller';
 import { DefaultPermissionsSuperUser } from '../../settings/permissions';
+import { FindUser, CreateUser } from './user/controller';
+import { Role } from '../../models';
 
 export default () => {
   const connect = () => {
@@ -28,17 +30,32 @@ export default () => {
   mongoose.connection.on('disconnected', connect);
 };
 
-function createRole() {
-  FindRole({ name: 'admin' }).then((role) => {
+function createAdminUser(role: Role) {
+  return FindUser({ name: 'admin' }).then((user) => {
+    if (!user) {
+      return CreateUser({
+        name: 'admin',
+        lastName: 'admin',
+        role: role._id,
+        email: 'admin@gmail.com',
+        password: 'o87y3hu4g',
+      });
+    }
+    return Promise.reject('User admin was already populated');
+  });
+}
+
+async function populate() {
+  try {
+    let role = await FindRole({ name: 'admin' });
     if (!role) {
-      CreateRole({
+      role = await CreateRole({
         name: 'admin',
         permissions: DefaultPermissionsSuperUser,
       });
     }
-  });
-}
-
-function populate() {
-  createRole();
+    await createAdminUser(role);
+  } catch (e) {
+    console.error(e);
+  }
 }

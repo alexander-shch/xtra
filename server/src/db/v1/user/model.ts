@@ -1,13 +1,15 @@
 import mongoose, { Schema, Document } from 'mongoose';
 import { createHash } from 'crypto';
 
-export interface IUser extends Document {
+export interface IUser {
   name: string;
   lastName: string;
   email: string;
   role: string;
   password: string;
 }
+
+type IUserDOC = IUser & Document;
 
 export const UserSchema = new Schema({
   name: { type: String, required: true },
@@ -17,7 +19,7 @@ export const UserSchema = new Schema({
   role: { type: Schema.Types.ObjectId, required: true },
 });
 
-UserSchema.pre<IUser>('save', function (next) {
+UserSchema.pre<IUserDOC>('save', function (next) {
   var user = this;
 
   // only hash the password if it has been modified (or is new)
@@ -31,4 +33,4 @@ UserSchema.pre<IUser>('save', function (next) {
   next();
 });
 
-export default mongoose.model<IUser>('User', UserSchema);
+export default mongoose.model<IUserDOC>('User', UserSchema);
