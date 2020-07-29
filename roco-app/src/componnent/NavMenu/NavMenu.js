@@ -10,25 +10,25 @@ import Settings from '../../componnent/settings/Settings'
 
 const NavMenu=({signOut,toggleView,settingsView})=>{
 
+
     return(
-        <>
-       
-        <div className='menu-links-container'>
+        <div className='menu-container'>
+            <div className='menu-links-container'>
             <Link className='single-link' to='/'> לובי </Link>
             <Link className='single-link' to='/'> קורסים </Link>
             <Link className='single-link' to='/'> מרצים </Link>
             <Link className='single-link' to='/'> נרשמים </Link>
             <Link className='single-link' to='/'> דוחות </Link>
             <Link className='single-link' to='/'> תשלומים </Link>
-            <Link className='single-link' to='/'> דרושים </Link>   
+            <Link className='single-link' to='/'> דרושים </Link>  
+            </div> 
             <div className='icon-menu-container'>
             <div className='iconLink' onClick={()=>signOut()}> SIGN OUT</div>
             <div className='iconLink settings-icon' onClick={()=>toggleView()}>&#9881;</div>
             {!settingsView?<Settings/>:null}
             </div>
-        
         </div>
-        </>
+       
     )
 }
 const mapDispatchToProps=dispatch=>({
