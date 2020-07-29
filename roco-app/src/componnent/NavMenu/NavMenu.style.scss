@@ -1,0 +1,34 @@
+
+.menu-links-container{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row-reverse;
+    height: 100%;
+    align-items: center;
+
+    .single-link{
+        text-decoration: none;
+        color: inherit;
+    }
+}
+
+.icon-menu-container{
+    width: 50%;
+    display: flex;
+    position: relative;
+    align-items: center;
+
+    .iconLink{
+        cursor: pointer;
+        width: 77px;
+        margin: 0 5px;
+        user-select: none;
+
+     &.settings-icon{
+         font-size: 24px;
+         user-select: none;
+     }   
+    }
+}
+
+
