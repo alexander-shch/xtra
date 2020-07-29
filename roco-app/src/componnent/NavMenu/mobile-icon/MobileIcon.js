@@ -2,9 +2,7 @@ import React from 'react';
 import{IconContiner,MenuIcon} from './MobileMenu.style'
 
 
-
-const MobileMenuIcon=({handdleClick,menuOpen})=>{
-    
+const MobileMenuIcon=({handdleClick,menuOpen})=>{    
     return(
         
         <IconContiner onClick={handdleClick}  >

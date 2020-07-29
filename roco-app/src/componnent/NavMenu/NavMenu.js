@@ -8,11 +8,13 @@ import Settings from '../../componnent/settings/Settings'
 
 
 
-const NavMenu=({signOut,toggleView,settingsView})=>{
+const NavMenu=({signOut,toggleView,settingsView,userName})=>{
 
 
     return(
-        <div className='menu-container'>
+        <>
+        <span className='greetUser'>{userName},שלום</span>
+         <div className='menu-container'>
             <div className='menu-links-container'>
             <Link className='single-link' to='/'> לובי </Link>
             <Link className='single-link' to='/'> קורסים </Link>
@@ -28,7 +30,7 @@ const NavMenu=({signOut,toggleView,settingsView})=>{
             {!settingsView?<Settings/>:null}
             </div>
         </div>
-       
+       </>
     )
 }
 const mapDispatchToProps=dispatch=>({
@@ -37,7 +39,8 @@ const mapDispatchToProps=dispatch=>({
 })
 
 const mapStateToProps=state=>({
-    settingsView:state.toggleSettingsView.hidden
+    settingsView:state.toggleSettingsView.hidden,
+    userName:state.user.userLoged.name
 })
 
 export default connect(mapStateToProps,mapDispatchToProps) (NavMenu);
