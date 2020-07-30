@@ -1,10 +1,9 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 const buttonStyles = css`
-  
   color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
+  background-color: #007bff;
+  border-color: #007bff;
 
   &:hover {
     color: #fff;
@@ -14,9 +13,9 @@ const buttonStyles = css`
 `;
 
 const forgotStyle = css`
-    color: #fff;
-    background-color: #868e96;
-    border-color: #868e96;
+  color: #fff;
+  background-color: #868e96;
+  border-color: #868e96;
 
   &:hover {
     background-color: #757d85;
@@ -24,35 +23,29 @@ const forgotStyle = css`
   }
 `;
 
-
-
-const getButtonStyles = props => {
- 
-
+const getButtonStyles = (props) => {
   return props.forgot ? forgotStyle : buttonStyles;
 };
 
 export const CustomButtonContainer = styled.button`
-margin:5px;
-cursor: pointer;
-display: inline-block;
-font-weight: 400;
-text-align: center;
-white-space: nowrap;
-vertical-align: middle;
--webkit-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
-user-select: none;
-border: 1px solid transparent;
-padding: .375rem .75rem;
-font-size: 1rem;
-line-height: 1.5;
-border-radius: .25rem;
-transition: background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  margin: 5px;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
 
   ${getButtonStyles}
 `;
-
-
-

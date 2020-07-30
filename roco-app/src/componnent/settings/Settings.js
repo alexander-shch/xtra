@@ -1,27 +1,33 @@
-import React from 'react';
-import './settings.style.scss';
-import{Link} from 'react-router-dom'
+import React from "react";
+import "./settings.style.scss";
+import { Link } from "react-router-dom";
 
+const Settings = () => {
+  const settingsMenuArray = [
+    { linkTitle: "ניהול משתמשים", linkUrl: "/", className: "setting-link" },
+    { linkTitle: "ניהול כיתות", linkUrl: "/", className: "setting-link" },
+    { linkTitle: "מעמ ומכפילי שכר", linkUrl: "/", className: "setting-link" },
+    { linkTitle: "מידע לקורס", linkUrl: "/", className: "setting-link" },
+    { linkTitle: "ניהול תחומים", linkUrl: "/", className: "setting-link" },
+    { linkTitle: "משובים", linkUrl: "/", className: "setting-link" },
+    { linkTitle: "סמסטרים", linkUrl: "/", className: "setting-link" },
+    { linkTitle: "מילון", linkUrl: "/", className: "setting-link" },
+    { linkTitle: "סיבת החזר", linkUrl: "/", className: "setting-link" },
+    { linkTitle: "חוברות קרוסים", linkUrl: "/", className: "setting-link" },
+    { linkTitle: "מכירות אונלין", linkUrl: "/", className: "setting-link" },
+    { linkTitle: "חגים", linkUrl: "/", className: "setting-link" },
+    { linkTitle: "ניהול בניינים", linkUrl: "/", className: "setting-link" },
+    { linkTitle: "קופונים", linkUrl: "/", className: "setting-link" },
+  ];
 
-const Settings=()=>{
-    return(
-        <div className='settings-container'>
-            <Link className='setting-link' to='/'>ניהול משתמשים</Link>
-            <Link className='setting-link' to='/'>ניהול כיתות</Link>
-            <Link className='setting-link' to='/'>מעמ ומכפילי שכר</Link>
-            <Link className='setting-link' to='/'>מידע לקורס</Link>
-            <Link className='setting-link' to='/'>ניהול תחומים</Link>
-            <Link className='setting-link' to='/'>משובים</Link>
-            <Link className='setting-link' to='/'>סמסטרים</Link>
-            <Link className='setting-link' to='/'>מילון</Link>
-            <Link className='setting-link' to='/'>סיבת החזר</Link>
-            <Link className='setting-link' to='/'>חוברות קרוסים</Link>
-            <Link className='setting-link' to='/'>מכירות אונלין</Link>
-            <Link className='setting-link' to='/'>חגים</Link>
-            <Link className='setting-link' to='/'>ניהול בניינים</Link>
-            <Link className='setting-link' to='/'>קופונים</Link>
-        </div>
+  let settingsLinks = settingsMenuArray.map(
+    ({ linkUrl, linkTitle, className }, index) => (
+      <Link key={index} to={linkUrl} className={className}>
+        {linkTitle}
+      </Link>
     )
-}
+  );
+  return <div className="settings-container">{settingsLinks}</div>;
+};
 
 export default Settings;
