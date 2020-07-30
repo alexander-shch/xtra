@@ -1,6 +1,5 @@
 import React from "react";
 import Header from "../../componnent/Header/Header";
-
 const Main = () => {
   return (
     <>
