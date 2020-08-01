@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import "./SignIn.style.scss";
-import { getToken } from "../../utils/logInUtils";
 import InputField from "../../componnent/input-field/InputField";
 import MyButton from "../../componnent/My-button/MyButton";
-import { setUserLog } from "../../Redux/userReduser/user.actions";
+import { setUserLog, getToken } from "../../Redux/userReduser/user.actions";
 
-const SignIn = ({ setUserLog }) => {
+const SignIn = ({ setUserLog, getToken }) => {
   const [UserDetail, setUserDetail] = useState({
     email: "",
     password: "",
@@ -57,6 +56,7 @@ const SignIn = ({ setUserLog }) => {
 
 const mapDispatchToProps = (dispatch) => ({
   setUserLog: () => dispatch(setUserLog()),
+  getToken: (email, password) => dispatch(getToken(email, password)),
 });
 
 export default connect(null, mapDispatchToProps)(SignIn);

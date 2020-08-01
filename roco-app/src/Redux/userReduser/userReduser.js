@@ -6,7 +6,7 @@ const INITAL_STATE = {
 
 const userReducer = (state = INITAL_STATE, action) => {
   switch (action.type) {
-    case "USER_LOG_PENDING":
+    case "USER_LOG_LOADING":
       return { ...state, loading: true };
     case "SIGNIN_SUCSESS":
       return { ...state, userLoged: action.payload, loading: false };

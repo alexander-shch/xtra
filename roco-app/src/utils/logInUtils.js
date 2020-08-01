@@ -11,6 +11,5 @@ export const getToken = (email, password) => {
     }),
   })
     .then((response) => response.json())
-    .catch((err) => console.log(err))
     .then(({ token }) => localStorage.setItem("token", token));
 };
