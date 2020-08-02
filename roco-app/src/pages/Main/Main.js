@@ -1,10 +1,16 @@
 import React from "react";
 import Header from "../../componnent/Header/Header";
+import { Switch, Route } from "react-router-dom";
+import Dashboard from "../../componnent/dashboard/Dashboard";
+import SettingsRoutes from "../../pages/settings/settingsRoutes";
 const Main = () => {
   return (
     <>
       <Header />
-      <h1>HomePage</h1>
+      <Switch>
+        <Route exact path="/" component={Dashboard} />
+        <Route path="/settings" component={SettingsRoutes} />
+      </Switch>
     </>
   );
 };
