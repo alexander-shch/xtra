@@ -12,14 +12,10 @@ const App = ({ userLoged, setUserLog, loading }) => {
   }, [setUserLog]);
 
   return (
-    <>
-      <Route
-        path="/"
-        render={() =>
-          userLoged ? <Main /> : loading ? <Spinner /> : <SignIn />
-        }
-      ></Route>
-    </>
+    <Route
+      path="/"
+      render={() => (userLoged ? <Main /> : loading ? <Spinner /> : <SignIn />)}
+    ></Route>
   );
 };
 

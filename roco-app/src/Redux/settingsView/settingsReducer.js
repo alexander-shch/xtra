@@ -1,5 +1,5 @@
 const INITAL_STATE = {
-  hidden: true,
+  hidden: false,
 };
 
 const settingsView = (state = INITAL_STATE, action) => {
