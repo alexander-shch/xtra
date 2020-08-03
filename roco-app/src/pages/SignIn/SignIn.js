@@ -19,8 +19,12 @@ const SignIn = ({ setUserLog, getToken }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await getToken(email, password);
-    await setUserLog();
+    try {
+      await getToken(email, password);
+      await setUserLog();
+    } catch (err) {
+      alert("something went wrong");
+    }
   };
 
   return (
