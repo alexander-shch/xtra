@@ -1,5 +1,4 @@
 export const setUserLog = () => (dispatch) => {
-  console.log("setUserLog");
   dispatch({ type: "USER_LOG_LOADING" });
   fetch("http://localhost:3005/user", {
     method: "GET",
