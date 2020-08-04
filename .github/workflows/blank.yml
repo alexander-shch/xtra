@@ -11,7 +11,7 @@ jobs:
 
     runs-on: ubuntu-latest
     env:
-      workdir-server: ./server
+      workdir-client: ./roco-app
 
     strategy:
       matrix:
@@ -66,11 +66,7 @@ jobs:
 
     - name: Run the tests and generate coverage report
       working-directory: ${{ env.workdir-server }}
-      run: npm test -- --coverage
+      run: npm run tsc
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
-
-    - name: Build
-      working-directory: ${{ env.workdir-server }}
-      run: npm run build
