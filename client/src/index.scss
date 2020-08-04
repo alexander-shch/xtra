@@ -1,11 +1,16 @@
-// imports
-@import './assets/scss/colors';
-@import 'bulma';
-
 body {
   margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: rgb(102, 102, 102);
+
+	@media screen and (max-width: 800px) {
+   
+    margin:10px;
+  }
 }
 
 code {
@@ -13,40 +18,6 @@ code {
     monospace;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-#root,
-#app-container,
-html,
-body {
-  height: 100%;
-  width: 100%;
-  overflow-x: hidden;
-}
-
-.page-content-wrapper {
-  display: flex;
-  height: 100%;
-}
-
-.selectable {
-  user-select: all;
-}
-
-.content .tabs ul {
-  margin: 0;
-}
-
-.react-notification-root {
-  left: 0;
-}
-
-// Create classes for height {.height-10%/100%}
-@for $i from 1 through 10 {
-  .height-#{$i+'0'} {
-    height: #{$i+'0%'};
-    max-height: #{$i+'0%'};
-  }
+h3{
+  font-size: 1.75rem;
 }
