@@ -38,10 +38,9 @@ export const getToken = (email, password) => (dispatch) => {
     .then((res) => {
       if (res.status === 200 && res.ok) {
         return res.json();
-      } else {
-        dispatch({ type: "SIGNIN_FAILED" });
-        throw new Error("nagrin");
       }
+      dispatch({ type: "SIGNIN_FAILED" });
+      throw new Error("nagrin");
     })
     .then(({ token }) => localStorage.setItem("token", token));
 };
