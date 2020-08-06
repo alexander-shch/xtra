@@ -1,5 +1,5 @@
 export const getBuildingsData = () => (dispatch) => {
-  dispatch({ type: 'DATA_FETCH_START' });
+  dispatch({ type: 'BUILDING_FETCH_START' });
   fetch('http://localhost:3005/buildings', {
     method: 'GET',
     cache: 'no-cache',
@@ -8,6 +8,6 @@ export const getBuildingsData = () => (dispatch) => {
     },
   })
     .then((res) => res.json())
-    .then((data) => dispatch({ type: 'DATA_FETCH_SUCSESS', payload: data }))
-    .catch((err) => dispatch({ type: 'DATA_FETCH_FAILED', payload: err }));
+    .then((data) => dispatch({ type: 'BUILDING_FETCH_SUCSESS', payload: data }))
+    .catch((err) => dispatch({ type: 'BUILDING_FETCH_FAILED', payload: err }));
 };

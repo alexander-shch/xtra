@@ -4,10 +4,10 @@ import Spinner from '../../componnent/spinner/Spinner';
 import Buildings from './Buildings';
 import { getBuildingsData } from '../../Redux/Data/data.actions';
 
-const BuildingsContainer = ({ getBuildingsData, data, loading }) => {
+const BuildingsContainer = ({ getBuildingsDataAction, data, loading }) => {
   useEffect(() => {
-    getBuildingsData();
-  }, [getBuildingsData]);
+    getBuildingsDataAction();
+  }, [getBuildingsDataAction]);
 
   return loading ? <Spinner /> : <Buildings data={data} />;
 };
@@ -18,7 +18,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getBuildingsData: () => dispatch(getBuildingsData()),
+  getBuildingsDataAction: () => dispatch(getBuildingsData()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BuildingsContainer);

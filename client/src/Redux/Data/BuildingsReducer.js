@@ -6,16 +6,16 @@ const INTIAL_STATE = {
 
 const BuildingsReducer = (state = INTIAL_STATE, action) => {
   switch (action.type) {
-    case 'DATA_FETCH_START':
+    case 'BUILDING_FETCH_START':
       return { ...state, isPending: true };
-    case 'DATA_FETCH_SUCSESS':
+    case 'BUILDING_FETCH_SUCSESS':
       return {
         ...state,
         buildings: action.payload,
         isPending: false,
         error: null,
       };
-    case 'DATA_FETCH_FAILED':
+    case 'BUILDING_FETCH_FAILED':
       return { ...state, isPending: false, error: action.payload };
     default:
       return state;
