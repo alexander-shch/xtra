@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { setUserLog } from "./Redux/userReduser/user.actions";
-import SignIn from "../src/pages/SignIn/SignIn";
-import Main from "./pages/Main/Main";
-import { Route } from "react-router-dom";
-import Spinner from "./componnent/spinner/Spinner";
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { setUserLog } from './Redux/userReduser/user.actions';
+import SignIn from '../src/pages/SignIn/SignIn';
+import Main from './pages/Main/Main';
+import { Route } from 'react-router-dom';
+import Spinner from './componnent/spinner/Spinner';
 
 const App = ({ userLoged, setUserLog, loading }) => {
   useEffect(() => {
@@ -13,8 +13,8 @@ const App = ({ userLoged, setUserLog, loading }) => {
 
   return (
     <Route
-      path="/"
-      render={() => (userLoged ? <Main /> : loading ? <Spinner /> : <SignIn />)}
+      path='/'
+      render={() => (loading ? <Spinner /> : userLoged ? <Main /> : <SignIn />)}
     ></Route>
   );
 };

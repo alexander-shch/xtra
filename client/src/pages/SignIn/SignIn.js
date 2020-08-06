@@ -1,14 +1,18 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import "./SignIn.style.scss";
-import InputField from "../../componnent/input-field/InputField";
-import MyButton from "../../componnent/My-button/MyButton";
-import { setUserLog, getToken } from "../../Redux/userReduser/user.actions";
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import './SignIn.style.scss';
+import InputField from '../../componnent/input-field/InputField';
+import MyButton from '../../componnent/My-button/MyButton';
+import {
+  setUserLog,
+  getToken,
+  signInFailed,
+} from '../../Redux/userReduser/user.actions';
 
-const SignIn = ({ setUserLog, getToken }) => {
+const SignIn = ({ setUserLog, getToken, signInFailed }) => {
   const [UserDetail, setUserDetail] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
   const { email, password } = UserDetail;
 
@@ -23,35 +27,36 @@ const SignIn = ({ setUserLog, getToken }) => {
       await getToken(email, password);
       await setUserLog();
     } catch (err) {
-      alert("something went wrong");
+      signInFailed(err);
+      alert('something went wrong');
     }
   };
 
   return (
-    <div className="signIn-continer">
-      <h3 className="signIn-title"> כניסה למערכת אקסטרא</h3>
+    <div className='signIn-continer'>
+      <h3 className='signIn-title'> כניסה למערכת אקסטרא</h3>
       <form onSubmit={handleSubmit}>
         <InputField
-          name="email"
-          type="email"
-          label=" דואל"
+          name='email'
+          type='email'
+          label=' דואל'
           value={email}
           handleChange={handdleChange}
           required
         />
         <InputField
-          name="password"
-          type="password"
-          label="סיסמה"
+          name='password'
+          type='password'
+          label='סיסמה'
           value={password}
           handleChange={handdleChange}
           required
         />
-        <div className="sign-in-buttons">
-          <MyButton type="button" forgot>
+        <div className='sign-in-buttons'>
+          <MyButton type='button' forgot>
             ?שכחת סיסמה
           </MyButton>
-          <MyButton type="submit">כניסה</MyButton>
+          <MyButton type='submit'>כניסה</MyButton>
         </div>
       </form>
     </div>
@@ -61,6 +66,7 @@ const SignIn = ({ setUserLog, getToken }) => {
 const mapDispatchToProps = (dispatch) => ({
   setUserLog: () => dispatch(setUserLog()),
   getToken: (email, password) => dispatch(getToken(email, password)),
+  signInFailed: (err) => dispatch(signInFailed(err)),
 });
 
 export default connect(null, mapDispatchToProps)(SignIn);

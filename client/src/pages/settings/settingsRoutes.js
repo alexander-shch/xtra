@@ -1,9 +1,11 @@
-import React from "react";
-import { Route } from "react-router-dom";
-import SettingsPage from "../settings/SettingsPage";
+import React from 'react';
+import { Route } from 'react-router-dom';
+import BuildingsContainer from '../buildings/BuildingsContainer';
 
-const SettingsRoutes = ({ match }) => {
-  return <Route path={`${match.path}/:settingsID`} component={SettingsPage} />;
+const SettingsRoutes = () => {
+  return (
+    <Route exact path='/settings/buildings' component={BuildingsContainer} />
+  );
 };
 
 export default SettingsRoutes;

@@ -1,10 +1,10 @@
-import React from "react";
-import "./settingsPage.style.scss";
+import React from 'react';
+import './settingsPage.style.scss';
 
 const SettingsPage = ({ match }) => {
   return (
-    <div className="settingsPage">
-      <h1>{match.params.settingsID}</h1>;
+    <div className='settingsPage'>
+      <h1>{match.params.settingsID}</h1>
     </div>
   );
 };
