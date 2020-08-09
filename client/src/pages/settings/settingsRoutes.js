@@ -1,11 +1,9 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import BuildingsContainer from '../buildings/BuildingsContainer';
+import BuildingsRoutes from '../../componnent/buildings-routes/BuildingsRoutes';
 
 const SettingsRoutes = () => {
-  return (
-    <Route exact path='/settings/buildings' component={BuildingsContainer} />
-  );
+  return <Route path='/settings/buildings' component={BuildingsRoutes} />;
 };
 
 export default SettingsRoutes;

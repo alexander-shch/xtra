@@ -1,12 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import BuildingItem from '../../componnent/Building-item/BuildingItem';
 import './buildings.style.scss';
 import MyButton from '../../componnent/My-button/MyButton';
+import { withRouter } from 'react-router-dom';
+import DataSpinner from '../../componnent/spinner/DataSpinner/DataSpiner';
+import DeleteBox from '../../componnent/are-you-sure/DeleteBox';
+import { connect } from 'react-redux';
+import { deleteBuilding } from '../../Redux/buildings/buildings.actions';
 
-const Buildings = ({ data }) => {
+const Buildings = ({
+  onDeleteBuilding,
+  match,
+  history,
+  data,
+  ...otherProps
+}) => {
+  const [deleteBoxView, setDeleteBoxView] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState({ id: '', name: '' });
+  const { id } = itemToDelete;
+
+  const openBoxsetItemToDelete = (item) => {
+    if (deleteBoxView === true) {
+      return;
+    }
+    setDeleteBoxView(true);
+    setItemToDelete({ id: item._id, name: item.name });
+  };
+
+  const closeBox = () => {
+    setDeleteBoxView(false);
+  };
+
+  const delteItem = () => {
+    onDeleteBuilding(id);
+  };
+
   return (
     <div className='buildingPage'>
-      <MyButton addButtonStyle>הוסף בניין</MyButton>
+      <MyButton
+        onClick={() => history.push(`${match.path}/addBuilding`)}
+        addButtonStyle
+      >
+        הוספת בניין
+      </MyButton>
       <h4 className='buildingsTitle'>רשימה</h4>
       <div className='buildingHead'>
         <div className='headerBlock'>
@@ -16,11 +52,26 @@ const Buildings = ({ data }) => {
           <span>אפשרויות</span>
         </div>
       </div>
-      {data.map((item) => (
-        <BuildingItem key={item._id} item={item} />
-      ))}
+      {otherProps.loading ? (
+        <DataSpinner />
+      ) : (
+        data.map((item) => (
+          <BuildingItem
+            openBox={openBoxsetItemToDelete}
+            key={item._id}
+            item={item}
+          />
+        ))
+      )}
+      {deleteBoxView ? (
+        <DeleteBox delteItem={delteItem} close={closeBox} item={itemToDelete} />
+      ) : null}
     </div>
   );
 };
 
-export default Buildings;
+const mapDispatchToProps = (dispatch) => ({
+  onDeleteBuilding: (id) => dispatch(deleteBuilding(id)),
+});
+
+export default connect(null, mapDispatchToProps)(withRouter(Buildings));
