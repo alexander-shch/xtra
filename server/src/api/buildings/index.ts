@@ -8,6 +8,7 @@ import {
   GetBuildingById,
   CreateBuildingRecord,
   DeleteBuildingRecord,
+  FindAndUpdate,
 } from '../../db/v1/buildings/controller';
 
 const buildingsRouter = Router();
@@ -67,7 +68,7 @@ buildingsRouter.put(
     if (!isValidObjectId(id)) {
       return BadRequest(res);
     }
-    return CreateBuildingRecord(req.body)
+    return FindAndUpdate(id, req.body)
       .then((data) => {
         return SuccessfulResponse(res, data);
       })
