@@ -36,6 +36,24 @@ export const addNewBuilding = (name, active) => (dispatch) => {
     );
 };
 
+export const updateBuilding = (itemid, name, active) => (dispatch) => {
+  dispatch({ type: 'UPDATE_BUILDING_START' });
+  fetch(`http://localhost:3005/buildings/${itemid}`, {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      name: name,
+      active: active,
+    }),
+  })
+    .then((res) => res.json())
+    .then((data) => console.log(data))
+    .catch((err) => dispatch({ type: 'UPDATE_BUILDING_FAILED', payload: err }));
+};
+
 export const deleteBuilding = (itemid) => (dispatch) => {
   dispatch({ type: 'DELETE_BUILDING_START' });
   fetch(`http://localhost:3005/buildings/${itemid}`, {
