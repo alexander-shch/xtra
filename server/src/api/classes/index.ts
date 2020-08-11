@@ -90,10 +90,10 @@ classesRouter.put(
   }
 );
 
-// Availability
-classesRouter
-  .use('/:classId')
-  .post('/availability', allow(scope), (req: RequestExtend, res: Response) => {
+classesRouter.post(
+  '/:classId/availability',
+  allow(scope),
+  (req: RequestExtend, res: Response) => {
     const { classId } = req.params;
     if (!isValidObjectId(classId)) {
       return BadRequest(res);
@@ -104,8 +104,13 @@ classesRouter
         SuccessfulResponse(res, d);
       })
       .catch(({ errors }) => ServerError(res, errors));
-  })
-  .get('/availability', allow(scope), (req: RequestExtend, res: Response) => {
+  }
+);
+
+classesRouter.get(
+  '/:classId/availability',
+  allow(scope),
+  (req: RequestExtend, res: Response) => {
     const { classId } = req.params;
     if (!isValidObjectId(classId)) {
       return BadRequest(res);
@@ -116,50 +121,53 @@ classesRouter
         SuccessfulResponse(res, d);
       })
       .catch(({ errors }) => ServerError(res, errors));
-  })
-  .get(
-    '/availability/:availabilityId',
-    allow(scope),
-    (req: RequestExtend, res: Response) => {
-      const { availabilityId } = req.params;
-      if (!isValidObjectId(availabilityId)) {
-        return BadRequest(res);
-      }
+  }
+);
 
-      return FindOneClassAvailability(availabilityId)
-        .then((data) => {
-          if (!data) {
-            return NotFound(
-              res,
-              `No availability was found with the id ${availabilityId} or failed to update`
-            );
-          }
-          return SuccessfulResponse(res, data);
-        })
-        .catch(({ errors }) => ServerError(res, errors));
+classesRouter.get(
+  '/:classId/availability/:availabilityId',
+  allow(scope),
+  (req: RequestExtend, res: Response) => {
+    const { availabilityId } = req.params;
+    if (!isValidObjectId(availabilityId)) {
+      return BadRequest(res);
     }
-  )
-  .put(
-    '/availability/:availabilityId',
-    allow(scope),
-    (req: RequestExtend, res: Response) => {
-      const { availabilityId } = req.params;
-      if (!isValidObjectId(availabilityId)) {
-        return BadRequest(res);
-      }
 
-      return UpdateAvailability(availabilityId, req.body)
-        .then((data) => {
-          if (!data) {
-            return NotFound(
-              res,
-              `No availability was found with the id ${availabilityId} or failed to update`
-            );
-          }
-          return SuccessfulResponse(res, data);
-        })
-        .catch(({ errors }) => ServerError(res, errors));
+    return FindOneClassAvailability(availabilityId)
+      .then((data) => {
+        if (!data) {
+          return NotFound(
+            res,
+            `No availability was found with the id ${availabilityId} or failed to update`
+          );
+        }
+        return SuccessfulResponse(res, data);
+      })
+      .catch(({ errors }) => ServerError(res, errors));
+  }
+);
+
+classesRouter.put(
+  '/:classId/availability/:availabilityId',
+  allow(scope),
+  (req: RequestExtend, res: Response) => {
+    const { availabilityId } = req.params;
+    if (!isValidObjectId(availabilityId)) {
+      return BadRequest(res);
     }
-  );
+
+    return UpdateAvailability(availabilityId, req.body)
+      .then((data) => {
+        if (!data) {
+          return NotFound(
+            res,
+            `No availability was found with the id ${availabilityId} or failed to update`
+          );
+        }
+        return SuccessfulResponse(res, data);
+      })
+      .catch(({ errors }) => ServerError(res, errors));
+  }
+);
 
 export default classesRouter;
