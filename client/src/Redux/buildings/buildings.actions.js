@@ -37,6 +37,7 @@ export const addNewBuilding = (name, active) => (dispatch) => {
 };
 
 export const updateBuilding = (itemid, name, active) => (dispatch) => {
+  const booleanActive = JSON.parse(active);
   dispatch({ type: 'UPDATE_BUILDING_START' });
   fetch(`http://localhost:3005/buildings/${itemid}`, {
     method: 'PUT',
@@ -46,11 +47,13 @@ export const updateBuilding = (itemid, name, active) => (dispatch) => {
     },
     body: JSON.stringify({
       name: name,
-      active: active,
+      active: booleanActive,
     }),
   })
     .then((res) => res.json())
-    .then((data) => console.log(data))
+    .then((data) =>
+      dispatch({ type: 'UPDATE_BUILDING_SUCSESS', payload: data })
+    )
     .catch((err) => dispatch({ type: 'UPDATE_BUILDING_FAILED', payload: err }));
 };
 

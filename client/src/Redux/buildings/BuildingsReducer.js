@@ -27,7 +27,7 @@ const BuildingsReducer = (state = INTIAL_STATE, action) => {
         (building) => building._id === action.payload._id
       );
       buildings[index] = action.payload;
-      return { ...state, buildings };
+      return { ...state, isPending: false, buildings };
     case 'DELETE_BUILDING_SUCSESS':
       return {
         ...state,

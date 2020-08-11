@@ -6,10 +6,19 @@ import MyButton from '../My-button/MyButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
-import { addNewBuilding } from '../../Redux/buildings/buildings.actions';
+import {
+  addNewBuilding,
+  updateBuilding,
+} from '../../Redux/buildings/buildings.actions';
 const element = <FontAwesomeIcon icon={faSave} />;
 
-const AddUpdateBuilding = ({ location, history, addNewBuilding, match }) => {
+const AddUpdateBuilding = ({
+  location,
+  history,
+  addNewBuilding,
+  updateBuilding,
+  match,
+}) => {
   const url = match.params.BuildingsId;
   const defultName = url === 'updateBuilding' ? location.state.name : '';
 
@@ -21,10 +30,19 @@ const AddUpdateBuilding = ({ location, history, addNewBuilding, match }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      await addNewBuilding(name, active);
-    } catch (err) {
-      console.log(err);
+    if (url === 'updateBuilding') {
+      let itemid = location.state._id;
+      try {
+        await updateBuilding(itemid, name, active);
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      try {
+        await addNewBuilding(name, active);
+      } catch (err) {
+        console.log(err);
+      }
     }
     history.push('/settings/buildings/');
   };
@@ -70,6 +88,8 @@ const AddUpdateBuilding = ({ location, history, addNewBuilding, match }) => {
 
 const mapDispatchToProps = (dispatch) => ({
   addNewBuilding: (name, active) => dispatch(addNewBuilding(name, active)),
+  updateBuilding: (itemid, name, active) =>
+    dispatch(updateBuilding(itemid, name, active)),
 });
 
 export default connect(null, mapDispatchToProps)(AddUpdateBuilding);
