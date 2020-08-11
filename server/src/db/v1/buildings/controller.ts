@@ -20,5 +20,5 @@ export async function FindAndUpdate(_id: string, building: IBuilding) {
 }
 
 export async function DeleteBuildingRecord(id: string) {
-  return BuildingModel.findByIdAndDelete(id).then((d) => d?.$isDeleted());
+  return BuildingModel.findByIdAndDelete(id).then((_) => true);
 }

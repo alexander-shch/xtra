@@ -31,8 +31,13 @@ const Buildings = ({
     setDeleteBoxView(false);
   };
 
-  const delteItem = () => {
-    onDeleteBuilding(id);
+  const delteItem = async () => {
+    try {
+      await onDeleteBuilding(id);
+    } catch (err) {
+      console.log(err);
+    }
+    closeBox();
   };
 
   return (

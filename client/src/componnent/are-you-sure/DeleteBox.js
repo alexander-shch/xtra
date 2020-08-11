@@ -12,7 +12,7 @@ const DeleteBox = ({ delteItem, close, item }) => {
         <h4>האם אתה בטוח שברצונך למחוק?</h4>
         <span>{item.name}</span>
         <div className='buttonsContainer'>
-          <MyButton onClick={() => delteItem}>אישור</MyButton>
+          <MyButton onClick={delteItem}>אישור</MyButton>
           <MyButton onClick={close} forgot>
             ביטול
           </MyButton>

@@ -37,5 +37,24 @@ export const addNewBuilding = (name, active) => (dispatch) => {
 };
 
 export const deleteBuilding = (itemid) => (dispatch) => {
-  console.log(itemid);
+  dispatch({ type: 'DELETE_BUILDING_START' });
+  fetch(`http://localhost:3005/buildings/${itemid}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.deleted) {
+        dispatch({
+          type: 'DELETE_BUILDING_SUCSESS',
+          payload: itemid,
+        });
+      } else {
+        throw new Error('cant delete this building');
+      }
+    })
+    .catch((err) => dispatch({ type: 'DELETE_BUILDING_FAILED', payload: err }));
 };
