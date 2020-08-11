@@ -10,6 +10,12 @@ export function BadRequest(res: Response, message: any = ''): Response {
     })
 }
 
+export function NotFound(res: Response, message: any = ''): Response {
+    return res.status(404).json({
+        error: message || "Not found"
+    })
+}
+
 export function ServerError(res: Response, message: any = ''): Response {
     return res.status(500).json({
         error: message || "Some server error occurred"
