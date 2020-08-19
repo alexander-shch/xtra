@@ -1,5 +1,20 @@
 import styled, { css } from 'styled-components';
 
+const editStyle = css`
+  background-color: #ffc107;
+`;
+
+const deleteStyle = css`
+  background-color: #ff0000;
+`;
+
+const getStyle = (props) => {
+  let styleObj = {
+    delete: deleteStyle,
+    edit: editStyle,
+  };
+};
+
 export const OptinButtonContainer = styled.button`
   border: none;
   color: white;
@@ -8,4 +23,5 @@ export const OptinButtonContainer = styled.button`
   cursor: pointer;
   margin: 2px;
   width: 30px;
+  ${getStyle}
 `;

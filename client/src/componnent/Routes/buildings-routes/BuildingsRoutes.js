@@ -1,12 +1,12 @@
 import React, { useEffect, lazy, Suspense } from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getBuildingsData } from '../../Redux/buildings/buildings.actions';
-import Spinner from '../../componnent/spinner/Spinner';
+import { getBuildingsData } from '../../../Redux/buildings/buildings.actions';
+import Spinner from '../../spinner/Spinner';
 const AddUpdateBuilding = lazy(() =>
-  import('../Add-Update-Building/AddUpdateBuilding')
+  import('../../Add-Update-Building/AddUpdateBuilding')
 );
-const Buildings = lazy(() => import('../../pages/buildings/Buildings'));
+const Buildings = lazy(() => import('../../../pages/buildings/Buildings'));
 
 const BuildingsRoutes = ({ match, getBuildingsData, data, ...otherProps }) => {
   useEffect(() => {

@@ -6,4 +6,4 @@ const OptionButton = ({ children, ...props }) => {
   return <OptinButtonContainer {...props}>{children}</OptinButtonContainer>;
 };
 
-export default MyButton;
+export default OptionButton;
