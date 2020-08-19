@@ -13,6 +13,7 @@ import {
   GetAllClassRooms,
   DeleteClass,
   UpdateClass,
+  GetSingleClassRoom,
 } from '../../db/v1/classes/controller';
 import {
   Create,
@@ -24,19 +25,41 @@ import {
 const classesRouter = Router();
 const scope = 'classes';
 
-classesRouter.get('/', allow(scope), (req: RequestExtend, res: Response) => {
-  const { classId } = req.params;
-  if (!isValidObjectId(classId)) {
-    return BadRequest(res);
+// Get all class rooms
+classesRouter.get(
+  '/',
+  allow(scope),
+  async (_: RequestExtend, res: Response) => {
+    return GetAllClassRooms()
+      .then((data) => {
+        return SuccessfulResponse(res, data);
+      })
+      .catch((error) => ServerError(res, error));
   }
+);
 
-  return GetAllClassRooms()
-    .then((data) => {
-      return SuccessfulResponse(res, data);
-    })
-    .catch((error) => ServerError(res, error));
-});
+// Get single class rooms
+classesRouter.get(
+  '/:classId',
+  allow(scope),
+  async (req: RequestExtend, res: Response) => {
+    const { classId } = req.params;
+    if (!isValidObjectId(classId)) {
+      return BadRequest(res);
+    }
 
+    return GetSingleClassRoom({ _id: classId })
+      .then((data) => {
+        if (!data) {
+          return NotFound(res)
+        }
+        return SuccessfulResponse(res, data);
+      })
+      .catch((error) => ServerError(res, error));
+  }
+);
+
+// Create a class rooms
 classesRouter.post('/', allow(scope), (req: RequestExtend, res: Response) => {
   const { classId } = req.params;
   if (!isValidObjectId(classId)) {
@@ -44,12 +67,20 @@ classesRouter.post('/', allow(scope), (req: RequestExtend, res: Response) => {
   }
 
   return CreateClass(req.body)
-    .then((d) => {
-      SuccessfulResponse(res, d);
+    .then(({ _id }) => GetSingleClassRoom({ _id }))
+    .then((classRoom) => {
+      if (!classRoom) {
+        return ServerError(
+          res,
+          'Trying to retrieve class room after creation failed'
+        );
+      }
+      return SuccessfulResponse(res, classRoom);
     })
     .catch(({ errors }) => ServerError(res, errors));
 });
 
+// Delete a class rooms
 classesRouter.delete(
   '/:classId',
   allow(scope),
@@ -67,6 +98,7 @@ classesRouter.delete(
   }
 );
 
+// Update a class rooms
 classesRouter.put(
   '/:classId',
   allow(scope),
@@ -90,6 +122,7 @@ classesRouter.put(
   }
 );
 
+// Create availability for a class rooms
 classesRouter.post(
   '/:classId/availability',
   allow(scope),
@@ -107,6 +140,7 @@ classesRouter.post(
   }
 );
 
+// Get availability for a class rooms
 classesRouter.get(
   '/:classId/availability',
   allow(scope),
@@ -124,6 +158,7 @@ classesRouter.get(
   }
 );
 
+// Get a specific availability for a class rooms
 classesRouter.get(
   '/:classId/availability/:availabilityId',
   allow(scope),
@@ -147,6 +182,7 @@ classesRouter.get(
   }
 );
 
+// Update a specific availability for a class rooms
 classesRouter.put(
   '/:classId/availability/:availabilityId',
   allow(scope),

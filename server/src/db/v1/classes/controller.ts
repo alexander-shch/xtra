@@ -1,7 +1,12 @@
 import ClassesModel, { ClassRoom, IClassRoom } from './model';
 
-export async function GetAllClassRooms() {
+export async function GetAllClassRooms(
+  query: object = {}
+): Promise<ClassRoom[]> {
   return ClassesModel.aggregate<ClassRoom>([
+    {
+      $match: query,
+    },
     {
       $lookup: {
         from: 'buildings',
@@ -30,6 +35,15 @@ export async function GetAllClassRooms() {
       },
     },
   ]).exec();
+}
+
+export async function GetSingleClassRoom(query: object) {
+  return GetAllClassRooms(query).then((data) => {
+    if (data.length > 0) {
+      return data[0];
+    }
+    return undefined;
+  });
 }
 
 export async function CreateClass(classData: IClassRoom) {
