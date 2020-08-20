@@ -13,6 +13,7 @@ import {
   GetAllClassRooms,
   DeleteClass,
   UpdateClass,
+  GetSingleClassRoom,
 } from '../../db/v1/classes/controller';
 import {
   Create,
@@ -22,28 +23,26 @@ import {
 } from '../../db/v1/classes/availability/controller';
 const classesRouter = Router();
 const scope = 'classes';
-classesRouter.get('/', allow(scope), (req: RequestExtend, res: Response) => {
-  const { classId } = req.params;
-  if (!isValidObjectId(classId)) {
-    return BadRequest(res);
-  }
-  return GetAllClassRooms()
-    .then((data) => {
-      return SuccessfulResponse(res, data);
-    })
-    .catch((error) => ServerError(res, error));
-});
+
 classesRouter.post('/', allow(scope), (req: RequestExtend, res: Response) => {
   const { classId } = req.params;
   if (!isValidObjectId(classId)) {
     return BadRequest(res);
   }
   return CreateClass(req.body)
-    .then((d) => {
-      SuccessfulResponse(res, d);
+    .then(({ _id }) => GetSingleClassRoom({ _id }))
+    .then((classRoom) => {
+      if (!classRoom) {
+        return ServerError(
+          res,
+          'Trying to retrieve class room after creation failed'
+        );
+      }
+      return SuccessfulResponse(res, classRoom);
     })
     .catch(({ errors }) => ServerError(res, errors));
 });
+
 classesRouter.delete(
   '/:classId',
   allow(scope),
@@ -59,6 +58,7 @@ classesRouter.delete(
       .catch(({ error }) => ServerError(res, error));
   }
 );
+
 classesRouter.put(
   '/:classId',
   allow(scope),
@@ -80,6 +80,7 @@ classesRouter.put(
       .catch(({ error }) => ServerError(res, error));
   }
 );
+
 classesRouter.post(
   '/:classId/availability',
   allow(scope),
@@ -95,6 +96,7 @@ classesRouter.post(
       .catch(({ errors }) => ServerError(res, errors));
   }
 );
+
 classesRouter.get(
   '/:classId/availability',
   allow(scope),
@@ -110,6 +112,7 @@ classesRouter.get(
       .catch(({ errors }) => ServerError(res, errors));
   }
 );
+
 classesRouter.get(
   '/:classId/availability/:availabilityId',
   allow(scope),
@@ -118,6 +121,7 @@ classesRouter.get(
     if (!isValidObjectId(availabilityId)) {
       return BadRequest(res);
     }
+
     return FindOneClassAvailability(availabilityId)
       .then((data) => {
         if (!data) {
@@ -131,6 +135,7 @@ classesRouter.get(
       .catch(({ errors }) => ServerError(res, errors));
   }
 );
+
 classesRouter.put(
   '/:classId/availability/:availabilityId',
   allow(scope),
@@ -139,6 +144,7 @@ classesRouter.put(
     if (!isValidObjectId(availabilityId)) {
       return BadRequest(res);
     }
+
     return UpdateAvailability(availabilityId, req.body)
       .then((data) => {
         if (!data) {
@@ -152,4 +158,5 @@ classesRouter.put(
       .catch(({ errors }) => ServerError(res, errors));
   }
 );
+
 export default classesRouter;
