@@ -10,8 +10,6 @@ jobs:
   build-client:
 
     runs-on: ubuntu-latest
-    env:
-      workdir-client: ./client
 
     strategy:
       matrix:
@@ -41,32 +39,4 @@ jobs:
       working-directory: ${{ env.workdir-client }}
       run: npm run build
       
-  build-server:
-
-    runs-on: ubuntu-latest
-    env:
-      workdir-server: ./server
-
-    strategy:
-      matrix:
-        node-version: [12.x]
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Set up Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-
-    - name: Install dependencies
-      working-directory: ${{ env.workdir-server }}
-      run: npm install
-
-    - name: Run the tests and generate coverage report
-      working-directory: ${{ env.workdir-server }}
-      run: npm run tsc
-
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v1
+  
