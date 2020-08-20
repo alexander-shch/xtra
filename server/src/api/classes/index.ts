@@ -21,51 +21,14 @@ import {
   UpdateAvailability,
   FindOneClassAvailability,
 } from '../../db/v1/classes/availability/controller';
-
 const classesRouter = Router();
 const scope = 'classes';
 
-// Get all class rooms
-classesRouter.get(
-  '/',
-  allow(scope),
-  async (_: RequestExtend, res: Response) => {
-    return GetAllClassRooms()
-      .then((data) => {
-        return SuccessfulResponse(res, data);
-      })
-      .catch((error) => ServerError(res, error));
-  }
-);
-
-// Get single class rooms
-classesRouter.get(
-  '/:classId',
-  allow(scope),
-  async (req: RequestExtend, res: Response) => {
-    const { classId } = req.params;
-    if (!isValidObjectId(classId)) {
-      return BadRequest(res);
-    }
-
-    return GetSingleClassRoom({ _id: classId })
-      .then((data) => {
-        if (!data) {
-          return NotFound(res)
-        }
-        return SuccessfulResponse(res, data);
-      })
-      .catch((error) => ServerError(res, error));
-  }
-);
-
-// Create a class rooms
 classesRouter.post('/', allow(scope), (req: RequestExtend, res: Response) => {
   const { classId } = req.params;
   if (!isValidObjectId(classId)) {
     return BadRequest(res);
   }
-
   return CreateClass(req.body)
     .then(({ _id }) => GetSingleClassRoom({ _id }))
     .then((classRoom) => {
@@ -80,7 +43,6 @@ classesRouter.post('/', allow(scope), (req: RequestExtend, res: Response) => {
     .catch(({ errors }) => ServerError(res, errors));
 });
 
-// Delete a class rooms
 classesRouter.delete(
   '/:classId',
   allow(scope),
@@ -89,7 +51,6 @@ classesRouter.delete(
     if (!isValidObjectId(classId)) {
       return BadRequest(res);
     }
-
     return DeleteClass(classId)
       .then((deleted) => {
         SuccessfulResponse(res, { deleted });
@@ -98,7 +59,6 @@ classesRouter.delete(
   }
 );
 
-// Update a class rooms
 classesRouter.put(
   '/:classId',
   allow(scope),
@@ -107,7 +67,6 @@ classesRouter.put(
     if (!isValidObjectId(classId)) {
       return BadRequest(res);
     }
-
     return UpdateClass(classId, req.body)
       .then((updatedData) => {
         if (!updatedData) {
@@ -122,7 +81,6 @@ classesRouter.put(
   }
 );
 
-// Create availability for a class rooms
 classesRouter.post(
   '/:classId/availability',
   allow(scope),
@@ -131,7 +89,6 @@ classesRouter.post(
     if (!isValidObjectId(classId)) {
       return BadRequest(res);
     }
-
     return Create(classId, req.body)
       .then((d) => {
         SuccessfulResponse(res, d);
@@ -140,7 +97,6 @@ classesRouter.post(
   }
 );
 
-// Get availability for a class rooms
 classesRouter.get(
   '/:classId/availability',
   allow(scope),
@@ -149,7 +105,6 @@ classesRouter.get(
     if (!isValidObjectId(classId)) {
       return BadRequest(res);
     }
-
     return GetAllClassAvailability(classId)
       .then((d) => {
         SuccessfulResponse(res, d);
@@ -158,7 +113,6 @@ classesRouter.get(
   }
 );
 
-// Get a specific availability for a class rooms
 classesRouter.get(
   '/:classId/availability/:availabilityId',
   allow(scope),
@@ -182,7 +136,6 @@ classesRouter.get(
   }
 );
 
-// Update a specific availability for a class rooms
 classesRouter.put(
   '/:classId/availability/:availabilityId',
   allow(scope),

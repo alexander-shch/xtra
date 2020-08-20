@@ -1,7 +1,7 @@
-import React from "react";
-import "./settings.style.scss";
-import { Link } from "react-router-dom";
-import { settingsMenuArray } from "./settingsLinkData";
+import React from 'react';
+import './settings.style.scss';
+import { Link } from 'react-router-dom';
+import { settingsMenuArray } from './settingsLinkData';
 
 const Settings = () => {
   let settingsLinks = settingsMenuArray.map(
@@ -11,7 +11,7 @@ const Settings = () => {
       </Link>
     )
   );
-  return <div className="settings-container">{settingsLinks}</div>;
+  return <div className='settings-container'>{settingsLinks}</div>;
 };
 
 export default Settings;

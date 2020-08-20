@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 const buttonStyles = css`
   color: #fff;
@@ -23,8 +23,28 @@ const forgotStyle = css`
   }
 `;
 
+const addStyle = css`
+  border: none;
+  color: white;
+  font-size: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 2px;
+  width: 130px;
+  height: 50px;
+  background-color: #ff6633;
+
+  &:hover {
+    background-color: #ff4d11;
+  }
+`;
+
 const getButtonStyles = (props) => {
-  return props.forgot ? forgotStyle : buttonStyles;
+  return props.forgot
+    ? forgotStyle
+    : props.addButtonStyle
+    ? addStyle
+    : buttonStyles;
 };
 
 export const CustomButtonContainer = styled.button`

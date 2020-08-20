@@ -1,0 +1,14 @@
+.selectbuildingInput {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 3%;
+
+  .buildingSelector {
+    margin-right: 20px;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid #c1c1c1;
+    border-radius: 5px;
+    font-size: 1em;
+    direction: rtl;
+  }
+}

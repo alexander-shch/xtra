@@ -1,13 +1,17 @@
-import React from "react";
+import React from 'react';
 
-import "./inputField.style.scss";
+import './inputField.style.scss';
 
 const InputField = ({ handleChange, label, ...restData }) => {
   return (
-    <div className="groupInput">
-      <label className="form-input-label">{label}</label>
-      <div className="input-continer">
-        <input className="form-input" onChange={handleChange} {...restData} />
+    <div className='groupInput'>
+      <label className='form-input-label'>{label}</label>
+      <div className='input-continer'>
+        <input
+          className={`form-input ${restData.hebrew ? 'hebrewInput' : ''}`}
+          onChange={handleChange}
+          {...restData}
+        />
       </div>
     </div>
   );
