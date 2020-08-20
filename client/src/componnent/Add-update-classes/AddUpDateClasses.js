@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './addUpdateClasses.style.scss';
 import Calendar from '../Calendar/Calendar';
 import FirstForm from './first-form/FirstForm';
+import SecondForm from '../Add-update-classes/second-form/SecondForm';
 import { withRouter } from 'react-router-dom';
 import { addNewClass } from '../../Redux/classes/class.action';
 import { connect } from 'react-redux';
@@ -30,6 +31,8 @@ const AddUpDateClasses = ({
     building: defaultBuilding,
   });
 
+  const [dateFormView, setDateFormView] = useState(false);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(classDetails);
@@ -39,7 +42,6 @@ const AddUpDateClasses = ({
       } catch (err) {
         console.log(err);
       }
-      // history.push('/settings/list-classes');
     }
   };
 
@@ -59,7 +61,7 @@ const AddUpDateClasses = ({
           classDetails={classDetails}
         />
         <h4>זמינות</h4>
-
+        {url === 'updateClasses' ? <SecondForm /> : null}
         <Calendar />
       </div>
     </div>

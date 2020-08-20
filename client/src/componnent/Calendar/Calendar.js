@@ -1,10 +1,10 @@
-import React, { setState } from 'react';
+import React from 'react';
 import './calendar.style.scss';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 
-const Calendar = () => {
+const Calendar = ({ toggleDateForm }) => {
   const events = [
     {
       title: '10:00-14:00',
@@ -20,29 +20,26 @@ const Calendar = () => {
   const handleEventClick = (eventInfo) => {
     console.log(eventInfo.event.title);
   };
-  const customButtons = {
-    myCustomButton: {
-      text: 'custom!',
-      click: function () {
-        alert('clicked the custom button!');
-      },
-    },
-  };
+  // const customButtons = {
+  //   myCustomButton: {
+  //     text: 'custom!',
+  //     click: function () {
+  //       alert('clicked the custom button!');
+  //     },
+  //   },
+  // };
 
   return (
     <>
       <FullCalendar
-        customButtons={{
-          myCustomButton: {
-            text: 'עדכן זמינות',
-            click: function () {
-              alert('clicked the custom button!');
-            },
-          },
-        }}
+        // customButtons={{
+        //   myCustomButton: {
+        //     text: 'עדכן זמינות',
+        //     click: () => toggleDateForm(),
+        //   },
+        // }}
         headerToolbar={{
           left: 'prev,next today',
-          center: 'myCustomButton',
           right: 'title',
         }}
         direction='rtl'
