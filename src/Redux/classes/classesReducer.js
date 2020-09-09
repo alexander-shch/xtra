@@ -2,6 +2,7 @@ import {
   updateAvailabilty,
   setAvailabilty,
   updateClass,
+  deleteAvailability,
 } from './classes.utiles';
 
 const INTIAL_STATE = {
@@ -18,6 +19,7 @@ const classesReducer = (state = INTIAL_STATE, action) => {
     case 'ADD_NEW_CLASS_START':
     case 'SET_AVAILABILITY_START':
     case 'UPDATE_AVAILABILTY_START':
+    case 'DELETE_AVAILABILTY_START':
       return { ...state, loading: true };
     case 'CLASSES_FETCH_SUCSESS':
       return { ...state, loading: false, classes: action.payload };
@@ -45,6 +47,13 @@ const classesReducer = (state = INTIAL_STATE, action) => {
         classes: updateAvailabilty(state, action.payload),
         loading: false,
       };
+    case 'DELETE_AVAILABILTY_SUCSESS':
+      console.log('red', action.payload);
+      return {
+        ...state,
+        classes: deleteAvailability(state, action.payload),
+        loading: false,
+      };
     case 'DELETE_CLASS_SUCSESS':
       return {
         ...state,
@@ -52,6 +61,7 @@ const classesReducer = (state = INTIAL_STATE, action) => {
         loading: false,
       };
     case 'SET_AVAILABILITY_FAILED':
+    case 'DELETE_AVAILABILTY_FAILED':
     case 'UPDATE_AVAILABILTY_FAILED':
     case 'CLASSES_FETCH_FAILED':
     case 'ADD_CLASS_FAILED':

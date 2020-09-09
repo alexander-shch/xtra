@@ -8,6 +8,7 @@ import {
   updateClass,
   setAvailability,
   updateAvailability,
+  deleteAvailability,
 } from '../../../Redux/classes/class.action';
 import { getBuildingsData } from '../../../Redux/buildings/buildings.actions';
 import { closeSettingMenu } from '../../../Redux/settingsView/settings.actions';
@@ -30,6 +31,7 @@ const ClassRoutes = ({
   setAvailability,
   updateAvailability,
   closeSettingMenu,
+  deleteAvailability,
 }) => {
   useEffect(() => {
     getclassesData();
@@ -63,6 +65,7 @@ const ClassRoutes = ({
               updateClass={updateClass}
               setAvailability={setAvailability}
               updateAvailability={updateAvailability}
+              deleteAvailability={deleteAvailability}
             />
           )}
         />
@@ -89,6 +92,8 @@ const mapDispatchToProps = (dispatch) => ({
   updateAvailability: (dateDetails) =>
     dispatch(updateAvailability(dateDetails)),
   closeSettingMenu: () => dispatch(closeSettingMenu()),
+  deleteAvailability: (classId, availabilityId) =>
+    dispatch(deleteAvailability(classId, availabilityId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ClassRoutes);

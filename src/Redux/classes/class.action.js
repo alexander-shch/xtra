@@ -136,3 +136,29 @@ export const updateAvailability = (dateDetails) => (dispatch) => {
       dispatch({ type: 'UPDATE_AVAILABILTY_FAILED', payload: err })
     );
 };
+
+export const deleteAvailability = (classId, availabilityId) => (dispatch) => {
+  const payload = { classId, availabilityId };
+  dispatch({ type: 'DELETE_AVAILABILTY_START' });
+  fetch(`http://localhost:3005/classes/availability/${availabilityId}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.deleted) {
+        dispatch({
+          type: 'DELETE_AVAILABILTY_SUCSESS',
+          payload: payload,
+        });
+      } else {
+        throw new Error('cant delete this availability');
+      }
+    })
+    .catch((err) =>
+      dispatch({ type: 'DELETE_AVAILABILTY_FAILED', payload: err })
+    );
+};

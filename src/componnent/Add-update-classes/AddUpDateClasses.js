@@ -20,6 +20,7 @@ const AddUpDateClasses = ({
   classes,
   loading,
   updateAvailability,
+  deleteAvailability,
 }) => {
   // default values--------------------------------------------------
   const url = match.params.ClassesID;
@@ -150,6 +151,17 @@ const AddUpDateClasses = ({
     const eventName = `${fromTime.slice(0, 5)} - ${toTime.slice(0, 5)}`;
     setConfirmMsg({ confirmMsgView: true, name: eventName });
   };
+
+  const delteItem = async () => {
+    const { availabilityId } = dateDetails;
+    try {
+      await deleteAvailability(classId, availabilityId);
+    } catch (err) {
+      console.log(err);
+    }
+    closeDeleteBox();
+    closeSingleBox();
+  };
   const closeDeleteBox = () => {
     setConfirmMsg({ confirmMsgView: false, name: '' });
   };
@@ -215,7 +227,11 @@ const AddUpDateClasses = ({
               />
             ) : null}
             {confirmMsgView ? (
-              <DeleteBox item={confirmMsg} close={closeDeleteBox} />
+              <DeleteBox
+                item={confirmMsg}
+                delteItem={delteItem}
+                close={closeDeleteBox}
+              />
             ) : null}
           </>
         ) : null}
