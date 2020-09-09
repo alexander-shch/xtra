@@ -1,6 +1,6 @@
 import React from 'react';
 import './firstForm.style.scss';
-import InputField from '../../input-field/InputField';
+import InputField from '../../inputes/input-field/InputField';
 import MyButton from '../../My-button/MyButton';
 import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -29,6 +29,7 @@ const FirstForm = ({
         />
         <div className='selectbuildingInput'>
           <select
+            required
             name='building'
             className='buildingSelector'
             defaultValue={building !== null ? building : '1'}
@@ -69,7 +70,7 @@ const FirstForm = ({
         />
       </div>
 
-      <div className='classesButtons'>
+      <div className='buttons'>
         <MyButton>{element}</MyButton>
         <MyButton
           type='button'

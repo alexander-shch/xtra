@@ -6,7 +6,6 @@ const WithSpinner = (WarpedComponenet) => ({
   BuildingsData,
   ...otherProps
 }) => {
-  console.log(BuildingsData);
   return loading ? (
     <Spinner />
   ) : (

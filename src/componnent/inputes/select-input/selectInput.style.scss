@@ -1,0 +1,14 @@
+.selectGroupInput {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-top: 15px;
+
+  label {
+    margin-right: 5px;
+  }
+  .selector {
+    border-radius: 0.25rem;
+    padding: 2px 10px;
+    margin-right: 10px;
+  }
+}

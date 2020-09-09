@@ -1,10 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getclassesData } from '../../../Redux/classes/class.action';
-import ClassList from '../../../pages/class/ClassList';
+import {
+  getclassesData,
+  deleteClass,
+  addNewClass,
+  updateClass,
+  setAvailability,
+  updateAvailability,
+} from '../../../Redux/classes/class.action';
 import { getBuildingsData } from '../../../Redux/buildings/buildings.actions';
-import AddUpDateClasses from '../../Add-update-classes/AddUpDateClasses';
+import { closeSettingMenu } from '../../../Redux/settingsView/settings.actions';
+import Spinner from '../../spinner/Spinner';
+const ClassList = lazy(() => import('../../../pages/class/ClassList'));
+const AddUpDateClasses = lazy(() =>
+  import('../../Add-update-classes/AddUpDateClasses')
+);
 
 const ClassRoutes = ({
   getBuildingsData,
@@ -12,34 +23,72 @@ const ClassRoutes = ({
   match,
   buildings,
   classes,
+  loading,
+  deleteClass,
+  addNewClass,
+  updateClass,
+  setAvailability,
+  updateAvailability,
+  closeSettingMenu,
 }) => {
   useEffect(() => {
     getclassesData();
     getBuildingsData();
-  }, [getclassesData, getBuildingsData]);
+    closeSettingMenu();
+  }, [getclassesData, getBuildingsData, closeSettingMenu]);
+
   return (
     <>
-      <Route
-        exact
-        path={`${match.path}`}
-        render={() => <ClassList classes={classes} buildings={buildings} />}
-      />
-      <Route
-        path={`${match.path}/:ClassesID`}
-        render={() => <AddUpDateClasses buildings={buildings} />}
-      />
+      <Suspense fallback={<Spinner />}>
+        <Route
+          exact
+          path={`${match.path}`}
+          render={() => (
+            <ClassList
+              classes={classes}
+              buildings={buildings}
+              loading={loading}
+              deleteClass={deleteClass}
+            />
+          )}
+        />
+        <Route
+          path={`${match.path}/:ClassesID`}
+          render={() => (
+            <AddUpDateClasses
+              buildings={buildings}
+              classes={classes}
+              loading={loading}
+              addNewClass={addNewClass}
+              updateClass={updateClass}
+              setAvailability={setAvailability}
+              updateAvailability={updateAvailability}
+            />
+          )}
+        />
+      </Suspense>
     </>
   );
 };
 
 const mapStateToProps = (state) => ({
-  buildings: state.Buildings.buildings,
+  buildings: state.buildings.buildings,
   classes: state.classes.classes,
+  loading: state.classes.loading,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getclassesData: () => dispatch(getclassesData()),
   getBuildingsData: () => dispatch(getBuildingsData()),
+  deleteClass: (id) => dispatch(deleteClass(id)),
+  addNewClass: (classDetails, history) =>
+    dispatch(addNewClass(classDetails, history)),
+  updateClass: (id, classDetails) => dispatch(updateClass(id, classDetails)),
+  setAvailability: (classId, dateDetails) =>
+    dispatch(setAvailability(classId, dateDetails)),
+  updateAvailability: (dateDetails) =>
+    dispatch(updateAvailability(dateDetails)),
+  closeSettingMenu: () => dispatch(closeSettingMenu()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ClassRoutes);

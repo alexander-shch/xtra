@@ -1,0 +1,19 @@
+.tableTop {
+  width: 100%;
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  flex-direction: row-reverse;
+  background-color: #ff6633;
+
+  .tableTopTitle {
+    margin-right: 5px;
+    width: 90%;
+    text-align: right;
+    &:last-child {
+      width: 20%;
+      text-align: center;
+    }
+  }
+}

@@ -13,7 +13,6 @@ export const getclassesData = () => (dispatch) => {
 };
 
 export const addNewClass = (classDetails, history) => (dispatch) => {
-  console.log(history);
   const { name, minStudents, maxStudents, building } = classDetails;
   const minNum = Number(minStudents);
   const maxNum = Number(maxStudents);
@@ -34,11 +33,38 @@ export const addNewClass = (classDetails, history) => (dispatch) => {
   })
     .then((res) => res.json())
     .then((data) => {
+      console.log(data);
       dispatch({ type: 'ADD_CLASS_SUCSESS', payload: data });
       history.push('/settings/list-classes/updateClasses', data);
     })
 
     .catch((err) => dispatch({ type: 'ADD_CLASS_FAILED', payload: err }));
+};
+
+export const updateClass = (id, classDetails) => (dispatch) => {
+  const { name, minStudents, maxStudents, building } = classDetails;
+  const minNum = Number(minStudents);
+  const maxNum = Number(maxStudents);
+  dispatch({ type: 'UPDATE_CLASS_START' });
+  fetch(`http://localhost:3005/classes/${id}`, {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      name: name,
+      minStudents: minNum,
+      maxStudents: maxNum,
+      building: building,
+    }),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      dispatch({ type: 'UPDATE_CLASS_SUCSESS', payload: data });
+    })
+    .catch((err) => dispatch({ type: 'UPDATE_CLASS_FAILED', payload: err }));
 };
 
 export const deleteClass = (id) => (dispatch) => {
@@ -59,4 +85,54 @@ export const deleteClass = (id) => (dispatch) => {
       }
     })
     .catch((err) => dispatch({ type: 'DELETE_CLASS_SUCSESS', payload: err }));
+};
+
+export const setAvailability = (id, dateDetails) => (dispatch) => {
+  const { from, to, fromTime, toTime } = dateDetails;
+  let fromDate = `${from}T${fromTime}Z`;
+  let toDate = `${to}T${toTime}Z`;
+  dispatch({ type: 'SET_AVAILABILITY_START' });
+  fetch(`http://localhost:3005/classes/${id}/availability`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      from: fromDate,
+      to: toDate,
+    }),
+  })
+    .then((res) => res.json())
+    .then((data) =>
+      dispatch({ type: 'SET_AVAILABILITY_SUCSESS', payload: data })
+    )
+    .catch((err) =>
+      dispatch({ type: 'SET_AVAILABILITY_FAILED', payload: err })
+    );
+};
+
+export const updateAvailability = (dateDetails) => (dispatch) => {
+  const { from, to, fromTime, toTime, availabilityId } = dateDetails;
+  let fromDate = `${from}T${fromTime}Z`;
+  let toDate = `${to}T${toTime}Z`;
+  dispatch({ type: 'UPDATE_AVAILABILTY_START' });
+  fetch(`http://localhost:3005/classes/availability/${availabilityId}`, {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      from: fromDate,
+      to: toDate,
+    }),
+  })
+    .then((res) => res.json())
+    .then((data) =>
+      dispatch({ type: 'UPDATE_AVAILABILTY_SUCSESS', payload: data })
+    )
+    .catch((err) =>
+      dispatch({ type: 'UPDATE_AVAILABILTY_FAILED', payload: err })
+    );
 };

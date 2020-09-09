@@ -1,0 +1,11 @@
+.groupDateInput {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+
+  .date-input {
+    padding: 5px;
+    font-family: unset;
+    margin-right: 5px;
+  }
+}

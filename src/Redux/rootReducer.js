@@ -7,7 +7,7 @@ import classesReducer from './classes/classesReducer';
 const rootReducer = combineReducers({
   user: userReducer,
   toggleSettingsView: settingsView,
-  Buildings: BuildingsReducer,
+  buildings: BuildingsReducer,
   classes: classesReducer,
 });
 

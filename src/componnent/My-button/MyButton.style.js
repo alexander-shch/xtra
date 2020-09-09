@@ -26,12 +26,12 @@ const forgotStyle = css`
 const addStyle = css`
   border: none;
   color: white;
-  font-size: 20px;
+  font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
   margin: 2px;
   width: 130px;
-  height: 50px;
+  height: 40px;
   background-color: #ff6633;
 
   &:hover {
@@ -39,12 +39,40 @@ const addStyle = css`
   }
 `;
 
+const deleteStyle = css`
+  color: white;
+  background-color: #ff3333;
+  border-color: #ff3333;
+
+  &:hover {
+    background-color: #ff1a1a;
+    border-color: #ff1a1a;
+  }
+`;
+
 const getButtonStyles = (props) => {
-  return props.forgot
-    ? forgotStyle
-    : props.addButtonStyle
-    ? addStyle
-    : buttonStyles;
+  let style = buttonStyles;
+  let styleObj = {
+    forgot: forgotStyle,
+    addButtonStyle: addStyle,
+    delete: deleteStyle,
+  };
+
+  let objArr = Object.keys(styleObj);
+
+  for (let i = 0; i < objArr.length; i++) {
+    if (objArr[i] in props) {
+      style = styleObj[objArr[i]];
+      break;
+    }
+  }
+  return style;
+
+  // return props.forgot
+  //   ? forgotStyle
+  //   : props.addButtonStyle
+  //   ? addStyle
+  //   : buttonStyles;
 };
 
 export const CustomButtonContainer = styled.button`
