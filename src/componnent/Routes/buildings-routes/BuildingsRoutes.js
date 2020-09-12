@@ -22,8 +22,10 @@ const BuildingsRoutes = ({
   ...otherProps
 }) => {
   useEffect(() => {
-    getBuildingsData();
-  }, [getBuildingsData]);
+    if (data.length === 0) {
+      getBuildingsData();
+    }
+  }, [getBuildingsData, data]);
   return (
     <>
       <Suspense fallback={<Spinner />}>

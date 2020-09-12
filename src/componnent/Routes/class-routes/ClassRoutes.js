@@ -34,10 +34,14 @@ const ClassRoutes = ({
   deleteAvailability,
 }) => {
   useEffect(() => {
-    getclassesData();
-    getBuildingsData();
+    if (classes.length === 0) {
+      getclassesData();
+    }
+    if (buildings.length === 0) {
+      getBuildingsData();
+    }
     closeSettingMenu();
-  }, [getclassesData, getBuildingsData, closeSettingMenu]);
+  }, [getclassesData, getBuildingsData, closeSettingMenu, classes, buildings]);
 
   return (
     <>

@@ -5,7 +5,6 @@ const INTIAL_STATE = {
 };
 
 const BuildingsReducer = (state = INTIAL_STATE, action) => {
-  let buildings;
   switch (action.type) {
     case 'BUILDING_FETCH_START':
     case 'UPDATE_BUILDING_START':
@@ -22,7 +21,7 @@ const BuildingsReducer = (state = INTIAL_STATE, action) => {
 
     case 'UPDATE_BUILDING_SUCSESS':
       const { buildings: allBuildings } = state;
-      buildings = [...allBuildings];
+      let buildings = [...allBuildings];
       const index = allBuildings.findIndex(
         (building) => building._id === action.payload._id
       );

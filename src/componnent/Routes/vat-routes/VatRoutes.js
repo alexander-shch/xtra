@@ -1,13 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import VatList from '../../../pages/Vat-list/VatList';
 import UpdateVatRate from '../../../pages/Vat-list/UpdateVatRate';
 import AddUpdateVatList from '../../../pages/Vat-list/AddUpdateVatList';
+import { connect } from 'react-redux';
+import {
+  getvatList,
+  addVatItem,
+  updateVatItem,
+  deleteVatItem,
+} from '../../../Redux/Vat/vat.action';
 
-const VatRoutes = ({ match }) => {
+const VatRoutes = ({
+  match,
+  vatList,
+  getvatList,
+  addVatItem,
+  updateVatItem,
+  deleteVatItem,
+}) => {
+  useEffect(() => {
+    getvatList();
+  }, [getvatList]);
   return (
     <Switch>
-      <Route exact path={`${match.path}`} render={() => <VatList />} />
+      <Route
+        exact
+        path={`${match.path}`}
+        render={() => (
+          <VatList vatList={vatList} deleteVatItem={deleteVatItem} />
+        )}
+      />
       <Route
         exact
         path='/settings/VAT-multipliers/updateVatRate'
@@ -16,10 +39,26 @@ const VatRoutes = ({ match }) => {
       <Route
         exact
         path={`${match.path}/:vatID`}
-        render={() => <AddUpdateVatList />}
+        render={() => (
+          <AddUpdateVatList
+            addVatItem={addVatItem}
+            updateVatItem={updateVatItem}
+          />
+        )}
       />
     </Switch>
   );
 };
 
-export default VatRoutes;
+const mapStateToProps = (state) => ({
+  vatList: state.vat.vatList,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getvatList: () => dispatch(getvatList()),
+  addVatItem: (vatItem) => dispatch(addVatItem(vatItem)),
+  updateVatItem: (itemId, vatItem) => dispatch(updateVatItem(itemId, vatItem)),
+  deleteVatItem: (itemId) => dispatch(deleteVatItem(itemId)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(VatRoutes);

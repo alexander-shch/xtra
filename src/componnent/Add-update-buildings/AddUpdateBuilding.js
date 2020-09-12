@@ -52,33 +52,31 @@ const AddUpdateBuilding = ({
 
   return (
     <UpdatePageContainer>
-      <div className='formContainer'>
-        <h3>{url === 'addBuilding' ? 'הוספה' : 'עריכה'}</h3>
-        <form onSubmit={handleSubmit}>
-          <InputField
-            name='name'
-            type='text'
-            label='שם המקום'
-            value={name}
-            handleChange={handdleChange}
-            hebrew='true'
-            required
-          />
-          <SelectInput
-            name='active'
-            label='פעיל'
-            value={active}
-            handleChange={handdleChange}
-            required
-          />
-          <div className='buttons'>
-            <MyButton>{element}</MyButton>
-            <MyButton type='button' onClick={() => cancel()} forgot>
-              ביטול
-            </MyButton>
-          </div>
-        </form>
-      </div>
+      <h3>{url === 'addBuilding' ? 'הוספה' : 'עריכה'}</h3>
+      <form onSubmit={handleSubmit}>
+        <InputField
+          name='name'
+          type='text'
+          label='שם המקום'
+          value={name}
+          handleChange={handdleChange}
+          hebrew='true'
+          required
+        />
+        <SelectInput
+          name='active'
+          label='פעיל'
+          value={active}
+          handleChange={handdleChange}
+          required
+        />
+        <div className='buttons'>
+          <MyButton>{element}</MyButton>
+          <MyButton type='button' onClick={() => cancel()} forgot>
+            ביטול
+          </MyButton>
+        </div>
+      </form>
     </UpdatePageContainer>
   );
 };

@@ -5,7 +5,7 @@ import ClassRoutes from '../class-routes/ClassRoutes';
 import CourseRoutes from '../Course-Routes/CourseRoutes';
 import BookListRoutes from '../book-list-routes/BookListRoutes';
 import VatRoutes from '../vat-routes/VatRoutes';
-import DomainManagementRoutes from '../Domain-management/DomainManagement';
+import CatagoriesRoutes from '../Catagories/CatagoriesRoutes';
 
 const SettingsRoutes = () => {
   return (
@@ -15,10 +15,7 @@ const SettingsRoutes = () => {
       <Route path='/settings/Course-information' component={CourseRoutes} />
       <Route path='/settings/Course-books' component={BookListRoutes} />
       <Route path='/settings/VAT-multipliers' component={VatRoutes} />
-      <Route
-        path='/settings/Domain-management'
-        component={DomainManagementRoutes}
-      />
+      <Route path='/settings/Categories-list' component={CatagoriesRoutes} />
     </>
   );
 };
