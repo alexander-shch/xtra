@@ -1,0 +1,19 @@
+.add-lecture-form {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
+  .groupInput {
+    flex: 0 50%;
+  }
+
+  .selectContianer {
+    margin-top: 5px;
+    display: flex;
+    width: 50%;
+    justify-content: flex-end;
+
+    .selectInputLabael {
+      margin: auto 5px;
+    }
+  }
+}

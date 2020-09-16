@@ -26,6 +26,7 @@ const BuildingsRoutes = ({
       getBuildingsData();
     }
   }, [getBuildingsData, data]);
+
   return (
     <>
       <Suspense fallback={<Spinner />}>

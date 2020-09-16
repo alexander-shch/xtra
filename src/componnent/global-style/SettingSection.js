@@ -46,14 +46,14 @@ export const SingleItem = styled.div`
   .buttons {
     flex-wrap: wrap;
     display: flex;
-    width: 20%;
+    width: 30%;
   }
   .itemName {
     margin-right: 5px;
     width: 90%;
     text-align: right;
     &:last-child {
-      width: 10%;
+      width: 20%;
       text-align: center;
     }
   }

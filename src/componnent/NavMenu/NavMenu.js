@@ -10,7 +10,7 @@ const NavMenu = ({ signOut, toggleView, settingsView, userName }) => {
   const navMenuArray = [
     { linkTitle: 'לובי', linkUrl: '/', className: 'single-link' },
     { linkTitle: 'קורסים', linkUrl: '/', className: 'single-link' },
-    { linkTitle: 'מרצים', linkUrl: '/', className: 'single-link' },
+    { linkTitle: 'מרצים', linkUrl: '/lecturers', className: 'single-link' },
     { linkTitle: 'נרשמים', linkUrl: '/', className: 'single-link' },
     { linkTitle: 'דוחות', linkUrl: '/', className: 'single-link' },
     { linkTitle: 'תשלומים', linkUrl: '/', className: 'single-link' },

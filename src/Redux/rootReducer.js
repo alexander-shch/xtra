@@ -5,6 +5,8 @@ import BuildingsReducer from './buildings/BuildingsReducer';
 import classesReducer from './classes/classesReducer';
 import categoriesReducer from './categories/categoriesReducer';
 import vatReducer from './Vat/vatReducer';
+import searchField from '../Redux/search/searchReducer';
+import lecturesReducer from '../Redux/Lectures/lecturesReducer';
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -13,6 +15,8 @@ const rootReducer = combineReducers({
   classes: classesReducer,
   categories: categoriesReducer,
   vat: vatReducer,
+  searchField: searchField,
+  lectures: lecturesReducer,
 });
 
 export default rootReducer;

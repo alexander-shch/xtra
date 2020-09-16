@@ -33,7 +33,6 @@ export const addNewClass = (classDetails, history) => (dispatch) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
       dispatch({ type: 'ADD_CLASS_SUCSESS', payload: data });
       history.push('/settings/list-classes/updateClasses', data);
     })

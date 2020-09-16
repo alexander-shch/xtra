@@ -1,0 +1,10 @@
+.avatar-container {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0px;
+  .fileInput-container {
+    flex: 0 50%;
+  }
+}

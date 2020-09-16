@@ -20,8 +20,10 @@ const VatRoutes = ({
   deleteVatItem,
 }) => {
   useEffect(() => {
-    getvatList();
-  }, [getvatList]);
+    if (vatList.length === 0) {
+      getvatList();
+    }
+  }, [getvatList, vatList]);
   return (
     <Switch>
       <Route
