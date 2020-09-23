@@ -9,7 +9,9 @@ const BuildingItem = ({ match, history, item, openBox }) => {
       <span className='itemName'>{item.name}</span>
       <div className='buttons'>
         <OptionButton
-          onClick={() => history.push(`${match.path}/updateBuilding`, item)}
+          onClick={() =>
+            history.push(`${match.path}/updateBulding/${item._id}`)
+          }
           edit
         >
           &#9998;

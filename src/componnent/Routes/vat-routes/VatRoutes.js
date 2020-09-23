@@ -10,6 +10,7 @@ import {
   updateVatItem,
   deleteVatItem,
 } from '../../../Redux/Vat/vat.action';
+import Spinner from '../../spinner/Spinner';
 
 const VatRoutes = ({
   match,
@@ -18,6 +19,7 @@ const VatRoutes = ({
   addVatItem,
   updateVatItem,
   deleteVatItem,
+  loading,
 }) => {
   useEffect(() => {
     if (vatList.length === 0) {
@@ -40,13 +42,18 @@ const VatRoutes = ({
       />
       <Route
         exact
-        path={`${match.path}/:vatID`}
-        render={() => (
-          <AddUpdateVatList
-            addVatItem={addVatItem}
-            updateVatItem={updateVatItem}
-          />
-        )}
+        path={`${match.path}/addNewVat`}
+        render={() => <AddUpdateVatList addVatItem={addVatItem} />}
+      />
+      <Route
+        path={`${match.path}/updateVatItem/:vatID`}
+        render={() =>
+          loading ? (
+            <Spinner />
+          ) : (
+            <AddUpdateVatList updateVatItem={updateVatItem} vatList={vatList} />
+          )
+        }
       />
     </Switch>
   );
@@ -54,6 +61,7 @@ const VatRoutes = ({
 
 const mapStateToProps = (state) => ({
   vatList: state.vat.vatList,
+  loading: state.vat.loading,
 });
 
 const mapDispatchToProps = (dispatch) => ({

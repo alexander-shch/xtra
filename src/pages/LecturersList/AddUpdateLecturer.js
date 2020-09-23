@@ -3,38 +3,36 @@ import AddLecturerForm from '../../componnent/Add-update-Lecturer/add-lecture/Ad
 import UpdateLectureForm from '../../componnent/Add-update-Lecturer/update-lecture/UpdateLectureForm';
 import { UpdatePageContainer } from '../../componnent/global-style/SettingSection';
 import { withRouter } from 'react-router-dom';
+import MyAlert from '../../componnent/My-Alert/MyAlert';
 
 const AddUpdateLecturer = ({
   vatList,
   match,
-  location,
   history,
   addNewLecture,
   updateLecture,
-  setAvatarImg,
+  lectures,
+  lecturesLoading,
 }) => {
-  const url = match.params.LecturerID;
-  const defaultName = url === 'updateLecture' ? location.state.name : '';
-  const defaultIdNumber =
-    url === 'updateLecture' ? location.state.idNumber : '';
-  const defaultPhone = url === 'updateLecture' ? location.state.phone : '';
-  const defaultEmail = url === 'updateLecture' ? location.state.email : '';
-  const defaultAdress =
-    url === 'updateLecture' ? location.state.address.address : '';
-  const defaultHourlyRate =
-    url === 'updateLecture' ? location.state.hourlyRate : '';
-  const defaultDuplicator =
-    url === 'updateLecture' ? location.state.duplicator : '';
-  const defaultDetails = url === 'updateLecture' ? location.state.details : '';
-  const defaultDescription =
-    url === 'updateLecture' ? location.state.description : '';
-  const defaultExperience =
-    url === 'updateLecture' ? location.state.experience : '';
-  const defaultTeaching =
-    url === 'updateLecture' ? location.state.teaching : '';
+  const lectureID = match.params.LecturerID;
+  const singleLecture =
+    lectureID && lectures.length !== 0
+      ? lectures.filter((item) => item._id === lectureID)
+      : null;
 
-  const defaultActive = url === 'updateLecture' ? location.state.active : true;
-  const test = url === 'updateLecture' ? location.state._id : null;
+  const defaultName = singleLecture ? singleLecture[0].name : '';
+  const defaultIdNumber = singleLecture ? singleLecture[0].idNumber : '';
+  const defaultPhone = singleLecture ? singleLecture[0].phone : '';
+  const defaultEmail = singleLecture ? singleLecture[0].email : '';
+  const defaultAdress = singleLecture ? singleLecture[0].address.address : '';
+  const defaultHourlyRate = singleLecture ? singleLecture[0].hourlyRate : '';
+  const defaultDuplicator = singleLecture ? singleLecture[0].duplicator : '';
+  const defaultDetails = singleLecture ? singleLecture[0].details : '';
+  const defaultDescription = singleLecture ? singleLecture[0].description : '';
+  const defaultExperience = singleLecture ? singleLecture[0].experience : '';
+  const defaultTeaching = singleLecture ? singleLecture[0].teaching : '';
+
+  const defaultActive = singleLecture ? singleLecture[0].active : true;
 
   const [lectureDeteils, setLectureDetails] = useState({
     name: defaultName,
@@ -51,28 +49,27 @@ const AddUpdateLecturer = ({
     teaching: defaultTeaching,
   });
 
-  const [imgFile, setImgFile] = useState({ file: null });
-  const { file } = imgFile;
-
   const handdleSubmit = async (e) => {
     e.preventDefault();
     let { active } = lectureDeteils;
     active = JSON.parse(active);
-    if (url === 'addLecturer') {
+    if (!singleLecture) {
       try {
         await addNewLecture(lectureDeteils, history);
       } catch (err) {
         console.log(err);
       }
     }
-    if (url === 'updateLecture') {
-      const id = location.state._id;
+    if (singleLecture) {
       try {
-        await updateLecture(id, lectureDeteils);
+        await updateLecture(lectureID, lectureDeteils);
       } catch (err) {
         console.log(err);
       }
     }
+  };
+  const handleEditorChange = (content) => {
+    setLectureDetails({ ...lectureDeteils, details: content });
   };
 
   const handdleChange = (e) => {
@@ -81,41 +78,22 @@ const AddUpdateLecturer = ({
       ? setLectureDetails({ ...lectureDeteils, address: { address: value } })
       : setLectureDetails({ ...lectureDeteils, [name]: value });
   };
-  const handdleImgChange = (e) => {
-    const { files } = e.target;
-    setImgFile({ file: files });
-  };
-
-  const fileSubmit = async (e) => {
-    const id = location.state._id;
-    let fromData = new FormData();
-
-    fromData.append('file', file[0]);
-    console.log(fromData, file[0]);
-
-    try {
-      await setAvatarImg(id, fromData);
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   return (
-    <UpdatePageContainer>
-      <AddLecturerForm
-        handdleChange={handdleChange}
-        handdleSubmit={handdleSubmit}
-        vatList={vatList}
-        lectureDeteils={lectureDeteils}
-      />
-      {url === 'updateLecture' ? (
-        <UpdateLectureForm
-          handdleImgChange={handdleImgChange}
-          fileSubmit={fileSubmit}
-          id={test}
+    <>
+      <MyAlert />
+      <UpdatePageContainer>
+        <AddLecturerForm
+          handdleChange={handdleChange}
+          handleEditorChange={handleEditorChange}
+          handdleSubmit={handdleSubmit}
+          vatList={vatList}
+          lectureDeteils={lectureDeteils}
+          lecturesLoading={lecturesLoading}
         />
-      ) : null}
-    </UpdatePageContainer>
+        {singleLecture ? <UpdateLectureForm id={lectureID} /> : null}
+      </UpdatePageContainer>
+    </>
   );
 };
 

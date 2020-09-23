@@ -52,7 +52,7 @@ const LecturersList = ({
   return (
     <SettingSectionContainer>
       <MyButton
-        onClick={() => history.push(`${match.path}/addLecturer`)}
+        onClick={() => history.push(`${match.path}/addLecture`)}
         addButtonStyle
       >
         הוספת מרצה

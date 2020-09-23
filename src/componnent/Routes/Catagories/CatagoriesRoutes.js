@@ -9,6 +9,7 @@ import {
 } from '../../../Redux/categories/categories.action';
 import CategoriesList from '../../../pages/Categories/CategoriesList';
 import AddUpdateCategory from '../../Add-Update-catagory/AddUpdateCategory';
+import Spinner from '../../spinner/Spinner';
 
 const CategoriesRoutes = ({
   match,
@@ -17,6 +18,7 @@ const CategoriesRoutes = ({
   addNewCategory,
   updateCategoty,
   deleteCategory,
+  loading,
   ...otherProps
 }) => {
   useEffect(() => {
@@ -38,13 +40,22 @@ const CategoriesRoutes = ({
         )}
       />
       <Route
-        path={`${match.path}/:categotyID`}
-        render={() => (
-          <AddUpdateCategory
-            addNewCategory={addNewCategory}
-            updateCategoty={updateCategoty}
-          />
-        )}
+        exact
+        path={`${match.path}/addNewCategory`}
+        render={() => <AddUpdateCategory addNewCategory={addNewCategory} />}
+      />
+      <Route
+        path={`${match.path}/updateCategory/:categotyID`}
+        render={() =>
+          loading ? (
+            <Spinner />
+          ) : (
+            <AddUpdateCategory
+              categories={categories}
+              updateCategoty={updateCategoty}
+            />
+          )
+        }
       />
     </>
   );

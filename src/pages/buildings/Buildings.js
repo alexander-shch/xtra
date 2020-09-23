@@ -44,7 +44,7 @@ const Buildings = ({
   return (
     <SettingSectionContainer>
       <MyButton
-        onClick={() => history.push(`${match.path}/addBuilding`)}
+        onClick={() => history.push(`${match.path}/addNewBulding`)}
         addButtonStyle
       >
         הוספת בניין

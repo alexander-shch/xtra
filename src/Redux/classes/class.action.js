@@ -1,13 +1,9 @@
+import { callFetch, URL } from '../../utils/actionUtils';
+import { setAlert } from '../My-Alert/myAlert.action';
+
 export const getclassesData = () => (dispatch) => {
   dispatch({ type: 'CLASSES_FETCH_START' });
-  fetch('http://localhost:3005/classes', {
-    method: 'GET',
-    cache: 'no-cache',
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    },
-  })
-    .then((res) => res.json())
+  callFetch(`${URL}/classes`, 'GET')
     .then((data) => dispatch({ type: 'CLASSES_FETCH_SUCSESS', payload: data }))
     .catch((err) => dispatch({ type: 'CLASSES_FETCH_FAILED', payload: err }));
 };
@@ -17,7 +13,7 @@ export const addNewClass = (classDetails, history) => (dispatch) => {
   const minNum = Number(minStudents);
   const maxNum = Number(maxStudents);
   dispatch({ type: 'ADD_NEW_CLASS_START' });
-  fetch('http://localhost:3005/classes', {
+  fetch(`${URL}/classes`, {
     method: 'POST',
     cache: 'no-cache',
     headers: {
@@ -34,7 +30,7 @@ export const addNewClass = (classDetails, history) => (dispatch) => {
     .then((res) => res.json())
     .then((data) => {
       dispatch({ type: 'ADD_CLASS_SUCSESS', payload: data });
-      history.push('/settings/list-classes/updateClasses', data);
+      history.push(`/settings/list-classes/updateClass/${data._id}`);
     })
 
     .catch((err) => dispatch({ type: 'ADD_CLASS_FAILED', payload: err }));
@@ -45,7 +41,7 @@ export const updateClass = (id, classDetails) => (dispatch) => {
   const minNum = Number(minStudents);
   const maxNum = Number(maxStudents);
   dispatch({ type: 'UPDATE_CLASS_START' });
-  fetch(`http://localhost:3005/classes/${id}`, {
+  fetch(`${URL}/classes/${id}`, {
     method: 'PUT',
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -61,6 +57,7 @@ export const updateClass = (id, classDetails) => (dispatch) => {
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
+      dispatch(setAlert('הכיתה עודכנה בהצלחה', 'sucsess'));
       dispatch({ type: 'UPDATE_CLASS_SUCSESS', payload: data });
     })
     .catch((err) => dispatch({ type: 'UPDATE_CLASS_FAILED', payload: err }));
@@ -68,7 +65,7 @@ export const updateClass = (id, classDetails) => (dispatch) => {
 
 export const deleteClass = (id) => (dispatch) => {
   dispatch({ type: 'DELETE_CLASS_START' });
-  fetch(`http://localhost:3005/classes/${id}`, {
+  fetch(`${URL}/classes/${id}`, {
     method: 'DELETE',
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -91,7 +88,7 @@ export const setAvailability = (id, dateDetails) => (dispatch) => {
   let fromDate = `${from}T${fromTime}Z`;
   let toDate = `${to}T${toTime}Z`;
   dispatch({ type: 'SET_AVAILABILITY_START' });
-  fetch(`http://localhost:3005/classes/${id}/availability`, {
+  fetch(`${URL}/classes/${id}/availability`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -139,7 +136,7 @@ export const updateAvailability = (dateDetails) => (dispatch) => {
 export const deleteAvailability = (classId, availabilityId) => (dispatch) => {
   const payload = { classId, availabilityId };
   dispatch({ type: 'DELETE_AVAILABILTY_START' });
-  fetch(`http://localhost:3005/classes/availability/${availabilityId}`, {
+  fetch(`${URL}/classes/availability/${availabilityId}`, {
     method: 'DELETE',
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,

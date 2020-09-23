@@ -42,13 +42,22 @@ const BuildingsRoutes = ({
           )}
         />
         <Route
-          path={`${match.path}/:BuildingsId`}
-          render={() => (
-            <AddUpdateBuilding
-              addNewBuilding={addNewBuilding}
-              updateBuilding={updateBuilding}
-            />
-          )}
+          exact
+          path={`${match.path}/addNewBulding/`}
+          render={() => <AddUpdateBuilding addNewBuilding={addNewBuilding} />}
+        />
+        <Route
+          path={`${match.path}/updateBulding/:BuildingId/`}
+          render={() =>
+            otherProps.loading ? (
+              <Spinner />
+            ) : (
+              <AddUpdateBuilding
+                updateBuilding={updateBuilding}
+                buildings={data}
+              />
+            )
+          }
         />
       </Suspense>
     </>

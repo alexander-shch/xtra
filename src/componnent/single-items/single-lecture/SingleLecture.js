@@ -11,7 +11,9 @@ const SingleLecture = ({ match, history, item, openBox }) => {
       <span className='itemName'>{item.hourlyRate}</span>
       <div className='buttons'>
         <OptionButton
-          onClick={() => history.push(`${match.path}/updateLecture`, item)}
+          onClick={() =>
+            history.push(`${match.path}/updateLecture/${item._id}`)
+          }
           edit
         >
           &#9998;

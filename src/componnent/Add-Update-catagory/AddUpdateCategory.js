@@ -13,50 +13,64 @@ const element = <FontAwesomeIcon icon={faSave} />;
 const AddUpdateCategory = ({
   history,
   match,
-  location,
+  categories,
   addNewCategory,
   updateCategoty,
 }) => {
-  const url = match.params.categotyID;
-  const state = location.state;
+  const categoryId = match.params.categotyID;
+  const singleCategory =
+    categoryId && categories.length !== 0
+      ? categories.filter((item) => item._id === categoryId)
+      : null;
 
   //============================d for default=======================================================
-  const dTitle = url === 'updateCategory' ? state.title : '';
-  const dCourseGoals =
-    url === 'updateCategory' ? state.courseDefaults.goals.value : '';
-  const dCourseGoalsSiteTitle =
-    url === 'updateCategory' ? state.courseDefaults.goals.title : '';
-  const dPreliminaryKnowledge =
-    url === 'updateCategory'
-      ? state.courseDefaults.preliminaryKnowledge.value
-      : '';
-  const dPreliminaryKnowledgeSiteTitle =
-    url === 'updateCategory'
-      ? state.courseDefaults.preliminaryKnowledge.title
-      : '';
-  const dHowPromoteYou =
-    url === 'updateCategory' ? state.courseDefaults.promotion.value : '';
-  const dHowPromoteYouSiteTitle =
-    url === 'updateCategory' ? state.courseDefaults.promotion.title : '';
-  const dMarketing =
-    url === 'updateCategory' ? state.courseDefaults.marketing : '';
-  const dNumberOfSessions =
-    url === 'updateCategory' ? state.courseDefaults.session.count.value : '';
-  const dNumberOfSessionsSiteTitle =
-    url === 'updateCategory' ? state.courseDefaults.session.count.title : '';
-  const dSessionLength =
-    url === 'updateCategory' ? state.courseDefaults.session.length.value : '';
-  const dSessionLengthSiteTitle =
-    url === 'updateCategory' ? state.courseDefaults.session.length.title : '';
-  const dMinStudent =
-    url === 'updateCategory' ? state.courseDefaults.minStudents : '';
-  const dMaxStudent =
-    url === 'updateCategory' ? state.courseDefaults.maxStudents : '';
-  const dPriceForStudent =
-    url === 'updateCategory' ? state.courseDefaults.studentPrice : '';
-  const dRegularPrice =
-    url === 'updateCategory' ? state.courseDefaults.price : '';
-  const dActive = url === 'updateCategory' ? state.active : true;
+  const dTitle = singleCategory ? singleCategory[0].title : '';
+  const dCourseGoals = singleCategory
+    ? singleCategory[0].courseDefaults.goals.value
+    : '';
+  const dCourseGoalsSiteTitle = singleCategory
+    ? singleCategory[0].courseDefaults.goals.title
+    : '';
+  const dPreliminaryKnowledge = singleCategory
+    ? singleCategory[0].courseDefaults.preliminaryKnowledge.value
+    : '';
+  const dPreliminaryKnowledgeSiteTitle = singleCategory
+    ? singleCategory[0].courseDefaults.preliminaryKnowledge.title
+    : '';
+  const dHowPromoteYou = singleCategory
+    ? singleCategory[0].courseDefaults.promotion.value
+    : '';
+  const dHowPromoteYouSiteTitle = singleCategory
+    ? singleCategory[0].courseDefaults.promotion.title
+    : '';
+  const dMarketing = singleCategory
+    ? singleCategory[0].courseDefaults.marketing
+    : '';
+  const dNumberOfSessions = singleCategory
+    ? singleCategory[0].courseDefaults.session.count.value
+    : '';
+  const dNumberOfSessionsSiteTitle = singleCategory
+    ? singleCategory[0].courseDefaults.session.count.title
+    : '';
+  const dSessionLength = singleCategory
+    ? singleCategory[0].courseDefaults.session.length.value
+    : '';
+  const dSessionLengthSiteTitle = singleCategory
+    ? singleCategory[0].courseDefaults.session.length.title
+    : '';
+  const dMinStudent = singleCategory
+    ? singleCategory[0].courseDefaults.minStudents
+    : '';
+  const dMaxStudent = singleCategory
+    ? singleCategory[0].courseDefaults.maxStudents
+    : '';
+  const dPriceForStudent = singleCategory
+    ? singleCategory[0].courseDefaults.studentPrice
+    : '';
+  const dRegularPrice = singleCategory
+    ? singleCategory[0].courseDefaults.price
+    : '';
+  const dActive = singleCategory ? singleCategory[0].active : true;
   //=======================================================================================
   const [domainDetails, setDomainDetails] = useState({
     title: dTitle,
@@ -121,16 +135,14 @@ const AddUpdateCategory = ({
   //==================================================================================================
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (url === 'updateCategory') {
-      let categoryID = state._id;
-      console.log(categoryID);
+    if (singleCategory) {
       try {
-        await updateCategoty(categoryID, objToServer);
+        await updateCategoty(categoryId, objToServer);
       } catch (err) {
         console.log(err);
       }
     }
-    if (url === 'addCategory') {
+    if (!singleCategory) {
       try {
         await addNewCategory(objToServer);
       } catch (err) {

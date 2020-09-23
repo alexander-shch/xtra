@@ -9,7 +9,9 @@ const SingleCategory = ({ match, history, item, openBox }) => {
       <span className='itemName'>{item.title}</span>
       <div className='buttons'>
         <OptionButton
-          onClick={() => history.push(`${match.path}/updateCategory`, item)}
+          onClick={() =>
+            history.push(`${match.path}/updateCategory/${item._id}`)
+          }
           edit
         >
           &#9998;

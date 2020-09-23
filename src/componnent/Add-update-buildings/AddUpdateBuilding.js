@@ -6,17 +6,23 @@ import MyButton from '../My-button/MyButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
 import { withRouter } from 'react-router-dom';
+
 const element = <FontAwesomeIcon icon={faSave} />;
 
 const AddUpdateBuilding = ({
-  location,
   history,
   addNewBuilding,
   updateBuilding,
+  buildings,
   match,
 }) => {
-  const url = match.params.BuildingsId;
-  const defultName = url === 'updateBuilding' ? location.state.name : '';
+  const buildingID = match.params.BuildingId;
+
+  let building = buildingID
+    ? buildings.filter((item) => item._id === buildingID)
+    : null;
+
+  const defultName = buildingID ? building[0].name : '';
 
   const [buildingDetails, setBuildingDetail] = useState({
     name: defultName,
@@ -26,10 +32,9 @@ const AddUpdateBuilding = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (url === 'updateBuilding') {
-      let itemid = location.state._id;
+    if (buildingID) {
       try {
-        await updateBuilding(itemid, name, active);
+        await updateBuilding(buildingID, name, active);
       } catch (err) {
         console.log(err);
       }
@@ -52,7 +57,7 @@ const AddUpdateBuilding = ({
 
   return (
     <UpdatePageContainer>
-      <h3>{url === 'addBuilding' ? 'הוספה' : 'עריכה'}</h3>
+      <h3>{buildingID ? 'הוספה' : 'עריכה'}</h3>
       <form onSubmit={handleSubmit}>
         <InputField
           name='name'

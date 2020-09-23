@@ -20,9 +20,8 @@ const BuildingsReducer = (state = INTIAL_STATE, action) => {
       return { ...state, buildings: [...state.buildings, action.payload] };
 
     case 'UPDATE_BUILDING_SUCSESS':
-      const { buildings: allBuildings } = state;
-      let buildings = [...allBuildings];
-      const index = allBuildings.findIndex(
+      const { buildings } = state;
+      const index = buildings.findIndex(
         (building) => building._id === action.payload._id
       );
       buildings[index] = action.payload;

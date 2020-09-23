@@ -8,9 +8,9 @@ import {
   addNewLecture,
   updateLecture,
   deleteLecture,
-  setAvatarImg,
 } from '../../../Redux/Lectures/lectures.action';
 import { getvatList } from '../../../Redux/Vat/vat.action';
+import Spinner from '../../spinner/Spinner';
 
 const LecturersRoutes = ({
   match,
@@ -23,7 +23,7 @@ const LecturersRoutes = ({
   searchField,
   updateLecture,
   deleteLecture,
-  setAvatarImg,
+  pageLoading,
 }) => {
   useEffect(() => {
     getLectures();
@@ -45,15 +45,31 @@ const LecturersRoutes = ({
         )}
       />
       <Route
-        path={`${match.path}/:LecturerID`}
+        exact
+        path={`${match.path}/addLecture`}
         render={() => (
           <AddUpdateLecturer
             vatList={vatList}
             addNewLecture={addNewLecture}
+            lecturesLoading={lecturesLoading}
             updateLecture={updateLecture}
-            setAvatarImg={setAvatarImg}
           />
         )}
+      />
+      <Route
+        path={`${match.path}/updateLecture/:LecturerID`}
+        render={() =>
+          pageLoading ? (
+            <Spinner />
+          ) : (
+            <AddUpdateLecturer
+              vatList={vatList}
+              lecturesLoading={lecturesLoading}
+              updateLecture={updateLecture}
+              lectures={lectures}
+            />
+          )
+        }
       />
     </Switch>
   );
@@ -63,6 +79,7 @@ const mapStateToProps = (state) => ({
   lecturesLoading: state.lectures.loading,
   vatList: state.vat.vatList,
   searchField: state.searchField.searchfield,
+  pageLoading: state.lectures.pageLoading,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -73,7 +90,6 @@ const mapDispatchToProps = (dispatch) => ({
   updateLecture: (id, lectureDetails) =>
     dispatch(updateLecture(id, lectureDetails)),
   deleteLecture: (id) => dispatch(deleteLecture(id)),
-  setAvatarImg: (id, dataForm) => dispatch(setAvatarImg(id, dataForm)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LecturersRoutes);

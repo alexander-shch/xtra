@@ -1,16 +1,12 @@
 export const updateClass = (state, payload) => {
-  let classes;
-  const { classes: newClasses } = state;
-  classes = [...newClasses];
-  const index = newClasses.findIndex((clasS) => clasS._id === payload._id);
+  let { classes } = state;
+  const index = classes.findIndex((clasS) => clasS._id === payload._id);
   classes[index] = payload;
   return classes;
 };
 
 export const setAvailabilty = (state, payload) => {
-  let classes;
-  const { classes: newClasses } = state;
-  classes = [...newClasses];
+  let { classes } = state;
   classes.forEach((item) => {
     let dataFilter = payload.filter(
       (payloadItem) => payloadItem.classId === item._id
@@ -21,9 +17,7 @@ export const setAvailabilty = (state, payload) => {
 };
 
 export const updateAvailabilty = (state, payload) => {
-  let classes;
-  const { classes: newClasses } = state;
-  classes = [...newClasses];
+  let { classes } = state;
   let classesObj = classes.reduce((acc, item) => {
     acc[item._id] = item;
     return acc;
@@ -35,9 +29,7 @@ export const updateAvailabilty = (state, payload) => {
 };
 
 export const deleteAvailability = (state, payload) => {
-  let classes;
-  const { classes: newClasses } = state;
-  classes = [...newClasses];
+  let { classes } = state;
   let classesObj = classes.reduce((acc, item) => {
     acc[item._id] = item;
     return acc;

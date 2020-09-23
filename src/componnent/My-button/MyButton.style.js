@@ -97,3 +97,9 @@ export const CustomButtonContainer = styled.button`
 
   ${getButtonStyles}
 `;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  position: relative;
+  justify-content: flex-end;
+`;

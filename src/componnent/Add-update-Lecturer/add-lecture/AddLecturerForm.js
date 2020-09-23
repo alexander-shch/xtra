@@ -12,6 +12,8 @@ const AddLecturerForm = ({
   vatList,
   lectureDeteils,
   handdleSubmit,
+  handleEditorChange,
+  lecturesLoading,
 }) => {
   const {
     name,
@@ -115,7 +117,7 @@ const AddLecturerForm = ({
           <label>פרטים על המרצה</label>
           <Editor
             apiKey='mwj83bdxn8dsq4sd6vz3oqclxlahbuzdhctyaoq2wfwmff1g'
-            initialValue=''
+            initialValue={details}
             init={{
               height: 500,
               menubar: false,
@@ -124,9 +126,11 @@ const AddLecturerForm = ({
                 'searchreplace visualblocks code fullscreen',
                 'insertdatetime media table paste code help wordcount directionality',
               ],
+              directionality: 'rtl',
               toolbar:
                 'rtl |undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent ',
             }}
+            onEditorChange={handleEditorChange}
           />
         </div>
         <TextArea
@@ -162,7 +166,9 @@ const AddLecturerForm = ({
         />
       </div>
       <div className='buttons'>
-        <MyButton>שמור</MyButton>
+        <MyButton save loading={lecturesLoading}>
+          שמור
+        </MyButton>
         <MyButton
           type='button'
           onClick={() => history.push('/lecturers')}
@@ -176,11 +182,3 @@ const AddLecturerForm = ({
 };
 
 export default withRouter(AddLecturerForm);
-
-// var formData = new FormData();
-
-// formData.append("username", "Groucho");
-// formData.append("accountnum", 123456); // number 123456 is immediately converted to a string "123456"
-
-// // HTML file input, chosen by user
-// formData.append("userfile", fileInputElement.files[0]);

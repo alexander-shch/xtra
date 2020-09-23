@@ -1,0 +1,16 @@
+$primary-color: #ff6633;
+.popUpContianer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  .popup {
+    width: 50%;
+    height: 25vh;
+    padding: 20px;
+    background-color: white;
+    position: fixed;
+    z-index: 11;
+    top: 25%;
+    border: 1px solid $primary-color;
+  }
+}
