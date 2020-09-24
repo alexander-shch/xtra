@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import Dashboard from '../../componnent/dashboard/Dashboard';
 import SettingsRoutes from '../../componnent/Routes/setting-routes/settingsRoutes';
 import LecturersRoutes from '../../componnent/Routes/LecturersRoutes/LecturersRoutes';
+
 const Main = () => {
   return (
     <>

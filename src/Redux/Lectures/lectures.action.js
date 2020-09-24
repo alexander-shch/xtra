@@ -46,7 +46,10 @@ export const deleteLecture = (lectureID) => (dispatch) => {
 export const setAvatarImg = (lectureID, fromData) => (dispatch) => {
   dispatch({ type: 'SET_AVATAR_IMG_START' });
   callFetch(`${URL}/lecturer/${lectureID}/avatar`, 'POST', fromData)
-    .then((data) => dispatch({ type: 'SET_AVATAR_IMG_SUCSESS', payload: data }))
+    .then((data) => {
+      dispatch({ type: 'SET_AVATAR_IMG_SUCSESS', payload: data });
+      dispatch(setAlert('תמונת פרופיל עודכנה בהצלחה', 'sucsess'));
+    })
     .catch((err) => dispatch({ type: 'SET_AVATAR_IMG_FAIELD', payload: err }));
 };
 

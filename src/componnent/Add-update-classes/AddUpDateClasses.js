@@ -108,8 +108,9 @@ const AddUpDateClasses = ({
       setAlert('יש למלא תאריכים ושעות', 'error');
       return;
     }
-    if (parseInt(toTime) - parseInt(fromTime) < 1) {
-      setAlert('מינמום טווח של שעה', 'error');
+
+    if (isTimeValid(toTime, fromTime) < 45) {
+      setAlert('טווח של 45 דק מינמום', 'error');
       return;
     } else {
       setLastUpdatedDate(from);
@@ -122,6 +123,15 @@ const AddUpDateClasses = ({
       }
     }
     closeSingleBox();
+  };
+
+  const isTimeValid = (toTime, fromTime) => {
+    let toTimeArr = toTime.split(':');
+    let fromTimeArr = fromTime.split(':');
+    let toTimeDate = new Date(0, 0, 0, toTimeArr[0], toTimeArr[1]);
+    let fromTimeDate = new Date(0, 0, 0, fromTimeArr[0], fromTimeArr[1]);
+    let minutes = Math.round((toTimeDate - fromTimeDate) / (1000 * 60));
+    return minutes;
   };
 
   const setDateClick = useCallback(
