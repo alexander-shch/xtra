@@ -9,17 +9,23 @@ import { withRouter } from 'react-router-dom';
 const element = <FontAwesomeIcon icon={faSave} />;
 
 const AddUpdateVatList = ({
-  location,
   history,
   match,
   addVatItem,
   updateVatItem,
+  vatList,
 }) => {
-  const url = match.params.vatID;
-  const dTitle = url === 'updateVatItem' ? location.state.title : '';
-  const dDuplicate = url === 'updateVatItem' ? location.state.duplicate : '';
-  const dVat = url === 'updateVatItem' ? location.state.vat : true;
-  const dActive = url === 'updateVatItem' ? location.state.active : true;
+  const vatID = match.params.vatID;
+
+  const singlevatItem =
+    vatID && vatList.length !== 0
+      ? vatList.filter((item) => item._id === vatID)
+      : null;
+
+  const dTitle = singlevatItem ? singlevatItem[0].title : '';
+  const dDuplicate = singlevatItem ? singlevatItem[0].duplicate : '';
+  const dVat = singlevatItem ? singlevatItem[0].vat : true;
+  const dActive = singlevatItem ? singlevatItem[0].active : true;
   const [vatItem, setVatItem] = useState({
     title: dTitle,
     duplicate: dDuplicate,
@@ -31,10 +37,9 @@ const AddUpdateVatList = ({
     e.preventDefault();
     active = JSON.parse(active);
     duplicate = Number(duplicate);
-    if (url === 'updateVatItem') {
-      let itemid = location.state._id;
+    if (vatID) {
       try {
-        await updateVatItem(itemid, vatItem);
+        await updateVatItem(vatID, vatItem);
       } catch (err) {
         console.log(err);
       }
@@ -57,7 +62,7 @@ const AddUpdateVatList = ({
 
   return (
     <UpdatePageContainer>
-      <h3>{url === 'addVatItem' ? 'הוספה' : 'עריכה'}</h3>
+      <h3>{vatID ? 'הוספה' : 'עריכה'}</h3>
       <form onSubmit={handleSubmit}>
         <InputField
           name='title'

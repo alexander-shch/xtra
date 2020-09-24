@@ -41,7 +41,7 @@ const CategoriesList = ({
   return (
     <SettingSectionContainer>
       <MyButton
-        onClick={() => history.push(`${match.path}/addCategory`)}
+        onClick={() => history.push(`${match.path}/addNewCategory`)}
         addButtonStyle
       >
         הוספת תחום

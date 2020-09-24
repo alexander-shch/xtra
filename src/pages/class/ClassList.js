@@ -44,7 +44,7 @@ const ClassList = ({
     <SettingSectionContainer>
       <MyButton
         addButtonStyle
-        onClick={() => history.push(`${match.path}/addClass`)}
+        onClick={() => history.push(`${match.path}/addNewClass`)}
       >
         הוספת כיתה
       </MyButton>

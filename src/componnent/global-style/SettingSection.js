@@ -47,11 +47,15 @@ export const SingleItem = styled.div`
     flex-wrap: wrap;
     display: flex;
     width: 30%;
+    justify-content: end;
   }
   .itemName {
     margin-right: 5px;
     width: 90%;
     text-align: right;
+    &.date {
+      text-align: left;
+    }
     &:last-child {
       width: 20%;
       text-align: center;

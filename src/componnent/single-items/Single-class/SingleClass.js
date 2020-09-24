@@ -10,7 +10,7 @@ const SingleClass = ({ item, match, history, openBox }) => {
       <span className='itemName'>{item.name}</span>
       <div className='buttons'>
         <OptionButton
-          onClick={() => history.push(`${match.path}/updateClasses`, item)}
+          onClick={() => history.push(`${match.path}/updateClass/${item._id}`)}
           edit
         >
           &#9998;

@@ -5,7 +5,6 @@ const INTIAL_STATE = {
 };
 
 const categoriesReducer = (state = INTIAL_STATE, action) => {
-  let categories;
   switch (action.type) {
     case 'GET_CATEGORIES_START':
     case 'ADD_NEW_CATEGORY_START':
@@ -21,9 +20,8 @@ const categoriesReducer = (state = INTIAL_STATE, action) => {
         loading: false,
       };
     case 'UPDATE_CATEGORY_SUCSESS':
-      const { categories: allCategories } = state;
-      categories = [...allCategories];
-      const index = allCategories.findIndex(
+      const { categories } = state;
+      const index = categories.findIndex(
         (category) => category._id === action.payload._id
       );
       categories[index] = action.payload;

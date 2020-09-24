@@ -8,11 +8,11 @@ import { withRouter } from 'react-router-dom';
 import DeleteBox from '../delete-box/DeleteBox';
 import { UpdatePageContainer } from '../global-style/SettingSection';
 import Spinner from '../spinner/Spinner';
+import MyAlert from '../My-Alert/MyAlert';
 
 const AddUpDateClasses = ({
   buildings,
   match,
-  location,
   addNewClass,
   history,
   updateClass,
@@ -21,24 +21,26 @@ const AddUpDateClasses = ({
   loading,
   updateAvailability,
   deleteAvailability,
+  setAlert,
 }) => {
   // default values--------------------------------------------------
-  const url = match.params.ClassesID;
 
-  const defaultName = url === 'updateClasses' ? location.state.name : '';
-  const defaultBuilding =
-    url === 'updateClasses' ? location.state.building._id : null;
-  const defaultMinNum =
-    url === 'updateClasses' ? location.state.minStudents : '';
-  const defaultMaxNum =
-    url === 'updateClasses' ? location.state.maxStudents : '';
-  const title = url === 'updateClasses' ? 'עדכון כיתה' : 'הוספת כיתה';
+  const classID = match.params.classID;
 
-  const classId = url === 'updateClasses' ? location.state._id : null;
+  const singleClass =
+    classID && classes.length !== 0
+      ? classes.filter((item) => item._id === classID)
+      : null;
+
+  const defaultName = singleClass ? singleClass[0].name : '';
+  const defaultBuilding = singleClass ? singleClass[0].building._id : null;
+  const defaultMinNum = singleClass ? singleClass[0].minStudents : '';
+  const defaultMaxNum = singleClass ? singleClass[0].maxStudents : '';
+  const title = singleClass ? 'עדכון כיתה' : 'הוספת כיתה';
 
   const events =
-    classes.length > 0 && url === 'updateClasses'
-      ? classes.filter((c) => c._id === classId)[0].availability
+    classes.length > 0 && singleClass
+      ? classes.filter((c) => c._id === classID)[0].availability
       : null;
 
   //-----------------states-----------------------------------------
@@ -54,6 +56,7 @@ const AddUpDateClasses = ({
     to: '',
     fromTime: '',
     toTime: '',
+    daysLimiter: 'select',
     updateSingleBoxDisplay: false,
     availabilityId: null,
   });
@@ -64,24 +67,30 @@ const AddUpDateClasses = ({
   });
 
   const [lastUpdatedDate, setLastUpdatedDate] = useState(new Date());
+
   //------------------------------------------------------------------------
   const handleSubmit = async (e) => {
+    const { minStudents, maxStudents } = classDetails;
     e.preventDefault();
     const { building } = classDetails;
     if (!building) {
-      alert('יש לבחור בניין');
+      setAlert('לא נבחר בניין', 'error');
       return;
     }
-    if (url === 'addClass') {
+    if (minStudents > maxStudents) {
+      setAlert('מספר תלמידים מינמלי גדול ממקסימלי', 'error');
+      return;
+    }
+    if (!classID) {
       try {
         await addNewClass(classDetails, history);
       } catch (err) {
         console.log(err);
       }
     }
-    if (url === 'updateClasses') {
+    if (classID) {
       try {
-        await updateClass(classId, classDetails);
+        await updateClass(classID, classDetails);
       } catch (err) {
         console.log(err);
       }
@@ -96,18 +105,18 @@ const AddUpDateClasses = ({
       fromTime.length < 1 ||
       toTime.length < 1
     ) {
-      alert('יש למלא תאריך ושעות');
+      setAlert('יש למלא תאריכים ושעות', 'error');
       return;
     }
     if (parseInt(toTime) - parseInt(fromTime) < 1) {
-      alert('מינמום שעה ');
+      setAlert('מינמום טווח של שעה', 'error');
       return;
     } else {
       setLastUpdatedDate(from);
       try {
         availabilityId
           ? await updateAvailability(dateDetails)
-          : await setAvailability(classId, dateDetails);
+          : await setAvailability(classID, dateDetails);
       } catch (err) {
         console.log(err);
       }
@@ -155,7 +164,7 @@ const AddUpDateClasses = ({
   const delteItem = async () => {
     const { availabilityId } = dateDetails;
     try {
-      await deleteAvailability(classId, availabilityId);
+      await deleteAvailability(classID, availabilityId);
     } catch (err) {
       console.log(err);
     }
@@ -192,51 +201,57 @@ const AddUpDateClasses = ({
   const { confirmMsgView } = confirmMsg;
   const { updateSingleBoxDisplay } = dateDetails;
   return (
-    <UpdatePageContainer>
-      <div className='classForm'>
-        <h3>{title}</h3>
-        <FirstForm
-          buildings={buildings}
-          handleSubmit={handleSubmit}
-          handdleChange={handdleChange}
-          classDetails={classDetails}
-        />
-        {url === 'updateClasses' ? (
-          <>
-            <SecondForm
-              handleDatesSubmit={handleDatesSubmit}
-              dateHanddleChange={dateHanddleChange}
-            />
-            {loading ? (
-              <Spinner />
-            ) : (
-              <Calendar
-                lastDate={lastUpdatedDate}
-                events={events}
-                setDateClick={setDateClick}
-                setEventClick={setEventClick}
-              />
-            )}
-            {updateSingleBoxDisplay ? (
-              <UpdateSingle
-                dateDetails={dateDetails}
-                dateHanddleChange={dateHanddleChange}
+    <>
+      <MyAlert />
+      <UpdatePageContainer>
+        <div className='classForm'>
+          <h3>{title}</h3>
+
+          <FirstForm
+            loading={loading}
+            buildings={buildings}
+            handleSubmit={handleSubmit}
+            handdleChange={handdleChange}
+            classDetails={classDetails}
+          />
+          {classID ? (
+            <>
+              <SecondForm
                 handleDatesSubmit={handleDatesSubmit}
-                openDeleteBox={openDeleteBox}
-                closeSingleBox={closeSingleBox}
+                dateHanddleChange={dateHanddleChange}
+                dateDetails={dateDetails}
               />
-            ) : null}
-            {confirmMsgView ? (
-              <DeleteBox
-                item={confirmMsg}
-                delteItem={delteItem}
-                close={closeDeleteBox}
-              />
-            ) : null}
-          </>
-        ) : null}
-      </div>
-    </UpdatePageContainer>
+              {loading ? (
+                <Spinner />
+              ) : (
+                <Calendar
+                  lastDate={lastUpdatedDate}
+                  events={events}
+                  setDateClick={setDateClick}
+                  setEventClick={setEventClick}
+                />
+              )}
+              {updateSingleBoxDisplay ? (
+                <UpdateSingle
+                  dateDetails={dateDetails}
+                  dateHanddleChange={dateHanddleChange}
+                  handleDatesSubmit={handleDatesSubmit}
+                  openDeleteBox={openDeleteBox}
+                  closeSingleBox={closeSingleBox}
+                />
+              ) : null}
+              {confirmMsgView ? (
+                <DeleteBox
+                  item={confirmMsg}
+                  delteItem={delteItem}
+                  close={closeDeleteBox}
+                />
+              ) : null}
+            </>
+          ) : null}
+        </div>
+      </UpdatePageContainer>
+    </>
   );
 };
 

@@ -13,6 +13,7 @@ const FirstForm = ({
   handleSubmit,
   classDetails,
   history,
+  loading,
 }) => {
   const { name, minStudents, maxStudents, building } = classDetails;
   return (
@@ -71,7 +72,9 @@ const FirstForm = ({
       </div>
 
       <div className='buttons'>
-        <MyButton>{element}</MyButton>
+        <MyButton save loading={loading}>
+          {element}
+        </MyButton>
         <MyButton
           type='button'
           onClick={() => history.push('/settings/list-classes')}

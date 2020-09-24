@@ -1,6 +1,8 @@
+import { URL } from '../../utils/actionUtils';
+
 export const getBuildingsData = () => (dispatch) => {
   dispatch({ type: 'BUILDING_FETCH_START' });
-  fetch('http://localhost:3005/buildings', {
+  fetch(`${URL}/buildings`, {
     method: 'GET',
     cache: 'no-cache',
     headers: {
@@ -15,7 +17,7 @@ export const getBuildingsData = () => (dispatch) => {
 export const addNewBuilding = (name, active) => (dispatch) => {
   const booleanActive = JSON.parse(active);
   dispatch({ type: 'POST_NEW_BUILDING_START' });
-  fetch('http://localhost:3005/buildings', {
+  fetch(`${URL}/buildings`, {
     method: 'POST',
     cache: 'no-cache',
     headers: {
@@ -39,7 +41,7 @@ export const addNewBuilding = (name, active) => (dispatch) => {
 export const updateBuilding = (itemid, name, active) => (dispatch) => {
   const booleanActive = JSON.parse(active);
   dispatch({ type: 'UPDATE_BUILDING_START' });
-  fetch(`http://localhost:3005/buildings/${itemid}`, {
+  fetch(`${URL}/buildings/${itemid}`, {
     method: 'PUT',
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -59,7 +61,7 @@ export const updateBuilding = (itemid, name, active) => (dispatch) => {
 
 export const deleteBuilding = (itemid) => (dispatch) => {
   dispatch({ type: 'DELETE_BUILDING_START' });
-  fetch(`http://localhost:3005/buildings/${itemid}`, {
+  fetch(`${URL}/buildings/${itemid}`, {
     method: 'DELETE',
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,

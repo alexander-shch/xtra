@@ -42,7 +42,7 @@ const VatList = ({ history, match, vatList, deleteVatItem }) => {
         </MyButton>
         <MyButton
           addButtonStyle
-          onClick={() => history.push(`${match.path}/addVatItem`)}
+          onClick={() => history.push(`${match.path}/addNewVat`)}
         >
           הוספה
         </MyButton>

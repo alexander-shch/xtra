@@ -10,6 +10,7 @@ import {
   updateAvailability,
   deleteAvailability,
 } from '../../../Redux/classes/class.action';
+import { setAlert } from '../../../Redux/My-Alert/myAlert.action';
 import { getBuildingsData } from '../../../Redux/buildings/buildings.actions';
 import { closeSettingMenu } from '../../../Redux/settingsView/settings.actions';
 import Spinner from '../../spinner/Spinner';
@@ -32,6 +33,8 @@ const ClassRoutes = ({
   updateAvailability,
   closeSettingMenu,
   deleteAvailability,
+  pageLoading,
+  setAlert,
 }) => {
   useEffect(() => {
     if (classes.length === 0) {
@@ -40,8 +43,7 @@ const ClassRoutes = ({
     if (buildings.length === 0) {
       getBuildingsData();
     }
-    closeSettingMenu();
-  }, [getclassesData, getBuildingsData, closeSettingMenu, classes, buildings]);
+  }, [getclassesData, getBuildingsData, classes, buildings]);
 
   return (
     <>
@@ -59,19 +61,36 @@ const ClassRoutes = ({
           )}
         />
         <Route
-          path={`${match.path}/:ClassesID`}
+          exact
+          path={`${match.path}/addNewClass`}
           render={() => (
             <AddUpDateClasses
-              buildings={buildings}
               classes={classes}
+              buildings={buildings}
               loading={loading}
               addNewClass={addNewClass}
-              updateClass={updateClass}
-              setAvailability={setAvailability}
-              updateAvailability={updateAvailability}
-              deleteAvailability={deleteAvailability}
+              setAlert={setAlert}
             />
           )}
+        />
+        <Route
+          path={`${match.path}/updateClass/:classID/`}
+          render={() =>
+            pageLoading ? (
+              <Spinner />
+            ) : (
+              <AddUpDateClasses
+                buildings={buildings}
+                classes={classes}
+                loading={loading}
+                updateClass={updateClass}
+                setAvailability={setAvailability}
+                updateAvailability={updateAvailability}
+                deleteAvailability={deleteAvailability}
+                setAlert={setAlert}
+              />
+            )
+          }
         />
       </Suspense>
     </>
@@ -82,6 +101,7 @@ const mapStateToProps = (state) => ({
   buildings: state.buildings.buildings,
   classes: state.classes.classes,
   loading: state.classes.loading,
+  pageLoading: state.classes.pageLoading,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -98,6 +118,7 @@ const mapDispatchToProps = (dispatch) => ({
   closeSettingMenu: () => dispatch(closeSettingMenu()),
   deleteAvailability: (classId, availabilityId) =>
     dispatch(deleteAvailability(classId, availabilityId)),
+  setAlert: (text, style) => dispatch(setAlert(text, style)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ClassRoutes);

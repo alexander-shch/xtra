@@ -7,6 +7,7 @@ import categoriesReducer from './categories/categoriesReducer';
 import vatReducer from './Vat/vatReducer';
 import searchField from '../Redux/search/searchReducer';
 import lecturesReducer from '../Redux/Lectures/lecturesReducer';
+import myAlertReducer from '../Redux/My-Alert/myAlert.reducer';
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   vat: vatReducer,
   searchField: searchField,
   lectures: lecturesReducer,
+  alert: myAlertReducer,
 });
 
 export default rootReducer;

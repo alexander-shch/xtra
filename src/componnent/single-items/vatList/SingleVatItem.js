@@ -12,7 +12,9 @@ const SingleVatItem = ({ item, match, history, openBox }) => {
       <span className='itemName'>{BooleanToHebrew}</span>
       <div className='buttons'>
         <OptionButton
-          onClick={() => history.push(`${match.path}/updateVatItem`, item)}
+          onClick={() =>
+            history.push(`${match.path}/updateVatItem/${item._id}`)
+          }
           edit
         >
           &#9998;

@@ -19,7 +19,7 @@ const UpdateVatRate = ({ history }) => {
   };
   return (
     <UpdatePageContainer>
-      <h3>עידכון מעמ</h3>
+      <h3>עידכון מע"מ</h3>
       <form>
         <InputField
           name='vatRate'

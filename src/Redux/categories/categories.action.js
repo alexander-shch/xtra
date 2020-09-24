@@ -1,17 +1,15 @@
-import { callFetch } from '../../utils/actionUtils';
+import { callFetch, URL } from '../../utils/actionUtils';
 
 export const getCategories = () => (dispatch) => {
   dispatch({ type: 'GET_CATEGORIES_START' });
-  callFetch('http://localhost:3005/categories', 'GET')
-    .then((res) => res.json())
+  callFetch(`${URL}/categories`, 'GET')
     .then((data) => dispatch({ type: 'GET_CATEGORIES_SUCSES', payload: data }))
     .catch((err) => dispatch({ type: 'GET_CATEGORIES_FAILED', payload: err }));
 };
 
 export const addNewCategory = (objToServer) => (dispatch) => {
   dispatch({ type: 'ADD_NEW_CATEGORY_START' });
-  callFetch('http://localhost:3005/categories', 'POST', objToServer)
-    .then((res) => res.json())
+  callFetch(`${URL}/categories`, 'POST', objToServer)
     .then((data) =>
       dispatch({ type: 'ADD_NEW_CATEGORY_SUCSESS', payload: data })
     )
@@ -22,12 +20,7 @@ export const addNewCategory = (objToServer) => (dispatch) => {
 
 export const updateCategoty = (categoryID, objToServer) => (dispatch) => {
   dispatch({ type: 'UPDATE_CATEGORY_START' });
-  callFetch(
-    `http://localhost:3005/categories/${categoryID}`,
-    'PUT',
-    objToServer
-  )
-    .then((res) => res.json())
+  callFetch(`${URL}/categories/${categoryID}`, 'PUT', objToServer)
     .then((data) =>
       dispatch({ type: 'UPDATE_CATEGORY_SUCSESS', payload: data })
     )
@@ -36,8 +29,7 @@ export const updateCategoty = (categoryID, objToServer) => (dispatch) => {
 
 export const deleteCategory = (categoryID) => (dispatch) => {
   dispatch({ type: 'DELETE_CATEGORY_START' });
-  callFetch(`http://localhost:3005/categories/${categoryID}`, 'DELETE')
-    .then((res) => res.json())
+  callFetch(`${URL}/categories/${categoryID}`, 'DELETE')
     .then((data) => {
       if (data.deleted) {
         dispatch({
