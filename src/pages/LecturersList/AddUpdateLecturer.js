@@ -51,8 +51,7 @@ const AddUpdateLecturer = ({
 
   const handdleSubmit = async (e) => {
     e.preventDefault();
-    let { active } = lectureDeteils;
-    active = JSON.parse(active);
+
     if (!singleLecture) {
       try {
         await addNewLecture(lectureDeteils, history);
