@@ -1,6 +1,6 @@
 import React from 'react';
 import './firstForm.style.scss';
-import InputField from '../../input-field/InputField';
+import InputField from '../../inputes/input-field/InputField';
 import MyButton from '../../My-button/MyButton';
 import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,6 +13,7 @@ const FirstForm = ({
   handleSubmit,
   classDetails,
   history,
+  loading,
 }) => {
   const { name, minStudents, maxStudents, building } = classDetails;
   return (
@@ -29,6 +30,7 @@ const FirstForm = ({
         />
         <div className='selectbuildingInput'>
           <select
+            required
             name='building'
             className='buildingSelector'
             defaultValue={building !== null ? building : '1'}
@@ -69,8 +71,10 @@ const FirstForm = ({
         />
       </div>
 
-      <div className='classesButtons'>
-        <MyButton>{element}</MyButton>
+      <div className='buttons'>
+        <MyButton save loading={loading}>
+          {element}
+        </MyButton>
         <MyButton
           type='button'
           onClick={() => history.push('/settings/list-classes')}

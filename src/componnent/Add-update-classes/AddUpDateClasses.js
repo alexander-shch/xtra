@@ -1,29 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import './addUpdateClasses.style.scss';
 import Calendar from '../Calendar/Calendar';
 import FirstForm from './first-form/FirstForm';
 import SecondForm from '../Add-update-classes/second-form/SecondForm';
+import UpdateSingle from './update-singel-date/UpdateSingle';
 import { withRouter } from 'react-router-dom';
-import { addNewClass } from '../../Redux/classes/class.action';
-import { connect } from 'react-redux';
+import DeleteBox from '../delete-box/DeleteBox';
+import { UpdatePageContainer } from '../global-style/SettingSection';
+import Spinner from '../spinner/Spinner';
+import MyAlert from '../My-Alert/MyAlert';
 
 const AddUpDateClasses = ({
   buildings,
   match,
-  location,
   addNewClass,
   history,
+  updateClass,
+  setAvailability,
+  classes,
+  loading,
+  updateAvailability,
+  deleteAvailability,
+  setAlert,
 }) => {
-  const url = match.params.ClassesID;
-  const defaultName = url === 'updateClasses' ? location.state.name : '';
-  const defaultBuilding =
-    url === 'updateClasses' ? location.state.building._id : null;
-  const defaultMinNum =
-    url === 'updateClasses' ? location.state.minStudents : '';
-  const defaultMaxNum =
-    url === 'updateClasses' ? location.state.maxStudents : '';
-  const title = url === 'updateClasses' ? 'עדכון כיתה' : 'הוספת כיתה';
+  // default values--------------------------------------------------
 
+  const classID = match.params.classID;
+
+  const singleClass =
+    classID && classes.length !== 0
+      ? classes.filter((item) => item._id === classID)
+      : null;
+
+  const defaultName = singleClass ? singleClass[0].name : '';
+  const defaultBuilding = singleClass ? singleClass[0].building._id : null;
+  const defaultMinNum = singleClass ? singleClass[0].minStudents : '';
+  const defaultMaxNum = singleClass ? singleClass[0].maxStudents : '';
+  const title = singleClass ? 'עדכון כיתה' : 'הוספת כיתה';
+
+  const events =
+    classes.length > 0 && singleClass
+      ? classes.filter((c) => c._id === classID)[0].availability
+      : null;
+
+  //-----------------states-----------------------------------------
   const [classDetails, setClassDetails] = useState({
     name: defaultName,
     minStudents: defaultMinNum,
@@ -31,46 +51,208 @@ const AddUpDateClasses = ({
     building: defaultBuilding,
   });
 
-  const [dateFormView, setDateFormView] = useState(false);
+  const [dateDetails, setDateDetails] = useState({
+    from: '',
+    to: '',
+    fromTime: '',
+    toTime: '',
+    daysLimiter: 'select',
+    updateSingleBoxDisplay: false,
+    availabilityId: null,
+  });
 
+  const [confirmMsg, setConfirmMsg] = useState({
+    confirmMsgView: false,
+    name: '',
+  });
+
+  const [lastUpdatedDate, setLastUpdatedDate] = useState(new Date());
+
+  //------------------------------------------------------------------------
   const handleSubmit = async (e) => {
+    const { minStudents, maxStudents } = classDetails;
     e.preventDefault();
-    console.log(classDetails);
-    if (url === 'addClass') {
+    const { building } = classDetails;
+    if (!building) {
+      setAlert('לא נבחר בניין', 'error');
+      return;
+    }
+    if (minStudents > maxStudents) {
+      setAlert('מספר תלמידים מינמלי גדול ממקסימלי', 'error');
+      return;
+    }
+    if (!classID) {
       try {
         await addNewClass(classDetails, history);
       } catch (err) {
         console.log(err);
       }
     }
+    if (classID) {
+      try {
+        await updateClass(classID, classDetails);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+  const handleDatesSubmit = async (e) => {
+    e.preventDefault();
+    const { from, to, fromTime, toTime, availabilityId } = dateDetails;
+    if (
+      from.length < 1 ||
+      to.length < 1 ||
+      fromTime.length < 1 ||
+      toTime.length < 1
+    ) {
+      setAlert('יש למלא תאריכים ושעות', 'error');
+      return;
+    }
+    if (parseInt(toTime) - parseInt(fromTime) < 1) {
+      setAlert('מינמום טווח של שעה', 'error');
+      return;
+    } else {
+      setLastUpdatedDate(from);
+      try {
+        availabilityId
+          ? await updateAvailability(dateDetails)
+          : await setAvailability(classID, dateDetails);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    closeSingleBox();
   };
 
+  const setDateClick = useCallback(
+    (date) => {
+      setDateDetails({
+        ...dateDetails,
+        from: date,
+        to: date,
+        updateSingleBoxDisplay: true,
+        id: null,
+        fromTime: '',
+        toTime: '',
+      });
+    },
+    [dateDetails]
+  );
+
+  const setEventClick = useCallback((eventInfo) => {
+    const { id, startStr, endStr } = eventInfo;
+    let from = startStr.slice(0, 10);
+    let to = endStr.slice(0, 10);
+    let fromTime = startStr.slice(11, 19);
+    let toTime = endStr.slice(11, 19);
+    setDateDetails({
+      availabilityId: id,
+      from: from,
+      to: to,
+      fromTime: fromTime,
+      toTime: toTime,
+      updateSingleBoxDisplay: true,
+    });
+  }, []);
+
+  const openDeleteBox = () => {
+    const { fromTime, toTime } = dateDetails;
+    const eventName = `${fromTime.slice(0, 5)} - ${toTime.slice(0, 5)}`;
+    setConfirmMsg({ confirmMsgView: true, name: eventName });
+  };
+
+  const delteItem = async () => {
+    const { availabilityId } = dateDetails;
+    try {
+      await deleteAvailability(classID, availabilityId);
+    } catch (err) {
+      console.log(err);
+    }
+    closeDeleteBox();
+    closeSingleBox();
+  };
+  const closeDeleteBox = () => {
+    setConfirmMsg({ confirmMsgView: false, name: '' });
+  };
+
+  const closeSingleBox = () => {
+    setDateDetails({
+      ...dateDetails,
+      from: '',
+      to: '',
+      fromTime: '',
+      toTime: '',
+      updateSingleBoxDisplay: false,
+      availabilityId: null,
+    });
+  };
+  //----------------------------------------------------------------
   const handdleChange = (e) => {
     const { name, value } = e.target;
     setClassDetails({ ...classDetails, [name]: value });
   };
 
+  const dateHanddleChange = (e) => {
+    const { name, value } = e.target;
+    setDateDetails({ ...dateDetails, [name]: value });
+  };
+
+  //---------------------------------------------------------------
+  const { confirmMsgView } = confirmMsg;
+  const { updateSingleBoxDisplay } = dateDetails;
   return (
-    <div className='addClassContainer'>
-      <div className='classForm'>
-        <h3>{title}</h3>
-        <FirstForm
-          buildings={buildings}
-          handleSubmit={handleSubmit}
-          handdleChange={handdleChange}
-          classDetails={classDetails}
-        />
-        <h4>זמינות</h4>
-        {url === 'updateClasses' ? <SecondForm /> : null}
-        <Calendar />
-      </div>
-    </div>
+    <>
+      <MyAlert />
+      <UpdatePageContainer>
+        <div className='classForm'>
+          <h3>{title}</h3>
+
+          <FirstForm
+            loading={loading}
+            buildings={buildings}
+            handleSubmit={handleSubmit}
+            handdleChange={handdleChange}
+            classDetails={classDetails}
+          />
+          {classID ? (
+            <>
+              <SecondForm
+                handleDatesSubmit={handleDatesSubmit}
+                dateHanddleChange={dateHanddleChange}
+                dateDetails={dateDetails}
+              />
+              {loading ? (
+                <Spinner />
+              ) : (
+                <Calendar
+                  lastDate={lastUpdatedDate}
+                  events={events}
+                  setDateClick={setDateClick}
+                  setEventClick={setEventClick}
+                />
+              )}
+              {updateSingleBoxDisplay ? (
+                <UpdateSingle
+                  dateDetails={dateDetails}
+                  dateHanddleChange={dateHanddleChange}
+                  handleDatesSubmit={handleDatesSubmit}
+                  openDeleteBox={openDeleteBox}
+                  closeSingleBox={closeSingleBox}
+                />
+              ) : null}
+              {confirmMsgView ? (
+                <DeleteBox
+                  item={confirmMsg}
+                  delteItem={delteItem}
+                  close={closeDeleteBox}
+                />
+              ) : null}
+            </>
+          ) : null}
+        </div>
+      </UpdatePageContainer>
+    </>
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  addNewClass: (classDetails, history) =>
-    dispatch(addNewClass(classDetails, history)),
-});
-
-export default connect(null, mapDispatchToProps)(withRouter(AddUpDateClasses));
+export default withRouter(AddUpDateClasses);

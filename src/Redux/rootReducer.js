@@ -3,12 +3,22 @@ import userReducer from './userReduser/userReduser';
 import settingsView from './settingsView/settingsReducer';
 import BuildingsReducer from './buildings/BuildingsReducer';
 import classesReducer from './classes/classesReducer';
+import categoriesReducer from './categories/categoriesReducer';
+import vatReducer from './Vat/vatReducer';
+import searchField from '../Redux/search/searchReducer';
+import lecturesReducer from '../Redux/Lectures/lecturesReducer';
+import myAlertReducer from '../Redux/My-Alert/myAlert.reducer';
 
 const rootReducer = combineReducers({
   user: userReducer,
   toggleSettingsView: settingsView,
-  Buildings: BuildingsReducer,
+  buildings: BuildingsReducer,
   classes: classesReducer,
+  categories: categoriesReducer,
+  vat: vatReducer,
+  searchField: searchField,
+  lectures: lecturesReducer,
+  alert: myAlertReducer,
 });
 
 export default rootReducer;

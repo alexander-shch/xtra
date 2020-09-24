@@ -21,7 +21,7 @@ export const settingsMenuArray = [
   },
   {
     linkTitle: 'ניהול תחומים',
-    linkUrl: '/settings/Domain-management',
+    linkUrl: '/settings/Categories-list',
     className: 'setting-link',
   },
   {

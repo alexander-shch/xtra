@@ -4,53 +4,48 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 
-const Calendar = ({ toggleDateForm }) => {
-  const events = [
-    {
-      title: '10:00-14:00',
-      date: '2020-08-17',
-    },
-    { title: '8:00-14:00', date: '2020-08-20' },
-  ];
+const Calendar = ({ events, setDateClick, setEventClick, lastDate }) => {
+  const eventsToDisplay = events
+    ? events.map(
+        (item) =>
+          (item = {
+            title: `${item.from.slice(11, 16)}-${item.to.slice(11, 16)}`,
+            start: item.from.slice(0, -1),
+            end: item.to.slice(0, -1),
+            id: item._id,
+          })
+      )
+    : null;
 
   const handleDateSelect = (info) => {
-    console.log(info.startStr);
+    setDateClick(info.startStr);
   };
 
   const handleEventClick = (eventInfo) => {
-    console.log(eventInfo.event.title);
+    setEventClick(eventInfo.event);
   };
-  // const customButtons = {
-  //   myCustomButton: {
-  //     text: 'custom!',
-  //     click: function () {
-  //       alert('clicked the custom button!');
-  //     },
-  //   },
-  // };
 
   return (
     <>
       <FullCalendar
-        // customButtons={{
-        //   myCustomButton: {
-        //     text: 'עדכן זמינות',
-        //     click: () => toggleDateForm(),
-        //   },
-        // }}
         headerToolbar={{
           left: 'prev,next today',
           right: 'title',
         }}
+        validRange={{
+          start: new Date(),
+        }}
+        initialDate={lastDate}
         direction='rtl'
         locale='he'
-        height='auto'
+        height='600px'
         initialView='dayGridMonth'
         editable={true}
         selectable={true}
         selectMirror={true}
         dayMaxEvents={true}
-        events={events}
+        displayEventTime={false}
+        events={eventsToDisplay}
         plugins={[dayGridPlugin, interactionPlugin]}
         select={handleDateSelect}
         eventClick={handleEventClick}
@@ -59,4 +54,4 @@ const Calendar = ({ toggleDateForm }) => {
   );
 };
 
-export default Calendar;
+export default React.memo(Calendar);

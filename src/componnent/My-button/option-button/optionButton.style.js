@@ -9,10 +9,7 @@ const deleteStyle = css`
 `;
 
 const getStyle = (props) => {
-  let styleObj = {
-    delete: deleteStyle,
-    edit: editStyle,
-  };
+  return props.delete ? deleteStyle : editStyle;
 };
 
 export const OptinButtonContainer = styled.button`

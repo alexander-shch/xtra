@@ -1,5 +1,13 @@
-.secondForm {
+.dateForm {
   display: flex;
   flex-direction: row-reverse;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+
+  .daySelector {
+    padding: 8px;
+    margin: auto 0;
+    direction: rtl;
+  }
 }

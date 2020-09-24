@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
-import BuildingItem from '../../componnent/Building-item/BuildingItem';
-import './buildings.style.scss';
+import BuildingItem from '../../componnent/single-items/Building-item/BuildingItem';
+import { SettingSectionContainer } from '../../componnent/global-style/SettingSection';
 import MyButton from '../../componnent/My-button/MyButton';
+import TableTop from '../../componnent/Table-top/Tabletop';
 import { withRouter } from 'react-router-dom';
 import DataSpinner from '../../componnent/spinner/DataSpinner/DataSpiner';
-import DeleteBox from '../../componnent/are-you-sure/DeleteBox';
-import { connect } from 'react-redux';
-import { deleteBuilding } from '../../Redux/buildings/buildings.actions';
+import DeleteBox from '../../componnent/delete-box/DeleteBox';
 
 const Buildings = ({
-  onDeleteBuilding,
+  deleteBuilding,
   match,
   history,
   data,
+  searchfield,
+  filterBy,
   ...otherProps
 }) => {
   const [deleteBoxView, setDeleteBoxView] = useState(false);
@@ -33,7 +34,7 @@ const Buildings = ({
 
   const delteItem = async () => {
     try {
-      await onDeleteBuilding(id);
+      await deleteBuilding(id);
     } catch (err) {
       console.log(err);
     }
@@ -41,22 +42,15 @@ const Buildings = ({
   };
 
   return (
-    <div className='buildingPage'>
+    <SettingSectionContainer>
       <MyButton
-        onClick={() => history.push(`${match.path}/addBuilding`)}
+        onClick={() => history.push(`${match.path}/addNewBulding`)}
         addButtonStyle
       >
         הוספת בניין
       </MyButton>
-      <h4 className='buildingsTitle'>רשימה</h4>
-      <div className='buildingHead'>
-        <div className='headerBlock'>
-          <span>שם הבניין</span>
-        </div>
-        <div className='headerBlock'>
-          <span>אפשרויות</span>
-        </div>
-      </div>
+      <h4>רשימה</h4>
+      <TableTop tableProps={['שם הבניין', 'אפשרויות']} />
       {otherProps.loading ? (
         <DataSpinner />
       ) : (
@@ -71,12 +65,8 @@ const Buildings = ({
       {deleteBoxView ? (
         <DeleteBox delteItem={delteItem} close={closeBox} item={itemToDelete} />
       ) : null}
-    </div>
+    </SettingSectionContainer>
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onDeleteBuilding: (id) => dispatch(deleteBuilding(id)),
-});
-
-export default connect(null, mapDispatchToProps)(withRouter(Buildings));
+export default withRouter(Buildings);
