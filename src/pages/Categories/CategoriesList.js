@@ -18,7 +18,7 @@ const CategoriesList = ({
   const [itemToDelete, setItemToDelete] = useState({ id: '', name: '' });
   const { id } = itemToDelete;
   const openBoxsetItemToDelete = (item) => {
-    if (deleteBoxView === true) {
+    if (deleteBoxView) {
       return;
     }
     setDeleteBoxView(true);

@@ -3,7 +3,7 @@ import DataInput from '../../inputes/date-input/DateInput';
 import MyButton from '../../My-button/MyButton';
 import './secondForm.style.scss';
 const SecondForm = ({ dateHanddleChange, handleDatesSubmit, dateDetails }) => {
-  const { from, to, fromTime, toTime, daysLimiter } = dateDetails;
+  const { from, to, fromTime, toTime, dayLimiter } = dateDetails;
   const dayObj = {
     0: 'יום ראשון',
     1: 'יום שני',
@@ -50,9 +50,9 @@ const SecondForm = ({ dateHanddleChange, handleDatesSubmit, dateDetails }) => {
         />
         <select
           onChange={dateHanddleChange}
-          name='daysLimiter'
+          name='dayLimiter'
           className='daySelector'
-          value={daysLimiter}
+          value={dayLimiter}
         >
           <option value='select' disabled>
             בחר יום

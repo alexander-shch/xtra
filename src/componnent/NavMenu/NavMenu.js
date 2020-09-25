@@ -37,7 +37,7 @@ const NavMenu = ({ signOut, toggleView, settingsView, userName }) => {
           <div className='iconLink settings-icon' onClick={() => toggleView()}>
             &#9881;
           </div>
-          {settingsView ? <Settings /> : null}
+          {settingsView ? <Settings toggleView={toggleView} /> : null}
         </div>
       </div>
     </>

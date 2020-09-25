@@ -31,6 +31,7 @@ export const addNewClass = (classDetails, history) => (dispatch) => {
     .then((data) => {
       dispatch({ type: 'ADD_CLASS_SUCSESS', payload: data });
       history.push(`/settings/list-classes/updateClass/${data._id}`);
+      dispatch(setAlert('כיתה נוספה בהצלחה', 'sucsess'));
     })
 
     .catch((err) => dispatch({ type: 'ADD_CLASS_FAILED', payload: err }));
@@ -85,8 +86,9 @@ export const deleteClass = (id) => (dispatch) => {
 
 export const setAvailability = (id, dateDetails) => (dispatch) => {
   const { from, to, fromTime, toTime } = dateDetails;
-  let fromDate = `${from}T${fromTime}Z`;
-  let toDate = `${to}T${toTime}Z`;
+  let fromDate = `${from}T${fromTime}:00.000Z`;
+  let toDate = `${to}T${toTime}:00.000Z`;
+  const { dayLimiter } = dateDetails;
   dispatch({ type: 'SET_AVAILABILITY_START' });
   fetch(`${URL}/classes/${id}/availability`, {
     method: 'POST',
@@ -97,6 +99,7 @@ export const setAvailability = (id, dateDetails) => (dispatch) => {
     body: JSON.stringify({
       from: fromDate,
       to: toDate,
+      dayLimiter: dayLimiter,
     }),
   })
     .then((res) => res.json())
@@ -125,9 +128,10 @@ export const updateAvailability = (dateDetails) => (dispatch) => {
     }),
   })
     .then((res) => res.json())
-    .then((data) =>
-      dispatch({ type: 'UPDATE_AVAILABILTY_SUCSESS', payload: data })
-    )
+    .then((data) => {
+      dispatch(setAlert('אירוע עודכן', 'sucsess'));
+      dispatch({ type: 'UPDATE_AVAILABILTY_SUCSESS', payload: data });
+    })
     .catch((err) =>
       dispatch({ type: 'UPDATE_AVAILABILTY_FAILED', payload: err })
     );
@@ -146,6 +150,7 @@ export const deleteAvailability = (classId, availabilityId) => (dispatch) => {
     .then((res) => res.json())
     .then((data) => {
       if (data.deleted) {
+        dispatch(setAlert('אירוע נמחק', 'sucsess'));
         dispatch({
           type: 'DELETE_AVAILABILTY_SUCSESS',
           payload: payload,

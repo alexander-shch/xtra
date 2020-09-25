@@ -21,10 +21,11 @@ const Buildings = ({
   const { id } = itemToDelete;
 
   const openBoxsetItemToDelete = (item) => {
-    if (deleteBoxView === true) {
+    if (deleteBoxView) {
       return;
     }
     setDeleteBoxView(true);
+
     setItemToDelete({ id: item._id, name: item.name });
   };
 

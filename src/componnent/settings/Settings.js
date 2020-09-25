@@ -3,7 +3,7 @@ import './settings.style.scss';
 import { Link } from 'react-router-dom';
 import { settingsMenuArray } from './settingsLinkData';
 
-const Settings = () => {
+const Settings = ({ toggleView }) => {
   let settingsLinks = settingsMenuArray.map(
     ({ linkUrl, linkTitle, className }, index) => (
       <Link key={index} to={linkUrl} className={className}>
@@ -11,7 +11,11 @@ const Settings = () => {
       </Link>
     )
   );
-  return <div className='settings-container'>{settingsLinks}</div>;
+  return (
+    <div onClick={() => toggleView()} className='menu-module'>
+      <div className='settings-container'>{settingsLinks}</div>
+    </div>
+  );
 };
 
 export default Settings;

@@ -56,7 +56,7 @@ const AddUpDateClasses = ({
     to: '',
     fromTime: '',
     toTime: '',
-    daysLimiter: 'select',
+    dayLimiter: 'select',
     updateSingleBoxDisplay: false,
     availabilityId: null,
   });
@@ -231,16 +231,18 @@ const AddUpDateClasses = ({
                 dateHanddleChange={dateHanddleChange}
                 dateDetails={dateDetails}
               />
-              {loading ? (
-                <Spinner />
-              ) : (
-                <Calendar
-                  lastDate={lastUpdatedDate}
-                  events={events}
-                  setDateClick={setDateClick}
-                  setEventClick={setEventClick}
-                />
-              )}
+              <div className='clendar-container'>
+                {loading ? (
+                  <Spinner />
+                ) : (
+                  <Calendar
+                    lastDate={lastUpdatedDate}
+                    events={events}
+                    setDateClick={setDateClick}
+                    setEventClick={setEventClick}
+                  />
+                )}
+              </div>
               {updateSingleBoxDisplay ? (
                 <UpdateSingle
                   dateDetails={dateDetails}

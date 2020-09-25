@@ -51,7 +51,6 @@ const AddUpdateLecturer = ({
 
   const handdleSubmit = async (e) => {
     e.preventDefault();
-
     if (!singleLecture) {
       try {
         await addNewLecture(lectureDeteils, history);
