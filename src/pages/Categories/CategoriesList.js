@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { SettingSectionContainer } from '../../componnent/global-style/SettingSection';
 import TableTop from '../../componnent/Table-top/Tabletop';
 import MyButton from '../../componnent/My-button/MyButton';
@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import SingleCategory from '../../componnent/single-items/single-category/SingleCategory';
 import DataSpinner from '../../componnent/spinner/DataSpinner/DataSpiner';
 import DeleteBox from '../../componnent/delete-box/DeleteBox';
+import useDelete from '../../componnent/delete-box/useDeleteHook';
 
 const CategoriesList = ({
   history,
@@ -14,19 +15,15 @@ const CategoriesList = ({
   deleteCategory,
   ...otherProps
 }) => {
-  const [deleteBoxView, setDeleteBoxView] = useState(false);
-  const [itemToDelete, setItemToDelete] = useState({ id: '', name: '' });
-  const { id } = itemToDelete;
+  const deleteHook = useDelete();
+  const { id } = deleteHook.itemToDelete;
+
   const openBoxsetItemToDelete = (item) => {
-    if (deleteBoxView) {
-      return;
-    }
-    setDeleteBoxView(true);
-    setItemToDelete({ id: item._id, name: item.title });
+    deleteHook.ItemToDelete({ id: item._id, name: item.title });
   };
 
   const closeBox = () => {
-    setDeleteBoxView(false);
+    deleteHook.setView(false);
   };
 
   const delteItem = async () => {
@@ -35,7 +32,7 @@ const CategoriesList = ({
     } catch (err) {
       console.log(err);
     }
-    closeBox();
+    deleteHook.setView(false);
   };
 
   return (
@@ -59,8 +56,12 @@ const CategoriesList = ({
           />
         ))
       )}
-      {deleteBoxView ? (
-        <DeleteBox delteItem={delteItem} close={closeBox} item={itemToDelete} />
+      {deleteHook.deleteBoxView ? (
+        <DeleteBox
+          delteItem={delteItem}
+          close={closeBox}
+          item={deleteHook.itemToDelete}
+        />
       ) : null}
     </SettingSectionContainer>
   );

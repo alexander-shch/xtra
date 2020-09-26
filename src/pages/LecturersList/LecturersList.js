@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { SettingSectionContainer } from '../../componnent/global-style/SettingSection';
 import MyButton from '../../componnent/My-button/MyButton';
 import TableTop from '../../componnent/Table-top/Tabletop';
@@ -7,6 +7,7 @@ import { withRouter } from 'react-router-dom';
 import DataSpinner from '../../componnent/spinner/DataSpinner/DataSpiner';
 import SingleLecture from '../../componnent/single-items/single-lecture/SingleLecture';
 import DeleteBox from '../../componnent/delete-box/DeleteBox';
+import useDelete from '../../componnent/delete-box/useDeleteHook';
 
 const LecturersList = ({
   history,
@@ -16,19 +17,14 @@ const LecturersList = ({
   searchField,
   deleteLecture,
 }) => {
-  const [deleteBoxView, setDeleteBoxView] = useState(false);
-  const [itemToDelete, setItemToDelete] = useState({ id: '', name: '' });
-  const { id } = itemToDelete;
+  const deleteHook = useDelete();
+  const { id } = deleteHook.itemToDelete;
   const openBoxsetItemToDelete = (item) => {
-    if (deleteBoxView === true) {
-      return;
-    }
-    setDeleteBoxView(true);
-    setItemToDelete({ id: item._id, name: item.name });
+    deleteHook.ItemToDelete({ id: item._id, name: item.name });
   };
 
   const closeBox = () => {
-    setDeleteBoxView(false);
+    deleteHook.setView(false);
   };
 
   const delteItem = async () => {
@@ -37,7 +33,7 @@ const LecturersList = ({
     } catch (err) {
       console.log(err);
     }
-    closeBox();
+    deleteHook.setView(false);
   };
 
   let filterLectures = lectures.filter(({ name, email, phone }) => {
@@ -82,8 +78,12 @@ const LecturersList = ({
           />
         ))
       )}
-      {deleteBoxView ? (
-        <DeleteBox delteItem={delteItem} close={closeBox} item={itemToDelete} />
+      {deleteHook.deleteBoxView ? (
+        <DeleteBox
+          delteItem={delteItem}
+          close={closeBox}
+          item={deleteHook.itemToDelete}
+        />
       ) : null}
     </SettingSectionContainer>
   );

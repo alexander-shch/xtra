@@ -5,27 +5,27 @@ import SingleLectureNote from '../../../single-items/SingleLecureNote';
 import DataSpinner from '../../../spinner/DataSpinner/DataSpiner';
 import DeleteBox from '../../../delete-box/DeleteBox';
 import CommentPopUp from './note-popup/CommentPopUp';
+import useDelete from '../../../delete-box/useDeleteHook';
 
 const CommentList = ({ SingleLecture, loading, addNewNote, deleteNote }) => {
   const notesArr = SingleLecture[0].internalNotes;
   const lectureID = SingleLecture[0]._id;
+  const deleteHook = useDelete();
 
   const [newCommentview, setNewCommentView] = useState(false);
-  const [deleteBoxView, setDeleteBoxView] = useState(false);
-  const [itemToDelete, setItemToDelete] = useState({ id: '', name: '' });
   const [noteText, setNoteText] = useState({ text: '' });
-  const { id } = itemToDelete;
+
+  const { id } = deleteHook.itemToDelete;
   const { text } = noteText;
 
   const openBoxsetItemToDelete = (item) => {
-    if (deleteBoxView === true) {
-      return;
-    }
-    setDeleteBoxView(true);
-    setItemToDelete({ id: item._id, name: item.text.slice(0, 40) + '...' });
+    deleteHook.ItemToDelete({
+      id: item._id,
+      name: item.text.slice(0, 40) + '...',
+    });
   };
   const closeBox = () => {
-    setDeleteBoxView(false);
+    deleteHook.setView(false);
   };
 
   const delteItem = async () => {
@@ -34,7 +34,7 @@ const CommentList = ({ SingleLecture, loading, addNewNote, deleteNote }) => {
     } catch (err) {
       console.log(err);
     }
-    closeBox();
+    deleteHook.setView(false);
   };
 
   const handleChange = (e) => {
@@ -82,8 +82,12 @@ const CommentList = ({ SingleLecture, loading, addNewNote, deleteNote }) => {
           />
         ))
       )}
-      {deleteBoxView ? (
-        <DeleteBox delteItem={delteItem} close={closeBox} item={itemToDelete} />
+      {deleteHook.deleteBoxView ? (
+        <DeleteBox
+          delteItem={delteItem}
+          close={closeBox}
+          item={deleteHook.itemToDelete}
+        />
       ) : null}
     </>
   );

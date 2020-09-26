@@ -1,25 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import MyButton from '../../componnent/My-button/MyButton';
 import { withRouter } from 'react-router-dom';
 import { SettingSectionContainer } from '../../componnent/global-style/SettingSection';
 import TableTop from '../../componnent/Table-top/Tabletop';
 import SingleVatItem from '../../componnent/single-items/vatList/SingleVatItem';
 import DeleteBox from '../../componnent/delete-box/DeleteBox';
+import useDelete from '../../componnent/delete-box/useDeleteHook';
 
 const VatList = ({ history, match, vatList, deleteVatItem }) => {
-  const [deleteBoxView, setDeleteBoxView] = useState(false);
-  const [itemToDelete, setItemToDelete] = useState({ id: '', name: '' });
-  const { id } = itemToDelete;
+  const deleteHook = useDelete();
+  const { id } = deleteHook.itemToDelete;
+
   const openBoxsetItemToDelete = (item) => {
-    if (deleteBoxView === true) {
-      return;
-    }
-    setDeleteBoxView(true);
-    setItemToDelete({ id: item._id, name: item.title });
+    deleteHook.ItemToDelete({ id: item._id, name: item.title });
   };
 
   const closeBox = () => {
-    setDeleteBoxView(false);
+    deleteHook.setView(false);
   };
 
   const delteItem = async () => {
@@ -28,7 +25,7 @@ const VatList = ({ history, match, vatList, deleteVatItem }) => {
     } catch (err) {
       console.log(err);
     }
-    closeBox();
+    deleteHook.setView(false);
   };
 
   return (
@@ -58,8 +55,12 @@ const VatList = ({ history, match, vatList, deleteVatItem }) => {
           item={item}
         />
       ))}
-      {deleteBoxView ? (
-        <DeleteBox delteItem={delteItem} close={closeBox} item={itemToDelete} />
+      {deleteHook.deleteBoxView ? (
+        <DeleteBox
+          delteItem={delteItem}
+          close={closeBox}
+          item={deleteHook.itemToDelete}
+        />
       ) : null}
     </SettingSectionContainer>
   );

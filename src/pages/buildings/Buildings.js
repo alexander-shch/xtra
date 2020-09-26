@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import BuildingItem from '../../componnent/single-items/Building-item/BuildingItem';
 import { SettingSectionContainer } from '../../componnent/global-style/SettingSection';
 import MyButton from '../../componnent/My-button/MyButton';
@@ -6,6 +6,7 @@ import TableTop from '../../componnent/Table-top/Tabletop';
 import { withRouter } from 'react-router-dom';
 import DataSpinner from '../../componnent/spinner/DataSpinner/DataSpiner';
 import DeleteBox from '../../componnent/delete-box/DeleteBox';
+import useDelete from '../../componnent/delete-box/useDeleteHook';
 
 const Buildings = ({
   deleteBuilding,
@@ -16,21 +17,15 @@ const Buildings = ({
   filterBy,
   ...otherProps
 }) => {
-  const [deleteBoxView, setDeleteBoxView] = useState(false);
-  const [itemToDelete, setItemToDelete] = useState({ id: '', name: '' });
-  const { id } = itemToDelete;
+  const deleteHook = useDelete();
+  const { id } = deleteHook.itemToDelete;
 
   const openBoxsetItemToDelete = (item) => {
-    if (deleteBoxView) {
-      return;
-    }
-    setDeleteBoxView(true);
-
-    setItemToDelete({ id: item._id, name: item.name });
+    deleteHook.ItemToDelete({ id: item._id, name: item.name });
   };
 
   const closeBox = () => {
-    setDeleteBoxView(false);
+    deleteHook.setView(false);
   };
 
   const delteItem = async () => {
@@ -39,7 +34,7 @@ const Buildings = ({
     } catch (err) {
       console.log(err);
     }
-    closeBox();
+    deleteHook.setView(false);
   };
 
   return (
@@ -63,8 +58,12 @@ const Buildings = ({
           />
         ))
       )}
-      {deleteBoxView ? (
-        <DeleteBox delteItem={delteItem} close={closeBox} item={itemToDelete} />
+      {deleteHook.deleteBoxView ? (
+        <DeleteBox
+          delteItem={delteItem}
+          close={closeBox}
+          item={deleteHook.itemToDelete}
+        />
       ) : null}
     </SettingSectionContainer>
   );
