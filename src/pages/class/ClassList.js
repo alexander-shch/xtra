@@ -5,8 +5,8 @@ import SingleClass from '../../componnent/single-items/Single-class/SingleClass'
 import DeleteBox from '../../componnent/delete-box/DeleteBox';
 import TableTop from '../../componnent/Table-top/Tabletop';
 import { withRouter } from 'react-router-dom';
-import DataSpinner from '../../componnent/spinner/DataSpinner/DataSpiner';
 import useDelete from '../../componnent/delete-box/useDeleteHook';
+import SingleItemContainer from '../../componnent/single-items/SingleItemContainer';
 
 const ClassList = ({
   match,
@@ -47,18 +47,13 @@ const ClassList = ({
       <h4>רשימה</h4>
       <TableTop tableProps={['בניין', 'כיתה', 'אפשרויות']} />
 
-      {loading ? (
-        <DataSpinner />
-      ) : (
-        classes.map((item) => (
-          <SingleClass
-            openBox={openBoxsetItemToDelete}
-            key={item._id}
-            item={item}
-            buildings={buildings}
-          />
-        ))
-      )}
+      <SingleItemContainer
+        SingleComponent={SingleClass}
+        data={classes}
+        loading={loading}
+        buildings={buildings}
+        openBox={openBoxsetItemToDelete}
+      />
       {deleteHook.deleteBoxView ? (
         <DeleteBox
           deleteClass={deleteClass}

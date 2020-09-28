@@ -9,6 +9,7 @@ import {
   addNewNote,
   deleteNote,
 } from '../../../Redux/Lectures/lectures.action';
+import { setAlert } from '../../../Redux/My-Alert/myAlert.action';
 
 const UpdateLectureForm = ({
   id,
@@ -18,6 +19,7 @@ const UpdateLectureForm = ({
   avatarLoading,
   loading,
   deleteNote,
+  setAlert,
 }) => {
   const SingleLecture = lectures.filter((item) => item._id === id);
 
@@ -52,13 +54,16 @@ const UpdateLectureForm = ({
       />
       <h4> חוזה וקבצים</h4>
       <FilesList />
-      <h4>הערות על המרצה</h4>
-      <CommentList
-        addNewNote={addNewNote}
-        SingleLecture={SingleLecture}
-        loading={loading}
-        deleteNote={deleteNote}
-      />
+      <div>
+        <h4>הערות על המרצה</h4>
+        <CommentList
+          addNewNote={addNewNote}
+          SingleLecture={SingleLecture}
+          loading={loading}
+          deleteNote={deleteNote}
+          setAlert={setAlert}
+        />
+      </div>
     </>
   );
 };
@@ -72,6 +77,7 @@ const mapDispatchToProps = (dispatch) => ({
   setAvatarImg: (id, fromData) => dispatch(setAvatarImg(id, fromData)),
   deleteNote: (lectureId, noteID) => dispatch(deleteNote(lectureId, noteID)),
   addNewNote: (lectureId, text) => dispatch(addNewNote(lectureId, text)),
+  setAlert: (text, style) => dispatch(setAlert(text, style)),
 });
 
 export default connect(

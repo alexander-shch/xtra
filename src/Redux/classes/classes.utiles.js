@@ -41,3 +41,17 @@ export const deleteAvailability = (state, payload) => {
   classesObj[payload.classId].availability = filterArr;
   return classes;
 };
+
+export const holyDaysTodisplay = (payload) => {
+  let { items } = payload;
+  let holyDays = [];
+  items.forEach((item) => {
+    let obj = {};
+    obj.title = item.title;
+    obj.date = item.date;
+    obj.color = '#FDAD9B';
+    obj.textColor = 'black';
+    holyDays.push(obj);
+  });
+  return holyDays;
+};

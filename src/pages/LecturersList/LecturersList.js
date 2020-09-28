@@ -4,16 +4,16 @@ import MyButton from '../../componnent/My-button/MyButton';
 import TableTop from '../../componnent/Table-top/Tabletop';
 import SearchField from '../../componnent/searchField/SearchField';
 import { withRouter } from 'react-router-dom';
-import DataSpinner from '../../componnent/spinner/DataSpinner/DataSpiner';
 import SingleLecture from '../../componnent/single-items/single-lecture/SingleLecture';
 import DeleteBox from '../../componnent/delete-box/DeleteBox';
 import useDelete from '../../componnent/delete-box/useDeleteHook';
+import SingleItemContainer from '../../componnent/single-items/SingleItemContainer';
 
 const LecturersList = ({
   history,
   match,
   lectures,
-  lecturesLoading,
+  pageLoading,
   searchField,
   deleteLecture,
 }) => {
@@ -65,19 +65,12 @@ const LecturersList = ({
           'אפשרויות',
         ]}
       />
-      {lecturesLoading ? (
-        <DataSpinner />
-      ) : filterLectures.length === 0 ? (
-        <h3>אין תוצאות</h3>
-      ) : (
-        filterLectures.map((item) => (
-          <SingleLecture
-            key={item._id}
-            item={item}
-            openBox={openBoxsetItemToDelete}
-          />
-        ))
-      )}
+      <SingleItemContainer
+        loading={pageLoading}
+        data={filterLectures}
+        SingleComponent={SingleLecture}
+        openBox={openBoxsetItemToDelete}
+      />
       {deleteHook.deleteBoxView ? (
         <DeleteBox
           delteItem={delteItem}

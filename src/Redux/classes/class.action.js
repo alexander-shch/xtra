@@ -163,3 +163,13 @@ export const deleteAvailability = (classId, availabilityId) => (dispatch) => {
       dispatch({ type: 'DELETE_AVAILABILTY_FAILED', payload: err })
     );
 };
+
+export const getJewishHolydays = () => (dispatch) => {
+  dispatch({ type: 'GET_HOLYDAYS_START' });
+  fetch(
+    'https://www.hebcal.com/hebcal?v=1&cfg=json&maj=on&min=on&mod=on&nx=off&year=now&month=x&ss=off&mf=off&c=off&geo=none=3448439&m=0&s=off&lg=h'
+  )
+    .then((res) => res.json())
+    .then((data) => dispatch({ type: 'GET_HOLYDAYS_SUCSESS', payload: data }))
+    .catch((err) => dispatch({ type: 'GET_HOLYDAYS_FAILED', payload: err }));
+};

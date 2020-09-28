@@ -7,8 +7,10 @@ import UpdateSingle from './update-singel-date/UpdateSingle';
 import { withRouter } from 'react-router-dom';
 import DeleteBox from '../delete-box/DeleteBox';
 import { UpdatePageContainer } from '../global-style/SettingSection';
-import Spinner from '../spinner/Spinner';
 import MyAlert from '../My-Alert/MyAlert';
+import WithSpinner from '../spinner/WithSpinner';
+
+const CalendarWithSpinner = WithSpinner(Calendar);
 
 const AddUpDateClasses = ({
   buildings,
@@ -21,7 +23,9 @@ const AddUpDateClasses = ({
   loading,
   updateAvailability,
   deleteAvailability,
+  calenderLoading,
   setAlert,
+  jewsihHolydays,
 }) => {
   // default values--------------------------------------------------
 
@@ -172,7 +176,8 @@ const AddUpDateClasses = ({
   };
 
   const delteItem = async () => {
-    const { availabilityId } = dateDetails;
+    const { availabilityId, from } = dateDetails;
+    setLastUpdatedDate(from);
     try {
       await deleteAvailability(classID, availabilityId);
     } catch (err) {
@@ -232,16 +237,14 @@ const AddUpDateClasses = ({
                 dateDetails={dateDetails}
               />
               <div className='clendar-container'>
-                {loading ? (
-                  <Spinner />
-                ) : (
-                  <Calendar
-                    lastDate={lastUpdatedDate}
-                    events={events}
-                    setDateClick={setDateClick}
-                    setEventClick={setEventClick}
-                  />
-                )}
+                <CalendarWithSpinner
+                  loading={calenderLoading}
+                  lastDate={lastUpdatedDate}
+                  events={events}
+                  jewsihHolydays={jewsihHolydays}
+                  setDateClick={setDateClick}
+                  setEventClick={setEventClick}
+                />
               </div>
               {updateSingleBoxDisplay ? (
                 <UpdateSingle

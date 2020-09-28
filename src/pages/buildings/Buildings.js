@@ -4,9 +4,9 @@ import { SettingSectionContainer } from '../../componnent/global-style/SettingSe
 import MyButton from '../../componnent/My-button/MyButton';
 import TableTop from '../../componnent/Table-top/Tabletop';
 import { withRouter } from 'react-router-dom';
-import DataSpinner from '../../componnent/spinner/DataSpinner/DataSpiner';
 import DeleteBox from '../../componnent/delete-box/DeleteBox';
 import useDelete from '../../componnent/delete-box/useDeleteHook';
+import SingleItemContainer from '../../componnent/single-items/SingleItemContainer';
 
 const Buildings = ({
   deleteBuilding,
@@ -47,17 +47,13 @@ const Buildings = ({
       </MyButton>
       <h4>רשימה</h4>
       <TableTop tableProps={['שם הבניין', 'אפשרויות']} />
-      {otherProps.loading ? (
-        <DataSpinner />
-      ) : (
-        data.map((item) => (
-          <BuildingItem
-            openBox={openBoxsetItemToDelete}
-            key={item._id}
-            item={item}
-          />
-        ))
-      )}
+
+      <SingleItemContainer
+        SingleComponent={BuildingItem}
+        data={data}
+        loading={otherProps.loading}
+        openBox={openBoxsetItemToDelete}
+      />
       {deleteHook.deleteBoxView ? (
         <DeleteBox
           delteItem={delteItem}

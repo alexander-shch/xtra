@@ -8,10 +8,13 @@ import {
   updateBuilding,
 } from '../../../Redux/buildings/buildings.actions';
 import Spinner from '../../spinner/Spinner';
+import WithSpinner from '../../spinner/WithSpinner';
 const AddUpdateBuilding = lazy(() =>
   import('../../Add-update-buildings/AddUpdateBuilding')
 );
 const Buildings = lazy(() => import('../../../pages/buildings/Buildings'));
+
+const UpdateBuildingWithSpinner = WithSpinner(AddUpdateBuilding);
 
 const BuildingsRoutes = ({
   match,
@@ -48,16 +51,13 @@ const BuildingsRoutes = ({
         />
         <Route
           path={`${match.path}/updateBulding/:BuildingId/`}
-          render={() =>
-            otherProps.loading ? (
-              <Spinner />
-            ) : (
-              <AddUpdateBuilding
-                updateBuilding={updateBuilding}
-                buildings={data}
-              />
-            )
-          }
+          render={() => (
+            <UpdateBuildingWithSpinner
+              loading={otherProps.loading}
+              updateBuilding={updateBuilding}
+              buildings={data}
+            />
+          )}
         />
       </Suspense>
     </>

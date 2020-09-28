@@ -9,6 +9,7 @@ import {
   setAvailability,
   updateAvailability,
   deleteAvailability,
+  getJewishHolydays,
 } from '../../../Redux/classes/class.action';
 import { setAlert } from '../../../Redux/My-Alert/myAlert.action';
 import { getBuildingsData } from '../../../Redux/buildings/buildings.actions';
@@ -31,9 +32,11 @@ const ClassRoutes = ({
   updateClass,
   setAvailability,
   updateAvailability,
-  closeSettingMenu,
   deleteAvailability,
   pageLoading,
+  calenderLoading,
+  getJewishHolydays,
+  jewsihHolydays,
   setAlert,
 }) => {
   useEffect(() => {
@@ -43,7 +46,17 @@ const ClassRoutes = ({
     if (buildings.length === 0) {
       getBuildingsData();
     }
-  }, [getclassesData, getBuildingsData, classes, buildings]);
+    if (jewsihHolydays.length === 0) {
+      getJewishHolydays();
+    }
+  }, [
+    getclassesData,
+    getBuildingsData,
+    getJewishHolydays,
+    classes,
+    buildings,
+    jewsihHolydays,
+  ]);
 
   return (
     <>
@@ -55,7 +68,7 @@ const ClassRoutes = ({
             <ClassList
               classes={classes}
               buildings={buildings}
-              loading={loading}
+              loading={pageLoading}
               deleteClass={deleteClass}
             />
           )}
@@ -83,11 +96,13 @@ const ClassRoutes = ({
                 buildings={buildings}
                 classes={classes}
                 loading={loading}
+                calenderLoading={calenderLoading}
                 updateClass={updateClass}
                 setAvailability={setAvailability}
                 updateAvailability={updateAvailability}
                 deleteAvailability={deleteAvailability}
                 setAlert={setAlert}
+                jewsihHolydays={jewsihHolydays}
               />
             )
           }
@@ -102,6 +117,8 @@ const mapStateToProps = (state) => ({
   classes: state.classes.classes,
   loading: state.classes.loading,
   pageLoading: state.classes.pageLoading,
+  calenderLoading: state.classes.calenderLoading,
+  jewsihHolydays: state.classes.jewsihHolydays,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -119,6 +136,7 @@ const mapDispatchToProps = (dispatch) => ({
   deleteAvailability: (classId, availabilityId) =>
     dispatch(deleteAvailability(classId, availabilityId)),
   setAlert: (text, style) => dispatch(setAlert(text, style)),
+  getJewishHolydays: () => dispatch(getJewishHolydays()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ClassRoutes);

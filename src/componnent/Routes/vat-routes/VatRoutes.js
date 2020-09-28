@@ -10,7 +10,10 @@ import {
   updateVatItem,
   deleteVatItem,
 } from '../../../Redux/Vat/vat.action';
-import Spinner from '../../spinner/Spinner';
+
+import WithSpinner from '../../spinner/WithSpinner';
+
+const AddUpdateVatListWithSpinner = WithSpinner(AddUpdateVatList);
 
 const VatRoutes = ({
   match,
@@ -32,7 +35,11 @@ const VatRoutes = ({
         exact
         path={`${match.path}`}
         render={() => (
-          <VatList vatList={vatList} deleteVatItem={deleteVatItem} />
+          <VatList
+            vatList={vatList}
+            deleteVatItem={deleteVatItem}
+            loading={loading}
+          />
         )}
       />
       <Route
@@ -47,13 +54,13 @@ const VatRoutes = ({
       />
       <Route
         path={`${match.path}/updateVatItem/:vatID`}
-        render={() =>
-          loading ? (
-            <Spinner />
-          ) : (
-            <AddUpdateVatList updateVatItem={updateVatItem} vatList={vatList} />
-          )
-        }
+        render={() => (
+          <AddUpdateVatListWithSpinner
+            updateVatItem={updateVatItem}
+            vatList={vatList}
+            loading={loading}
+          />
+        )}
       />
     </Switch>
   );

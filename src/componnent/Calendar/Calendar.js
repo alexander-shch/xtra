@@ -4,7 +4,13 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 
-const Calendar = ({ events, setDateClick, setEventClick, lastDate }) => {
+const Calendar = ({
+  events,
+  setDateClick,
+  setEventClick,
+  lastDate,
+  jewsihHolydays,
+}) => {
   const eventsToDisplay = events
     ? events.map(
         (item) =>
@@ -45,10 +51,10 @@ const Calendar = ({ events, setDateClick, setEventClick, lastDate }) => {
         selectMirror={true}
         dayMaxEvents={true}
         displayEventTime={false}
-        events={eventsToDisplay}
         plugins={[dayGridPlugin, interactionPlugin]}
         select={handleDateSelect}
         eventClick={handleEventClick}
+        eventSources={[jewsihHolydays, eventsToDisplay]}
       />
     </>
   );

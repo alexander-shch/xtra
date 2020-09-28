@@ -3,12 +3,15 @@ import {
   setAvailabilty,
   updateClass,
   deleteAvailability,
+  holyDaysTodisplay,
 } from './classes.utiles';
 
 const INTIAL_STATE = {
   pageLoading: false,
+  calenderLoading: false,
   loading: false,
   classes: [],
+  jewsihHolydays: [],
   error: null,
 };
 
@@ -19,9 +22,6 @@ const classesReducer = (state = INTIAL_STATE, action) => {
     case 'DELETE_CLASS_START':
     case 'UPDATE_CLASS_START':
     case 'ADD_NEW_CLASS_START':
-    case 'SET_AVAILABILITY_START':
-    case 'UPDATE_AVAILABILTY_START':
-    case 'DELETE_AVAILABILTY_START':
       return { ...state, loading: true };
     case 'CLASSES_FETCH_SUCSESS':
       return {
@@ -30,6 +30,10 @@ const classesReducer = (state = INTIAL_STATE, action) => {
         pageLoading: false,
         classes: action.payload,
       };
+    case 'SET_AVAILABILITY_START':
+    case 'UPDATE_AVAILABILTY_START':
+    case 'DELETE_AVAILABILTY_START':
+      return { ...state, calenderLoading: true };
     case 'ADD_CLASS_SUCSESS':
       return {
         ...state,
@@ -46,20 +50,20 @@ const classesReducer = (state = INTIAL_STATE, action) => {
       return {
         ...state,
         classes: setAvailabilty(state, action.payload),
-        loading: false,
+        calenderLoading: false,
       };
     case 'UPDATE_AVAILABILTY_SUCSESS':
       return {
         ...state,
         classes: updateAvailabilty(state, action.payload),
-        loading: false,
+        calenderLoading: false,
       };
     case 'DELETE_AVAILABILTY_SUCSESS':
       console.log('red', action.payload);
       return {
         ...state,
         classes: deleteAvailability(state, action.payload),
-        loading: false,
+        calenderLoading: false,
       };
     case 'DELETE_CLASS_SUCSESS':
       return {
@@ -67,11 +71,18 @@ const classesReducer = (state = INTIAL_STATE, action) => {
         classes: state.classes.filter((item) => item._id !== action.payload),
         loading: false,
       };
+    case 'GET_HOLYDAYS_SUCSESS':
+      return {
+        ...state,
+        jewsihHolydays: holyDaysTodisplay(action.payload),
+      };
+
     case 'SET_AVAILABILITY_FAILED':
     case 'DELETE_AVAILABILTY_FAILED':
     case 'UPDATE_AVAILABILTY_FAILED':
     case 'CLASSES_FETCH_FAILED':
     case 'ADD_CLASS_FAILED':
+    case 'GET_HOLYDAYS_FAILED':
       return {
         ...state,
         error: action.payload,

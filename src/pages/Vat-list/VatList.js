@@ -6,8 +6,9 @@ import TableTop from '../../componnent/Table-top/Tabletop';
 import SingleVatItem from '../../componnent/single-items/vatList/SingleVatItem';
 import DeleteBox from '../../componnent/delete-box/DeleteBox';
 import useDelete from '../../componnent/delete-box/useDeleteHook';
+import SingleItemContainer from '../../componnent/single-items/SingleItemContainer';
 
-const VatList = ({ history, match, vatList, deleteVatItem }) => {
+const VatList = ({ history, match, vatList, deleteVatItem, loading }) => {
   const deleteHook = useDelete();
   const { id } = deleteHook.itemToDelete;
 
@@ -48,13 +49,12 @@ const VatList = ({ history, match, vatList, deleteVatItem }) => {
       <TableTop
         tableProps={['כותרת', 'מכפילי שכר', 'האם להוסיף מע"מ', 'אפשרויות']}
       />
-      {vatList.map((item) => (
-        <SingleVatItem
-          openBox={openBoxsetItemToDelete}
-          key={item._id}
-          item={item}
-        />
-      ))}
+      <SingleItemContainer
+        loading={loading}
+        data={vatList}
+        SingleComponent={SingleVatItem}
+        openBox={openBoxsetItemToDelete}
+      />
       {deleteHook.deleteBoxView ? (
         <DeleteBox
           delteItem={delteItem}

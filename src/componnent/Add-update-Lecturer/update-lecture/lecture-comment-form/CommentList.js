@@ -7,7 +7,13 @@ import DeleteBox from '../../../delete-box/DeleteBox';
 import CommentPopUp from './note-popup/CommentPopUp';
 import useDelete from '../../../delete-box/useDeleteHook';
 
-const CommentList = ({ SingleLecture, loading, addNewNote, deleteNote }) => {
+const CommentList = ({
+  SingleLecture,
+  loading,
+  addNewNote,
+  deleteNote,
+  setAlert,
+}) => {
   const notesArr = SingleLecture[0].internalNotes;
   const lectureID = SingleLecture[0]._id;
   const deleteHook = useDelete();
@@ -44,7 +50,7 @@ const CommentList = ({ SingleLecture, loading, addNewNote, deleteNote }) => {
   const noteSubmit = async (e) => {
     e.preventDefault();
     if (text.length === 0) {
-      alert('יש למלא הערה');
+      setAlert('יש למלא הערה', 'error');
       return;
     }
     try {

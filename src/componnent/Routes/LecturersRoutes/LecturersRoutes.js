@@ -39,7 +39,7 @@ const LecturersRoutes = ({
           <LecturersList
             searchField={searchField}
             lectures={lectures}
-            lecturesLoading={lecturesLoading}
+            pageLoading={pageLoading}
             deleteLecture={deleteLecture}
           />
         )}
