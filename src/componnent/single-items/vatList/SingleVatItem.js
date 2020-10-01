@@ -2,8 +2,9 @@ import React from 'react';
 import { SingleItem } from '../../global-style/SettingSection';
 import OptionButton from '../../My-button/option-button/OptionButton';
 import { withRouter } from 'react-router-dom';
+import DeleteButton from '../../My-button/delete-button/DeleteButton';
 
-const SingleVatItem = ({ item, match, history, openBox }) => {
+const SingleVatItem = ({ item, match, history }) => {
   const BooleanToHebrew = item.vat ? 'כן' : 'לא';
   return (
     <SingleItem>
@@ -19,9 +20,7 @@ const SingleVatItem = ({ item, match, history, openBox }) => {
         >
           &#9998;
         </OptionButton>
-        <OptionButton onClick={() => openBox(item)} delete>
-          &#10008;
-        </OptionButton>
+        <DeleteButton item={item} />
       </div>
     </SingleItem>
   );

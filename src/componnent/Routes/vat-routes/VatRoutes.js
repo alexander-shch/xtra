@@ -10,7 +10,8 @@ import {
   updateVatItem,
   deleteVatItem,
 } from '../../../Redux/Vat/vat.action';
-
+import { closeConfirmMessage } from '../../../Redux/on-delete/delete.action';
+import DeleteBox from '../../delete-box/DeleteBox';
 import WithSpinner from '../../spinner/WithSpinner';
 
 const AddUpdateVatListWithSpinner = WithSpinner(AddUpdateVatList);
@@ -23,6 +24,8 @@ const VatRoutes = ({
   updateVatItem,
   deleteVatItem,
   loading,
+  confirmMessageData,
+  closeConfirmMessage,
 }) => {
   useEffect(() => {
     if (vatList.length === 0) {
@@ -30,45 +33,47 @@ const VatRoutes = ({
     }
   }, [getvatList, vatList]);
   return (
-    <Switch>
-      <Route
-        exact
-        path={`${match.path}`}
-        render={() => (
-          <VatList
-            vatList={vatList}
-            deleteVatItem={deleteVatItem}
-            loading={loading}
-          />
-        )}
+    <>
+      <DeleteBox
+        confirmMessageData={confirmMessageData}
+        closeConfirmMessage={closeConfirmMessage}
+        deleteFunction={deleteVatItem}
       />
-      <Route
-        exact
-        path='/settings/VAT-multipliers/updateVatRate'
-        render={() => <UpdateVatRate />}
-      />
-      <Route
-        exact
-        path={`${match.path}/addNewVat`}
-        render={() => <AddUpdateVatList addVatItem={addVatItem} />}
-      />
-      <Route
-        path={`${match.path}/updateVatItem/:vatID`}
-        render={() => (
-          <AddUpdateVatListWithSpinner
-            updateVatItem={updateVatItem}
-            vatList={vatList}
-            loading={loading}
-          />
-        )}
-      />
-    </Switch>
+      <Switch>
+        <Route
+          exact
+          path={`${match.path}`}
+          render={() => <VatList vatList={vatList} loading={loading} />}
+        />
+        <Route
+          exact
+          path='/settings/VAT-multipliers/updateVatRate'
+          render={() => <UpdateVatRate />}
+        />
+        <Route
+          exact
+          path={`${match.path}/addNewVat`}
+          render={() => <AddUpdateVatList addVatItem={addVatItem} />}
+        />
+        <Route
+          path={`${match.path}/updateVatItem/:vatID`}
+          render={() => (
+            <AddUpdateVatListWithSpinner
+              updateVatItem={updateVatItem}
+              vatList={vatList}
+              loading={loading}
+            />
+          )}
+        />
+      </Switch>
+    </>
   );
 };
 
 const mapStateToProps = (state) => ({
   vatList: state.vat.vatList,
   loading: state.vat.loading,
+  confirmMessageData: state.delete,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -76,6 +81,7 @@ const mapDispatchToProps = (dispatch) => ({
   addVatItem: (vatItem) => dispatch(addVatItem(vatItem)),
   updateVatItem: (itemId, vatItem) => dispatch(updateVatItem(itemId, vatItem)),
   deleteVatItem: (itemId) => dispatch(deleteVatItem(itemId)),
+  closeConfirmMessage: () => dispatch(closeConfirmMessage()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(VatRoutes);

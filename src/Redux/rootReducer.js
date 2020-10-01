@@ -8,6 +8,7 @@ import vatReducer from './Vat/vatReducer';
 import searchField from '../Redux/search/searchReducer';
 import lecturesReducer from '../Redux/Lectures/lecturesReducer';
 import myAlertReducer from '../Redux/My-Alert/myAlert.reducer';
+import deleteReducer from '../Redux/on-delete/delete.reducer';
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   searchField: searchField,
   lectures: lecturesReducer,
   alert: myAlertReducer,
+  delete: deleteReducer,
 });
 
 export default rootReducer;

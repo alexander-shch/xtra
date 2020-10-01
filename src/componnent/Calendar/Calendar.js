@@ -12,15 +12,16 @@ const Calendar = ({
   jewsihHolydays,
 }) => {
   const eventsToDisplay = events
-    ? events.map(
-        (item) =>
-          (item = {
-            title: `${item.from.slice(11, 16)}-${item.to.slice(11, 16)}`,
-            start: item.from.slice(0, -1),
-            end: item.to.slice(0, -1),
-            id: item._id,
-          })
-      )
+    ? events.map((item) => {
+        let from = new Date(item.from).toString().slice(15, 21);
+        let to = new Date(item.to).toString().slice(15, 21);
+        return (item = {
+          title: `${to}-${from}`,
+          start: new Date(item.from),
+          end: new Date(item.to),
+          id: item._id,
+        });
+      })
     : null;
 
   const handleDateSelect = (info) => {

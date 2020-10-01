@@ -8,7 +8,9 @@ const InputField = ({ handleChange, label, ...restData }) => {
       <label className='form-input-label'>{label}</label>
       <div className='input-continer'>
         <input
-          className={`form-input ${restData.hebrew ? 'hebrewInput' : ''}`}
+          className={`form-input ${restData.hebrew ? 'hebrewInput' : ''} ${
+            restData.type === 'text' ? 'textInput' : ''
+          }`}
           onChange={handleChange}
           {...restData}
         />

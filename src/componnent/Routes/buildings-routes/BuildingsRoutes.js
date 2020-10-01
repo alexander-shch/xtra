@@ -7,8 +7,10 @@ import {
   addNewBuilding,
   updateBuilding,
 } from '../../../Redux/buildings/buildings.actions';
+import { closeConfirmMessage } from '../../../Redux/on-delete/delete.action';
 import Spinner from '../../spinner/Spinner';
 import WithSpinner from '../../spinner/WithSpinner';
+import DeleteBox from '../../delete-box/DeleteBox';
 const AddUpdateBuilding = lazy(() =>
   import('../../Add-update-buildings/AddUpdateBuilding')
 );
@@ -22,6 +24,9 @@ const BuildingsRoutes = ({
   data,
   addNewBuilding,
   updateBuilding,
+  confirmMessageData,
+  closeConfirmMessage,
+  deleteBuilding,
   ...otherProps
 }) => {
   useEffect(() => {
@@ -33,16 +38,15 @@ const BuildingsRoutes = ({
   return (
     <>
       <Suspense fallback={<Spinner />}>
+        <DeleteBox
+          confirmMessageData={confirmMessageData}
+          closeConfirmMessage={closeConfirmMessage}
+          deleteFunction={deleteBuilding}
+        />
         <Route
           exact
           path={`${match.path}`}
-          render={() => (
-            <Buildings
-              data={data}
-              deleteBuilding={deleteBuilding}
-              {...otherProps}
-            />
-          )}
+          render={() => <Buildings data={data} {...otherProps} />}
         />
         <Route
           exact
@@ -67,6 +71,7 @@ const BuildingsRoutes = ({
 const mapStateToProps = (state) => ({
   loading: state.buildings.isPending,
   data: state.buildings.buildings,
+  confirmMessageData: state.delete,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -75,6 +80,7 @@ const mapDispatchToProps = (dispatch) => ({
   addNewBuilding: (name, active) => dispatch(addNewBuilding(name, active)),
   updateBuilding: (itemid, name, active) =>
     dispatch(updateBuilding(itemid, name, active)),
+  closeConfirmMessage: () => dispatch(closeConfirmMessage()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BuildingsRoutes);

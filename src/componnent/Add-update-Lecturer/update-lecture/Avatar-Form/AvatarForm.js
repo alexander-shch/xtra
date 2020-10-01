@@ -14,7 +14,7 @@ const AvatarImg = styled.div`
 
 const AvatarForm = ({
   handdleImgChange,
-  fileSubmit,
+  imgSubmit,
   lecture,
   avatarLoading,
 }) => {
@@ -27,7 +27,9 @@ const AvatarForm = ({
       {avatarLoading ? <Spinner /> : <AvatarImg img={img} />}
 
       <div className='fileInput-container'>
-        <MyButton onClick={() => fileSubmit()}>שמור תמונה</MyButton>
+        <MyButton save loading={avatarLoading} onClick={() => imgSubmit()}>
+          שמור תמונה
+        </MyButton>
         <input type='file' name='file' onChange={handdleImgChange} />
       </div>
     </div>

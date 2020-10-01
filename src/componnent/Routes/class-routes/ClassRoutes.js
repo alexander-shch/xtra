@@ -11,6 +11,8 @@ import {
   deleteAvailability,
   getJewishHolydays,
 } from '../../../Redux/classes/class.action';
+import { closeConfirmMessage } from '../../../Redux/on-delete/delete.action';
+import DeleteBox from '../../delete-box/DeleteBox';
 import { setAlert } from '../../../Redux/My-Alert/myAlert.action';
 import { getBuildingsData } from '../../../Redux/buildings/buildings.actions';
 import { closeSettingMenu } from '../../../Redux/settingsView/settings.actions';
@@ -38,6 +40,8 @@ const ClassRoutes = ({
   getJewishHolydays,
   jewsihHolydays,
   setAlert,
+  closeConfirmMessage,
+  confirmMessageData,
 }) => {
   useEffect(() => {
     if (classes.length === 0) {
@@ -61,6 +65,11 @@ const ClassRoutes = ({
   return (
     <>
       <Suspense fallback={<Spinner />}>
+        <DeleteBox
+          confirmMessageData={confirmMessageData}
+          closeConfirmMessage={closeConfirmMessage}
+          deleteFunction={deleteClass}
+        />
         <Route
           exact
           path={`${match.path}`}
@@ -69,7 +78,6 @@ const ClassRoutes = ({
               classes={classes}
               buildings={buildings}
               loading={pageLoading}
-              deleteClass={deleteClass}
             />
           )}
         />
@@ -119,6 +127,7 @@ const mapStateToProps = (state) => ({
   pageLoading: state.classes.pageLoading,
   calenderLoading: state.classes.calenderLoading,
   jewsihHolydays: state.classes.jewsihHolydays,
+  confirmMessageData: state.delete,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -137,6 +146,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(deleteAvailability(classId, availabilityId)),
   setAlert: (text, style) => dispatch(setAlert(text, style)),
   getJewishHolydays: () => dispatch(getJewishHolydays()),
+  closeConfirmMessage: () => dispatch(closeConfirmMessage()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ClassRoutes);

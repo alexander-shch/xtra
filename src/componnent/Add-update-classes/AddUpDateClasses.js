@@ -60,7 +60,7 @@ const AddUpDateClasses = ({
     to: '',
     fromTime: '',
     toTime: '',
-    dayLimiter: 'select',
+    limiter: [],
     updateSingleBoxDisplay: false,
     availabilityId: null,
   });
@@ -211,6 +211,13 @@ const AddUpDateClasses = ({
     const { name, value } = e.target;
     setDateDetails({ ...dateDetails, [name]: value });
   };
+  const onDayChange = (e) => {
+    let valuesArr = Array.from(
+      e.target.selectedOptions,
+      (option) => option.value
+    );
+    setDateDetails({ ...dateDetails, limiter: valuesArr });
+  };
 
   //---------------------------------------------------------------
   const { confirmMsgView } = confirmMsg;
@@ -232,6 +239,7 @@ const AddUpDateClasses = ({
           {classID ? (
             <>
               <SecondForm
+                onDayChange={onDayChange}
                 handleDatesSubmit={handleDatesSubmit}
                 dateHanddleChange={dateHanddleChange}
                 dateDetails={dateDetails}

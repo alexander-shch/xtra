@@ -66,13 +66,21 @@ export const addNewNote = (lectureID, text) => (dispatch) => {
 };
 
 export const deleteNote = (lectureID, noteID) => (dispatch) => {
-  console.log(lectureID, noteID);
   dispatch({ type: 'DELETE_NOTE_START' });
   callFetch(`${URL}/lecturer/${lectureID}/notes/${noteID}`, 'DELETE')
-    .then((data) => {
-      console.log(data);
+    .then(() => {
       dispatch({ type: 'DELETE_NOTE_SUCSESS', payload: { lectureID, noteID } });
       dispatch(setAlert('הערה נמחקה בהצלחה', 'sucsess'));
     })
     .catch((err) => dispatch({ type: 'DELETE_NOTE_FAILED', payload: err }));
+};
+
+export const uploadCv = (lectureID, formData) => (dispatch) => {
+  dispatch({ type: 'UPLOAD_CV_START' });
+  callFetch(`${URL}/lecturer/${lectureID}/file`, 'POST', formData)
+    .then((data) => {
+      console.log(data);
+      dispatch({ type: 'UPLOAD_CV_SUCSESS', payload: data });
+    })
+    .catch((err) => dispatch({ type: 'UPLOAD_CV_FAILED', payload: err }));
 };

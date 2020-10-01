@@ -1,5 +1,4 @@
 import React from 'react';
-import './DeleteBox.style.scss';
 import MyButton from '../My-button/MyButton';
 import {
   FlexContainer,
@@ -9,8 +8,29 @@ import {
   ButtonContainer,
 } from '../global-style/popUpsStyle';
 
-const DeleteBox = ({ delteItem, close, item }) => {
-  return (
+const DeleteBox = ({
+  closeConfirmMessage,
+  deleteFunction,
+  confirmMessageData,
+  additionalData,
+}) => {
+  const { confirmMessageDisplay, itemToDelete } = confirmMessageData;
+
+  const onDelete = async (deleteFunction, itemToDelete, additionalData) => {
+    try {
+      if (additionalData) {
+        await deleteFunction(additionalData, itemToDelete._id);
+      } else {
+        await deleteFunction(itemToDelete._id);
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      closeConfirmMessage();
+    }
+  };
+
+  return confirmMessageDisplay ? (
     <FlexContainer>
       <PopUpContainer>
         <BoxHeader>
@@ -18,17 +38,23 @@ const DeleteBox = ({ delteItem, close, item }) => {
         </BoxHeader>
         <BoxContent>
           <h4>האם אתה בטוח שברצונך למחוק?</h4>
-          <span>{item.name}</span>
+          {/* <span>{item.name}</span> */}
           <ButtonContainer>
-            <MyButton onClick={delteItem}>אישור</MyButton>
-            <MyButton onClick={close} forgot>
+            <MyButton
+              onClick={() =>
+                onDelete(deleteFunction, itemToDelete, additionalData)
+              }
+            >
+              אישור
+            </MyButton>
+            <MyButton onClick={() => closeConfirmMessage()} forgot>
               ביטול
             </MyButton>
           </ButtonContainer>
         </BoxContent>
       </PopUpContainer>
     </FlexContainer>
-  );
+  ) : null;
 };
 
 export default DeleteBox;

@@ -86,9 +86,9 @@ export const deleteClass = (id) => (dispatch) => {
 
 export const setAvailability = (id, dateDetails) => (dispatch) => {
   const { from, to, fromTime, toTime } = dateDetails;
-  let fromDate = `${from}T${fromTime}:00.000Z`;
-  let toDate = `${to}T${toTime}:00.000Z`;
-  const { dayLimiter } = dateDetails;
+  let fromDate = new Date(`${from}T${fromTime}`).toISOString();
+  let toDate = new Date(`${to}T${toTime}`).toISOString();
+  const { limiter } = dateDetails;
   dispatch({ type: 'SET_AVAILABILITY_START' });
   fetch(`${URL}/classes/${id}/availability`, {
     method: 'POST',
@@ -99,7 +99,7 @@ export const setAvailability = (id, dateDetails) => (dispatch) => {
     body: JSON.stringify({
       from: fromDate,
       to: toDate,
-      dayLimiter: dayLimiter,
+      limiter: limiter,
     }),
   })
     .then((res) => res.json())
@@ -113,8 +113,8 @@ export const setAvailability = (id, dateDetails) => (dispatch) => {
 
 export const updateAvailability = (dateDetails) => (dispatch) => {
   const { from, to, fromTime, toTime, availabilityId } = dateDetails;
-  let fromDate = `${from}T${fromTime}Z`;
-  let toDate = `${to}T${toTime}Z`;
+  let fromDate = new Date(`${from}T${fromTime}`).toISOString();
+  let toDate = new Date(`${to}T${toTime}`).toISOString();
   dispatch({ type: 'UPDATE_AVAILABILTY_START' });
   fetch(`http://localhost:3005/classes/availability/${availabilityId}`, {
     method: 'PUT',

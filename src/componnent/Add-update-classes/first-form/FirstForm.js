@@ -62,7 +62,7 @@ const FirstForm = ({
         />
         <InputField
           name='minStudents'
-          type='text'
+          type='number'
           label='מינימלי'
           value={minStudents}
           handleChange={handdleChange}

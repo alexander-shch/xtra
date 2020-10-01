@@ -2,7 +2,8 @@ import React from 'react';
 import OptionButton from '../../My-button/option-button/OptionButton';
 import { SingleItem } from '../../global-style/SettingSection';
 import { withRouter } from 'react-router-dom';
-const SingleLecture = ({ match, history, item, openBox }) => {
+import DeleteButton from '../../My-button/delete-button/DeleteButton';
+const SingleLecture = ({ match, history, item }) => {
   return (
     <SingleItem>
       <span className='itemName'>{item.name}</span>
@@ -18,9 +19,7 @@ const SingleLecture = ({ match, history, item, openBox }) => {
         >
           &#9998;
         </OptionButton>
-        <OptionButton onClick={() => openBox(item)} delete>
-          &#10008;
-        </OptionButton>
+        <DeleteButton item={item} />
       </div>
     </SingleItem>
   );

@@ -2,8 +2,9 @@ import React from 'react';
 import OptionButton from '../../My-button/option-button/OptionButton';
 import { withRouter } from 'react-router-dom';
 import { SingleItem } from '../../global-style/SettingSection';
+import DeleteButton from '../../My-button/delete-button/DeleteButton';
 
-const SingleCategory = ({ match, history, item, openBox }) => {
+const SingleCategory = ({ match, history, item }) => {
   return (
     <SingleItem>
       <span className='itemName'>{item.title}</span>
@@ -16,9 +17,7 @@ const SingleCategory = ({ match, history, item, openBox }) => {
         >
           &#9998;
         </OptionButton>
-        <OptionButton onClick={() => openBox(item)} delete>
-          &#10008;
-        </OptionButton>
+        <DeleteButton item={item} />
       </div>
     </SingleItem>
   );

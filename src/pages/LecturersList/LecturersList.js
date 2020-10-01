@@ -5,8 +5,7 @@ import TableTop from '../../componnent/Table-top/Tabletop';
 import SearchField from '../../componnent/searchField/SearchField';
 import { withRouter } from 'react-router-dom';
 import SingleLecture from '../../componnent/single-items/single-lecture/SingleLecture';
-import DeleteBox from '../../componnent/delete-box/DeleteBox';
-import useDelete from '../../componnent/delete-box/useDeleteHook';
+
 import SingleItemContainer from '../../componnent/single-items/SingleItemContainer';
 
 const LecturersList = ({
@@ -15,27 +14,7 @@ const LecturersList = ({
   lectures,
   pageLoading,
   searchField,
-  deleteLecture,
 }) => {
-  const deleteHook = useDelete();
-  const { id } = deleteHook.itemToDelete;
-  const openBoxsetItemToDelete = (item) => {
-    deleteHook.ItemToDelete({ id: item._id, name: item.name });
-  };
-
-  const closeBox = () => {
-    deleteHook.setView(false);
-  };
-
-  const delteItem = async () => {
-    try {
-      await deleteLecture(id);
-    } catch (err) {
-      console.log(err);
-    }
-    deleteHook.setView(false);
-  };
-
   let filterLectures = lectures.filter(({ name, email, phone }) => {
     if (!searchField) {
       return lectures;
@@ -54,7 +33,6 @@ const LecturersList = ({
         הוספת מרצה
       </MyButton>
       <SearchField />
-
       <h4>מרצים</h4>
       <TableTop
         tableProps={[
@@ -69,15 +47,7 @@ const LecturersList = ({
         loading={pageLoading}
         data={filterLectures}
         SingleComponent={SingleLecture}
-        openBox={openBoxsetItemToDelete}
       />
-      {deleteHook.deleteBoxView ? (
-        <DeleteBox
-          delteItem={delteItem}
-          close={closeBox}
-          item={deleteHook.itemToDelete}
-        />
-      ) : null}
     </SettingSectionContainer>
   );
 };

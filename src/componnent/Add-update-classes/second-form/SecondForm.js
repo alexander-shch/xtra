@@ -2,7 +2,12 @@ import React from 'react';
 import DataInput from '../../inputes/date-input/DateInput';
 import MyButton from '../../My-button/MyButton';
 import './secondForm.style.scss';
-const SecondForm = ({ dateHanddleChange, handleDatesSubmit, dateDetails }) => {
+const SecondForm = ({
+  dateHanddleChange,
+  handleDatesSubmit,
+  onDayChange,
+  dateDetails,
+}) => {
   const { from, to, fromTime, toTime, dayLimiter } = dateDetails;
   const dayObj = {
     0: 'יום ראשון',
@@ -49,14 +54,12 @@ const SecondForm = ({ dateHanddleChange, handleDatesSubmit, dateDetails }) => {
           type='time'
         />
         <select
-          onChange={dateHanddleChange}
-          name='dayLimiter'
+          multiple
+          onChange={onDayChange}
+          name='limiter'
           className='daySelector'
           value={dayLimiter}
         >
-          <option value='select' disabled>
-            בחר יום
-          </option>
           {Object.keys(dayObj).map((day) => (
             <option key={day} value={day}>
               {dayObj[day]}

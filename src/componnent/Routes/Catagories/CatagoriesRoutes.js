@@ -10,6 +10,8 @@ import {
 import AddUpdateCategory from '../../Add-Update-catagory/AddUpdateCategory';
 import Spinner from '../../spinner/Spinner';
 import WithSpinner from '../../spinner/WithSpinner';
+import DeleteBox from '../../delete-box/DeleteBox';
+import { closeConfirmMessage } from '../../../Redux/on-delete//delete.action';
 
 const AddUpdateCategoryWithSpinner = WithSpinner(AddUpdateCategory);
 const CategoriesList = lazy(() =>
@@ -23,6 +25,8 @@ const CategoriesRoutes = ({
   addNewCategory,
   updateCategoty,
   deleteCategory,
+  confirmMessageData,
+  closeConfirmMessage,
   loading,
 }) => {
   useEffect(() => {
@@ -33,15 +37,16 @@ const CategoriesRoutes = ({
   return (
     <>
       <Suspense fallback={<Spinner />}>
+        <DeleteBox
+          confirmMessageData={confirmMessageData}
+          closeConfirmMessage={closeConfirmMessage}
+          deleteFunction={deleteCategory}
+        />
         <Route
           exact
           path={`${match.path}`}
           render={() => (
-            <CategoriesList
-              categories={categories}
-              deleteCategory={deleteCategory}
-              loading={loading}
-            />
+            <CategoriesList categories={categories} loading={loading} />
           )}
         />
         <Route
@@ -66,6 +71,7 @@ const CategoriesRoutes = ({
 const mapStateToProps = (state) => ({
   categories: state.categories.categories,
   loading: state.categories.loading,
+  confirmMessageData: state.delete,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -74,6 +80,7 @@ const mapDispatchToProps = (dispatch) => ({
   updateCategoty: (categoryID, objToServer) =>
     dispatch(updateCategoty(categoryID, objToServer)),
   deleteCategory: (categoryID) => dispatch(deleteCategory(categoryID)),
+  closeConfirmMessage: () => dispatch(closeConfirmMessage()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CategoriesRoutes);

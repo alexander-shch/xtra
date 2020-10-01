@@ -4,39 +4,9 @@ import { SettingSectionContainer } from '../../componnent/global-style/SettingSe
 import MyButton from '../../componnent/My-button/MyButton';
 import TableTop from '../../componnent/Table-top/Tabletop';
 import { withRouter } from 'react-router-dom';
-import DeleteBox from '../../componnent/delete-box/DeleteBox';
-import useDelete from '../../componnent/delete-box/useDeleteHook';
 import SingleItemContainer from '../../componnent/single-items/SingleItemContainer';
 
-const Buildings = ({
-  deleteBuilding,
-  match,
-  history,
-  data,
-  searchfield,
-  filterBy,
-  ...otherProps
-}) => {
-  const deleteHook = useDelete();
-  const { id } = deleteHook.itemToDelete;
-
-  const openBoxsetItemToDelete = (item) => {
-    deleteHook.ItemToDelete({ id: item._id, name: item.name });
-  };
-
-  const closeBox = () => {
-    deleteHook.setView(false);
-  };
-
-  const delteItem = async () => {
-    try {
-      await deleteBuilding(id);
-    } catch (err) {
-      console.log(err);
-    }
-    deleteHook.setView(false);
-  };
-
+const Buildings = ({ match, history, data, ...otherProps }) => {
   return (
     <SettingSectionContainer>
       <MyButton
@@ -52,15 +22,7 @@ const Buildings = ({
         SingleComponent={BuildingItem}
         data={data}
         loading={otherProps.loading}
-        openBox={openBoxsetItemToDelete}
       />
-      {deleteHook.deleteBoxView ? (
-        <DeleteBox
-          delteItem={delteItem}
-          close={closeBox}
-          item={deleteHook.itemToDelete}
-        />
-      ) : null}
     </SettingSectionContainer>
   );
 };

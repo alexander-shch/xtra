@@ -9,8 +9,10 @@ import {
   updateLecture,
   deleteLecture,
 } from '../../../Redux/Lectures/lectures.action';
+import { closeConfirmMessage } from '../../../Redux/on-delete/delete.action';
 import { getvatList } from '../../../Redux/Vat/vat.action';
 import Spinner from '../../spinner/Spinner';
+import DeleteBox from '../../delete-box/DeleteBox';
 
 const LecturersRoutes = ({
   match,
@@ -24,6 +26,8 @@ const LecturersRoutes = ({
   updateLecture,
   deleteLecture,
   pageLoading,
+  closeConfirmMessage,
+  confirmMessageData,
 }) => {
   useEffect(() => {
     getLectures();
@@ -31,47 +35,53 @@ const LecturersRoutes = ({
   }, [getLectures, getvatList]);
 
   return (
-    <Switch>
-      <Route
-        exact
-        path={`${match.path}`}
-        render={() => (
-          <LecturersList
-            searchField={searchField}
-            lectures={lectures}
-            pageLoading={pageLoading}
-            deleteLecture={deleteLecture}
-          />
-        )}
+    <>
+      <DeleteBox
+        confirmMessageData={confirmMessageData}
+        closeConfirmMessage={closeConfirmMessage}
+        deleteFunction={deleteLecture}
       />
-      <Route
-        exact
-        path={`${match.path}/addLecture`}
-        render={() => (
-          <AddUpdateLecturer
-            vatList={vatList}
-            addNewLecture={addNewLecture}
-            lecturesLoading={lecturesLoading}
-            updateLecture={updateLecture}
-          />
-        )}
-      />
-      <Route
-        path={`${match.path}/updateLecture/:LecturerID`}
-        render={() =>
-          pageLoading ? (
-            <Spinner />
-          ) : (
+      <Switch>
+        <Route
+          exact
+          path={`${match.path}`}
+          render={() => (
+            <LecturersList
+              searchField={searchField}
+              lectures={lectures}
+              pageLoading={pageLoading}
+            />
+          )}
+        />
+        <Route
+          exact
+          path={`${match.path}/addLecture`}
+          render={() => (
             <AddUpdateLecturer
               vatList={vatList}
+              addNewLecture={addNewLecture}
               lecturesLoading={lecturesLoading}
               updateLecture={updateLecture}
-              lectures={lectures}
             />
-          )
-        }
-      />
-    </Switch>
+          )}
+        />
+        <Route
+          path={`${match.path}/updateLecture/:LecturerID`}
+          render={() =>
+            pageLoading ? (
+              <Spinner />
+            ) : (
+              <AddUpdateLecturer
+                vatList={vatList}
+                lecturesLoading={lecturesLoading}
+                updateLecture={updateLecture}
+                lectures={lectures}
+              />
+            )
+          }
+        />
+      </Switch>
+    </>
   );
 };
 const mapStateToProps = (state) => ({
@@ -80,6 +90,7 @@ const mapStateToProps = (state) => ({
   vatList: state.vat.vatList,
   searchField: state.searchField.searchfield,
   pageLoading: state.lectures.pageLoading,
+  confirmMessageData: state.delete,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -90,6 +101,7 @@ const mapDispatchToProps = (dispatch) => ({
   updateLecture: (id, lectureDetails) =>
     dispatch(updateLecture(id, lectureDetails)),
   deleteLecture: (id) => dispatch(deleteLecture(id)),
+  closeConfirmMessage: () => dispatch(closeConfirmMessage()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LecturersRoutes);
