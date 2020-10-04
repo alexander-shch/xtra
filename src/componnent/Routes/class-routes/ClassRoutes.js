@@ -18,7 +18,7 @@ import { getBuildingsData } from '../../../Redux/buildings/buildings.actions';
 import { closeSettingMenu } from '../../../Redux/settingsView/settings.actions';
 import Spinner from '../../spinner/Spinner';
 const ClassList = lazy(() => import('../../../pages/class/ClassList'));
-const AddUpDateClasses = lazy(() =>
+const EditClass = lazy(() =>
   import('../../../pages/class/edit-class/EditClass')
 );
 
@@ -74,7 +74,7 @@ const ClassRoutes = ({
           exact
           path={`${match.path}/addNewClass`}
           render={() => (
-            <AddUpDateClasses
+            <EditClass
               classes={classes}
               buildings={buildings}
               loading={loading}
@@ -89,7 +89,7 @@ const ClassRoutes = ({
             pageLoading ? (
               <Spinner />
             ) : (
-              <AddUpDateClasses
+              <EditClass
                 buildings={buildings}
                 classes={classes}
                 loading={loading}
