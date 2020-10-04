@@ -1,5 +1,5 @@
 import React from 'react';
-// import './spinner.style.scss';
+
 import { SpinnerContainer, SpinnerOverlay, SpinnerWrap } from './spinnerStyle';
 
 const Spinner = ({ ...props }) => {

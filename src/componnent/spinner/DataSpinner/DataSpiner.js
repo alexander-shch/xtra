@@ -1,5 +1,5 @@
 import React from 'react';
-import SingleDataSpinner from './SingleDataSpinner';
+import SingleDataSpinner from '../dataSpinner/SingleDataSpinner';
 
 const DataSpinner = () => {
   return (

@@ -28,10 +28,9 @@ const VatRoutes = ({
   closeConfirmMessage,
 }) => {
   useEffect(() => {
-    if (vatList.length === 0) {
-      getvatList();
-    }
-  }, [getvatList, vatList]);
+    getvatList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <>
       <DeleteBox

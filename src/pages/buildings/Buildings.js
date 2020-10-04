@@ -1,10 +1,10 @@
 import React from 'react';
-import BuildingItem from '../../componnent/single-items/Building-item/BuildingItem';
+import BuildingItem from '../../componnent/single-items/building-item/BuildingItem';
 import { SettingSectionContainer } from '../../componnent/global-style/SettingSection';
 import MyButton from '../../componnent/My-button/MyButton';
-import TableTop from '../../componnent/Table-top/Tabletop';
+import TableTop from '../../componnent/table-top/Tabletop';
 import { withRouter } from 'react-router-dom';
-import SingleItemContainer from '../../componnent/single-items/SingleItemContainer';
+import SingleItemContainer from '../../componnent/single-items/singleItemContainer';
 
 const Buildings = ({ match, history, data, ...otherProps }) => {
   return (

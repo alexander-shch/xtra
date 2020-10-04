@@ -24,3 +24,6 @@ const getHeaders = (isFormData = false) => {
 };
 
 export const URL = 'http://localhost:3005';
+
+export const jewishHolyUrl =
+  'https://www.hebcal.com/hebcal?v=1&cfg=json&maj=on&min=on&mod=on&nx=off&year=now&month=x&ss=off&mf=off&c=off&geo=none=3448439&m=0&s=off&lg=h';

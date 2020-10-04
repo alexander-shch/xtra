@@ -4,7 +4,7 @@ import './NavMenu.style.scss';
 import { connect } from 'react-redux';
 import { onsignOut } from '../../Redux/userReduser/user.actions';
 import { toggleView } from '../../Redux/settingsView/settings.actions';
-import Settings from '../../componnent/settings/Settings';
+import Settings from '../settings/Settings';
 
 const NavMenu = ({ signOut, toggleView, settingsView, userName }) => {
   const navMenuArray = [

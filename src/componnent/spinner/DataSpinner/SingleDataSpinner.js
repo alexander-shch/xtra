@@ -1,5 +1,5 @@
 import React from 'react';
-import './DataSpinner.style.scss';
+import './dataSpinner.style.scss';
 
 const SingleDataSpinner = () => {
   return (

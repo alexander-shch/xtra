@@ -19,7 +19,7 @@ import { closeSettingMenu } from '../../../Redux/settingsView/settings.actions';
 import Spinner from '../../spinner/Spinner';
 const ClassList = lazy(() => import('../../../pages/class/ClassList'));
 const AddUpDateClasses = lazy(() =>
-  import('../../Add-update-classes/AddUpDateClasses')
+  import('../../../pages/class/edit-class/EditClass')
 );
 
 const ClassRoutes = ({
@@ -44,23 +44,12 @@ const ClassRoutes = ({
   confirmMessageData,
 }) => {
   useEffect(() => {
-    if (classes.length === 0) {
-      getclassesData();
-    }
-    if (buildings.length === 0) {
-      getBuildingsData();
-    }
+    getclassesData();
+    getBuildingsData();
     if (jewsihHolydays.length === 0) {
       getJewishHolydays();
-    }
-  }, [
-    getclassesData,
-    getBuildingsData,
-    getJewishHolydays,
-    classes,
-    buildings,
-    jewsihHolydays,
-  ]);
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>

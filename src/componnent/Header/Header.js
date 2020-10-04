@@ -1,5 +1,5 @@
 import React from 'react';
-import NavMenu from '../NavMenu/NavMenu';
+import NavMenu from '../navMenu/NavMenu';
 
 import './Header.style.scss';
 

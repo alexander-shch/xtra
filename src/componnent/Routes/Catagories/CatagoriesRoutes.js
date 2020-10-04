@@ -7,15 +7,15 @@ import {
   updateCategoty,
   deleteCategory,
 } from '../../../Redux/categories/categories.action';
-import AddUpdateCategory from '../../Add-Update-catagory/AddUpdateCategory';
+import AddUpdateCategory from '../../../pages/categories/add-Update-catagory/AddUpdateCategory';
 import Spinner from '../../spinner/Spinner';
 import WithSpinner from '../../spinner/WithSpinner';
 import DeleteBox from '../../delete-box/DeleteBox';
-import { closeConfirmMessage } from '../../../Redux/on-delete//delete.action';
+import { closeConfirmMessage } from '../../../Redux/on-delete/delete.action';
 
 const AddUpdateCategoryWithSpinner = WithSpinner(AddUpdateCategory);
 const CategoriesList = lazy(() =>
-  import('../../../pages/Categories/CategoriesList')
+  import('../../../pages/categories/CategoriesList')
 );
 
 const CategoriesRoutes = ({
@@ -30,10 +30,9 @@ const CategoriesRoutes = ({
   loading,
 }) => {
   useEffect(() => {
-    if (categories.length === 0) {
-      getCategories();
-    }
-  }, [getCategories, categories]);
+    getCategories();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <>
       <Suspense fallback={<Spinner />}>

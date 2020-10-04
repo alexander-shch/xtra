@@ -1,6 +1,6 @@
 const INITAL_STATE = {
   userLoged: null,
-  loading: false,
+  loading: true,
   error: null,
 };
 

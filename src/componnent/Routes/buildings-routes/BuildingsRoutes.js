@@ -6,13 +6,15 @@ import {
   deleteBuilding,
   addNewBuilding,
   updateBuilding,
+  getSingleBuilding,
+  clearSingle,
 } from '../../../Redux/buildings/buildings.actions';
 import { closeConfirmMessage } from '../../../Redux/on-delete/delete.action';
 import Spinner from '../../spinner/Spinner';
 import WithSpinner from '../../spinner/WithSpinner';
 import DeleteBox from '../../delete-box/DeleteBox';
 const AddUpdateBuilding = lazy(() =>
-  import('../../Add-update-buildings/AddUpdateBuilding')
+  import('../../../pages/buildings/add-update-buildings/AddUpdateBuilding')
 );
 const Buildings = lazy(() => import('../../../pages/buildings/Buildings'));
 
@@ -27,13 +29,16 @@ const BuildingsRoutes = ({
   confirmMessageData,
   closeConfirmMessage,
   deleteBuilding,
+  getSingleBuilding,
+  singleBuilding,
+  clearSingle,
+  error,
   ...otherProps
 }) => {
   useEffect(() => {
-    if (data.length === 0) {
-      getBuildingsData();
-    }
-  }, [getBuildingsData, data]);
+    getBuildingsData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -59,7 +64,10 @@ const BuildingsRoutes = ({
             <UpdateBuildingWithSpinner
               loading={otherProps.loading}
               updateBuilding={updateBuilding}
-              buildings={data}
+              singleBuilding={singleBuilding}
+              getSingleBuilding={getSingleBuilding}
+              error={error}
+              clearSingle={clearSingle}
             />
           )}
         />
@@ -72,6 +80,8 @@ const mapStateToProps = (state) => ({
   loading: state.buildings.isPending,
   data: state.buildings.buildings,
   confirmMessageData: state.delete,
+  singleBuilding: state.buildings.singleBuilding,
+  error: state.buildings.error,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -81,6 +91,9 @@ const mapDispatchToProps = (dispatch) => ({
   updateBuilding: (itemid, name, active) =>
     dispatch(updateBuilding(itemid, name, active)),
   closeConfirmMessage: () => dispatch(closeConfirmMessage()),
+  getSingleBuilding: (id, setBuildingDetail) =>
+    dispatch(getSingleBuilding(id, setBuildingDetail)),
+  clearSingle: () => dispatch(clearSingle()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BuildingsRoutes);
