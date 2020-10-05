@@ -1,0 +1,14 @@
+.dateForm {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  align-items: baseline;
+
+  .daySelector {
+    padding: 8px;
+    margin: auto 0;
+    direction: rtl;
+  }
+}
