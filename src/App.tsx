@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { Route } from 'react-router-dom';
 import { setUserLog } from './redux/userReducer/user.actions';
 import SignIn from './pages/signIn/SignIn';
 import Main from './pages/main/main';
-import { Route } from 'react-router-dom';
 import Spinner from './component/spinner/Spinner';
 
 const App = ({ userLoged, setUserLog, loading }: any) => {
