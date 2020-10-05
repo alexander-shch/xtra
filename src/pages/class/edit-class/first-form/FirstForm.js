@@ -1,7 +1,7 @@
 import React from 'react';
 import './firstForm.style.scss';
-import InputField from '../../../../componnent/inputes/input-field/InputField';
-import MyButton from '../../../../componnent/My-button/MyButton';
+import InputField from '../../../../component/inputs/input-field/InputField';
+import MyButton from '../../../../component/my-button/MyButton';
 import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave } from '@fortawesome/free-solid-svg-icons';

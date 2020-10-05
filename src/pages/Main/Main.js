@@ -1,9 +1,9 @@
 import React from 'react';
-import Header from '../../componnent/header/Header';
+import Header from '../../component/header/Header';
 import { Switch, Route } from 'react-router-dom';
-import Dashboard from '../../componnent/dashboard/Dashboard';
-import SettingsRoutes from '../../componnent/Routes/setting-routes/settingsRoutes';
-import LecturersRoutes from '../../componnent/Routes/lecturers-routes/LecturersRoutes';
+import Dashboard from '../../component/dashboard/dashboard';
+import SettingsRoutes from '../../component/routes/setting-routes/settingsRoutes';
+import LecturersRoutes from '../../component/routes/lecturers-routes/LecturersRoutes';
 
 const Main = () => {
   return (

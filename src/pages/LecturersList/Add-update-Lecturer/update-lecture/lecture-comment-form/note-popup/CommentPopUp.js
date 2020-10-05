@@ -1,11 +1,11 @@
 import React from 'react';
-import TextArea from '../../../../../../componnent/inputes/text-area/TextArea';
-import MyButton from '../../../../../../componnent/My-button/MyButton';
+import TextArea from '../../../../../../component/inputs/text-area/TextArea';
+import MyButton from '../../../../../../component/my-button/MyButton';
 import {
   FlexContainer,
   PopUpContainer,
   ButtonContainer,
-} from '../../../../../../componnent/global-style/popUpsStyle';
+} from '../../../../../../component/global-style/popUpsStyle';
 
 const CommentPopUp = ({ setNewCommentView, handleChange, noteSubmit }) => {
   return (

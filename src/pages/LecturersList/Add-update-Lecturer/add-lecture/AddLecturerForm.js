@@ -1,10 +1,10 @@
 import React from 'react';
-import InputField from '../../../../componnent/inputes/input-field/InputField';
-import TextArea from '../../../../componnent/inputes/text-area/TextArea';
+import InputField from '../../../../component/inputs/input-field/InputField';
+import TextArea from '../../../../component/inputs/text-area/TextArea';
 import './addLectureForm.style.scss';
 import { Editor } from '@tinymce/tinymce-react';
-import MyButton from '../../../../componnent/My-button/MyButton';
-import SelectInput from '../../../../componnent/inputes/select-input/SelectInput';
+import MyButton from '../../../../component/my-button/MyButton';
+import SelectInput from '../../../../component/inputs/select-input/SelectInput';
 import { withRouter } from 'react-router-dom';
 const AddLecturerForm = ({
   history,

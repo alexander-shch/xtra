@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import TableTop from '../../../../../componnent/table-top/Tabletop';
-import MyButton from '../../../../../componnent/My-button/MyButton';
+import TableTop from '../../../../../component/table-top/Tabletop';
+import MyButton from '../../../../../component/my-button/MyButton';
 import FilePopUp from './File-PopUp/FilePopUp';
 
 const FilesLIst = ({ handdleCvChange, cvSubmit }) => {

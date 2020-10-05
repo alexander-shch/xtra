@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import TableTop from '../../../../../componnent/table-top/Tabletop';
-import MyButton from '../../../../../componnent/My-button/MyButton';
-import SingleLectureNote from '../../../../../componnent/single-items/SingleLecureNote';
-import DataSpinner from '../../../../../componnent/spinner/dataSpinner/DataSpiner';
+import TableTop from '../../../../../component/table-top/Tabletop';
+import MyButton from '../../../../../component/my-button/MyButton';
+import SingleLectureNote from '../../../../../component/single-items/singleLectureNote';
+import DataSpinner from '../../../../../component/spinner/dataSpinner/dataSpinner';
 
 import CommentPopUp from './note-popup/CommentPopUp';
 
@@ -10,7 +10,7 @@ const CommentList = ({ SingleLecture, loading, addNewNote, setAlert }) => {
   const notesArr = SingleLecture[0] ? SingleLecture[0].internalNotes : [];
   const lectureID = SingleLecture[0]._id;
 
-  const [newCommentview, setNewCommentView] = useState(false);
+  const [newCommentView, setNewCommentView] = useState(false);
   const [noteText, setNoteText] = useState({ text: '' });
   const { text } = noteText;
 
@@ -34,7 +34,7 @@ const CommentList = ({ SingleLecture, loading, addNewNote, setAlert }) => {
 
   return (
     <>
-      {newCommentview ? (
+      {newCommentView ? (
         <CommentPopUp
           setNewCommentView={setNewCommentView}
           handleChange={handleChange}

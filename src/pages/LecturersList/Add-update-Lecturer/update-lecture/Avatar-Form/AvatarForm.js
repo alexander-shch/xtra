@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './avatarForm.style.scss';
-import MyButton from '../../../../../componnent/My-button/MyButton';
-import Spinner from '../../../../../componnent/spinner/Spinner';
+import MyButton from '../../../../../component/my-button/MyButton';
+import Spinner from '../../../../../component/spinner/Spinner';
 import styled from 'styled-components';
 
 const AvatarImg = styled.div`

@@ -1,14 +1,14 @@
 import React, { useState, useCallback } from 'react';
 import './addUpdateClasses.style.scss';
-import Calendar from '../../../componnent/calendar/Calendar';
+import Calendar from '../../../component/calendar/calendar';
 import FirstForm from './first-form/FirstForm';
 import SecondForm from './second-form/SecondForm';
 import UpdateSingle from './update-singel-date/UpdateSingle';
 import { withRouter } from 'react-router-dom';
-import DeleteBox from '../../../componnent/delete-box/DeleteBox';
-import { UpdatePageContainer } from '../../../componnent/global-style/SettingSection';
-import MyAlert from '../../../componnent/my-Alert/MyAlert';
-import WithSpinner from '../../../componnent/spinner/WithSpinner';
+import DeleteBox from '../../../component/delete-box/deleteBox';
+import { UpdatePageContainer } from '../../../component/global-style/SettingSection';
+import MyAlert from '../../../component/my-Alert/MyAlert';
+import WithSpinner from '../../../component/spinner/WithSpinner';
 
 const CalendarWithSpinner = WithSpinner(Calendar);
 
