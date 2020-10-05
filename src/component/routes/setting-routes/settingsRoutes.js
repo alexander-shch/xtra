@@ -2,7 +2,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import BuildingsRoutes from '../buildings-routes/BuildingsRoutes';
 import ClassRoutes from '../class-routes/ClassRoutes';
-import CourseRoutes from '../course-Routes/CourseRoutes';
+import CourseRoutes from '../course-Routes/courseRoutes';
 import BookListRoutes from '../book-list-routes/BookListRoutes';
 import VatRoutes from '../vat-routes/VatRoutes';
 import CatagoriesRoutes from '../catagories/CatagoriesRoutes';

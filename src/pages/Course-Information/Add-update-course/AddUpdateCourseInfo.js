@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { UpdatePageContainer } from '../../../component/global-style/SettingSection';
-import CourseInfoForm from './forms/CourseInfoForm';
+import CourseInfoForm from './forms/courseInfoForm';
 import MyButton from '../../../component/my-button/MyButton';
 import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
-import './AddUpdateCourseInfo.style.scss';
+import './addUpdateCourseInfo.style.scss';
 const element = <FontAwesomeIcon icon={faSave} />;
 
 const AddUpdateCourseInfo = ({ history }) => {

@@ -10,7 +10,7 @@ import {
   deleteLecture,
 } from '../../../redux/lectures/lectures.action';
 import { closeConfirmMessage } from '../../../redux/on-delete/delete.action';
-import { getvatList } from '../../../redux/Vat/vat.action';
+import { getVatList } from '../../../redux/vat/vat.action';
 import Spinner from '../../spinner/Spinner';
 import DeleteBox from '../../delete-box/deleteBox';
 
@@ -19,7 +19,7 @@ const LecturersRoutes = ({
   lectures,
   vatList,
   getLectures,
-  getvatList,
+  getVatList,
   lecturesLoading,
   addNewLecture,
   searchField,
@@ -31,7 +31,7 @@ const LecturersRoutes = ({
 }) => {
   useEffect(() => {
     getLectures();
-    getvatList();
+    getVatList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -96,7 +96,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getLectures: () => dispatch(getLectures()),
-  getvatList: () => dispatch(getvatList()),
+  getvatList: () => dispatch(getVatList()),
   addNewLecture: (lectureDetails, history) =>
     dispatch(addNewLecture(lectureDetails, history)),
   updateLecture: (id, lectureDetails) =>

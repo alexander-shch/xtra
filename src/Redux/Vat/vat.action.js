@@ -1,6 +1,6 @@
 import { callFetch, URL } from '../../utils/actionUtils';
 
-export const getvatList = () => (dispatch) => {
+export const getVatList = () => (dispatch) => {
   dispatch({ type: 'GET_VAT_LIST_START' });
   callFetch(`${URL}/pay-duplicator`, 'GET')
     .then((data) => dispatch({ type: 'GET_VAT_LIST_SUCSESS', payload: data }))

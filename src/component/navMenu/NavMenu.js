@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './NavMenu.style.scss';
 import { connect } from 'react-redux';
-import { onsignOut } from '../../redux/userReducer/user.actions';
+import { onSignOut } from '../../redux/userReducer/user.actions';
 import { toggleView } from '../../redux/settingsView/settings.actions';
 import Settings from '../settings/Settings';
+
+import './navMenu.style.scss';
 
 const NavMenu = ({ signOut, toggleView, settingsView, userName }) => {
   const navMenuArray = [
@@ -44,7 +45,7 @@ const NavMenu = ({ signOut, toggleView, settingsView, userName }) => {
   );
 };
 const mapDispatchToProps = (dispatch) => ({
-  signOut: () => dispatch(onsignOut()),
+  signOut: () => dispatch(onSignOut()),
   toggleView: () => dispatch(toggleView()),
 });
 

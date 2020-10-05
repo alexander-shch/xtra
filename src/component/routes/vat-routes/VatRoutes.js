@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import VatList from '../../../pages/Vat-list/VatList';
-import UpdateVatRate from '../../../pages/Vat-list/UpdateVatRate';
-import AddUpdateVatList from '../../../pages/Vat-list/AddUpdateVatList';
+import VatList from '../../../pages/vat-list/vatList';
+import UpdateVatRate from '../../../pages/vat-list/updateVatRate';
+import AddUpdateVatList from '../../../pages/vat-list/addUpdateVatList';
 import { connect } from 'react-redux';
 import {
-  getvatList,
+  getVatList,
   addVatItem,
   updateVatItem,
   deleteVatItem,
-} from '../../../redux/Vat/vat.action';
+} from '../../../redux/vat/vat.action';
 import { closeConfirmMessage } from '../../../redux/on-delete/delete.action';
 import DeleteBox from '../../delete-box/deleteBox';
 import WithSpinner from '../../spinner/WithSpinner';
@@ -19,7 +19,7 @@ const AddUpdateVatListWithSpinner = WithSpinner(AddUpdateVatList);
 const VatRoutes = ({
   match,
   vatList,
-  getvatList,
+  getVatList,
   addVatItem,
   updateVatItem,
   deleteVatItem,
@@ -28,7 +28,7 @@ const VatRoutes = ({
   closeConfirmMessage,
 }) => {
   useEffect(() => {
-    getvatList();
+    getVatList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
@@ -76,7 +76,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getvatList: () => dispatch(getvatList()),
+  getVatList: () => dispatch(getVatList()),
   addVatItem: (vatItem) => dispatch(addVatItem(vatItem)),
   updateVatItem: (itemId, vatItem) => dispatch(updateVatItem(itemId, vatItem)),
   deleteVatItem: (itemId) => dispatch(deleteVatItem(itemId)),

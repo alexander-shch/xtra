@@ -17,7 +17,7 @@ export const setUserLog = () => (dispatch) => {
     .catch((err) => dispatch(signInFailed(err)));
 };
 
-export const onsignOut = () => (dispatch) => {
+export const onSignOut = () => (dispatch) => {
   localStorage.removeItem('token');
   dispatch({ type: 'SIGNOUT_SUCSESS' });
 };

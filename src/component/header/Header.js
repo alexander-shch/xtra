@@ -1,7 +1,7 @@
 import React from 'react';
-import NavMenu from '../navMenu/NavMenu';
+import NavMenu from '../navMenu/navMenu';
 
-import './Header.style.scss';
+import './header.style.scss';
 
 const Header = () => {
   return (
