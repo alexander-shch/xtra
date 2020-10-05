@@ -16,7 +16,7 @@ import DeleteBox from '../../delete-box/deleteBox';
 import { setAlert } from '../../../redux/my-Alert/myAlert.action';
 import { getBuildingsData } from '../../../redux/buildings/buildings.actions';
 import { closeSettingMenu } from '../../../redux/settingsView/settings.actions';
-import Spinner from '../../spinner/Spinner';
+import Spinner from '../../spinner/spinner';
 const ClassList = lazy(() => import('../../../pages/class/ClassList'));
 const EditClass = lazy(() =>
   import('../../../pages/class/edit-class/EditClass')

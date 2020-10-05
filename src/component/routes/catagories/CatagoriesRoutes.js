@@ -8,8 +8,8 @@ import {
   deleteCategory,
 } from '../../../redux/categories/categories.action';
 import AddUpdateCategory from '../../../pages/categories/add-update-category/AddUpdateCategory';
-import Spinner from '../../spinner/Spinner';
-import WithSpinner from '../../spinner/WithSpinner';
+import Spinner from '../../spinner/spinner';
+import WithSpinner from '../../spinner/withSpinner';
 import DeleteBox from '../../delete-box/deleteBox';
 import { closeConfirmMessage } from '../../../redux/on-delete/delete.action';
 

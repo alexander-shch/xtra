@@ -10,8 +10,8 @@ import {
   clearSingle,
 } from '../../../redux/buildings/buildings.actions';
 import { closeConfirmMessage } from '../../../redux/on-delete/delete.action';
-import Spinner from '../../spinner/Spinner';
-import WithSpinner from '../../spinner/WithSpinner';
+import Spinner from '../../spinner/spinner';
+import WithSpinner from '../../spinner/withSpinner';
 import DeleteBox from '../../delete-box/deleteBox';
 const AddUpdateBuilding = lazy(() =>
   import('../../../pages/buildings/add-update-buildings/AddUpdateBuilding')

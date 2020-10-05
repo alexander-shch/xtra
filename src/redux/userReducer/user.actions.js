@@ -8,7 +8,7 @@ export const setUserLog = () => (dispatch) => {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
   })
-    .then((respons) => respons.json())
+    .then((response) => response.json())
     .then((user) => {
       if (user) {
         dispatch({ type: 'SIGNIN_SUCSESS', payload: user });

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import FilesList from './filesForm/FilesList';
-import CommentList from './lecture-comment-form/CommentList';
-import AvatarForm from './avatar-Form/avatarForm';
+import CommentList from './lecture-comment-form/commentList';
+import AvatarForm from './avatar-form/avatarForm';
 import { setAvatarImg } from '../../../../redux/lectures/lectures.action';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';

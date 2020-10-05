@@ -8,7 +8,7 @@ import { withRouter } from 'react-router-dom';
 import DeleteBox from '../../../component/delete-box/deleteBox';
 import { UpdatePageContainer } from '../../../component/global-style/SettingSection';
 import MyAlert from '../../../component/my-Alert/MyAlert';
-import WithSpinner from '../../../component/spinner/WithSpinner';
+import WithSpinner from '../../../component/spinner/withSpinner';
 
 const CalendarWithSpinner = WithSpinner(Calendar);
 

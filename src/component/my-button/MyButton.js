@@ -1,5 +1,5 @@
 import React from 'react';
-import Spinner from '../spinner/Spinner';
+import Spinner from '../spinner/spinner';
 
 import { CustomButtonContainer, ButtonContainer } from './MyButton.style';
 

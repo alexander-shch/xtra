@@ -12,7 +12,7 @@ import {
 } from '../../../redux/vat/vat.action';
 import { closeConfirmMessage } from '../../../redux/on-delete/delete.action';
 import DeleteBox from '../../delete-box/deleteBox';
-import WithSpinner from '../../spinner/WithSpinner';
+import WithSpinner from '../../spinner/withSpinner';
 
 const AddUpdateVatListWithSpinner = WithSpinner(AddUpdateVatList);
 

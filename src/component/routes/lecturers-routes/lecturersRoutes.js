@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import LecturersList from '../../../pages/lecturersList/LecturersList';
-import AddUpdateLecturer from '../../../pages/lecturersList/AddUpdateLecturer';
+import LecturersList from '../../../pages/lecturersList/lecturersList';
+import AddUpdateLecturer from '../../../pages/lecturersList/addUpdateLecturer';
 import { connect } from 'react-redux';
 import {
   getLectures,
@@ -11,7 +11,7 @@ import {
 } from '../../../redux/lectures/lectures.action';
 import { closeConfirmMessage } from '../../../redux/on-delete/delete.action';
 import { getVatList } from '../../../redux/vat/vat.action';
-import Spinner from '../../spinner/Spinner';
+import Spinner from '../../spinner/spinner';
 import DeleteBox from '../../delete-box/deleteBox';
 
 const LecturersRoutes = ({
