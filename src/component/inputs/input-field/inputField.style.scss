@@ -1,0 +1,65 @@
+$sub-color: grey;
+$main-color: black;
+
+.groupInput {
+  margin: 5px auto;
+  width: 100%;
+
+  .form-input {
+    display: block;
+    width: 100%;
+    padding: 0.2em 0;
+    font-size: 1rem;
+    line-height: 1.5;
+
+    &.hebrewInput {
+      direction: rtl;
+    }
+    &.textInput {
+      color: #495057;
+      background-color: #fff;
+      background-image: none;
+      background-clip: padding-box;
+      border: 1px solid #9d9d9d;
+      border-radius: 0.25rem;
+    }
+
+    &.small {
+      height: 25px;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .input-continer {
+    position: relative;
+    min-height: 1px;
+    margin: 5px;
+  }
+
+  input[type='password'] {
+    letter-spacing: 0.3em;
+  }
+  input[type='text'],
+  input[type='number'] {
+    box-sizing: border-box;
+    padding-right: 5px;
+  }
+
+  textarea {
+    resize: vertical;
+    height: 100px;
+  }
+
+  .form-input-label {
+    margin: 5px 5px;
+
+    position: relative;
+    min-height: 1px;
+    display: inline-block;
+    text-align: end;
+    display: block;
+  }
+}
