@@ -1,5 +1,5 @@
-import { callFetch, URL } from '../../utils/actionUtils';
-import { setAlert } from '../My-Alert/myAlert.action';
+import { callFetch, URL, jewishHolyUrl } from '../../utils/actionUtils';
+import { setAlert } from '../my-Alert/myAlert.action';
 
 export const getclassesData = () => (dispatch) => {
   dispatch({ type: 'CLASSES_FETCH_START' });
@@ -166,9 +166,7 @@ export const deleteAvailability = (classId, availabilityId) => (dispatch) => {
 
 export const getJewishHolydays = () => (dispatch) => {
   dispatch({ type: 'GET_HOLYDAYS_START' });
-  fetch(
-    'https://www.hebcal.com/hebcal?v=1&cfg=json&maj=on&min=on&mod=on&nx=off&year=now&month=x&ss=off&mf=off&c=off&geo=none=3448439&m=0&s=off&lg=h'
-  )
+  fetch(jewishHolyUrl)
     .then((res) => res.json())
     .then((data) => dispatch({ type: 'GET_HOLYDAYS_SUCSESS', payload: data }))
     .catch((err) => dispatch({ type: 'GET_HOLYDAYS_FAILED', payload: err }));

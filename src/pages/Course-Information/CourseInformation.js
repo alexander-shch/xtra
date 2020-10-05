@@ -1,7 +1,7 @@
 import React from 'react';
-import MyButton from '../../componnent/My-button/MyButton';
-import TableTop from '../../componnent/Table-top/Tabletop';
-import { SettingSectionContainer } from '../../componnent/global-style/SettingSection';
+import MyButton from '../../component/my-button/MyButton';
+import TableTop from '../../component/table-top/Tabletop';
+import { SettingSectionContainer } from '../../component/global-style/SettingSection';
 import { withRouter } from 'react-router-dom';
 
 const CourseInformation = ({ history, match }) => {

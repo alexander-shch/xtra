@@ -1,12 +1,12 @@
 import React from 'react';
-import { SettingSectionContainer } from '../../componnent/global-style/SettingSection';
-import MyButton from '../../componnent/My-button/MyButton';
-import TableTop from '../../componnent/Table-top/Tabletop';
-import SearchField from '../../componnent/searchField/SearchField';
+import { SettingSectionContainer } from '../../component/global-style/SettingSection';
+import MyButton from '../../component/my-button/MyButton';
+import TableTop from '../../component/table-top/Tabletop';
+import SearchField from '../../component/searchField/SearchField';
 import { withRouter } from 'react-router-dom';
-import SingleLecture from '../../componnent/single-items/single-lecture/SingleLecture';
+import SingleLecture from '../../component/single-items/single-lecture/singleLecture';
 
-import SingleItemContainer from '../../componnent/single-items/SingleItemContainer';
+import SingleItemContainer from '../../component/single-items/singleItemContainer';
 
 const LecturersList = ({
   history,

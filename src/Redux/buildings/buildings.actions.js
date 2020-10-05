@@ -1,4 +1,4 @@
-import { URL } from '../../utils/actionUtils';
+import { callFetch, URL } from '../../utils/actionUtils';
 
 export const getBuildingsData = () => (dispatch) => {
   dispatch({ type: 'BUILDING_FETCH_START' });
@@ -81,3 +81,21 @@ export const deleteBuilding = (itemid) => (dispatch) => {
     })
     .catch((err) => dispatch({ type: 'DELETE_BUILDING_FAILED', payload: err }));
 };
+
+export const getSingleBuilding = (ID) => (dispatch) => {
+  dispatch({ type: 'GET_SINGLE_BUILDING_START' });
+  callFetch(`${URL}/buildings/${ID}`, 'GET')
+    .then((data) => {
+      if (data.error) {
+        dispatch({ type: 'GET_SINGLE_BUILDING_FAILED', payload: data });
+      }
+      dispatch({ type: 'GET_SINGLE_BUILDING_SUCSESS', payload: data });
+    })
+    .catch((err) =>
+      dispatch({ type: 'GET_SINGLE_BUILDING_FAILED', payload: err })
+    );
+};
+
+export const clearSingle = () => ({
+  type: 'CLEAR_SINGLE',
+});

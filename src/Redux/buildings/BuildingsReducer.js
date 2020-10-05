@@ -1,6 +1,7 @@
 const INTIAL_STATE = {
   buildings: [],
-  isPending: false,
+  isPending: true,
+  singleBuilding: null,
   error: null,
 };
 
@@ -9,13 +10,17 @@ const BuildingsReducer = (state = INTIAL_STATE, action) => {
     case 'BUILDING_FETCH_START':
     case 'UPDATE_BUILDING_START':
     case 'DELETE_BUILDING_START':
-      return { ...state, isPending: true };
+    case 'GET_SINGLE_BUILDING_START':
+      return state;
     case 'BUILDING_FETCH_SUCSESS':
       return {
         buildings: action.payload,
         isPending: false,
         error: null,
       };
+
+    case 'GET_SINGLE_BUILDING_SUCSESS':
+      return { ...state, isPending: false, singleBuilding: action.payload };
     case 'POST_NEW_BUILDING_SUCSESS':
       return { ...state, buildings: [...state.buildings, action.payload] };
 
@@ -37,7 +42,11 @@ const BuildingsReducer = (state = INTIAL_STATE, action) => {
     case 'DELETE_BUILDING_FAILED':
     case 'POST_NEW_BUILDING_FAILED':
     case 'BUILDING_FETCH_FAILED':
+    case 'GET_SINGLE_BUILDING_FAILED':
       return { ...state, isPending: false, error: action.payload };
+
+    case 'CLEAR_SINGLE':
+      return { ...state, error: null, singleBuilding: null };
     default:
       return state;
   }

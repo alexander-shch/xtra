@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import './SignIn.style.scss';
-import InputField from '../../componnent/inputes/input-field/InputField';
-import MyButton from '../../componnent/My-button/MyButton';
+import InputField from '../../component/inputs/input-field/InputField';
+import MyButton from '../../component/my-button/MyButton';
 import {
   setUserLog,
   getToken,
   signInFailed,
-} from '../../Redux/userReduser/user.actions';
+} from '../../redux/userReducer/user.actions';
 
 const SignIn = ({ setUserLog, getToken, signInFailed }) => {
   const [UserDetail, setUserDetail] = useState({

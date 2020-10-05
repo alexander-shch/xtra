@@ -1,14 +1,14 @@
 import { combineReducers } from 'redux';
-import userReducer from './userReduser/userReduser';
+import userReducer from './userReducer/userReduser';
 import settingsView from './settingsView/settingsReducer';
 import BuildingsReducer from './buildings/BuildingsReducer';
 import classesReducer from './classes/classesReducer';
 import categoriesReducer from './categories/categoriesReducer';
-import vatReducer from './Vat/vatReducer';
-import searchField from '../Redux/search/searchReducer';
-import lecturesReducer from '../Redux/Lectures/lecturesReducer';
-import myAlertReducer from '../Redux/My-Alert/myAlert.reducer';
-import deleteReducer from '../Redux/on-delete/delete.reducer';
+import vatReducer from './vat/vatReducer';
+import searchField from './search/searchReducer';
+import lecturesReducer from './lectures/lecturesReducer';
+import myAlertReducer from './my-Alert/myAlert.reducer';
+import deleteReducer from './on-delete/delete.reducer';
 
 const rootReducer = combineReducers({
   user: userReducer,
