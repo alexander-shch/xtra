@@ -1,46 +1,12 @@
-import React, { useState } from 'react';
-import BuildingItem from '../../componnent/single-items/Building-item/BuildingItem';
-import { SettingSectionContainer } from '../../componnent/global-style/SettingSection';
-import MyButton from '../../componnent/My-button/MyButton';
-import TableTop from '../../componnent/Table-top/Tabletop';
+import React from 'react';
+import BuildingItem from '../../component/single-items/building-item/BuildingItem';
+import SingleItemContainer from '../../component/single-items/singleItemContainer';
+import { SettingSectionContainer } from '../../component/global-style/SettingSection';
+import MyButton from '../../component/my-button/MyButton';
+import TableTop from '../../component/table-top/Tabletop';
 import { withRouter } from 'react-router-dom';
-import DataSpinner from '../../componnent/spinner/DataSpinner/DataSpiner';
-import DeleteBox from '../../componnent/delete-box/DeleteBox';
 
-const Buildings = ({
-  deleteBuilding,
-  match,
-  history,
-  data,
-  searchfield,
-  filterBy,
-  ...otherProps
-}) => {
-  const [deleteBoxView, setDeleteBoxView] = useState(false);
-  const [itemToDelete, setItemToDelete] = useState({ id: '', name: '' });
-  const { id } = itemToDelete;
-
-  const openBoxsetItemToDelete = (item) => {
-    if (deleteBoxView === true) {
-      return;
-    }
-    setDeleteBoxView(true);
-    setItemToDelete({ id: item._id, name: item.name });
-  };
-
-  const closeBox = () => {
-    setDeleteBoxView(false);
-  };
-
-  const delteItem = async () => {
-    try {
-      await deleteBuilding(id);
-    } catch (err) {
-      console.log(err);
-    }
-    closeBox();
-  };
-
+const Buildings = ({ match, history, data, ...otherProps }) => {
   return (
     <SettingSectionContainer>
       <MyButton
@@ -51,20 +17,12 @@ const Buildings = ({
       </MyButton>
       <h4>רשימה</h4>
       <TableTop tableProps={['שם הבניין', 'אפשרויות']} />
-      {otherProps.loading ? (
-        <DataSpinner />
-      ) : (
-        data.map((item) => (
-          <BuildingItem
-            openBox={openBoxsetItemToDelete}
-            key={item._id}
-            item={item}
-          />
-        ))
-      )}
-      {deleteBoxView ? (
-        <DeleteBox delteItem={delteItem} close={closeBox} item={itemToDelete} />
-      ) : null}
+
+      <SingleItemContainer
+        SingleComponent={BuildingItem}
+        data={data}
+        loading={otherProps.loading}
+      />
     </SettingSectionContainer>
   );
 };
