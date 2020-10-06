@@ -11,7 +11,7 @@ export const addNewCategory = (objToServer) => (dispatch) => {
   dispatch({ type: 'ADD_NEW_CATEGORY_START' });
   callFetch(`${URL}/categories`, 'POST', objToServer)
     .then((data) =>
-      dispatch({ type: 'ADD_NEW_CATEGORY_SUCSESS', payload: data })
+      dispatch({ type: 'ADD_NEW_CATEGORY_SUCCESS', payload: data })
     )
     .catch((err) =>
       dispatch({ type: 'ADD_NEW_CATEGORY_FAILED', payload: err })
@@ -22,7 +22,7 @@ export const updateCategoty = (categoryID, objToServer) => (dispatch) => {
   dispatch({ type: 'UPDATE_CATEGORY_START' });
   callFetch(`${URL}/categories/${categoryID}`, 'PUT', objToServer)
     .then((data) =>
-      dispatch({ type: 'UPDATE_CATEGORY_SUCSESS', payload: data })
+      dispatch({ type: 'UPDATE_CATEGORY_SUCCESS', payload: data })
     )
     .catch((err) => dispatch({ type: 'UPDATE_CATEGORY_FAILED', payload: err }));
 };
@@ -33,12 +33,12 @@ export const deleteCategory = (categoryID) => (dispatch) => {
     .then((data) => {
       if (data.deleted) {
         dispatch({
-          type: 'DELETE_CATEGORY_SUCSESS',
+          type: 'DELETE_CATEGORY_SUCCESS',
           payload: categoryID,
         });
       } else {
         throw new Error('cant delete this building');
       }
     })
-    .catch((err) => dispatch({ type: 'DELETE_CATEGORY_FAIELD', payload: err }));
+    .catch((err) => dispatch({ type: 'DELETE_CATEGORY_FAILED', payload: err }));
 };

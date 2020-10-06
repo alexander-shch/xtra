@@ -20,39 +20,39 @@ const lecturesReducer = (state = INTAIL_STATE, action) => {
       return { ...state, loading: true };
     case 'SET_AVATAR_IMG_START':
       return { ...state, avatarLoading: true };
-    case 'GET_LECTURES_SUCSESS':
+    case 'GET_LECTURES_SUCCESS':
       return {
         ...state,
         pageLoading: false,
         loading: false,
         lectures: action.payload,
       };
-    case 'ADD_NEW_LECTURE_SUCSESS':
+    case 'ADD_NEW_LECTURE_SUCCESS':
       return {
         ...state,
         loading: false,
         lectures: [...state.lectures, action.payload],
       };
-    case 'UPDATE_LECTURE_SUCSESS':
-    case 'SET_AVATAR_IMG_SUCSESS':
+    case 'UPDATE_LECTURE_SUCCESS':
+    case 'SET_AVATAR_IMG_SUCCESS':
       let { lectures } = state;
       let index = lectures.findIndex((item) => item._id === action.payload._id);
       lectures[index] = action.payload;
       return { ...state, avatarLoading: false, loading: false, lectures };
-    case 'DELETE_LECTURE_SUCSESS':
+    case 'DELETE_LECTURE_SUCCESS':
       return {
         ...state,
         loading: false,
         lectures: state.lectures.filter((item) => item._id !== action.payload),
       };
-    case 'ADD_NEW_NOTE_SUCSESS':
+    case 'ADD_NEW_NOTE_SUCCESS':
       console.log(action.payload);
       return {
         ...state,
         loading: false,
         lectures: addNote(state, action.payload),
       };
-    case 'DELETE_NOTE_SUCSESS':
+    case 'DELETE_NOTE_SUCCESS':
       return {
         ...state,
         loading: false,
@@ -62,7 +62,7 @@ const lecturesReducer = (state = INTAIL_STATE, action) => {
     case 'ADD_NEW_LECTURE_FAILED':
     case 'UPDATE_LECTURE_FAILED':
     case 'DELETE_LECTURE_FAILED':
-    case 'SET_AVATAR_IMG_FAIELD':
+    case 'SET_AVATAR_IMG_FAILED':
     case 'DELETE_NOTE_FAILED':
       return {
         ...state,

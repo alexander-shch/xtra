@@ -10,7 +10,7 @@ const element = <FontAwesomeIcon icon={faSave} />;
 const UpdateVatRate = ({ history }) => {
   const [vatRate, setVatRate] = useState(17);
 
-  const handdleChange = (e) => {
+  const handleChange = (e) => {
     const { value } = e.target;
     setVatRate(value);
   };
@@ -26,7 +26,7 @@ const UpdateVatRate = ({ history }) => {
           type='number'
           label='מע"מ'
           value={vatRate}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
           required
         />

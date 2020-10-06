@@ -8,10 +8,10 @@ import SelectInput from '../../../../component/inputs/select-input/SelectInput';
 import { withRouter } from 'react-router-dom';
 const AddLecturerForm = ({
   history,
-  handdleChange,
+  handleChange,
   vatList,
   lectureDeteils,
-  handdleSubmit,
+  handleSubmit,
   handleEditorChange,
   lecturesLoading,
 }) => {
@@ -30,14 +30,14 @@ const AddLecturerForm = ({
     teaching,
   } = lectureDeteils;
   return (
-    <form onSubmit={handdleSubmit}>
+    <form onSubmit={handleSubmit}>
       <div className='add-lecture-form'>
         <InputField
           name='name'
           type='text'
           label='שם המרצה'
           value={name}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
           required
         />
@@ -46,7 +46,7 @@ const AddLecturerForm = ({
           type='number'
           label='תז'
           value={idNumber}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
           required
         />
@@ -55,7 +55,7 @@ const AddLecturerForm = ({
           type='text'
           value={phone}
           label='טלפון'
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
           required
         />
@@ -64,7 +64,7 @@ const AddLecturerForm = ({
           type='email'
           label='דוא"ל'
           value={email}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
           required
         />
@@ -73,7 +73,7 @@ const AddLecturerForm = ({
           type='text'
           label='כתובת'
           value={address.address}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
           required
         />
@@ -82,7 +82,7 @@ const AddLecturerForm = ({
           type='number'
           label='שכר לשעה'
           value={hourlyRate}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
           required
         />
@@ -92,7 +92,7 @@ const AddLecturerForm = ({
             name='duplicator'
             className='.selectbuildingInput'
             defaultValue={duplicator !== '' ? duplicator : '1'}
-            onChange={handdleChange}
+            onChange={handleChange}
           >
             <option value='1' disabled hidden>
               בחר מכפיל
@@ -109,7 +109,7 @@ const AddLecturerForm = ({
           name='active'
           label='פעיל'
           value={active}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           required
         />
 
@@ -138,7 +138,7 @@ const AddLecturerForm = ({
           type='text'
           label='תיאור'
           value={description}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
         />
         <TextArea
@@ -146,7 +146,7 @@ const AddLecturerForm = ({
           type='text'
           label='נסיון קודם'
           value={experience}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
         />
         <TextArea
@@ -154,14 +154,14 @@ const AddLecturerForm = ({
           type='text'
           label='מקצועות לימוד'
           value={teaching}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
         />
         <TextArea
           name='internalNotes'
           type='text'
           label='הערות'
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
         />
       </div>

@@ -13,20 +13,20 @@ const categoriesReducer = (state = INTIAL_STATE, action) => {
       return { ...state, loading: true };
     case 'GET_CATEGORIES_SUCSES':
       return { ...state, categories: action.payload, loading: false };
-    case 'ADD_NEW_CATEGORY_SUCSESS':
+    case 'ADD_NEW_CATEGORY_SUCCESS':
       return {
         ...state,
         categories: [...state.categories, action.payload],
         loading: false,
       };
-    case 'UPDATE_CATEGORY_SUCSESS':
+    case 'UPDATE_CATEGORY_SUCCESS':
       const { categories } = state;
       const index = categories.findIndex(
         (category) => category._id === action.payload._id
       );
       categories[index] = action.payload;
       return { ...state, loading: false, categories };
-    case 'DELETE_CATEGORY_SUCSESS':
+    case 'DELETE_CATEGORY_SUCCESS':
       return {
         ...state,
         categories: state.categories.filter(
@@ -38,7 +38,7 @@ const categoriesReducer = (state = INTIAL_STATE, action) => {
     case 'GET_CATEGORIES_FAILED':
     case 'ADD_NEW_CATEGORY_FAILED':
     case 'UPDATE_CATEGORY_FAILED':
-    case 'DELETE_CATEGORY_FAIELD':
+    case 'DELETE_CATEGORY_FAILED':
       return { ...state, loading: false, error: action.payload };
     default:
       return state;

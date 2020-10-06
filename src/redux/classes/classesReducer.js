@@ -23,7 +23,7 @@ const classesReducer = (state = INTIAL_STATE, action) => {
     case 'UPDATE_CLASS_START':
     case 'ADD_NEW_CLASS_START':
       return { ...state, loading: true };
-    case 'CLASSES_FETCH_SUCSESS':
+    case 'CLASSES_FETCH_SUCCESS':
       return {
         ...state,
         loading: false,
@@ -34,44 +34,44 @@ const classesReducer = (state = INTIAL_STATE, action) => {
     case 'UPDATE_AVAILABILTY_START':
     case 'DELETE_AVAILABILTY_START':
       return { ...state, calenderLoading: true };
-    case 'ADD_CLASS_SUCSESS':
+    case 'ADD_CLASS_SUCCESS':
       return {
         ...state,
         classes: [...state.classes, action.payload],
         loading: false,
       };
-    case 'UPDATE_CLASS_SUCSESS':
+    case 'UPDATE_CLASS_SUCCESS':
       return {
         ...state,
         loading: false,
         classes: updateClass(state, action.payload),
       };
-    case 'SET_AVAILABILITY_SUCSESS':
+    case 'SET_AVAILABILITY_SUCCESS':
       return {
         ...state,
         classes: setAvailabilty(state, action.payload),
         calenderLoading: false,
       };
-    case 'UPDATE_AVAILABILTY_SUCSESS':
+    case 'UPDATE_AVAILABILTY_SUCCESS':
       return {
         ...state,
         classes: updateAvailabilty(state, action.payload),
         calenderLoading: false,
       };
-    case 'DELETE_AVAILABILTY_SUCSESS':
+    case 'DELETE_AVAILABILTY_SUCCESS':
       console.log('red', action.payload);
       return {
         ...state,
         classes: deleteAvailability(state, action.payload),
         calenderLoading: false,
       };
-    case 'DELETE_CLASS_SUCSESS':
+    case 'DELETE_CLASS_SUCCESS':
       return {
         ...state,
         classes: state.classes.filter((item) => item._id !== action.payload),
         loading: false,
       };
-    case 'GET_HOLYDAYS_SUCSESS':
+    case 'GET_HOLYDAYS_SUCCESS':
       return {
         ...state,
         jewsihHolydays: holyDaysTodisplay(action.payload),

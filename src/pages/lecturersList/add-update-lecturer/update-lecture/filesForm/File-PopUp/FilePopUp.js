@@ -7,7 +7,7 @@ import {
 import InputField from '../../../../../../component/inputs/input-field/InputField';
 import MyButton from '../../../../../../component/my-button/MyButton';
 
-const FilePopUp = ({ handdleFileChange, setFilePopUpView, cvSubmit }) => {
+const FilePopUp = ({ handleFileChange, setFilePopUpView, cvSubmit }) => {
   return (
     <FlexContainer>
       <PopUpContainer padding>
@@ -22,7 +22,7 @@ const FilePopUp = ({ handdleFileChange, setFilePopUpView, cvSubmit }) => {
           name='fileName'
           type='file'
           label='בחר קובץ'
-          handleChange={handdleFileChange}
+          handleChange={handleFileChange}
           hebrew='true'
           required
         />

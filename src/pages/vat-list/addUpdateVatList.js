@@ -52,7 +52,7 @@ const AddUpdateVatList = ({
     }
     history.push('/settings/VAT-multipliers');
   };
-  const handdleChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setVatItem({ ...vatItem, [name]: value });
   };
@@ -69,7 +69,7 @@ const AddUpdateVatList = ({
           type='text'
           label='כותרת'
           value={title}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
           required
         />
@@ -78,7 +78,7 @@ const AddUpdateVatList = ({
           type='number'
           label='מכפילי שכר'
           value={duplicate}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
           required
         />
@@ -86,14 +86,14 @@ const AddUpdateVatList = ({
           name='vat'
           label='האם להוסיף מעמ'
           value={vat}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           required
         />
         <SelectInput
           name='active'
           label='פעיל'
           value={active}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           required
         />
         <div className='buttons'>

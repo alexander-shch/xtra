@@ -64,7 +64,7 @@ const AddUpdateBuilding = ({
     }
     history.push('/settings/buildings/');
   };
-  const handdleChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setBuildingDetail({ ...buildingDetails, [name]: value });
   };
@@ -81,7 +81,7 @@ const AddUpdateBuilding = ({
           type='text'
           label='שם המקום'
           value={name}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
           required
         />
@@ -89,7 +89,7 @@ const AddUpdateBuilding = ({
           name='active'
           label='פעיל'
           value={active}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           required
         />
         <div className='buttons'>
