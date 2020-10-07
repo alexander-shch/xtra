@@ -50,7 +50,7 @@ export const setAvatarImg = (lectureID, fromData) => (dispatch) => {
       dispatch({ type: 'SET_AVATAR_IMG_SUCSESS', payload: data });
       dispatch(setAlert('תמונת פרופיל עודכנה בהצלחה', 'sucsess'));
     })
-    .catch((err) => dispatch({ type: 'SET_AVATAR_IMG_FAIELD', payload: err }));
+    .catch((err) => dispatch({ type: 'SET_AVATAR_IMG_FAILED', payload: err }));
 };
 
 export const addNewNote = (lectureID, text) => (dispatch) => {

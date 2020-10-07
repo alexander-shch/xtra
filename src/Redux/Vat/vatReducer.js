@@ -1,6 +1,7 @@
 const INITAL_STATE = {
   vatList: [],
-  loading: false,
+  loading: true,
+  singleVatItem: null,
   error: null,
 };
 
@@ -13,6 +14,8 @@ const vatReducer = (state = INITAL_STATE, action) => {
       return { ...state, loading: true };
     case 'GET_VAT_LIST_SUCSESS':
       return { ...state, loading: false, vatList: action.payload };
+    case 'GET_SINGLE_VAT_SUCSESS':
+      return { ...state, singleVatItem: action.payload };
     case 'ADD_VAT_ITEM_SUCSESS':
       return {
         ...state,
@@ -26,7 +29,12 @@ const vatReducer = (state = INITAL_STATE, action) => {
         (item) => item._id === action.payload._id
       );
       vatList[index] = action.payload;
-      return { ...state, loading: false, vatList };
+      return {
+        ...state,
+        loading: false,
+        vatList,
+        singleVatItem: action.payload,
+      };
     case 'DELETE_VAT_ITEM_SUCSESS':
       return {
         ...state,
@@ -37,6 +45,8 @@ const vatReducer = (state = INITAL_STATE, action) => {
     case 'ADD_VAT_ITEM_FAILED':
     case 'DELETE_VAT_ITEM_FAILED':
       return { ...state, loading: false, error: action.payload };
+    case 'CLEAR_SINGLE':
+      return { ...state, singleVatItem: null };
     default:
       return state;
   }

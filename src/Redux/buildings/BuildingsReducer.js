@@ -1,6 +1,7 @@
 const INTIAL_STATE = {
   buildings: [],
   isPending: true,
+  process: false,
   singleBuilding: null,
   error: null,
 };
@@ -8,21 +9,25 @@ const INTIAL_STATE = {
 const BuildingsReducer = (state = INTIAL_STATE, action) => {
   switch (action.type) {
     case 'BUILDING_FETCH_START':
-    case 'UPDATE_BUILDING_START':
     case 'DELETE_BUILDING_START':
-    case 'GET_SINGLE_BUILDING_START':
-      return state;
+      return { ...state, isPending: true };
+    case 'POST_NEW_BUILDING_START':
+    case 'UPDATE_BUILDING_START':
+      return { ...state, process: true };
     case 'BUILDING_FETCH_SUCSESS':
       return {
         buildings: action.payload,
         isPending: false,
         error: null,
       };
-
     case 'GET_SINGLE_BUILDING_SUCSESS':
       return { ...state, isPending: false, singleBuilding: action.payload };
     case 'POST_NEW_BUILDING_SUCSESS':
-      return { ...state, buildings: [...state.buildings, action.payload] };
+      return {
+        ...state,
+        buildings: [...state.buildings, action.payload],
+        process: false,
+      };
 
     case 'UPDATE_BUILDING_SUCSESS':
       const { buildings } = state;
@@ -30,7 +35,13 @@ const BuildingsReducer = (state = INTIAL_STATE, action) => {
         (building) => building._id === action.payload._id
       );
       buildings[index] = action.payload;
-      return { ...state, isPending: false, buildings };
+      return {
+        ...state,
+        isPending: false,
+        process: false,
+        buildings,
+        singleBuilding: action.payload,
+      };
     case 'DELETE_BUILDING_SUCSESS':
       return {
         ...state,

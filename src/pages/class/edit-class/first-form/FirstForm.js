@@ -14,6 +14,7 @@ const FirstForm = ({
   classDetails,
   history,
   loading,
+  clearSingle,
 }) => {
   const { name, minStudents, maxStudents, building } = classDetails;
   return (
@@ -77,7 +78,12 @@ const FirstForm = ({
         </MyButton>
         <MyButton
           type='button'
-          onClick={() => history.push('/settings/list-classes')}
+          onClick={() => {
+            history.push('/settings/list-classes');
+            if (!classDetails) {
+              clearSingle();
+            }
+          }}
           forgot
         >
           ביטול

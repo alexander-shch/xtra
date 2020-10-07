@@ -62,7 +62,7 @@ const lecturesReducer = (state = INTAIL_STATE, action) => {
     case 'ADD_NEW_LECTURE_FAILED':
     case 'UPDATE_LECTURE_FAILED':
     case 'DELETE_LECTURE_FAILED':
-    case 'SET_AVATAR_IMG_FAIELD':
+    case 'SET_AVATAR_IMG_FAILED':
     case 'DELETE_NOTE_FAILED':
       return {
         ...state,

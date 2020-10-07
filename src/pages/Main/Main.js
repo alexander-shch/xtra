@@ -19,5 +19,3 @@ const Main = () => {
 };
 
 export default Main;
-
-///אני עושה שינוי

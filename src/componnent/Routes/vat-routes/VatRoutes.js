@@ -9,6 +9,8 @@ import {
   addVatItem,
   updateVatItem,
   deleteVatItem,
+  getSingleVatItem,
+  clearSingle,
 } from '../../../Redux/Vat/vat.action';
 import { closeConfirmMessage } from '../../../Redux/on-delete/delete.action';
 import DeleteBox from '../../delete-box/DeleteBox';
@@ -26,6 +28,9 @@ const VatRoutes = ({
   loading,
   confirmMessageData,
   closeConfirmMessage,
+  singleVatItem,
+  getSingleVatItem,
+  clearSingle,
 }) => {
   useEffect(() => {
     getvatList();
@@ -59,8 +64,10 @@ const VatRoutes = ({
           render={() => (
             <AddUpdateVatListWithSpinner
               updateVatItem={updateVatItem}
-              vatList={vatList}
+              getSingleVatItem={getSingleVatItem}
+              singleVatItem={singleVatItem}
               loading={loading}
+              clearSingle={clearSingle}
             />
           )}
         />
@@ -73,6 +80,7 @@ const mapStateToProps = (state) => ({
   vatList: state.vat.vatList,
   loading: state.vat.loading,
   confirmMessageData: state.delete,
+  singleVatItem: state.vat.singleVatItem,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -81,6 +89,8 @@ const mapDispatchToProps = (dispatch) => ({
   updateVatItem: (itemId, vatItem) => dispatch(updateVatItem(itemId, vatItem)),
   deleteVatItem: (itemId) => dispatch(deleteVatItem(itemId)),
   closeConfirmMessage: () => dispatch(closeConfirmMessage()),
+  getSingleVatItem: (id) => dispatch(getSingleVatItem(id)),
+  clearSingle: () => dispatch(clearSingle()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(VatRoutes);

@@ -55,3 +55,28 @@ export const holyDaysTodisplay = (payload) => {
   });
   return holyDays;
 };
+
+export const pushToSingle = (state, payload) => {
+  let { singleClass } = state;
+  Array.prototype.push.apply(singleClass.availability, payload);
+  return singleClass;
+};
+
+export const updateSingle = (state, payload) => {
+  let { singleClass } = state;
+  let index = singleClass.availability.findIndex(
+    (item) => item._id === payload._id
+  );
+  singleClass.availability[index] = payload;
+  return singleClass;
+};
+
+export const deleteSingle = (state, payload) => {
+  let { singleClass } = state;
+
+  let filterArr = singleClass.availability.filter(
+    (item) => item._id !== payload.availabilityId
+  );
+  singleClass.availability = filterArr;
+  return singleClass;
+};

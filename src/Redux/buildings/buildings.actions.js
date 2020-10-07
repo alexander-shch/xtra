@@ -30,9 +30,9 @@ export const addNewBuilding = (name, active) => (dispatch) => {
     }),
   })
     .then((res) => res.json())
-    .then((data) =>
-      dispatch({ type: 'POST_NEW_BUILDING_SUCSESS', payload: data })
-    )
+    .then((data) => {
+      dispatch({ type: 'POST_NEW_BUILDING_SUCSESS', payload: data });
+    })
     .catch((err) =>
       dispatch({ type: 'POST_NEW_BUILDING_FAILED', payload: err })
     );

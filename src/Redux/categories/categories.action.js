@@ -3,7 +3,7 @@ import { callFetch, URL } from '../../utils/actionUtils';
 export const getCategories = () => (dispatch) => {
   dispatch({ type: 'GET_CATEGORIES_START' });
   callFetch(`${URL}/categories`, 'GET')
-    .then((data) => dispatch({ type: 'GET_CATEGORIES_SUCSES', payload: data }))
+    .then((data) => dispatch({ type: 'GET_CATEGORIES_SUCCESS', payload: data }))
     .catch((err) => dispatch({ type: 'GET_CATEGORIES_FAILED', payload: err }));
 };
 
@@ -11,7 +11,7 @@ export const addNewCategory = (objToServer) => (dispatch) => {
   dispatch({ type: 'ADD_NEW_CATEGORY_START' });
   callFetch(`${URL}/categories`, 'POST', objToServer)
     .then((data) =>
-      dispatch({ type: 'ADD_NEW_CATEGORY_SUCSESS', payload: data })
+      dispatch({ type: 'ADD_NEW_CATEGORY_SUCCESS', payload: data })
     )
     .catch((err) =>
       dispatch({ type: 'ADD_NEW_CATEGORY_FAILED', payload: err })
