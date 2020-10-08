@@ -8,6 +8,8 @@ import {
   addNewLecture,
   updateLecture,
   deleteLecture,
+  getSingleLecture,
+  clearSingle,
 } from '../../../Redux/Lectures/lectures.action';
 import { closeConfirmMessage } from '../../../Redux/on-delete/delete.action';
 import { getvatList } from '../../../Redux/Vat/vat.action';
@@ -28,6 +30,11 @@ const LecturersRoutes = ({
   pageLoading,
   closeConfirmMessage,
   confirmMessageData,
+  getSingleLecture,
+  singleLecture,
+  error,
+  clearSingle,
+  editorLoading,
 }) => {
   useEffect(() => {
     getLectures();
@@ -76,7 +83,11 @@ const LecturersRoutes = ({
                 vatList={vatList}
                 lecturesLoading={lecturesLoading}
                 updateLecture={updateLecture}
-                lectures={lectures}
+                getSingleLecture={getSingleLecture}
+                singleLecture={singleLecture}
+                error={error}
+                clearSingle={clearSingle}
+                editorLoading={editorLoading}
               />
             )
           }
@@ -87,11 +98,14 @@ const LecturersRoutes = ({
 };
 const mapStateToProps = (state) => ({
   lectures: state.lectures.lectures,
+  singleLecture: state.lectures.singleLecture,
   lecturesLoading: state.lectures.loading,
   vatList: state.vat.vatList,
   searchField: state.searchField.searchfield,
   pageLoading: state.lectures.pageLoading,
   confirmMessageData: state.delete,
+  editorLoading: state.lectures.editorLoading,
+  error: state.lectures.error,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -103,6 +117,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(updateLecture(id, lectureDetails)),
   deleteLecture: (id) => dispatch(deleteLecture(id)),
   closeConfirmMessage: () => dispatch(closeConfirmMessage()),
+  getSingleLecture: (id) => dispatch(getSingleLecture(id)),
+  clearSingle: () => dispatch(clearSingle()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LecturersRoutes);

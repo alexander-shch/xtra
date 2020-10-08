@@ -6,6 +6,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import MyButton from '../../../../componnent/My-button/MyButton';
 import SelectInput from '../../../../componnent/inputes/select-input/SelectInput';
 import { withRouter } from 'react-router-dom';
+import Spinner from '../../../../componnent/spinner/Spinner';
 const AddLecturerForm = ({
   history,
   handdleChange,
@@ -14,6 +15,9 @@ const AddLecturerForm = ({
   handdleSubmit,
   handleEditorChange,
   lecturesLoading,
+  lectureID,
+  clearSingle,
+  editorLoading,
 }) => {
   const {
     name,
@@ -90,8 +94,8 @@ const AddLecturerForm = ({
           <select
             required
             name='duplicator'
-            className='.selectbuildingInput'
-            defaultValue={duplicator !== '' ? duplicator : '1'}
+            className='selectbuildingInput'
+            value={duplicator ? duplicator : '1'}
             onChange={handdleChange}
           >
             <option value='1' disabled hidden>
@@ -112,26 +116,29 @@ const AddLecturerForm = ({
           handleChange={handdleChange}
           required
         />
-
         <div className='editor'>
           <label>פרטים על המרצה</label>
-          <Editor
-            apiKey='mwj83bdxn8dsq4sd6vz3oqclxlahbuzdhctyaoq2wfwmff1g'
-            initialValue={details}
-            init={{
-              height: 500,
-              menubar: false,
-              plugins: [
-                'advlist autolink lists link image charmap print preview anchor',
-                'searchreplace visualblocks code fullscreen',
-                'insertdatetime media table paste code help wordcount directionality',
-              ],
-              directionality: 'rtl',
-              toolbar:
-                'rtl |undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent ',
-            }}
-            onEditorChange={handleEditorChange}
-          />
+          {editorLoading ? (
+            <Spinner />
+          ) : (
+            <Editor
+              apiKey='mwj83bdxn8dsq4sd6vz3oqclxlahbuzdhctyaoq2wfwmff1g'
+              initialValue={details}
+              init={{
+                height: 500,
+                menubar: false,
+                plugins: [
+                  'advlist autolink lists link image charmap print preview anchor',
+                  'searchreplace visualblocks code fullscreen',
+                  'insertdatetime media table paste code help wordcount directionality',
+                ],
+                directionality: 'rtl',
+                toolbar:
+                  'rtl |undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent ',
+              }}
+              onEditorChange={handleEditorChange}
+            />
+          )}
         </div>
         <TextArea
           name='description'
@@ -171,7 +178,12 @@ const AddLecturerForm = ({
         </MyButton>
         <MyButton
           type='button'
-          onClick={() => history.push('/lecturers')}
+          onClick={() => {
+            history.push('/lecturers');
+            if (lectureID) {
+              clearSingle();
+            }
+          }}
           forgot
         >
           ביטול

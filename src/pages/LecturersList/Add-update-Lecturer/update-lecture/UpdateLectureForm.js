@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import FilesList from './filesForm/FilesList';
 import CommentList from './lecture-comment-form/CommentList';
 import AvatarForm from './Avatar-Form/AvatarForm';
@@ -26,26 +26,8 @@ const UpdateLectureForm = ({
   setAlert,
   confirmMessageData,
   closeConfirmMessage,
+  singleLecture,
 }) => {
-  const SingleLecture = lectures.filter((item) => item._id === id);
-  const [cvFile, setCvFile] = useState({ cv: null });
-  const { cv } = cvFile;
-
-  const handdleCvChange = (e) => {
-    const { files } = e.target;
-    setCvFile({ cv: files });
-  };
-
-  const cvSubmit = async () => {
-    let formData = new FormData();
-    formData.append('file', cv[0]);
-    try {
-      await uploadCv(id, formData);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   return (
     <>
       <DeleteBox
@@ -56,17 +38,17 @@ const UpdateLectureForm = ({
       />
       <AvatarForm
         id={id}
-        lecture={SingleLecture}
+        singleLecture={singleLecture}
         avatarLoading={avatarLoading}
         setAvatarImg={setAvatarImg}
       />
       <h4>חוזה וקבצים</h4>
-      <FilesList handdleCvChange={handdleCvChange} cvSubmit={cvSubmit} />
+      <FilesList id={id} uploadCv={uploadCv} />
       <div>
         <h4>הערות על המרצה</h4>
         <CommentList
           addNewNote={addNewNote}
-          SingleLecture={SingleLecture}
+          singleLecture={singleLecture}
           loading={loading}
           setAlert={setAlert}
         />
@@ -79,6 +61,7 @@ const mapStateToProps = (state) => ({
   avatarLoading: state.lectures.avatarLoading,
   loading: state.lectures.loading,
   confirmMessageData: state.delete,
+  singleLecture: state.lectures.singleLecture,
 });
 
 const mapDispatchToProps = (dispatch) => ({
