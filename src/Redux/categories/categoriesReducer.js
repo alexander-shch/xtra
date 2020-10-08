@@ -1,6 +1,7 @@
 const INTIAL_STATE = {
-  loading: false,
+  loading: true,
   categories: [],
+  singleCategory: null,
   error: null,
 };
 
@@ -13,7 +14,7 @@ const categoriesReducer = (state = INTIAL_STATE, action) => {
       return { ...state, loading: true };
     case 'GET_CATEGORIES_SUCCESS':
       return { ...state, categories: action.payload, loading: false };
-    case 'ADD_NEW_CATEGORY_SUCSESS':
+    case 'ADD_NEW_CATEGORY_SUCCESS':
       return {
         ...state,
         categories: [...state.categories, action.payload],
@@ -25,7 +26,12 @@ const categoriesReducer = (state = INTIAL_STATE, action) => {
         (category) => category._id === action.payload._id
       );
       categories[index] = action.payload;
-      return { ...state, loading: false, categories };
+      return {
+        ...state,
+        loading: false,
+        categories,
+        singleCategory: action.payload,
+      };
     case 'DELETE_CATEGORY_SUCSESS':
       return {
         ...state,
@@ -34,12 +40,16 @@ const categoriesReducer = (state = INTIAL_STATE, action) => {
         ),
         loading: false,
       };
-
+    case 'GET_SINGLE_CATEGORY_SUCSESS':
+      return { ...state, singleCategory: action.payload, loading: false };
     case 'GET_CATEGORIES_FAILED':
     case 'ADD_NEW_CATEGORY_FAILED':
     case 'UPDATE_CATEGORY_FAILED':
     case 'DELETE_CATEGORY_FAIELD':
+    case 'GET_SINGLE_CATEGORY_FAILED':
       return { ...state, loading: false, error: action.payload };
+    case 'CLEAR_SINGLE':
+      return { ...state, singleCategory: null, error: null };
     default:
       return state;
   }

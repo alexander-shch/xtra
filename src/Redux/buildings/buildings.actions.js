@@ -86,9 +86,6 @@ export const getSingleBuilding = (ID) => (dispatch) => {
   dispatch({ type: 'GET_SINGLE_BUILDING_START' });
   callFetch(`${URL}/buildings/${ID}`, 'GET')
     .then((data) => {
-      if (data.error) {
-        dispatch({ type: 'GET_SINGLE_BUILDING_FAILED', payload: data });
-      }
       dispatch({ type: 'GET_SINGLE_BUILDING_SUCSESS', payload: data });
     })
     .catch((err) =>

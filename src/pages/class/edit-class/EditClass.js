@@ -28,6 +28,7 @@ const EditClass = ({
   getSingleClass,
   singleClass,
   clearSingle,
+  error,
 }) => {
   const classID = match.params.classID;
 
@@ -48,11 +49,11 @@ const EditClass = ({
       const { name, minStudents, maxStudents, building } = singleClass;
       setClassDetails({ name, minStudents, maxStudents, building });
     }
-    if (singleClass && singleClass.error) {
+    if (error) {
       history.push('/settings/list-classes');
       clearSingle();
     } // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [singleClass]);
+  }, [singleClass, error]);
 
   const events = singleClass ? singleClass.availability : null;
   const title = singleClass ? 'עדכון כיתה' : 'הוספת כיתה';

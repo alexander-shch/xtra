@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { UpdatePageContainer } from '../../../componnent/global-style/SettingSection';
 import InputField from '../../../componnent/inputes/input-field/InputField';
 import SelectInput from '../../../componnent/inputes/select-input/SelectInput';
@@ -8,89 +8,90 @@ import { withRouter } from 'react-router-dom';
 import './AddUpdateCatagory.style.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
+
 const element = <FontAwesomeIcon icon={faSave} />;
 
 const AddUpdateCategory = ({
   history,
   match,
-  categories,
+  singleCategory,
   addNewCategory,
   updateCategoty,
+  getSingleCategory,
+  clearSingle,
+  error,
 }) => {
   const categoryId = match.params.categotyID;
-  const singleCategory =
-    categoryId && categories.length !== 0
-      ? categories.filter((item) => item._id === categoryId)
-      : null;
-
-  //============================d for default=======================================================
-  const dTitle = singleCategory ? singleCategory[0].title : '';
-  const dCourseGoals = singleCategory
-    ? singleCategory[0].courseDefaults.goals.value
-    : '';
-  const dCourseGoalsSiteTitle = singleCategory
-    ? singleCategory[0].courseDefaults.goals.title
-    : '';
-  const dPreliminaryKnowledge = singleCategory
-    ? singleCategory[0].courseDefaults.preliminaryKnowledge.value
-    : '';
-  const dPreliminaryKnowledgeSiteTitle = singleCategory
-    ? singleCategory[0].courseDefaults.preliminaryKnowledge.title
-    : '';
-  const dHowPromoteYou = singleCategory
-    ? singleCategory[0].courseDefaults.promotion.value
-    : '';
-  const dHowPromoteYouSiteTitle = singleCategory
-    ? singleCategory[0].courseDefaults.promotion.title
-    : '';
-  const dMarketing = singleCategory
-    ? singleCategory[0].courseDefaults.marketing
-    : '';
-  const dNumberOfSessions = singleCategory
-    ? singleCategory[0].courseDefaults.session.count.value
-    : '';
-  const dNumberOfSessionsSiteTitle = singleCategory
-    ? singleCategory[0].courseDefaults.session.count.title
-    : '';
-  const dSessionLength = singleCategory
-    ? singleCategory[0].courseDefaults.session.length.value
-    : '';
-  const dSessionLengthSiteTitle = singleCategory
-    ? singleCategory[0].courseDefaults.session.length.title
-    : '';
-  const dMinStudent = singleCategory
-    ? singleCategory[0].courseDefaults.minStudents
-    : '';
-  const dMaxStudent = singleCategory
-    ? singleCategory[0].courseDefaults.maxStudents
-    : '';
-  const dPriceForStudent = singleCategory
-    ? singleCategory[0].courseDefaults.studentPrice
-    : '';
-  const dRegularPrice = singleCategory
-    ? singleCategory[0].courseDefaults.price
-    : '';
-  const dActive = singleCategory ? singleCategory[0].active : true;
-  //=======================================================================================
   const [domainDetails, setDomainDetails] = useState({
-    title: dTitle,
-    courseGoals: dCourseGoals,
-    courseGoalsSiteTitle: dCourseGoalsSiteTitle,
-    preliminaryKnowledge: dPreliminaryKnowledge,
-    preliminaryKnowledgeSiteTitle: dPreliminaryKnowledgeSiteTitle,
-    howPromoteYou: dHowPromoteYou,
-    howPromoteYouSiteTitle: dHowPromoteYouSiteTitle,
-    marketing: dMarketing,
-    numberOfSessions: dNumberOfSessions,
-    numberOfSessionsSiteTitle: dNumberOfSessionsSiteTitle,
-    sessionLength: dSessionLength,
-    sessionLengthSiteTitle: dSessionLengthSiteTitle,
-    minStudent: dMinStudent,
-    maxStudent: dMaxStudent,
-    priceForStudent: dPriceForStudent,
-    regularPrice: dRegularPrice,
-    active: dActive,
+    title: '',
+    courseGoals: '',
+    courseGoalsSiteTitle: '',
+    preliminaryKnowledge: '',
+    preliminaryKnowledgeSiteTitle: '',
+    howPromoteYou: '',
+    howPromoteYouSiteTitle: '',
+    marketing: '',
+    numberOfSessions: '',
+    numberOfSessionsSiteTitle: '',
+    sessionLength: '',
+    sessionLengthSiteTitle: '',
+    minStudents: '',
+    maxStudents: '',
+    studentPrice: '',
+    price: '',
+    active: true,
   });
+
+  useEffect(() => {
+    if (categoryId) {
+      getSingleCategory(categoryId);
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (singleCategory) {
+      const {
+        title,
+        active,
+        courseDefaults: {
+          studentPrice,
+          minStudents,
+          maxStudents,
+          price,
+          preliminaryKnowledge,
+          goals,
+          promotion,
+          marketing,
+          session: { count, length },
+        },
+      } = singleCategory;
+
+      setDomainDetails({
+        title,
+        active,
+        preliminaryKnowledge: preliminaryKnowledge.value,
+        preliminaryKnowledgeSiteTitle: preliminaryKnowledge.title,
+        courseGoals: goals.value,
+        courseGoalsSiteTitle: goals.title,
+        howPromoteYou: promotion.value,
+        howPromoteYouSiteTitle: promotion.title,
+        marketing,
+        numberOfSessions: count.value,
+        numberOfSessionsSiteTitle: count.title,
+        sessionLength: length.value,
+        sessionLengthSiteTitle: length.title,
+        minStudents,
+        maxStudents,
+        studentPrice,
+        price,
+      });
+    }
+    if (error) {
+      history.push('/settings/Categories-list');
+      clearSingle();
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [singleCategory, error]);
+
   const {
     title,
     courseGoals,
@@ -104,10 +105,10 @@ const AddUpdateCategory = ({
     numberOfSessionsSiteTitle,
     sessionLength,
     sessionLengthSiteTitle,
-    minStudent,
-    maxStudent,
-    priceForStudent,
-    regularPrice,
+    minStudents,
+    maxStudents,
+    studentPrice,
+    price,
     active,
   } = domainDetails;
 
@@ -126,10 +127,10 @@ const AddUpdateCategory = ({
         count: { value: numberOfSessions, title: numberOfSessionsSiteTitle },
         length: { value: sessionLength, title: sessionLengthSiteTitle },
       },
-      minStudents: minStudent,
-      maxStudents: maxStudent,
-      price: regularPrice,
-      studentPrice: priceForStudent,
+      minStudents: minStudents,
+      maxStudents: maxStudents,
+      price: price,
+      studentPrice: studentPrice,
     },
   };
   //==================================================================================================
@@ -158,6 +159,9 @@ const AddUpdateCategory = ({
   };
   const cancel = () => {
     history.push('/settings/Categories-list');
+    if (categoryId) {
+      clearSingle();
+    }
   };
 
   return (
@@ -274,31 +278,31 @@ const AddUpdateCategory = ({
             label='מספר תלמידים מינמלי'
             handleChange={handleChange}
             hebrew='true'
-            value={minStudent}
+            value={minStudents}
           />
           <InputField
-            name='maxStudent'
+            name='maxStudents'
             type='number'
             label='מספר תלמידים מקסימלי'
             handleChange={handleChange}
             hebrew='true'
-            value={maxStudent}
+            value={maxStudents}
           />
           <InputField
-            name='priceForStudent'
+            name='studentPrice'
             type='number'
             label='מחיר לשעה לסטודנט'
             handleChange={handleChange}
             hebrew='true'
-            value={priceForStudent}
+            value={studentPrice}
           />
           <InputField
-            name='regularPrice'
+            name='price'
             type='number'
             label='מחיר רגיל'
             handleChange={handleChange}
             hebrew='true'
-            value={regularPrice}
+            value={price}
           />
         </div>
         <SelectInput name='active' handleChange={handleChange} label='פעיל' />

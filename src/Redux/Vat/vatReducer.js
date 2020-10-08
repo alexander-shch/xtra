@@ -44,6 +44,7 @@ const vatReducer = (state = INITAL_STATE, action) => {
     case 'GET_VAT_LIST_FAILED':
     case 'ADD_VAT_ITEM_FAILED':
     case 'DELETE_VAT_ITEM_FAILED':
+    case 'GET_SINGLE_VAT_FAILED':
       return { ...state, loading: false, error: action.payload };
     case 'CLEAR_SINGLE':
       return { ...state, singleVatItem: null };

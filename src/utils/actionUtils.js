@@ -8,7 +8,7 @@ export const callFetch = (url, method, body) => {
     cache: 'no-cache',
     headers: getHeaders(isFormData),
     body,
-  }).then((res) => res.json());
+  }).then((res) => Promise[res.ok ? 'resolve' : 'reject'](res.json()));
 };
 
 const getHeaders = (isFormData = false) => {

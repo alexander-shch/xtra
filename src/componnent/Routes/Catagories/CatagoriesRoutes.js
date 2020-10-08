@@ -6,6 +6,8 @@ import {
   addNewCategory,
   updateCategoty,
   deleteCategory,
+  getSingleCategory,
+  clearSingle,
 } from '../../../Redux/categories/categories.action';
 import AddUpdateCategory from '../../../pages/categories/add-Update-catagory/AddUpdateCategory';
 import Spinner from '../../spinner/Spinner';
@@ -28,6 +30,10 @@ const CategoriesRoutes = ({
   confirmMessageData,
   closeConfirmMessage,
   loading,
+  getSingleCategory,
+  singleCategory,
+  clearSingle,
+  error,
 }) => {
   useEffect(() => {
     getCategories();
@@ -58,8 +64,12 @@ const CategoriesRoutes = ({
           render={() => (
             <AddUpdateCategoryWithSpinner
               loading={loading}
+              getSingleCategory={getSingleCategory}
+              singleCategory={singleCategory}
               categories={categories}
               updateCategoty={updateCategoty}
+              clearSingle={clearSingle}
+              error={error}
             />
           )}
         />
@@ -71,6 +81,8 @@ const mapStateToProps = (state) => ({
   categories: state.categories.categories,
   loading: state.categories.loading,
   confirmMessageData: state.delete,
+  singleCategory: state.categories.singleCategory,
+  error: state.categories.error,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -80,6 +92,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(updateCategoty(categoryID, objToServer)),
   deleteCategory: (categoryID) => dispatch(deleteCategory(categoryID)),
   closeConfirmMessage: () => dispatch(closeConfirmMessage()),
+  getSingleCategory: (id) => dispatch(getSingleCategory(id)),
+  clearSingle: () => dispatch(clearSingle()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CategoriesRoutes);
