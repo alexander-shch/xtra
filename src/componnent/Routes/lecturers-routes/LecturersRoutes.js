@@ -13,7 +13,6 @@ import {
 } from '../../../Redux/Lectures/lectures.action';
 import { closeConfirmMessage } from '../../../Redux/on-delete/delete.action';
 import { getvatList } from '../../../Redux/Vat/vat.action';
-import Spinner from '../../spinner/Spinner';
 import DeleteBox from '../../delete-box/DeleteBox';
 
 const LecturersRoutes = ({
@@ -22,19 +21,19 @@ const LecturersRoutes = ({
   vatList,
   getLectures,
   getvatList,
-  lecturesLoading,
+  inProcess,
   addNewLecture,
   searchField,
   updateLecture,
   deleteLecture,
-  pageLoading,
+  listLoading,
   closeConfirmMessage,
   confirmMessageData,
   getSingleLecture,
   singleLecture,
   error,
   clearSingle,
-  editorLoading,
+  innerSinglePageLoading,
 }) => {
   useEffect(() => {
     getLectures();
@@ -57,7 +56,7 @@ const LecturersRoutes = ({
             <LecturersList
               searchField={searchField}
               lectures={lectures}
-              pageLoading={pageLoading}
+              listLoading={listLoading}
             />
           )}
         />
@@ -68,29 +67,25 @@ const LecturersRoutes = ({
             <AddUpdateLecturer
               vatList={vatList}
               addNewLecture={addNewLecture}
-              lecturesLoading={lecturesLoading}
+              inProcess={inProcess}
               updateLecture={updateLecture}
             />
           )}
         />
         <Route
           path={`${match.path}/updateLecture/:LecturerID`}
-          render={() =>
-            pageLoading ? (
-              <Spinner />
-            ) : (
-              <AddUpdateLecturer
-                vatList={vatList}
-                lecturesLoading={lecturesLoading}
-                updateLecture={updateLecture}
-                getSingleLecture={getSingleLecture}
-                singleLecture={singleLecture}
-                error={error}
-                clearSingle={clearSingle}
-                editorLoading={editorLoading}
-              />
-            )
-          }
+          render={() => (
+            <AddUpdateLecturer
+              vatList={vatList}
+              updateLecture={updateLecture}
+              getSingleLecture={getSingleLecture}
+              singleLecture={singleLecture}
+              error={error}
+              clearSingle={clearSingle}
+              innerSinglePageLoading={innerSinglePageLoading}
+              inProcess={inProcess}
+            />
+          )}
         />
       </Switch>
     </>
@@ -99,12 +94,12 @@ const LecturersRoutes = ({
 const mapStateToProps = (state) => ({
   lectures: state.lectures.lectures,
   singleLecture: state.lectures.singleLecture,
-  lecturesLoading: state.lectures.loading,
+  innerSinglePageLoading: state.lectures.innerSinglePageLoading,
   vatList: state.vat.vatList,
   searchField: state.searchField.searchfield,
-  pageLoading: state.lectures.pageLoading,
+  listLoading: state.lectures.listLoading,
   confirmMessageData: state.delete,
-  editorLoading: state.lectures.editorLoading,
+  inProcess: state.lectures.inProcess,
   error: state.lectures.error,
 });
 

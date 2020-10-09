@@ -16,7 +16,8 @@ const AddUpdateLecturer = ({
   singleLecture,
   error,
   clearSingle,
-  editorLoading,
+  innerSinglePageLoading,
+  inProcess,
 }) => {
   const lectureID = match.params.LecturerID;
   useEffect(() => {
@@ -117,7 +118,8 @@ const AddUpdateLecturer = ({
           lecturesLoading={lecturesLoading}
           lectureID={lectureID}
           clearSingle={clearSingle}
-          editorLoading={editorLoading}
+          innerSinglePageLoading={innerSinglePageLoading}
+          inProcess={inProcess}
         />
         {singleLecture ? <UpdateLectureForm id={lectureID} /> : null}
       </UpdatePageContainer>

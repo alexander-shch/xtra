@@ -14,10 +14,10 @@ const AddLecturerForm = ({
   lectureDeteils,
   handdleSubmit,
   handleEditorChange,
-  lecturesLoading,
+  inProcess,
   lectureID,
   clearSingle,
-  editorLoading,
+  innerSinglePageLoading,
 }) => {
   const {
     name,
@@ -33,7 +33,9 @@ const AddLecturerForm = ({
     experience,
     teaching,
   } = lectureDeteils;
-  return (
+  return innerSinglePageLoading ? (
+    <Spinner />
+  ) : (
     <form onSubmit={handdleSubmit}>
       <div className='add-lecture-form'>
         <InputField
@@ -118,27 +120,24 @@ const AddLecturerForm = ({
         />
         <div className='editor'>
           <label>פרטים על המרצה</label>
-          {editorLoading ? (
-            <Spinner />
-          ) : (
-            <Editor
-              apiKey='mwj83bdxn8dsq4sd6vz3oqclxlahbuzdhctyaoq2wfwmff1g'
-              initialValue={details}
-              init={{
-                height: 500,
-                menubar: false,
-                plugins: [
-                  'advlist autolink lists link image charmap print preview anchor',
-                  'searchreplace visualblocks code fullscreen',
-                  'insertdatetime media table paste code help wordcount directionality',
-                ],
-                directionality: 'rtl',
-                toolbar:
-                  'rtl |undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent ',
-              }}
-              onEditorChange={handleEditorChange}
-            />
-          )}
+
+          <Editor
+            apiKey='mwj83bdxn8dsq4sd6vz3oqclxlahbuzdhctyaoq2wfwmff1g'
+            initialValue={details}
+            init={{
+              height: 500,
+              menubar: false,
+              plugins: [
+                'advlist autolink lists link image charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table paste code help wordcount directionality',
+              ],
+              directionality: 'rtl',
+              toolbar:
+                'rtl |undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent ',
+            }}
+            onEditorChange={handleEditorChange}
+          />
         </div>
         <TextArea
           name='description'
@@ -173,7 +172,7 @@ const AddLecturerForm = ({
         />
       </div>
       <div className='buttons'>
-        <MyButton save loading={lecturesLoading}>
+        <MyButton save loading={inProcess}>
           שמור
         </MyButton>
         <MyButton

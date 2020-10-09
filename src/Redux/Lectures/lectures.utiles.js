@@ -1,6 +1,5 @@
 export const addNoteToSingleLecture = (state, payload) => {
   let { singleLecture } = state;
-  debugger;
   singleLecture.internalNotes.push(payload.data);
   return singleLecture;
 };

@@ -1,49 +1,48 @@
 import { addNoteToSingleLecture, deleteSingleNote } from './lectures.utiles';
 
 const INTAIL_STATE = {
-  loading: true,
+  listLoading: true,
+  inProcess: true,
+  innerSinglePageLoading: true,
   avatarLoading: false,
   lectures: [],
   singleLecture: null,
   error: null,
-  pageLoading: true,
-  editorLoading: true,
 };
 
 const lecturesReducer = (state = INTAIL_STATE, action) => {
   switch (action.type) {
     case 'GET_LECTURES_START':
     case 'DELETE_LECTURE_START':
-      return { ...state, pageLoading: true };
+      return { ...state, listLoading: true };
+    case 'GET_SINGLE_LECTURE_START':
+      return { ...state, innerSinglePageLoading: true };
     case 'ADD_NEW_LECTURE_START':
     case 'UPDATE_LECTURE_START':
     case 'ADD_NEW_NOTE_START':
     case 'DELETE_NOTE_START':
-      return { ...state, loading: true };
-    case 'GET_SINGLE_LECTURE_START':
-      return { ...state, loading: true, editorLoading: true };
+      return { ...state, inProcess: true };
     case 'SET_AVATAR_IMG_START':
       return { ...state, avatarLoading: true };
-
     case 'GET_SINGLE_LECTURE_SUCCESS':
       return {
         ...state,
         singleLecture: action.payload,
-        loading: false,
-        editorLoading: false,
+        inProcess: false,
+        innerSinglePageLoading: false,
       };
     case 'GET_LECTURES_SUCSESS':
       return {
         ...state,
-        pageLoading: false,
-        loading: false,
+        listLoading: false,
+        inProcess: false,
         lectures: action.payload,
-        editorLoading: false,
+        innerSinglePageLoading: false,
       };
     case 'ADD_NEW_LECTURE_SUCSESS':
       return {
         ...state,
-        loading: false,
+        inProcess: false,
         lectures: [...state.lectures, action.payload],
         singleLecture: action.payload,
       };
@@ -55,26 +54,26 @@ const lecturesReducer = (state = INTAIL_STATE, action) => {
       return {
         ...state,
         avatarLoading: false,
-        loading: false,
+        inProcess: false,
         lectures,
         singleLecture: action.payload,
       };
     case 'DELETE_LECTURE_SUCSESS':
       return {
         ...state,
-        pageLoading: false,
+        listLoading: false,
         lectures: state.lectures.filter((item) => item._id !== action.payload),
       };
     case 'ADD_NEW_NOTE_SUCSESS':
       return {
         ...state,
-        loading: false,
+        inProcess: false,
         singleLecture: addNoteToSingleLecture(state, action.payload),
       };
     case 'DELETE_NOTE_SUCSESS':
       return {
         ...state,
-        loading: false,
+        inProcess: false,
         singleLecture: deleteSingleNote(state, action.payload),
       };
     case 'GET_LECTURES_FAILED':
@@ -86,8 +85,8 @@ const lecturesReducer = (state = INTAIL_STATE, action) => {
     case 'GET_SINGLE_LECTURE_FAILED':
       return {
         ...state,
-        loading: false,
-        pageLoading: false,
+        inProcess: false,
+        listLoading: false,
         avatarLoading: false,
         error: action.payload,
       };

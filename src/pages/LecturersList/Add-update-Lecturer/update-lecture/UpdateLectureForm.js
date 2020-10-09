@@ -18,10 +18,9 @@ const UpdateLectureForm = ({
   id,
   setAvatarImg,
   uploadCv,
-  lectures,
   addNewNote,
   avatarLoading,
-  loading,
+  inProcess,
   deleteNote,
   setAlert,
   confirmMessageData,
@@ -49,7 +48,7 @@ const UpdateLectureForm = ({
         <CommentList
           addNewNote={addNewNote}
           singleLecture={singleLecture}
-          loading={loading}
+          loading={inProcess}
           setAlert={setAlert}
         />
       </div>
@@ -57,9 +56,8 @@ const UpdateLectureForm = ({
   );
 };
 const mapStateToProps = (state) => ({
-  lectures: state.lectures.lectures,
   avatarLoading: state.lectures.avatarLoading,
-  loading: state.lectures.loading,
+  inProcess: state.lectures.inProcess,
   confirmMessageData: state.delete,
   singleLecture: state.lectures.singleLecture,
 });
