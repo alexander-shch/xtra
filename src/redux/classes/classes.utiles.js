@@ -5,7 +5,7 @@ export const updateClass = (state, payload) => {
   return classes;
 };
 
-export const setAvailabilty = (state, payload) => {
+export const setAvailability = (state, payload) => {
   let { classes } = state;
   classes.forEach((item) => {
     let dataFilter = payload.filter(
@@ -16,7 +16,7 @@ export const setAvailabilty = (state, payload) => {
   return classes;
 };
 
-export const updateAvailabilty = (state, payload) => {
+export const updateAvailability = (state, payload) => {
   let { classes } = state;
   let classesObj = classes.reduce((acc, item) => {
     acc[item._id] = item;
@@ -42,7 +42,7 @@ export const deleteAvailability = (state, payload) => {
   return classes;
 };
 
-export const holyDaysTodisplay = (payload) => {
+export const holyDaysToDisplay = (payload) => {
   let { items } = payload;
   let holyDays = [];
   items.forEach((item) => {

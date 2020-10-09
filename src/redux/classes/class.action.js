@@ -115,7 +115,7 @@ export const updateAvailability = (dateDetails) => (dispatch) => {
   const { from, to, fromTime, toTime, availabilityId } = dateDetails;
   let fromDate = new Date(`${from}T${fromTime}`).toISOString();
   let toDate = new Date(`${to}T${toTime}`).toISOString();
-  dispatch({ type: 'UPDATE_AVAILABILTY_START' });
+  dispatch({ type: 'UPDATE_AVAILABILITY_START' });
   fetch(`http://localhost:3005/classes/availability/${availabilityId}`, {
     method: 'PUT',
     headers: {
@@ -130,16 +130,16 @@ export const updateAvailability = (dateDetails) => (dispatch) => {
     .then((res) => res.json())
     .then((data) => {
       dispatch(setAlert('אירוע עודכן', 'success'));
-      dispatch({ type: 'UPDATE_AVAILABILTY_SUCCESS', payload: data });
+      dispatch({ type: 'UPDATE_AVAILABILITY_SUCCESS', payload: data });
     })
     .catch((err) =>
-      dispatch({ type: 'UPDATE_AVAILABILTY_FAILED', payload: err })
+      dispatch({ type: 'UPDATE_AVAILABILITY_FAILED', payload: err })
     );
 };
 
 export const deleteAvailability = (classId, availabilityId) => (dispatch) => {
   const payload = { classId, availabilityId };
-  dispatch({ type: 'DELETE_AVAILABILTY_START' });
+  dispatch({ type: 'DELETE_AVAILABILITY_START' });
   fetch(`${URL}/classes/availability/${availabilityId}`, {
     method: 'DELETE',
     headers: {
@@ -152,7 +152,7 @@ export const deleteAvailability = (classId, availabilityId) => (dispatch) => {
       if (data.deleted) {
         dispatch(setAlert('אירוע נמחק', 'success'));
         dispatch({
-          type: 'DELETE_AVAILABILTY_SUCCESS',
+          type: 'DELETE_AVAILABILITY_SUCCESS',
           payload: payload,
         });
       } else {
@@ -160,7 +160,7 @@ export const deleteAvailability = (classId, availabilityId) => (dispatch) => {
       }
     })
     .catch((err) =>
-      dispatch({ type: 'DELETE_AVAILABILTY_FAILED', payload: err })
+      dispatch({ type: 'DELETE_AVAILABILITY_FAILED', payload: err })
     );
 };
 

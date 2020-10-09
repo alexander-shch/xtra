@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import CourseInformation from '../../../pages/course-Information/courseInformation';
-import AddUpdateCourseInfo from '../../../pages/course-Information/add-update-course/addUpdateCourseInfo';
+import CourseInformation from '../../../pages/course-information/courseInformation';
+import AddUpdateCourseInfo from '../../../pages/course-information/add-update-course/addUpdateCourseInfo';
 
 const CourseRoutes = ({ match }) => {
   return (
