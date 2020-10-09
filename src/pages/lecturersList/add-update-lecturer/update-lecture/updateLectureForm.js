@@ -31,7 +31,7 @@ const UpdateLectureForm = ({
   const [cvFile, setCvFile] = useState({ cv: null });
   const { cv } = cvFile;
 
-  const handdleCvChange = (e) => {
+  const handleCvChange = (e) => {
     const { files } = e.target;
     setCvFile({ cv: files });
   };
@@ -61,7 +61,7 @@ const UpdateLectureForm = ({
         setAvatarImg={setAvatarImg}
       />
       <h4>חוזה וקבצים</h4>
-      <FilesList handdleCvChange={handdleCvChange} cvSubmit={cvSubmit} />
+      <FilesList handleCvChange={handleCvChange} cvSubmit={cvSubmit} />
       <div>
         <h4>הערות על המרצה</h4>
         <CommentList

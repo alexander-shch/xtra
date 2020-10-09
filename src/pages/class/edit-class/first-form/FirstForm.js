@@ -9,7 +9,7 @@ const element = <FontAwesomeIcon icon={faSave} />;
 
 const FirstForm = ({
   buildings,
-  handdleChange,
+  handleChange,
   handleSubmit,
   classDetails,
   history,
@@ -24,7 +24,7 @@ const FirstForm = ({
           type='text'
           label='שם הכיתה'
           value={name}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
           required
         />
@@ -34,7 +34,7 @@ const FirstForm = ({
             name='building'
             className='buildingSelector'
             defaultValue={building !== null ? building : '1'}
-            onChange={handdleChange}
+            onChange={handleChange}
           >
             <option value='1' disabled hidden>
               בחר בניין
@@ -56,7 +56,7 @@ const FirstForm = ({
           type='number'
           label='מקסימלי'
           value={maxStudents}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
           required
         />
@@ -65,7 +65,7 @@ const FirstForm = ({
           type='number'
           label='מינימלי'
           value={minStudents}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
           required
         />

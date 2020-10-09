@@ -11,15 +11,15 @@ const vatReducer = (state = INITAL_STATE, action) => {
     case 'UPDATE_VAT_ITEM_START':
     case 'DELETE_VAT_ITEM_START':
       return { ...state, loading: true };
-    case 'GET_VAT_LIST_SUCSESS':
+    case 'GET_VAT_LIST_SUCCESS':
       return { ...state, loading: false, vatList: action.payload };
-    case 'ADD_VAT_ITEM_SUCSESS':
+    case 'ADD_VAT_ITEM_SUCCESS':
       return {
         ...state,
         loading: false,
         vatList: [...state.vatList, action.payload],
       };
-    case 'UPDATE_VAT_ITEM_SUCSESS':
+    case 'UPDATE_VAT_ITEM_SUCCESS':
       let { vatList: newVatList } = state;
       let vatList = [...newVatList];
       let index = newVatList.findIndex(
@@ -27,7 +27,7 @@ const vatReducer = (state = INITAL_STATE, action) => {
       );
       vatList[index] = action.payload;
       return { ...state, loading: false, vatList };
-    case 'DELETE_VAT_ITEM_SUCSESS':
+    case 'DELETE_VAT_ITEM_SUCCESS':
       return {
         ...state,
         loading: false,

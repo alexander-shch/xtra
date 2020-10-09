@@ -3,7 +3,7 @@ import TableTop from '../../../../../component/table-top/Tabletop';
 import MyButton from '../../../../../component/my-button/MyButton';
 import FilePopUp from './File-PopUp/FilePopUp';
 
-const FilesLIst = ({ handdleCvChange, cvSubmit }) => {
+const FilesLIst = ({ handleCvChange, cvSubmit }) => {
   const [filePopUpView, setFilePopUpView] = useState(false);
 
   return (
@@ -11,7 +11,7 @@ const FilesLIst = ({ handdleCvChange, cvSubmit }) => {
       {filePopUpView ? (
         <FilePopUp
           cvSubmit={cvSubmit}
-          handdleFileChange={handdleCvChange}
+          handleFileChange={handleCvChange}
           setFilePopUpView={setFilePopUpView}
         />
       ) : null}

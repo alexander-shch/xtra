@@ -12,26 +12,26 @@ const BuildingsReducer = (state = INTIAL_STATE, action) => {
     case 'DELETE_BUILDING_START':
     case 'GET_SINGLE_BUILDING_START':
       return state;
-    case 'BUILDING_FETCH_SUCSESS':
+    case 'BUILDING_FETCH_SUCCESS':
       return {
         buildings: action.payload,
         isPending: false,
         error: null,
       };
 
-    case 'GET_SINGLE_BUILDING_SUCSESS':
+    case 'GET_SINGLE_BUILDING_SUCCESS':
       return { ...state, isPending: false, singleBuilding: action.payload };
-    case 'POST_NEW_BUILDING_SUCSESS':
+    case 'POST_NEW_BUILDING_SUCCESS':
       return { ...state, buildings: [...state.buildings, action.payload] };
 
-    case 'UPDATE_BUILDING_SUCSESS':
+    case 'UPDATE_BUILDING_SUCCESS':
       const { buildings } = state;
       const index = buildings.findIndex(
         (building) => building._id === action.payload._id
       );
       buildings[index] = action.payload;
       return { ...state, isPending: false, buildings };
-    case 'DELETE_BUILDING_SUCSESS':
+    case 'DELETE_BUILDING_SUCCESS':
       return {
         ...state,
         buildings: state.buildings.filter(

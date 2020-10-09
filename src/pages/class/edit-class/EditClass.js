@@ -202,7 +202,7 @@ const EditClass = ({
     });
   };
   //----------------------------------------------------------------
-  const handdleChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setClassDetails({ ...classDetails, [name]: value });
   };
@@ -233,7 +233,7 @@ const EditClass = ({
             loading={loading}
             buildings={buildings}
             handleSubmit={handleSubmit}
-            handdleChange={handdleChange}
+            handleChange={handleChange}
             classDetails={classDetails}
           />
           {classID ? (
