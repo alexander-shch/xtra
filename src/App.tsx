@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { setUserLog } from './Redux/userReduser/user.actions';
-import SignIn from './pages/SignIn/SignIn';
-import Main from './pages/main/Main';
 import { Route } from 'react-router-dom';
-import Spinner from './componnent/spinner/Spinner';
+import SignIn from './pages/signIn/SignIn';
+import Main from './pages/main/main';
+import Spinner from './component/spinner/spinner';
+import { setUserLog } from './redux/userReducer/user.actions';
 
-const App = ({ userLoged, setUserLog, loading }: any) => {
+const App = ({ userLogged, setUserLog, loading }: any) => {
   useEffect(() => {
     setUserLog();
   }, [setUserLog]);
@@ -14,13 +14,13 @@ const App = ({ userLoged, setUserLog, loading }: any) => {
   return (
     <Route
       path='/'
-      render={() => (userLoged ? <Main /> : loading ? <Spinner /> : <SignIn />)}
+      render={() => (userLogged ? <Main /> : loading ? <Spinner /> : <SignIn />)}
     ></Route>
   );
 };
 
 const mapStateToProps = (state: any) => ({
-  userLoged: state.user.userLoged,
+  userLogged: state.user.userLogged,
   loading: state.user.loading,
 });
 

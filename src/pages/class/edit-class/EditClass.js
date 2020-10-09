@@ -1,14 +1,14 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import './addUpdateClasses.style.scss';
-import Calendar from '../../../componnent/calendar/Calendar';
+import Calendar from '../../../component/calendar/calendar';
 import FirstForm from './first-form/FirstForm';
 import SecondForm from './second-form/SecondForm';
 import UpdateSingle from './update-singel-date/UpdateSingle';
 import { withRouter } from 'react-router-dom';
-import DeleteDate from '../../../componnent/delete-box/DeleteDate';
-import { UpdatePageContainer } from '../../../componnent/global-style/SettingSection';
-import MyAlert from '../../../componnent/my-Alert/MyAlert';
-import WithSpinner from '../../../componnent/spinner/WithSpinner';
+import DeleteDate from '../../../component/delete-box/deleteBox';
+import { UpdatePageContainer } from '../../../component/global-style/SettingSection';
+import MyAlert from '../../../component/my-Alert/MyAlert';
+import WithSpinner from '../../../component/spinner/withSpinner';
 
 const CalendarWithSpinner = WithSpinner(Calendar);
 
@@ -204,7 +204,7 @@ const EditClass = ({
     });
   };
   //----------------------------------------------------------------
-  const handdleChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setClassDetails({ ...classDetails, [name]: value });
   };
@@ -235,7 +235,7 @@ const EditClass = ({
             loading={loading}
             buildings={buildings}
             handleSubmit={handleSubmit}
-            handdleChange={handdleChange}
+            handleChange={handleChange}
             classDetails={classDetails}
             clearSingle={clearSingle}
           />
