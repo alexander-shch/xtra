@@ -2,7 +2,7 @@ import React, { useEffect, lazy, Suspense } from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
-  getclassesData,
+  getClassesData,
   deleteClass,
   addNewClass,
   updateClass,
@@ -10,10 +10,12 @@ import {
   updateAvailability,
   deleteAvailability,
   getJewishHolydays,
+  getSingleClass,
+  clearSingle,
 } from '../../../redux/classes/class.action';
 import { closeConfirmMessage } from '../../../redux/on-delete/delete.action';
 import DeleteBox from '../../delete-box/deleteBox';
-import { setAlert } from '../../../redux/my-Alert/myAlert.action';
+import { setAlert } from '../../../redux/my-alert/myAlert.action';
 import { getBuildingsData } from '../../../redux/buildings/buildings.actions';
 import { closeSettingMenu } from '../../../redux/settingsView/settings.actions';
 import Spinner from '../../spinner/spinner';
@@ -24,7 +26,7 @@ const EditClass = lazy(() =>
 
 const ClassRoutes = ({
   getBuildingsData,
-  getclassesData,
+  getClassesData,
   match,
   buildings,
   classes,
@@ -42,9 +44,12 @@ const ClassRoutes = ({
   setAlert,
   closeConfirmMessage,
   confirmMessageData,
+  getSingleClass,
+  singleClass,
+  clearSingle,
 }) => {
   useEffect(() => {
-    getclassesData();
+    getClassesData();
     getBuildingsData();
     if (jewsihHolydays.length === 0) {
       getJewishHolydays();
@@ -90,8 +95,9 @@ const ClassRoutes = ({
               <Spinner />
             ) : (
               <EditClass
+                getSingleClass={getSingleClass}
                 buildings={buildings}
-                classes={classes}
+                singleClass={singleClass}
                 loading={loading}
                 calenderLoading={calenderLoading}
                 updateClass={updateClass}
@@ -100,6 +106,7 @@ const ClassRoutes = ({
                 deleteAvailability={deleteAvailability}
                 setAlert={setAlert}
                 jewsihHolydays={jewsihHolydays}
+                clearSingle={clearSingle}
               />
             )
           }
@@ -112,7 +119,8 @@ const ClassRoutes = ({
 const mapStateToProps = (state) => ({
   buildings: state.buildings.buildings,
   classes: state.classes.classes,
-  loading: state.classes.loading,
+  singleClass: state.classes.singleClass,
+  loading: state.classes.process,
   pageLoading: state.classes.pageLoading,
   calenderLoading: state.classes.calenderLoading,
   jewsihHolydays: state.classes.jewsihHolydays,
@@ -120,7 +128,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getclassesData: () => dispatch(getclassesData()),
+  getClassesData: () => dispatch(getClassesData()),
   getBuildingsData: () => dispatch(getBuildingsData()),
   deleteClass: (id) => dispatch(deleteClass(id)),
   addNewClass: (classDetails, history) =>
@@ -136,6 +144,8 @@ const mapDispatchToProps = (dispatch) => ({
   setAlert: (text, style) => dispatch(setAlert(text, style)),
   getJewishHolydays: () => dispatch(getJewishHolydays()),
   closeConfirmMessage: () => dispatch(closeConfirmMessage()),
+  getSingleClass: (id) => dispatch(getSingleClass(id)),
+  clearSingle: () => dispatch(clearSingle()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ClassRoutes);

@@ -1,5 +1,5 @@
 import { callFetch, URL } from '../../utils/actionUtils';
-import { setAlert } from '../my-Alert/myAlert.action';
+import { setAlert } from '../my-alert/myAlert.action';
 
 export const getLectures = () => (dispatch) => {
   dispatch({ type: 'GET_LECTURES_START' });

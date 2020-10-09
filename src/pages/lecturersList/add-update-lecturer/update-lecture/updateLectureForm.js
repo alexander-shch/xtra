@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import FilesList from './filesForm/FilesList';
+import FilesList from './filesForm/filesList';
 import CommentList from './lecture-comment-form/commentList';
-import AvatarForm from './avatar-form/avatarForm';
-import { setAvatarImg } from '../../../../redux/lectures/lectures.action';
+import AvatarForm from './avatar-Form/avatarForm';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { setAlert } from '../../../../redux/my-alert/myAlert.action';
+import { closeConfirmMessage } from '../../../../redux/on-delete/delete.action';
+import DeleteBox from '../../../../component/delete-box/deleteBox';
 import {
   addNewNote,
   deleteNote,
+  setAvatarImg,
   uploadCv,
 } from '../../../../redux/lectures/lectures.action';
-import { setAlert } from '../../../../redux/my-Alert/myAlert.action';
-import { closeConfirmMessage } from '../../../../redux/on-delete/delete.action';
-import DeleteBox from '../../../../component/delete-box/deleteBox';
 
 const UpdateLectureForm = ({
   id,

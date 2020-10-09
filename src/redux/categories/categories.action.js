@@ -3,7 +3,7 @@ import { callFetch, URL } from '../../utils/actionUtils';
 export const getCategories = () => (dispatch) => {
   dispatch({ type: 'GET_CATEGORIES_START' });
   callFetch(`${URL}/categories`, 'GET')
-    .then((data) => dispatch({ type: 'GET_CATEGORIES_SUCSES', payload: data }))
+    .then((data) => dispatch({ type: 'GET_CATEGORIES_SUCCESS', payload: data }))
     .catch((err) => dispatch({ type: 'GET_CATEGORIES_FAILED', payload: err }));
 };
 

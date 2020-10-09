@@ -1,14 +1,14 @@
-const INTIAL_STATE = {
+const INITIAL_STATE = {
   buildings: [],
   isPending: true,
+  process: false,
   singleBuilding: null,
   error: null,
 };
 
-const BuildingsReducer = (state = INTIAL_STATE, action) => {
+const BuildingsReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'BUILDING_FETCH_START':
-    case 'UPDATE_BUILDING_START':
     case 'DELETE_BUILDING_START':
     case 'GET_SINGLE_BUILDING_START':
       return state;

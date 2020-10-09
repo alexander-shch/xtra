@@ -1,7 +1,7 @@
 import { callFetch, URL, jewishHolyUrl } from '../../utils/actionUtils';
-import { setAlert } from '../my-Alert/myAlert.action';
+import { setAlert } from '../my-alert/myAlert.action';
 
-export const getclassesData = () => (dispatch) => {
+export const getClassesData = () => (dispatch) => {
   dispatch({ type: 'CLASSES_FETCH_START' });
   callFetch(`${URL}/classes`, 'GET')
     .then((data) => dispatch({ type: 'CLASSES_FETCH_SUCCESS', payload: data }))
@@ -31,7 +31,7 @@ export const addNewClass = (classDetails, history) => (dispatch) => {
     .then((data) => {
       dispatch({ type: 'ADD_CLASS_SUCCESS', payload: data });
       history.push(`/settings/list-classes/updateClass/${data._id}`);
-      dispatch(setAlert('כיתה נוספה בהצלחה', 'sucsess'));
+      dispatch(setAlert('כיתה נוספה בהצלחה', 'success'));
     })
 
     .catch((err) => dispatch({ type: 'ADD_CLASS_FAILED', payload: err }));
@@ -58,7 +58,7 @@ export const updateClass = (id, classDetails) => (dispatch) => {
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
-      dispatch(setAlert('הכיתה עודכנה בהצלחה', 'sucsess'));
+      dispatch(setAlert('הכיתה עודכנה בהצלחה', 'success'));
       dispatch({ type: 'UPDATE_CLASS_SUCCESS', payload: data });
     })
     .catch((err) => dispatch({ type: 'UPDATE_CLASS_FAILED', payload: err }));
@@ -115,7 +115,7 @@ export const updateAvailability = (dateDetails) => (dispatch) => {
   const { from, to, fromTime, toTime, availabilityId } = dateDetails;
   let fromDate = new Date(`${from}T${fromTime}`).toISOString();
   let toDate = new Date(`${to}T${toTime}`).toISOString();
-  dispatch({ type: 'UPDATE_AVAILABILTY_START' });
+  dispatch({ type: 'UPDATE_AVAILABILITY_START' });
   fetch(`http://localhost:3005/classes/availability/${availabilityId}`, {
     method: 'PUT',
     headers: {
@@ -129,17 +129,17 @@ export const updateAvailability = (dateDetails) => (dispatch) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      dispatch(setAlert('אירוע עודכן', 'sucsess'));
-      dispatch({ type: 'UPDATE_AVAILABILTY_SUCCESS', payload: data });
+      dispatch(setAlert('אירוע עודכן', 'success'));
+      dispatch({ type: 'UPDATE_AVAILABILITY_SUCCESS', payload: data });
     })
     .catch((err) =>
-      dispatch({ type: 'UPDATE_AVAILABILTY_FAILED', payload: err })
+      dispatch({ type: 'UPDATE_AVAILABILITY_FAILED', payload: err })
     );
 };
 
 export const deleteAvailability = (classId, availabilityId) => (dispatch) => {
   const payload = { classId, availabilityId };
-  dispatch({ type: 'DELETE_AVAILABILTY_START' });
+  dispatch({ type: 'DELETE_AVAILABILITY_START' });
   fetch(`${URL}/classes/availability/${availabilityId}`, {
     method: 'DELETE',
     headers: {
@@ -150,9 +150,9 @@ export const deleteAvailability = (classId, availabilityId) => (dispatch) => {
     .then((res) => res.json())
     .then((data) => {
       if (data.deleted) {
-        dispatch(setAlert('אירוע נמחק', 'sucsess'));
+        dispatch(setAlert('אירוע נמחק', 'success'));
         dispatch({
-          type: 'DELETE_AVAILABILTY_SUCCESS',
+          type: 'DELETE_AVAILABILITY_SUCCESS',
           payload: payload,
         });
       } else {
@@ -160,7 +160,7 @@ export const deleteAvailability = (classId, availabilityId) => (dispatch) => {
       }
     })
     .catch((err) =>
-      dispatch({ type: 'DELETE_AVAILABILTY_FAILED', payload: err })
+      dispatch({ type: 'DELETE_AVAILABILITY_FAILED', payload: err })
     );
 };
 
@@ -171,3 +171,21 @@ export const getJewishHolydays = () => (dispatch) => {
     .then((data) => dispatch({ type: 'GET_HOLYDAYS_SUCCESS', payload: data }))
     .catch((err) => dispatch({ type: 'GET_HOLYDAYS_FAILED', payload: err }));
 };
+
+export const getSingleClass = (ID) => (dispatch) => {
+  dispatch({ type: 'GET_SINGLE_CLASS_START' });
+  callFetch(`${URL}/classes/${ID}`, 'GET')
+    .then((data) => {
+      if (data.error) {
+        dispatch({ type: 'GET_SINGLE_CLASS_FAILED', payload: data });
+      }
+      dispatch({ type: 'GET_SINGLE_CLASS_SUCCESS', payload: data });
+    })
+    .catch((err) =>
+      dispatch({ type: 'GET_SINGLE_CLASS_FAILED', payload: err })
+    );
+};
+
+export const clearSingle = () => ({
+  type: 'CLEAR_SINGLE',
+});

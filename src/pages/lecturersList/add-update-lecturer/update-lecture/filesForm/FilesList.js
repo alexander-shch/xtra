@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import TableTop from '../../../../../component/table-top/Tabletop';
 import MyButton from '../../../../../component/my-button/MyButton';
-import FilePopUp from './File-PopUp/FilePopUp';
+import FilePopUp from './filePopup';
 
 const FilesLIst = ({ handleCvChange, cvSubmit }) => {
   const [filePopUpView, setFilePopUpView] = useState(false);

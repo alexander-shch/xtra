@@ -33,6 +33,7 @@ const BuildingsRoutes = ({
   singleBuilding,
   clearSingle,
   error,
+  process,
   ...otherProps
 }) => {
   useEffect(() => {
@@ -62,6 +63,7 @@ const BuildingsRoutes = ({
           path={`${match.path}/updateBulding/:BuildingId/`}
           render={() => (
             <UpdateBuildingWithSpinner
+              process={process}
               loading={otherProps.loading}
               updateBuilding={updateBuilding}
               singleBuilding={singleBuilding}
@@ -82,6 +84,7 @@ const mapStateToProps = (state) => ({
   confirmMessageData: state.delete,
   singleBuilding: state.buildings.singleBuilding,
   error: state.buildings.error,
+  process: state.buildings.process,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,11 +1,11 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import './addUpdateClasses.style.scss';
 import Calendar from '../../../component/calendar/calendar';
 import FirstForm from './first-form/FirstForm';
 import SecondForm from './second-form/SecondForm';
 import UpdateSingle from './update-singel-date/UpdateSingle';
 import { withRouter } from 'react-router-dom';
-import DeleteBox from '../../../component/delete-box/deleteBox';
+import DeleteDate from '../../../component/delete-box/deleteBox';
 import { UpdatePageContainer } from '../../../component/global-style/SettingSection';
 import MyAlert from '../../../component/my-Alert/MyAlert';
 import WithSpinner from '../../../component/spinner/withSpinner';
@@ -19,41 +19,43 @@ const EditClass = ({
   history,
   updateClass,
   setAvailability,
-  classes,
   loading,
   updateAvailability,
   deleteAvailability,
   calenderLoading,
   setAlert,
   jewsihHolydays,
+  getSingleClass,
+  singleClass,
+  clearSingle,
 }) => {
-  // default values--------------------------------------------------
-
   const classID = match.params.classID;
 
-  const singleClass =
-    classID && classes.length !== 0
-      ? classes.filter((item) => item._id === classID)
-      : null;
+  useEffect(() => {
+    if (classID) {
+      getSingleClass(classID);
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const defaultName = singleClass ? singleClass[0].name : '';
-  const defaultBuilding = singleClass ? singleClass[0].building._id : null;
-  const defaultMinNum = singleClass ? singleClass[0].minStudents : '';
-  const defaultMaxNum = singleClass ? singleClass[0].maxStudents : '';
-  const title = singleClass ? 'עדכון כיתה' : 'הוספת כיתה';
-
-  const events =
-    classes.length > 0 && singleClass
-      ? classes.filter((c) => c._id === classID)[0].availability
-      : null;
-
-  //-----------------states-----------------------------------------
   const [classDetails, setClassDetails] = useState({
-    name: defaultName,
-    minStudents: defaultMinNum,
-    maxStudents: defaultMaxNum,
-    building: defaultBuilding,
+    name: '',
+    minStudents: '',
+    maxStudents: '',
+    building: '',
   });
+  useEffect(() => {
+    if (singleClass) {
+      const { name, minStudents, maxStudents, building } = singleClass;
+      setClassDetails({ name, minStudents, maxStudents, building });
+    }
+    if (singleClass && singleClass.error) {
+      history.push('/settings/list-classes');
+      clearSingle();
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [singleClass]);
+
+  const events = singleClass ? singleClass.availability : null;
+  const title = singleClass ? 'עדכון כיתה' : 'הוספת כיתה';
 
   const [dateDetails, setDateDetails] = useState({
     from: '',
@@ -235,6 +237,7 @@ const EditClass = ({
             handleSubmit={handleSubmit}
             handleChange={handleChange}
             classDetails={classDetails}
+            clearSingle={clearSingle}
           />
           {classID ? (
             <>
@@ -264,7 +267,7 @@ const EditClass = ({
                 />
               ) : null}
               {confirmMsgView ? (
-                <DeleteBox
+                <DeleteDate
                   item={confirmMsg}
                   delteItem={delteItem}
                   close={closeDeleteBox}

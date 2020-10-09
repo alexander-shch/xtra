@@ -89,7 +89,7 @@ const mapStateToProps = (state) => ({
   lectures: state.lectures.lectures,
   lecturesLoading: state.lectures.loading,
   vatList: state.vat.vatList,
-  searchField: state.searchField.searchfield,
+  searchField: state.searchField.searchField,
   pageLoading: state.lectures.pageLoading,
   confirmMessageData: state.delete,
 });

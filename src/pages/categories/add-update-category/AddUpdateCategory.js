@@ -5,7 +5,7 @@ import SelectInput from '../../../component/inputs/select-input/SelectInput';
 import MyButton from '../../../component/my-button/MyButton';
 import TextArea from '../../../component/inputs/text-area/TextArea';
 import { withRouter } from 'react-router-dom';
-import './AddUpdateCatagory.style.scss';
+import './addUpdateCatagory.style.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
 const element = <FontAwesomeIcon icon={faSave} />;

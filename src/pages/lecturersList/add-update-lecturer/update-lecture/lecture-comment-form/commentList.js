@@ -4,7 +4,7 @@ import MyButton from '../../../../../component/my-button/MyButton';
 import SingleLectureNote from '../../../../../component/single-items/singleLectureNote';
 import DataSpinner from '../../../../../component/spinner/dataSpinner/dataSpinner';
 
-import CommentPopUp from './note-popup/commentPopUp';
+import CommentPopUp from './note-popup/commentPopup';
 
 const CommentList = ({ SingleLecture, loading, addNewNote, setAlert }) => {
   const notesArr = SingleLecture[0] ? SingleLecture[0].internalNotes : [];

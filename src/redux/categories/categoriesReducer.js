@@ -11,7 +11,7 @@ const categoriesReducer = (state = INTIAL_STATE, action) => {
     case 'UPDATE_CATEGORY_START':
     case 'DELETE_CATEGORY_START':
       return { ...state, loading: true };
-    case 'GET_CATEGORIES_SUCSES':
+    case 'GET_CATEGORIES_SUCCESS':
       return { ...state, categories: action.payload, loading: false };
     case 'ADD_NEW_CATEGORY_SUCCESS':
       return {

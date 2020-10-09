@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import InputField from '../../component/inputs/input-field/InputField';
 import SelectInput from '../../component/inputs/select-input/SelectInput';
 import { UpdatePageContainer } from '../../component/global-style/SettingSection';
@@ -13,26 +13,37 @@ const AddUpdateVatList = ({
   match,
   addVatItem,
   updateVatItem,
-  vatList,
+  getSingleVatItem,
+  singleVatItem,
+  clearSingle,
 }) => {
   const vatID = match.params.vatID;
 
-  const singlevatItem =
-    vatID && vatList.length !== 0
-      ? vatList.filter((item) => item._id === vatID)
-      : null;
-
-  const dTitle = singlevatItem ? singlevatItem[0].title : '';
-  const dDuplicate = singlevatItem ? singlevatItem[0].duplicate : '';
-  const dVat = singlevatItem ? singlevatItem[0].vat : true;
-  const dActive = singlevatItem ? singlevatItem[0].active : true;
+  useEffect(() => {
+    if (vatID) {
+      getSingleVatItem(vatID);
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const [vatItem, setVatItem] = useState({
-    title: dTitle,
-    duplicate: dDuplicate,
-    vat: dVat,
-    active: dActive,
+    title: '',
+    duplicate: '',
+    vat: true,
+    active: true,
   });
+
+  useEffect(() => {
+    if (singleVatItem) {
+      const { title, duplicate, vat, active } = singleVatItem;
+      setVatItem({ title, duplicate, vat, active });
+    }
+    if (singleVatItem && singleVatItem.error) {
+      history.push('/settings/VAT-multipliers');
+      clearSingle();
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [singleVatItem]);
+
   let { title, duplicate, vat, active } = vatItem;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     active = JSON.parse(active);
@@ -58,6 +69,9 @@ const AddUpdateVatList = ({
   };
   const cancel = () => {
     history.push('/settings/VAT-multipliers');
+    if (vatID) {
+      clearSingle();
+    }
   };
 
   return (

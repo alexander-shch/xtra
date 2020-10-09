@@ -18,6 +18,7 @@ const AddUpdateBuilding = ({
   singleBuilding,
   clearSingle,
   error,
+  process,
 }) => {
   const buildingID = match.params.BuildingId;
   const [buildingDetails, setBuildingDetail] = useState({
@@ -35,9 +36,6 @@ const AddUpdateBuilding = ({
     if (singleBuilding) {
       const { name, active } = singleBuilding;
       setBuildingDetail({ name, active });
-      return () => {
-        clearSingle();
-      };
     }
     if (error) {
       history.push('/settings/buildings/');
@@ -70,6 +68,9 @@ const AddUpdateBuilding = ({
   };
   const cancel = () => {
     history.push('/settings/buildings/');
+    if (buildingID) {
+      clearSingle();
+    }
   };
 
   return (
@@ -93,9 +94,11 @@ const AddUpdateBuilding = ({
           required
         />
         <div className='buttons'>
-          <MyButton>{element}</MyButton>
+          <MyButton save loading={process}>
+            {element}
+          </MyButton>
           <MyButton type='button' onClick={() => cancel()} forgot>
-            ביטול
+            חזרה
           </MyButton>
         </div>
       </form>
