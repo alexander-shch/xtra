@@ -3,9 +3,9 @@ import {
   FlexContainer,
   PopUpContainer,
   ButtonContainer,
-} from '../../../../../../component/global-style/popUpsStyle';
-import InputField from '../../../../../../component/inputs/input-field/InputField';
-import MyButton from '../../../../../../component/my-button/MyButton';
+} from '../../../../../component/global-style/popUpsStyle';
+import InputField from '../../../../../component/inputs/input-field/InputField';
+import MyButton from '../../../../../component/my-button/MyButton';
 
 const FilePopUp = ({ handleFileChange, setFilePopUpView, cvSubmit }) => {
   return (
