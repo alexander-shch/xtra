@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import TableTop from '../../../../../componnent/table-top/Tabletop';
 import MyButton from '../../../../../componnent/My-button/MyButton';
 import FilePopUp from './File-PopUp/FilePopUp';
+import SingleFile from '../../../../../componnent/single-items/singleFile/SingleFile';
 
-const FilesLIst = ({ uploadCv, id }) => {
+const FilesLIst = ({ uploadCv, id, singleLecture }) => {
+  const fileArr = singleLecture.files;
   const [filePopUpView, setFilePopUpView] = useState(false);
 
   const [cvFile, setCvFile] = useState({ cv: null });
@@ -23,7 +25,6 @@ const FilesLIst = ({ uploadCv, id }) => {
       console.log(err);
     }
   };
-
   return (
     <>
       {filePopUpView ? (
@@ -37,7 +38,10 @@ const FilesLIst = ({ uploadCv, id }) => {
       <MyButton onClick={() => setFilePopUpView(true)} addButtonStyle>
         הוסף קובץ
       </MyButton>
-      <TableTop tableProps={['כותרת', 'תוקף', 'אפשרויות']} />
+      <TableTop tableProps={['כותרת', 'אפשרויות']} />
+      {fileArr.map((item) => (
+        <SingleFile key={item._id} item={item} />
+      ))}
     </>
   );
 };

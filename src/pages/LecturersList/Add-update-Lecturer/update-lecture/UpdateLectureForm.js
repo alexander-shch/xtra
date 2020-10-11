@@ -9,6 +9,7 @@ import {
   addNewNote,
   deleteNote,
   uploadCv,
+  deleteFile,
 } from '../../../../Redux/Lectures/lectures.action';
 import { setAlert } from '../../../../Redux/My-Alert/myAlert.action';
 import { closeConfirmMessage } from '../../../../Redux/on-delete/delete.action';
@@ -20,19 +21,25 @@ const UpdateLectureForm = ({
   uploadCv,
   addNewNote,
   avatarLoading,
-  inProcess,
+  noteLoading,
   deleteNote,
   setAlert,
   confirmMessageData,
   closeConfirmMessage,
   singleLecture,
+  OnDeleteFunction,
+  deleteFile,
 }) => {
+  const deleteFunctions = {
+    deleteNote: deleteNote,
+    deleteFile: deleteFile,
+  };
   return (
     <>
       <DeleteBox
         confirmMessageData={confirmMessageData}
         closeConfirmMessage={closeConfirmMessage}
-        deleteFunction={deleteNote}
+        deleteFunction={deleteFunctions[OnDeleteFunction]}
         additionalData={id}
       />
       <AvatarForm
@@ -42,13 +49,13 @@ const UpdateLectureForm = ({
         setAvatarImg={setAvatarImg}
       />
       <h4>חוזה וקבצים</h4>
-      <FilesList id={id} uploadCv={uploadCv} />
+      <FilesList id={id} uploadCv={uploadCv} singleLecture={singleLecture} />
       <div>
         <h4>הערות על המרצה</h4>
         <CommentList
           addNewNote={addNewNote}
           singleLecture={singleLecture}
-          loading={inProcess}
+          loading={noteLoading}
           setAlert={setAlert}
         />
       </div>
@@ -57,15 +64,17 @@ const UpdateLectureForm = ({
 };
 const mapStateToProps = (state) => ({
   avatarLoading: state.lectures.avatarLoading,
-  inProcess: state.lectures.inProcess,
+  noteLoading: state.lectures.noteLoading,
   confirmMessageData: state.delete,
   singleLecture: state.lectures.singleLecture,
+  OnDeleteFunction: state.delete.addDeleteFunction,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   setAvatarImg: (id, fromData) => dispatch(setAvatarImg(id, fromData)),
   uploadCv: (id, formData) => dispatch(uploadCv(id, formData)),
   deleteNote: (lectureId, noteID) => dispatch(deleteNote(lectureId, noteID)),
+  deleteFile: (lectureId, fileID) => dispatch(deleteFile(lectureId, fileID)),
   addNewNote: (lectureId, text) => dispatch(addNewNote(lectureId, text)),
   setAlert: (text, style) => dispatch(setAlert(text, style)),
   closeConfirmMessage: () => dispatch(closeConfirmMessage()),

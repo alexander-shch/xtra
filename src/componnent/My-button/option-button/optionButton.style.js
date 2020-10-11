@@ -8,8 +8,16 @@ const deleteStyle = css`
   background-color: #ff0000;
 `;
 
+const downloadStyle = css`
+  background-color: #40bf40;
+`;
+
 const getStyle = (props) => {
-  return props.delete ? deleteStyle : editStyle;
+  return props.delete
+    ? deleteStyle
+    : props.download
+    ? downloadStyle
+    : editStyle;
 };
 
 export const OptinButtonContainer = styled.button`
