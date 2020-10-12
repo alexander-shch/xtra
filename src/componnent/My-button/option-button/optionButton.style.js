@@ -11,6 +11,9 @@ const deleteStyle = css`
 const downloadStyle = css`
   background-color: #40bf40;
 `;
+const spin = {
+  spinAnimation: 'fa-spin 2s infinite linear',
+};
 
 const getStyle = (props) => {
   return props.delete
@@ -29,4 +32,7 @@ export const OptinButtonContainer = styled.button`
   margin: 2px;
   width: 30px;
   ${getStyle}
+  svg {
+    animation: ${(props) => (props.spin ? spin.spinAnimation : null)};
+  }
 `;

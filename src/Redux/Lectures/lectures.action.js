@@ -106,3 +106,26 @@ export const getSingleLecture = (lectureID) => (dispatch) => {
 export const clearSingle = () => ({
   type: 'CLEAR_SINGLE',
 });
+
+export const downLoadFile = (item) => (dispatch) => {
+  dispatch({ type: 'DOWNLOAD_START' });
+  fetch(`${URL}/files/${item._id}`, {
+    method: 'GET',
+    cache: 'no-cache',
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  })
+    .then((res) => res.blob())
+    .then((blob) => {
+      dispatch({ type: 'DOWNLOAD_SUCCESS' });
+      const url = window.URL.createObjectURL(new Blob([blob]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', item.name);
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode.removeChild(link);
+    })
+    .catch((err) => dispatch({ type: 'DOWNLOAD_FAILED', payload: err }));
+};

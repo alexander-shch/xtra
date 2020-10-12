@@ -3,8 +3,9 @@ import TableTop from '../../../../../componnent/table-top/Tabletop';
 import MyButton from '../../../../../componnent/My-button/MyButton';
 import FilePopUp from './File-PopUp/FilePopUp';
 import SingleFile from '../../../../../componnent/single-items/singleFile/SingleFile';
+import DataSpinner from '../../../../../componnent/spinner/dataSpinner/DataSpiner';
 
-const FilesLIst = ({ uploadCv, id, singleLecture }) => {
+const FilesLIst = ({ uploadCv, id, singleLecture, fileSpinner }) => {
   const fileArr = singleLecture.files;
   const [filePopUpView, setFilePopUpView] = useState(false);
 
@@ -25,6 +26,7 @@ const FilesLIst = ({ uploadCv, id, singleLecture }) => {
       console.log(err);
     }
   };
+
   return (
     <>
       {filePopUpView ? (
@@ -32,16 +34,20 @@ const FilesLIst = ({ uploadCv, id, singleLecture }) => {
           cvSubmit={cvSubmit}
           handdleFileChange={handdleCvChange}
           setFilePopUpView={setFilePopUpView}
+          loading={fileSpinner}
         />
       ) : null}
-
       <MyButton onClick={() => setFilePopUpView(true)} addButtonStyle>
         הוסף קובץ
       </MyButton>
       <TableTop tableProps={['כותרת', 'אפשרויות']} />
-      {fileArr.map((item) => (
-        <SingleFile key={item._id} item={item} />
-      ))}
+      {fileSpinner ? (
+        <DataSpinner linesNum={fileArr.length} />
+      ) : fileArr.length === 0 ? (
+        <h3>אין קבצים</h3>
+      ) : (
+        fileArr.map((item) => <SingleFile key={item._id} item={item} />)
+      )}
     </>
   );
 };

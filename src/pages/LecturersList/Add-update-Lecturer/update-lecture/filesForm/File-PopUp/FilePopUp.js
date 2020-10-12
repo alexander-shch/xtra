@@ -7,17 +7,15 @@ import {
 import InputField from '../../../../../../componnent/inputes/input-field/InputField';
 import MyButton from '../../../../../../componnent/My-button/MyButton';
 
-const FilePopUp = ({ handdleFileChange, setFilePopUpView, cvSubmit }) => {
+const FilePopUp = ({
+  handdleFileChange,
+  setFilePopUpView,
+  cvSubmit,
+  loading,
+}) => {
   return (
     <FlexContainer>
       <PopUpContainer padding>
-        <InputField
-          name='fileName'
-          type='text'
-          label='שם הקובץ'
-          hebrew='true'
-          required
-        />
         <InputField
           name='fileName'
           type='file'
@@ -28,13 +26,15 @@ const FilePopUp = ({ handdleFileChange, setFilePopUpView, cvSubmit }) => {
         />
 
         <ButtonContainer>
-          <MyButton onClick={() => cvSubmit()}>העלה קובץ</MyButton>
+          <MyButton onClick={() => cvSubmit()} save loading={loading}>
+            העלה קובץ
+          </MyButton>
           <MyButton
             type='button'
             onClick={() => setFilePopUpView(false)}
             forgot
           >
-            ביטול
+            סגור
           </MyButton>
         </ButtonContainer>
       </PopUpContainer>

@@ -12,3 +12,13 @@ export const deleteSingleNote = (state, payload) => {
   singleLecture.internalNotes = filterNotes;
   return singleLecture;
 };
+
+export const deleteFile = (state, payload) => {
+  console.log(payload);
+  let { singleLecture } = state;
+  let filterFile = singleLecture.files.filter(
+    (file) => file._id !== payload.fileID
+  );
+  singleLecture.files = filterFile;
+  return singleLecture;
+};

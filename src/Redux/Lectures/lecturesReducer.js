@@ -1,4 +1,8 @@
-import { addNoteToSingleLecture, deleteSingleNote } from './lectures.utiles';
+import {
+  addNoteToSingleLecture,
+  deleteSingleNote,
+  deleteFile,
+} from './lectures.utiles';
 
 const INTAIL_STATE = {
   listLoading: true,
@@ -6,6 +10,8 @@ const INTAIL_STATE = {
   innerSinglePageLoading: true,
   avatarLoading: false,
   noteLoading: true,
+  downLoadSpinner: false,
+  fileSpinner: false,
   lectures: [],
   singleLecture: null,
   error: null,
@@ -24,6 +30,17 @@ const lecturesReducer = (state = INTAIL_STATE, action) => {
     case 'ADD_NEW_NOTE_START':
     case 'DELETE_NOTE_START':
       return { ...state, noteLoading: true };
+    case 'UPLOAD_CV_START':
+    case 'DELETE_FILE_START':
+      return { ...state, fileSpinner: true };
+    case 'UPLOAD_CV_SUCCESS':
+      return { ...state, singleLecture: action.payload, fileSpinner: false };
+    case 'DELETE_FILE_SUCCESS':
+      return {
+        ...state,
+        singleLecture: deleteFile(state, action.payload),
+        fileSpinner: false,
+      };
     case 'SET_AVATAR_IMG_START':
       return { ...state, avatarLoading: true };
     case 'GET_SINGLE_LECTURE_SUCCESS':
@@ -86,6 +103,7 @@ const lecturesReducer = (state = INTAIL_STATE, action) => {
     case 'SET_AVATAR_IMG_FAILED':
     case 'DELETE_NOTE_FAILED':
     case 'GET_SINGLE_LECTURE_FAILED':
+    case 'DOWNLOAD_FAILED':
       return {
         ...state,
         inProcess: false,
@@ -93,7 +111,12 @@ const lecturesReducer = (state = INTAIL_STATE, action) => {
         avatarLoading: false,
         error: action.payload,
         noteLoading: false,
+        downLoadSpinner: false,
       };
+    case 'DOWNLOAD_START':
+      return { ...state, downLoadSpinner: true };
+    case 'DOWNLOAD_SUCCESS':
+      return { ...state, downLoadSpinner: false };
     case 'CLEAR_SINGLE':
       return { ...state, singleLecture: null, error: null };
     default:

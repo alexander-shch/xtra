@@ -29,6 +29,7 @@ const UpdateLectureForm = ({
   singleLecture,
   OnDeleteFunction,
   deleteFile,
+  fileSpinner,
 }) => {
   const deleteFunctions = {
     deleteNote: deleteNote,
@@ -49,7 +50,12 @@ const UpdateLectureForm = ({
         setAvatarImg={setAvatarImg}
       />
       <h4>חוזה וקבצים</h4>
-      <FilesList id={id} uploadCv={uploadCv} singleLecture={singleLecture} />
+      <FilesList
+        id={id}
+        uploadCv={uploadCv}
+        singleLecture={singleLecture}
+        fileSpinner={fileSpinner}
+      />
       <div>
         <h4>הערות על המרצה</h4>
         <CommentList
@@ -68,6 +74,7 @@ const mapStateToProps = (state) => ({
   confirmMessageData: state.delete,
   singleLecture: state.lectures.singleLecture,
   OnDeleteFunction: state.delete.addDeleteFunction,
+  fileSpinner: state.lectures.fileSpinner,
 });
 
 const mapDispatchToProps = (dispatch) => ({

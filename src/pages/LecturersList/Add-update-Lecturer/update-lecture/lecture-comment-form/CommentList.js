@@ -47,7 +47,7 @@ const CommentList = ({ singleLecture, loading, addNewNote, setAlert }) => {
       </MyButton>
       <TableTop tableProps={['הערה', 'תאריך', 'אפשרויות']} />
       {loading ? (
-        <DataSpinner />
+        <DataSpinner linesNum={notesArr.length} />
       ) : notesArr.length === 0 ? (
         <h3>אין הערות</h3>
       ) : (
