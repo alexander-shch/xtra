@@ -107,9 +107,8 @@ export const clearSingle = () => ({
   type: 'CLEAR_SINGLE',
 });
 
-export const downLoadFile = (item) => (dispatch) => {
-  dispatch({ type: 'DOWNLOAD_START' });
-  fetch(`${URL}/files/${item._id}`, {
+export const downLoadFile = (item) => {
+  return fetch(`${URL}/files/${item._id}`, {
     method: 'GET',
     cache: 'no-cache',
     headers: {
@@ -118,7 +117,6 @@ export const downLoadFile = (item) => (dispatch) => {
   })
     .then((res) => res.blob())
     .then((blob) => {
-      dispatch({ type: 'DOWNLOAD_SUCCESS' });
       const url = window.URL.createObjectURL(new Blob([blob]));
       const link = document.createElement('a');
       link.href = url;
@@ -127,5 +125,7 @@ export const downLoadFile = (item) => (dispatch) => {
       link.click();
       link.parentNode.removeChild(link);
     })
-    .catch((err) => dispatch({ type: 'DOWNLOAD_FAILED', payload: err }));
+    .catch((err) => {
+      throw new Error(err);
+    });
 };
