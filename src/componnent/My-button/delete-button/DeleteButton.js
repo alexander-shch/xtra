@@ -7,6 +7,7 @@ const DeleteButton = ({
   item,
   confirmMessageDisplay,
   deleteConfirmMessage,
+  addFunction,
 }) => {
   const handdleDeleteClick = (item) => {
     if (confirmMessageDisplay) {
@@ -15,10 +16,12 @@ const DeleteButton = ({
       deleteConfirmMessage(item);
     }
   };
-
+  const itemToDelete = addFunction
+    ? { ...item, addFunction: addFunction }
+    : item;
   return (
     <>
-      <OptionButton onClick={() => handdleDeleteClick(item)} delete>
+      <OptionButton onClick={() => handdleDeleteClick(itemToDelete)} delete>
         &#10008;
       </OptionButton>
     </>
@@ -30,7 +33,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  deleteConfirmMessage: (item) => dispatch(deleteConfirmMessage(item)),
+  deleteConfirmMessage: (itemToDelete) =>
+    dispatch(deleteConfirmMessage(itemToDelete)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DeleteButton);

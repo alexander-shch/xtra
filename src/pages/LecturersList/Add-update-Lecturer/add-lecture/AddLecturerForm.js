@@ -6,6 +6,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import MyButton from '../../../../componnent/My-button/MyButton';
 import SelectInput from '../../../../componnent/inputes/select-input/SelectInput';
 import { withRouter } from 'react-router-dom';
+import Spinner from '../../../../componnent/spinner/Spinner';
 const AddLecturerForm = ({
   history,
   handdleChange,
@@ -13,7 +14,10 @@ const AddLecturerForm = ({
   lectureDeteils,
   handdleSubmit,
   handleEditorChange,
-  lecturesLoading,
+  inProcess,
+  lectureID,
+  clearSingle,
+  innerSinglePageLoading,
 }) => {
   const {
     name,
@@ -29,7 +33,9 @@ const AddLecturerForm = ({
     experience,
     teaching,
   } = lectureDeteils;
-  return (
+  return innerSinglePageLoading ? (
+    <Spinner />
+  ) : (
     <form onSubmit={handdleSubmit}>
       <div className='add-lecture-form'>
         <InputField
@@ -90,8 +96,8 @@ const AddLecturerForm = ({
           <select
             required
             name='duplicator'
-            className='.selectbuildingInput'
-            defaultValue={duplicator !== '' ? duplicator : '1'}
+            className='selectbuildingInput'
+            value={duplicator ? duplicator : '1'}
             onChange={handdleChange}
           >
             <option value='1' disabled hidden>
@@ -112,9 +118,9 @@ const AddLecturerForm = ({
           handleChange={handdleChange}
           required
         />
-
         <div className='editor'>
           <label>פרטים על המרצה</label>
+
           <Editor
             apiKey='mwj83bdxn8dsq4sd6vz3oqclxlahbuzdhctyaoq2wfwmff1g'
             initialValue={details}
@@ -166,12 +172,17 @@ const AddLecturerForm = ({
         />
       </div>
       <div className='buttons'>
-        <MyButton save loading={lecturesLoading}>
+        <MyButton save loading={inProcess}>
           שמור
         </MyButton>
         <MyButton
           type='button'
-          onClick={() => history.push('/lecturers')}
+          onClick={() => {
+            history.push('/lecturers');
+            if (lectureID) {
+              clearSingle();
+            }
+          }}
           forgot
         >
           ביטול

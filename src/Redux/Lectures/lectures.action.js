@@ -4,18 +4,17 @@ import { setAlert } from '../My-Alert/myAlert.action';
 export const getLectures = () => (dispatch) => {
   dispatch({ type: 'GET_LECTURES_START' });
   callFetch(`${URL}/lecturer`, 'GET')
-    .then((data) => dispatch({ type: 'GET_LECTURES_SUCSESS', payload: data }))
+    .then((data) => dispatch({ type: 'GET_LECTURES_SUCCESS', payload: data }))
     .catch((err) => dispatch({ type: 'GET_LECTURES_FAILED', payload: err }));
 };
 
 export const addNewLecture = (lectureDetails, history) => (dispatch) => {
-  console.log(lectureDetails);
   dispatch({ type: 'ADD_NEW_LECTURE_START' });
   callFetch(`${URL}/lecturer`, 'POST', lectureDetails)
     .then((data) => {
-      dispatch({ type: 'ADD_NEW_LECTURE_SUCSESS', payload: data });
+      dispatch({ type: 'ADD_NEW_LECTURE_SUCCESS', payload: data });
       history.push(`/lecturers/updateLecture/${data._id}`);
-      dispatch(setAlert('מרצה נוסף בהצלחה', 'sucsess'));
+      dispatch(setAlert('מרצה נוסף בהצלחה', 'success'));
     })
     .catch((err) => dispatch({ type: 'ADD_NEW_LECTURE_FAILED', payload: err }));
 };
@@ -24,8 +23,8 @@ export const updateLecture = (lectureID, lectureDetails) => (dispatch) => {
   dispatch({ type: 'UPDATE_LECTURE_START' });
   callFetch(`${URL}/lecturer/${lectureID}`, 'PUT', lectureDetails)
     .then((data) => {
-      dispatch({ type: 'UPDATE_LECTURE_SUCSESS', payload: data });
-      dispatch(setAlert('מרצה עודכן בהצלחה', 'sucsess'));
+      dispatch({ type: 'UPDATE_LECTURE_SUCCESS', payload: data });
+      dispatch(setAlert('מרצה עודכן בהצלחה', 'success'));
     })
     .catch((err) => dispatch({ type: 'UPDATE_LECTURE_FAILED', payload: err }));
 };
@@ -35,7 +34,7 @@ export const deleteLecture = (lectureID) => (dispatch) => {
   callFetch(`${URL}/lecturer/${lectureID}`, 'DELETE')
     .then((data) => {
       if (data.deleted) {
-        dispatch({ type: 'DELETE_LECTURE_SUCSESS', payload: lectureID });
+        dispatch({ type: 'DELETE_LECTURE_SUCCESS', payload: lectureID });
       } else {
         throw Error('cant delete this lecture');
       }
@@ -47,8 +46,8 @@ export const setAvatarImg = (lectureID, fromData) => (dispatch) => {
   dispatch({ type: 'SET_AVATAR_IMG_START' });
   callFetch(`${URL}/lecturer/${lectureID}/avatar`, 'POST', fromData)
     .then((data) => {
-      dispatch({ type: 'SET_AVATAR_IMG_SUCSESS', payload: data });
-      dispatch(setAlert('תמונת פרופיל עודכנה בהצלחה', 'sucsess'));
+      dispatch({ type: 'SET_AVATAR_IMG_SUCCESS', payload: data });
+      dispatch(setAlert('תמונת פרופיל עודכנה בהצלחה', 'success'));
     })
     .catch((err) => dispatch({ type: 'SET_AVATAR_IMG_FAILED', payload: err }));
 };
@@ -57,9 +56,8 @@ export const addNewNote = (lectureID, text) => (dispatch) => {
   dispatch({ type: 'ADD_NEW_NOTE_START' });
   callFetch(`${URL}/lecturer/${lectureID}/notes`, 'POST', { text })
     .then((data) => {
-      console.log(data);
-      dispatch({ type: 'ADD_NEW_NOTE_SUCSESS', payload: { lectureID, data } });
-      dispatch(setAlert('הערה נוספה בהצלחה', 'sucsess'));
+      dispatch({ type: 'ADD_NEW_NOTE_SUCCESS', payload: { lectureID, data } });
+      dispatch(setAlert('הערה נוספה בהצלחה', 'success'));
     })
 
     .catch((err) => dispatch({ type: 'ADD_NEW_NOTE_FAILED', payload: err }));
@@ -69,8 +67,8 @@ export const deleteNote = (lectureID, noteID) => (dispatch) => {
   dispatch({ type: 'DELETE_NOTE_START' });
   callFetch(`${URL}/lecturer/${lectureID}/notes/${noteID}`, 'DELETE')
     .then(() => {
-      dispatch({ type: 'DELETE_NOTE_SUCSESS', payload: { lectureID, noteID } });
-      dispatch(setAlert('הערה נמחקה בהצלחה', 'sucsess'));
+      dispatch({ type: 'DELETE_NOTE_SUCCESS', payload: { lectureID, noteID } });
+      dispatch(setAlert('הערה נמחקה בהצלחה', 'success'));
     })
     .catch((err) => dispatch({ type: 'DELETE_NOTE_FAILED', payload: err }));
 };
@@ -79,8 +77,55 @@ export const uploadCv = (lectureID, formData) => (dispatch) => {
   dispatch({ type: 'UPLOAD_CV_START' });
   callFetch(`${URL}/lecturer/${lectureID}/file`, 'POST', formData)
     .then((data) => {
-      console.log(data);
-      dispatch({ type: 'UPLOAD_CV_SUCSESS', payload: data });
+      dispatch({ type: 'UPLOAD_CV_SUCCESS', payload: data });
     })
     .catch((err) => dispatch({ type: 'UPLOAD_CV_FAILED', payload: err }));
+};
+
+export const deleteFile = (lectureID, fileID) => (dispatch) => {
+  dispatch({ type: 'DELETE_FILE_START' });
+  callFetch(`${URL}/lecturer/${lectureID}/file/${fileID}`, 'DELETE')
+    .then(() => {
+      dispatch({ type: 'DELETE_FILE_SUCCESS', payload: { lectureID, fileID } });
+      dispatch(setAlert('קובץ נמחק בהצלחה', 'success'));
+    })
+    .catch((err) => dispatch({ type: 'DELETE_FILE_FAILED', payload: err }));
+};
+
+export const getSingleLecture = (lectureID) => (dispatch) => {
+  dispatch({ type: 'GET_SINGLE_LECTURE_START' });
+  callFetch(`${URL}/lecturer/${lectureID}`, 'GET')
+    .then((data) =>
+      dispatch({ type: 'GET_SINGLE_LECTURE_SUCCESS', payload: data })
+    )
+    .catch((err) =>
+      dispatch({ type: 'GET_SINGLE_LECTURE_FAILED', payload: err })
+    );
+};
+
+export const clearSingle = () => ({
+  type: 'CLEAR_SINGLE',
+});
+
+export const downLoadFile = (item) => (dispatch) => {
+  dispatch({ type: 'DOWNLOAD_START' });
+  fetch(`${URL}/files/${item._id}`, {
+    method: 'GET',
+    cache: 'no-cache',
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  })
+    .then((res) => res.blob())
+    .then((blob) => {
+      dispatch({ type: 'DOWNLOAD_SUCCESS' });
+      const url = window.URL.createObjectURL(new Blob([blob]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', item.name);
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode.removeChild(link);
+    })
+    .catch((err) => dispatch({ type: 'DOWNLOAD_FAILED', payload: err }));
 };

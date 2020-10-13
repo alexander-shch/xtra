@@ -6,9 +6,9 @@ import DataSpinner from '../../../../../componnent/spinner/dataSpinner/DataSpine
 
 import CommentPopUp from './note-popup/CommentPopUp';
 
-const CommentList = ({ SingleLecture, loading, addNewNote, setAlert }) => {
-  const notesArr = SingleLecture[0] ? SingleLecture[0].internalNotes : [];
-  const lectureID = SingleLecture[0]._id;
+const CommentList = ({ singleLecture, loading, addNewNote, setAlert }) => {
+  const notesArr = singleLecture.internalNotes;
+  const lectureID = singleLecture._id;
 
   const [newCommentview, setNewCommentView] = useState(false);
   const [noteText, setNoteText] = useState({ text: '' });
@@ -47,7 +47,7 @@ const CommentList = ({ SingleLecture, loading, addNewNote, setAlert }) => {
       </MyButton>
       <TableTop tableProps={['הערה', 'תאריך', 'אפשרויות']} />
       {loading ? (
-        <DataSpinner />
+        <DataSpinner linesNum={notesArr.length} />
       ) : notesArr.length === 0 ? (
         <h3>אין הערות</h3>
       ) : (

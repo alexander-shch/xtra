@@ -12,7 +12,7 @@ const LecturersList = ({
   history,
   match,
   lectures,
-  pageLoading,
+  listLoading,
   searchField,
 }) => {
   let filterLectures = lectures.filter(({ name, email, phone }) => {
@@ -44,7 +44,7 @@ const LecturersList = ({
         ]}
       />
       <SingleItemContainer
-        loading={pageLoading}
+        loading={listLoading}
         data={filterLectures}
         SingleComponent={SingleLecture}
       />
