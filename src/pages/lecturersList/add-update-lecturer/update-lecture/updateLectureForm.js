@@ -1,0 +1,116 @@
+import React, { useState } from 'react';
+import FilesList from './filesForm/filesList';
+import CommentList from './lecture-comment-form/commentList';
+import AvatarForm from './avatar-Form/avatarForm';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { setAlert } from '../../../../redux/my-alert/myAlert.action';
+import { closeConfirmMessage } from '../../../../redux/on-delete/delete.action';
+import DeleteBox from '../../../../component/delete-box/deleteBox';
+import {
+  addNewNote,
+  deleteNote,
+  setAvatarImg,
+  uploadCv,
+} from '../../../../redux/lectures/lectures.action';
+
+const UpdateLectureForm = ({
+  id,
+  setAvatarImg,
+  uploadCv,
+  addNewNote,
+  avatarLoading,
+  noteLoading,
+  deleteNote,
+  setAlert,
+  confirmMessageData,
+  closeConfirmMessage,
+  singleLecture,
+  OnDeleteFunction,
+  deleteFile,
+  fileSpinner,
+}) => {
+<<<<<<< HEAD:src/pages/LecturersList/Add-update-Lecturer/update-lecture/UpdateLectureForm.js
+  const deleteFunctions = {
+    deleteNote: deleteNote,
+    deleteFile: deleteFile,
+=======
+  const SingleLecture = lectures.filter((item) => item._id === id);
+  const [cvFile, setCvFile] = useState({ cv: null });
+  const { cv } = cvFile;
+
+  const handleCvChange = (e) => {
+    const { files } = e.target;
+    setCvFile({ cv: files });
+  };
+
+  const cvSubmit = async () => {
+    let formData = new FormData();
+    formData.append('file', cv[0]);
+    try {
+      await uploadCv(id, formData);
+    } catch (err) {
+      console.log(err);
+    }
+>>>>>>> master:src/pages/lecturersList/add-update-lecturer/update-lecture/updateLectureForm.js
+  };
+  return (
+    <>
+      <DeleteBox
+        confirmMessageData={confirmMessageData}
+        closeConfirmMessage={closeConfirmMessage}
+        deleteFunction={deleteFunctions[OnDeleteFunction]}
+        additionalData={id}
+      />
+      <AvatarForm
+        id={id}
+        singleLecture={singleLecture}
+        avatarLoading={avatarLoading}
+        setAvatarImg={setAvatarImg}
+      />
+      <h4>חוזה וקבצים</h4>
+<<<<<<< HEAD:src/pages/LecturersList/Add-update-Lecturer/update-lecture/UpdateLectureForm.js
+      <FilesList
+        id={id}
+        uploadCv={uploadCv}
+        singleLecture={singleLecture}
+        fileSpinner={fileSpinner}
+      />
+=======
+      <FilesList handleCvChange={handleCvChange} cvSubmit={cvSubmit} />
+>>>>>>> master:src/pages/lecturersList/add-update-lecturer/update-lecture/updateLectureForm.js
+      <div>
+        <h4>הערות על המרצה</h4>
+        <CommentList
+          addNewNote={addNewNote}
+          singleLecture={singleLecture}
+          loading={noteLoading}
+          setAlert={setAlert}
+        />
+      </div>
+    </>
+  );
+};
+const mapStateToProps = (state) => ({
+  avatarLoading: state.lectures.avatarLoading,
+  noteLoading: state.lectures.noteLoading,
+  confirmMessageData: state.delete,
+  singleLecture: state.lectures.singleLecture,
+  OnDeleteFunction: state.delete.addDeleteFunction,
+  fileSpinner: state.lectures.fileSpinner,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setAvatarImg: (id, fromData) => dispatch(setAvatarImg(id, fromData)),
+  uploadCv: (id, formData) => dispatch(uploadCv(id, formData)),
+  deleteNote: (lectureId, noteID) => dispatch(deleteNote(lectureId, noteID)),
+  deleteFile: (lectureId, fileID) => dispatch(deleteFile(lectureId, fileID)),
+  addNewNote: (lectureId, text) => dispatch(addNewNote(lectureId, text)),
+  setAlert: (text, style) => dispatch(setAlert(text, style)),
+  closeConfirmMessage: () => dispatch(closeConfirmMessage()),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(UpdateLectureForm));

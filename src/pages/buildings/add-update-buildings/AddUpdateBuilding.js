@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import InputField from '../../../componnent/inputes/input-field/InputField';
-import SelectInput from '../../../componnent/inputes/select-input/SelectInput';
-import { UpdatePageContainer } from '../../../componnent/global-style/SettingSection';
-import MyButton from '../../../componnent/My-button/MyButton';
+import InputField from '../../../component/inputs/input-field/InputField';
+import SelectInput from '../../../component/inputs/select-input/SelectInput';
+import { UpdatePageContainer } from '../../../component/global-style/SettingSection';
+import MyButton from '../../../component/my-button/MyButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
 import { withRouter } from 'react-router-dom';
@@ -62,7 +62,7 @@ const AddUpdateBuilding = ({
     }
     history.push('/settings/buildings/');
   };
-  const handdleChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setBuildingDetail({ ...buildingDetails, [name]: value });
   };
@@ -82,7 +82,7 @@ const AddUpdateBuilding = ({
           type='text'
           label='שם המקום'
           value={name}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
           required
         />
@@ -90,7 +90,7 @@ const AddUpdateBuilding = ({
           name='active'
           label='פעיל'
           value={active}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           required
         />
         <div className='buttons'>

@@ -1,6 +1,6 @@
 import React from 'react';
-import DataInput from '../../../../componnent/inputes/date-input/DateInput';
-import MyButton from '../../../../componnent/My-button/MyButton';
+import DataInput from '../../../../component/inputs/date-input/DateInput';
+import MyButton from '../../../../component/my-button/MyButton';
 import './updateSingle.style.scss';
 
 const UpdateSingle = ({
