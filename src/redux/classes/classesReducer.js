@@ -101,7 +101,7 @@ const classesReducer = (state = INITIAL_STATE, action) => {
         pageLoading: false,
       };
     case 'CLEAR_SINGLE':
-      return { ...state, singleClass: null };
+      return { ...state, singleClass: null, error: null };
     default:
       return state;
   }

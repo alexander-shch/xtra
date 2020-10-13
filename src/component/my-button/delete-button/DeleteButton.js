@@ -7,6 +7,7 @@ const DeleteButton = ({
   item,
   confirmMessageDisplay,
   deleteConfirmMessage,
+  addFunction,
 }) => {
   const handleDeleteClick = (item) => {
     if (confirmMessageDisplay) {
@@ -15,7 +16,9 @@ const DeleteButton = ({
       deleteConfirmMessage(item);
     }
   };
-
+  const itemToDelete = addFunction
+    ? { ...item, addFunction: addFunction }
+    : item;
   return (
     <>
       <OptionButton onClick={() => handleDeleteClick(item)} delete>
@@ -30,7 +33,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  deleteConfirmMessage: (item) => dispatch(deleteConfirmMessage(item)),
+  deleteConfirmMessage: (itemToDelete) =>
+    dispatch(deleteConfirmMessage(itemToDelete)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DeleteButton);

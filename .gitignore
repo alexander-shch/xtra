@@ -9,6 +9,10 @@ node_modules/
 node_modules/
 /.pnp
 .pnp.js
+.metals
+/coverage
+/build
+.vscode
 
 
 npm-debug.log*

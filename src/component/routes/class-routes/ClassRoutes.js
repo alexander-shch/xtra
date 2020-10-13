@@ -47,6 +47,7 @@ const ClassRoutes = ({
   getSingleClass,
   singleClass,
   clearSingle,
+  error,
 }) => {
   useEffect(() => {
     getClassesData();
@@ -107,6 +108,7 @@ const ClassRoutes = ({
                 setAlert={setAlert}
                 jewsihHolydays={jewsihHolydays}
                 clearSingle={clearSingle}
+                error={error}
               />
             )
           }
@@ -121,6 +123,7 @@ const mapStateToProps = (state) => ({
   classes: state.classes.classes,
   singleClass: state.classes.singleClass,
   loading: state.classes.process,
+  error: state.classes.error,
   pageLoading: state.classes.pageLoading,
   calenderLoading: state.classes.calenderLoading,
   jewsihHolydays: state.classes.jewsihHolydays,

@@ -31,6 +31,7 @@ const VatRoutes = ({
   singleVatItem,
   getSingleVatItem,
   clearSingle,
+  error,
 }) => {
   useEffect(() => {
     getVatList();
@@ -68,6 +69,7 @@ const VatRoutes = ({
               singleVatItem={singleVatItem}
               loading={loading}
               clearSingle={clearSingle}
+              error={error}
             />
           )}
         />
@@ -81,6 +83,7 @@ const mapStateToProps = (state) => ({
   loading: state.vat.loading,
   confirmMessageData: state.delete,
   singleVatItem: state.vat.singleVatItem,
+  error: state.vat.error,
 });
 
 const mapDispatchToProps = (dispatch) => ({
