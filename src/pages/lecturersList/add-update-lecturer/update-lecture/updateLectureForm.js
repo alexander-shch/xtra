@@ -30,29 +30,9 @@ const UpdateLectureForm = ({
   deleteFile,
   fileSpinner,
 }) => {
-<<<<<<< HEAD:src/pages/LecturersList/Add-update-Lecturer/update-lecture/UpdateLectureForm.js
   const deleteFunctions = {
     deleteNote: deleteNote,
     deleteFile: deleteFile,
-=======
-  const SingleLecture = lectures.filter((item) => item._id === id);
-  const [cvFile, setCvFile] = useState({ cv: null });
-  const { cv } = cvFile;
-
-  const handleCvChange = (e) => {
-    const { files } = e.target;
-    setCvFile({ cv: files });
-  };
-
-  const cvSubmit = async () => {
-    let formData = new FormData();
-    formData.append('file', cv[0]);
-    try {
-      await uploadCv(id, formData);
-    } catch (err) {
-      console.log(err);
-    }
->>>>>>> master:src/pages/lecturersList/add-update-lecturer/update-lecture/updateLectureForm.js
   };
   return (
     <>
@@ -69,16 +49,12 @@ const UpdateLectureForm = ({
         setAvatarImg={setAvatarImg}
       />
       <h4>חוזה וקבצים</h4>
-<<<<<<< HEAD:src/pages/LecturersList/Add-update-Lecturer/update-lecture/UpdateLectureForm.js
       <FilesList
         id={id}
         uploadCv={uploadCv}
         singleLecture={singleLecture}
         fileSpinner={fileSpinner}
       />
-=======
-      <FilesList handleCvChange={handleCvChange} cvSubmit={cvSubmit} />
->>>>>>> master:src/pages/lecturersList/add-update-lecturer/update-lecture/updateLectureForm.js
       <div>
         <h4>הערות על המרצה</h4>
         <CommentList
