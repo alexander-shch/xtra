@@ -8,6 +8,10 @@ yarn-error.log
 roco-app/node_modules
 /.pnp
 .pnp.js
+.metals
+/coverage
+/build
+.vscode
 
 
 
