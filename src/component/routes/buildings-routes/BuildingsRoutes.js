@@ -56,11 +56,11 @@ const BuildingsRoutes = ({
         />
         <Route
           exact
-          path={`${match.path}/addNewBulding/`}
+          path={`${match.path}/addNewBuilding/`}
           render={() => <AddUpdateBuilding addNewBuilding={addNewBuilding} />}
         />
         <Route
-          path={`${match.path}/updateBulding/:BuildingId/`}
+          path={`${match.path}/updateBuilding/:BuildingId/`}
           render={() => (
             <UpdateBuildingWithSpinner
               process={process}

@@ -1,5 +1,5 @@
 import React from 'react';
-import BuildingItem from '../../component/single-items/building-item/BuildingItem';
+import BuildingItem from '../../component/single-items/building-item/buildingItem';
 import SingleItemContainer from '../../component/single-items/singleItemContainer';
 import { SettingSectionContainer } from '../../component/global-style/settingSection';
 import MyButton from '../../component/my-button/myButton';
@@ -10,7 +10,7 @@ const Buildings = ({ match, history, data, ...otherProps }) => {
   return (
     <SettingSectionContainer>
       <MyButton
-        onClick={() => history.push(`${match.path}/addNewBulding`)}
+        onClick={() => history.push(`${match.path}/addNewBuilding`)}
         addButtonStyle
       >
         הוספת בניין
