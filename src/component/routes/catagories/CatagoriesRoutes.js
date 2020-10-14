@@ -4,18 +4,20 @@ import { connect } from 'react-redux';
 import {
   getCategories,
   addNewCategory,
-  updateCategoty,
   deleteCategory,
+  updateCategory,
+  getSingleCategory,
 } from '../../../redux/categories/categories.action';
-import AddUpdateCategory from '../../../pages/categories/add-update-category/addUpdateCategory';
 import Spinner from '../../spinner/spinner';
 import WithSpinner from '../../spinner/withSpinner';
 import DeleteBox from '../../delete-box/deleteBox';
 import { closeConfirmMessage } from '../../../redux/on-delete/delete.action';
+import AddUpdateCategory from '../../../pages/categories/add-update-category/addUpdateCategory';
+import { clearSingle } from '../../../redux/buildings/buildings.actions';
 
 const AddUpdateCategoryWithSpinner = WithSpinner(AddUpdateCategory);
 const CategoriesList = lazy(() =>
-  import('../../../pages/categories/CategoriesList')
+  import('../../../pages/categories/categoriesList')
 );
 
 const CategoriesRoutes = ({
@@ -23,7 +25,7 @@ const CategoriesRoutes = ({
   getCategories,
   categories,
   addNewCategory,
-  updateCategoty,
+  updateCategory,
   deleteCategory,
   confirmMessageData,
   closeConfirmMessage,
@@ -65,7 +67,7 @@ const CategoriesRoutes = ({
               getSingleCategory={getSingleCategory}
               singleCategory={singleCategory}
               categories={categories}
-              updateCategoty={updateCategoty}
+              updateCategoty={updateCategory}
               clearSingle={clearSingle}
               error={error}
             />
@@ -86,8 +88,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getCategories: () => dispatch(getCategories()),
   addNewCategory: (objToServer) => dispatch(addNewCategory(objToServer)),
-  updateCategoty: (categoryID, objToServer) =>
-    dispatch(updateCategoty(categoryID, objToServer)),
+  updateCategory: (categoryID, objToServer) =>
+    dispatch(updateCategory(categoryID, objToServer)),
   deleteCategory: (categoryID) => dispatch(deleteCategory(categoryID)),
   closeConfirmMessage: () => dispatch(closeConfirmMessage()),
   getSingleCategory: (id) => dispatch(getSingleCategory(id)),

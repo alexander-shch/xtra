@@ -1,6 +1,6 @@
 import React from 'react';
 import DataInput from '../../../../component/inputs/date-input/DateInput';
-import MyButton from '../../../../component/my-button/MyButton';
+import MyButton from '../../../../component/my-button/myButton';
 import './secondForm.style.scss';
 const SecondForm = ({
   dateHanddleChange,

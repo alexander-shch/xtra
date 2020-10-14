@@ -5,7 +5,7 @@ import ClassRoutes from '../class-routes/ClassRoutes';
 import CourseRoutes from '../course-routes/courseRoutes';
 import BookListRoutes from '../book-list-routes/BookListRoutes';
 import VatRoutes from '../vat-routes/VatRoutes';
-import CatagoriesRoutes from '../catagories/CatagoriesRoutes';
+import CatagoriesRoutes from '../catagories/catagoriesRoutes';
 
 const SettingsRoutes = () => {
   return (

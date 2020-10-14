@@ -1,5 +1,5 @@
 import React from 'react';
-import MyButton from '../my-button/MyButton';
+import MyButton from '../my-button/myButton';
 import {
   FlexContainer,
   PopUpContainer,

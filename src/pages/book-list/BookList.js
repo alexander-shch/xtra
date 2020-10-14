@@ -1,8 +1,8 @@
 import React from 'react';
-import { SettingSectionContainer } from '../../component/global-style/SettingSection';
+import { SettingSectionContainer } from '../../component/global-style/settingSection';
 import TableTop from '../../component/table-top/Tabletop';
 import { withRouter } from 'react-router-dom';
-import MyButton from '../../component/my-button/MyButton';
+import MyButton from '../../component/my-button/myButton';
 
 const BookList = ({ history, match }) => {
   return (

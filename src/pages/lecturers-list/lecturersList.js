@@ -1,6 +1,6 @@
 import React from 'react';
-import { SettingSectionContainer } from '../../component/global-style/SettingSection';
-import MyButton from '../../component/my-button/MyButton';
+import { SettingSectionContainer } from '../../component/global-style/settingSection';
+import MyButton from '../../component/my-button/myButton';
 import TableTop from '../../component/table-top/Tabletop';
 import SearchField from '../../component/searchField/SearchField';
 import { withRouter } from 'react-router-dom';

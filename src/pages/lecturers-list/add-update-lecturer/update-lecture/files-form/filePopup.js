@@ -5,9 +5,9 @@ import {
   ButtonContainer,
 } from '../../../../../component/global-style/popUpsStyle';
 import InputField from '../../../../../component/inputs/input-field/InputField';
-import MyButton from '../../../../../component/my-button/MyButton';
+import MyButton from '../../../../../component/my-button/myButton';
 
-const FilePopUp = ({ handleFileChange, setFilePopUpView, cvSubmit }) => {
+const FilePopUp = ({ handleFileChange, setFilePopUpView, cvSubmit, loading }) => {
   return (
     <FlexContainer>
       <PopUpContainer padding>

@@ -1,9 +1,9 @@
 import React from 'react';
-import { SettingSectionContainer } from '../../component/global-style/SettingSection';
+import { SettingSectionContainer } from '../../component/global-style/settingSection';
 import TableTop from '../../component/table-top/Tabletop';
-import MyButton from '../../component/my-button/MyButton';
+import MyButton from '../../component/my-button/myButton';
 import { withRouter } from 'react-router-dom';
-import SingleCategory from '../../component/single-items/single-category/SingleCategory';
+import SingleCategory from '../../component/single-items/single-category/singleCategory';
 import SingleItemContainer from '../../component/single-items/singleItemContainer';
 
 const CategoriesList = ({ history, match, categories, ...otherProps }) => {

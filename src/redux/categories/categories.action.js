@@ -18,7 +18,7 @@ export const addNewCategory = (objToServer) => (dispatch) => {
     );
 };
 
-export const updateCategoty = (categoryID, objToServer) => (dispatch) => {
+export const updateCategory = (categoryID, objToServer) => (dispatch) => {
   dispatch({ type: 'UPDATE_CATEGORY_START' });
   callFetch(`${URL}/categories/${categoryID}`, 'PUT', objToServer)
     .then((data) =>
@@ -47,7 +47,7 @@ export const getSingleCategory = (categoryID) => (dispatch) => {
   dispatch({ type: 'GET_SINGLE_CATEGORY_START' });
   callFetch(`${URL}/categories/${categoryID}`, 'GET')
     .then((data) =>
-      dispatch({ type: 'GET_SINGLE_CATEGORY_SUCSESS', payload: data })
+      dispatch({ type: 'GET_SINGLE_CATEGORY_SUCCESS', payload: data })
     )
     .catch((err) =>
       dispatch({ type: 'GET_SINGLE_CATEGORY_FAILED', payload: err })

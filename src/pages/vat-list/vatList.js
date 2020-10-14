@@ -1,7 +1,7 @@
 import React from 'react';
-import MyButton from '../../component/my-button/MyButton';
+import MyButton from '../../component/my-button/myButton';
 import { withRouter } from 'react-router-dom';
-import { SettingSectionContainer } from '../../component/global-style/SettingSection';
+import { SettingSectionContainer } from '../../component/global-style/settingSection';
 import TableTop from '../../component/table-top/Tabletop';
 import SingleVatItem from '../../component/single-items/vatList/SingleVatItem';
 import SingleItemContainer from '../../component/single-items/singleItemContainer';

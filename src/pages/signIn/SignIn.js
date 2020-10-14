@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import './SignIn.style.scss';
+import './signIn.style.scss';
 import InputField from '../../component/inputs/input-field/InputField';
-import MyButton from '../../component/my-button/MyButton';
+import MyButton from '../../component/my-button/myButton';
 import {
   setUserLog,
   getToken,

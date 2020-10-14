@@ -1,8 +1,9 @@
 import React from 'react';
-import OptionButton from '../../my-button/option-button/OptionButton';
-import { SingleItem } from '../../global-style/SettingSection';
+import OptionButton from '../../my-button/option-button/optionButton';
+import { SingleItem } from '../../global-style/settingSection';
 import { withRouter } from 'react-router-dom';
-import DeleteButton from '../../my-button/delete-button/DeleteButton';
+import DeleteButton from '../../my-button/delete-button/deleteButton';
+
 const SingleLecture = ({ match, history, item }) => {
   return (
     <SingleItem>

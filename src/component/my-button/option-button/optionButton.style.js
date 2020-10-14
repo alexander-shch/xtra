@@ -23,7 +23,7 @@ const getStyle = (props) => {
     : editStyle;
 };
 
-export const OptinButtonContainer = styled.button`
+export const OptionButtonContainer = styled.button`
   border: none;
   color: white;
   font-size: 20px;

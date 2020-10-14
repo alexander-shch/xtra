@@ -3,10 +3,9 @@ import InputField from '../../../../component/inputs/input-field/InputField';
 import TextArea from '../../../../component/inputs/text-area/TextArea';
 import './addLectureForm.style.scss';
 import { Editor } from '@tinymce/tinymce-react';
-import MyButton from '../../../../component/my-button/MyButton';
+import MyButton from '../../../../component/my-button/myButton';
 import SelectInput from '../../../../component/inputs/select-input/SelectInput';
 import { withRouter } from 'react-router-dom';
-import Spinner from '../../../../componnent/spinner/Spinner';
 const AddLecturerForm = ({
   history,
   handleChange,
@@ -94,15 +93,9 @@ const AddLecturerForm = ({
           <select
             required
             name='duplicator'
-<<<<<<< HEAD:src/pages/LecturersList/Add-update-Lecturer/add-lecture/AddLecturerForm.js
-            className='selectbuildingInput'
-            value={duplicator ? duplicator : '1'}
-            onChange={handdleChange}
-=======
             className='.selectbuildingInput'
             defaultValue={duplicator !== '' ? duplicator : '1'}
             onChange={handleChange}
->>>>>>> master:src/pages/lecturersList/add-update-lecturer/add-lecture/AddLecturerForm.js
           >
             <option value='1' disabled hidden>
               בחר מכפיל
