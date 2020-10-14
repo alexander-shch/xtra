@@ -3,7 +3,7 @@ import CommentList from './lecture-comment-form/commentList';
 import AvatarForm from './avatar-form/avatarForm';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { setAlert } from '../../../../redux/my-alert/myAlert.action';
+import { setAlert } from '../../../../redux/alert/myAlert.action';
 import { closeConfirmMessage } from '../../../../redux/on-delete/delete.action';
 import DeleteBox from '../../../../component/delete-box/deleteBox';
 import {

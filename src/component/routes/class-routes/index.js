@@ -15,7 +15,7 @@ import {
 } from '../../../redux/classes/class.action';
 import { closeConfirmMessage } from '../../../redux/on-delete/delete.action';
 import DeleteBox from '../../delete-box/deleteBox';
-import { setAlert } from '../../../redux/my-alert/myAlert.action';
+import { setAlert } from '../../../redux/alert/myAlert.action';
 import { getBuildingsData } from '../../../redux/buildings/buildings.actions';
 import { closeSettingMenu } from '../../../redux/settingsView/settings.actions';
 import Spinner from '../../spinner/spinner';
