@@ -1,5 +1,5 @@
 import React from 'react';
-import OptionButton from '../option-button/optionButton';
+import OptionButton from '../option-button';
 import { deleteConfirmMessage } from '../../../redux/on-delete/delete.action';
 import { connect } from 'react-redux';
 

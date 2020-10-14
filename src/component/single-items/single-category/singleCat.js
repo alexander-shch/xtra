@@ -1,5 +1,5 @@
 import React from 'react';
-import OptionButton from '../../my-button/option-button/optionButton';
+import OptionButton from '../../my-button/option-button';
 import { withRouter } from 'react-router-dom';
 import { SingleItem } from '../../global-style/settingsSection';
 import DeleteButton from '../../my-button/delete-button/deleteBtn';
