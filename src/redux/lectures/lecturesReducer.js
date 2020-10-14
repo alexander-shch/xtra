@@ -79,12 +79,6 @@ const lecturesReducer = (state = INITIAL_STATE, action) => {
         lectures,
         singleLecture: action.payload,
       };
-    case 'DELETE_LECTURE_SUCCESS':
-      return {
-        ...state,
-        listLoading: false,
-        lectures: state.lectures.filter((item) => item._id !== action.payload),
-      };
     case 'ADD_NEW_NOTE_SUCCESS':
       return {
         ...state,

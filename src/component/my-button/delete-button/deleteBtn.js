@@ -16,9 +16,9 @@ const DeleteButton = ({
       deleteConfirmMessage(item);
     }
   };
-  const itemToDelete = addFunction
-    ? { ...item, addFunction: addFunction }
-    : item;
+  // const itemToDelete = addFunction
+  //   ? { ...item, addFunction: addFunction }
+  //   : item;
   return (
     <>
       <OptionButton onClick={() => handleDeleteClick(item)} delete>
