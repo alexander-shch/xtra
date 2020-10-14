@@ -12,6 +12,11 @@ const AvatarImg = styled.div`
   background-image: url(${(props) => props.img});
 `;
 
+const ImgPlaceHolder = styled.div`
+  height: 150px;
+  width: 150px;
+`;
+
 const AvatarForm = ({ singleLecture, avatarLoading, id, setAvatarImg }) => {
   const [imgFile, setImgFile] = useState({ img: null });
   const { img } = imgFile;
@@ -40,7 +45,9 @@ const AvatarForm = ({ singleLecture, avatarLoading, id, setAvatarImg }) => {
 
   return (
     <div className='avatar-container'>
-      {avatarLoading ? <Spinner /> : <AvatarImg img={avatarImg} />}
+      <ImgPlaceHolder>
+        {avatarLoading ? <Spinner /> : <AvatarImg img={avatarImg} />}
+      </ImgPlaceHolder>
 
       <div className='fileInput-container'>
         <MyButton save loading={avatarLoading} onClick={() => imgSubmit()}>

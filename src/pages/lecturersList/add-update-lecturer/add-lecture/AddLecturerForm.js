@@ -113,7 +113,7 @@ const AddLecturerForm = ({
               </option>
             ))}
           </select>
-          <label className='selectInputLabael'>בחר מכפיל שכר</label>
+          <label className='selectInputLabael'> מכפיל שכר</label>
         </div>
         <SelectInput
           name='active'

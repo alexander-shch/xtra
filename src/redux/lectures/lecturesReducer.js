@@ -10,7 +10,6 @@ const INTAIL_STATE = {
   innerSinglePageLoading: true,
   avatarLoading: false,
   noteLoading: true,
-  downLoadSpinner: false,
   fileSpinner: false,
   lectures: [],
   singleLecture: null,
@@ -105,7 +104,6 @@ const lecturesReducer = (state = INTAIL_STATE, action) => {
     case 'SET_AVATAR_IMG_FAILED':
     case 'DELETE_NOTE_FAILED':
     case 'GET_SINGLE_LECTURE_FAILED':
-    case 'DOWNLOAD_FAILED':
       return {
         ...state,
         inProcess: false,
@@ -115,10 +113,6 @@ const lecturesReducer = (state = INTAIL_STATE, action) => {
         noteLoading: false,
         downLoadSpinner: false,
       };
-    case 'DOWNLOAD_START':
-      return { ...state, downLoadSpinner: true };
-    case 'DOWNLOAD_SUCCESS':
-      return { ...state, downLoadSpinner: false };
     case 'CLEAR_SINGLE':
       return { ...state, singleLecture: null, error: null };
     default:
