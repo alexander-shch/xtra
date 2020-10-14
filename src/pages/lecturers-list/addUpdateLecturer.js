@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import AddLecturerForm from './add-update-lecturer/add-lecture/AddLecturerForm';
 import UpdateLectureForm from './add-update-lecturer/update-lecture/updateLectureForm';
-import { UpdatePageContainer } from '../../component/global-style/SettingSection';
+import { UpdatePageContainer } from '../../component/global-style/settingSection';
 import { withRouter } from 'react-router-dom';
-import MyAlert from '../../component/my-Alert/MyAlert';
+import MyAlert from '../../component/my-alert/MyAlert';
 
 const AddUpdateLecturer = ({
   vatList,

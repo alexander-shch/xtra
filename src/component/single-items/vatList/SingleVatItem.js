@@ -1,8 +1,8 @@
 import React from 'react';
-import { SingleItem } from '../../global-style/SettingSection';
-import OptionButton from '../../my-button/option-button/OptionButton';
+import { SingleItem } from '../../global-style/settingSection';
+import OptionButton from '../../my-button/option-button/optionButton';
 import { withRouter } from 'react-router-dom';
-import DeleteButton from '../../my-button/delete-button/DeleteButton';
+import DeleteButton from '../../my-button/delete-button/deleteButton';
 
 const SingleVatItem = ({ item, match, history }) => {
   const BooleanToHebrew = item.vat ? 'כן' : 'לא';

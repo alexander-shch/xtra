@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { UpdatePageContainer } from '../../component/global-style/SettingSection';
+import { UpdatePageContainer } from '../../component/global-style/settingSection';
 import InputField from '../../component/inputs/input-field/InputField';
-import MyButton from '../../component/my-button/MyButton';
+import MyButton from '../../component/my-button/myButton';
 import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave } from '@fortawesome/free-solid-svg-icons';

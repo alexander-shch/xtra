@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import TableTop from '../../../../../component/table-top/Tabletop';
-import MyButton from '../../../../../component/my-button/MyButton';
+import MyButton from '../../../../../component/my-button/myButton';
 import SingleLectureNote from '../../../../../component/single-items/singleLectureNote';
 import DataSpinner from '../../../../../component/spinner/dataSpinner/dataSpinner';
 import CommentPopUp from '../lecture-comment-form/note-popup/commentPopUp';

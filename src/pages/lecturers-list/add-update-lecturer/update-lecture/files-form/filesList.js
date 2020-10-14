@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
-import TableTop from '../../../../../component/table-top/Tabletop';
-import MyButton from '../../../../../component/my-button/MyButton';
 import FilePopUp from './filePopup';
+import MyButton from '../../../../../component/my-button/myButton';
+import TableTop from '../../../../../component/table-top/Tabletop';
+import DataSpinner from '../../../../../component/spinner/dataSpinner/dataSpinner';
+import SingleFile from '../../../../../component/single-items/singleFile/singleFile';
 
-const FilesLIst = ({ handleCvChange, cvSubmit }) => {
+const FilesLIst = ({ uploadCv, id, singleLecture, fileSpinner }) => {
+  const fileArr = singleLecture.files;
   const [filePopUpView, setFilePopUpView] = useState(false);
 
   const [cvFile, setCvFile] = useState({ cv: null });
   const { cv } = cvFile;
 
-  const handdleCvChange = (e) => {
+  const handleCvChange = (e) => {
     const { files } = e.target;
     setCvFile({ cv: files });
   };

@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { OptinButtonContainer } from './optionButton.style';
+import { OptionButtonContainer } from './optionButton.style';
 
 const OptionButton = ({ children, ...props }) => {
-  return <OptinButtonContainer {...props}>{children}</OptinButtonContainer>;
+  return <OptionButtonContainer {...props}>{children}</OptionButtonContainer>;
 };
 
 export default OptionButton;

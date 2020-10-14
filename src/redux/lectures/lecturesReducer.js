@@ -2,9 +2,9 @@ import {
   addNoteToSingleLecture,
   deleteSingleNote,
   deleteFile,
-} from './lectures.utiles';
+} from './lectures.utils';
 
-const INTAIL_STATE = {
+const INITIAL_STATE = {
   listLoading: true,
   inProcess: true,
   innerSinglePageLoading: true,
@@ -16,7 +16,7 @@ const INTAIL_STATE = {
   error: null,
 };
 
-const lecturesReducer = (state = INTAIL_STATE, action) => {
+const lecturesReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'GET_LECTURES_START':
     case 'DELETE_LECTURE_START':

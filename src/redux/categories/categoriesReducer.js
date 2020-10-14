@@ -35,7 +35,7 @@ const categoriesReducer = (state = INTIAL_STATE, action) => {
         ),
         loading: false,
       };
-    case 'GET_SINGLE_CATEGORY_SUCSESS':
+    case 'GET_SINGLE_CATEGORY_SUCCESS':
       return { ...state, singleCategory: action.payload, loading: false };
     case 'GET_CATEGORIES_FAILED':
     case 'ADD_NEW_CATEGORY_FAILED':

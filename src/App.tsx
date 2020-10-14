@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
-import SignIn from './pages/signIn/SignIn';
+import SignIn from './pages/signIn/signIn';
 import Main from './pages/main/main';
 import Spinner from './component/spinner/spinner';
 import { setUserLog } from './redux/userReducer/user.actions';

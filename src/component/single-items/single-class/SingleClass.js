@@ -1,8 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import OptionButton from '../../my-button/option-button/OptionButton';
-import { SingleItem } from '../../global-style/SettingSection';
-import DeleteButton from '../../my-button/delete-button/DeleteButton';
+import OptionButton from '../../my-button/option-button/optionButton';
+import { SingleItem } from '../../global-style/settingSection';
+import DeleteButton from '../../my-button/delete-button/deleteButton';
 
 const SingleClass = ({ item, match, history }) => {
   return (

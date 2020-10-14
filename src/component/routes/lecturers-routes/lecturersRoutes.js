@@ -1,18 +1,19 @@
 import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import LecturersList from '../../../pages/lecturersList/lecturersList';
-import AddUpdateLecturer from '../../../pages/lecturersList/addUpdateLecturer';
+import LecturersList from '../../../pages/lecturers-list/lecturersList';
+import AddUpdateLecturer from '../../../pages/lecturers-list/addUpdateLecturer';
 import { connect } from 'react-redux';
 import {
   getLectures,
   addNewLecture,
   updateLecture,
   deleteLecture,
+  getSingleLecture,
 } from '../../../redux/lectures/lectures.action';
 import { closeConfirmMessage } from '../../../redux/on-delete/delete.action';
 import { getVatList } from '../../../redux/vat/vat.action';
-import Spinner from '../../spinner/spinner';
 import DeleteBox from '../../delete-box/deleteBox';
+import { clearSingle } from '../../../redux/buildings/buildings.actions';
 
 const LecturersRoutes = ({
   match,
@@ -20,7 +21,6 @@ const LecturersRoutes = ({
   vatList,
   getLectures,
   getVatList,
-  lecturesLoading,
   addNewLecture,
   searchField,
   updateLecture,
@@ -33,6 +33,7 @@ const LecturersRoutes = ({
   error,
   clearSingle,
   innerSinglePageLoading,
+  inProcess,
 }) => {
   useEffect(() => {
     getLectures();
@@ -104,7 +105,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getLectures: () => dispatch(getLectures()),
-  getvatList: () => dispatch(getVatList()),
+  getVatList: () => dispatch(getVatList()),
   addNewLecture: (lectureDetails, history) =>
     dispatch(addNewLecture(lectureDetails, history)),
   updateLecture: (id, lectureDetails) =>
