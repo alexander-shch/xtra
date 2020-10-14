@@ -3,7 +3,7 @@ import SingleItemContainer from '../../component/single-items/singleItemContaine
 import MyButton from '../../component/my-button/button';
 import TableTop from '../../component/table-top/Tabletop';
 import { withRouter } from 'react-router-dom';
-import buildingItem from '../../component/single-items/building-item/buildingItem';
+import buildingItem from '../../component/single-items/building-item/building-item';
 import { SettingSectionContainer } from '../../component/global-style/settingsSection';
 
 const Buildings = ({ match, history, data, ...otherProps }) => {
