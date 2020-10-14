@@ -9,7 +9,6 @@ const SingleDataSpinner = () => {
         <div className='textLinesContainer'>
           <div className='text-line' />
           <div className='text-line' />
-          <div className='text-line' />
         </div>
       </div>
     </div>

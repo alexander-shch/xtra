@@ -3,12 +3,11 @@ import TableTop from '../../../../../component/table-top/Tabletop';
 import MyButton from '../../../../../component/my-button/MyButton';
 import SingleLectureNote from '../../../../../component/single-items/singleLectureNote';
 import DataSpinner from '../../../../../component/spinner/dataSpinner/dataSpinner';
+import CommentPopUp from '../lecture-comment-form/note-popup/commentPopUp';
 
-import CommentPopUp from './note-popup/commentPopUp';
-
-const CommentList = ({ SingleLecture, loading, addNewNote, setAlert }) => {
-  const notesArr = SingleLecture[0] ? SingleLecture[0].internalNotes : [];
-  const lectureID = SingleLecture[0]._id;
+const CommentList = ({ singleLecture, loading, addNewNote, setAlert }) => {
+  const notesArr = singleLecture.internalNotes;
+  const lectureID = singleLecture._id;
 
   const [newCommentView, setNewCommentView] = useState(false);
   const [noteText, setNoteText] = useState({ text: '' });
@@ -47,7 +46,7 @@ const CommentList = ({ SingleLecture, loading, addNewNote, setAlert }) => {
       </MyButton>
       <TableTop tableProps={['הערה', 'תאריך', 'אפשרויות']} />
       {loading ? (
-        <DataSpinner />
+        <DataSpinner linesNum={notesArr.length} />
       ) : notesArr.length === 0 ? (
         <h3>אין הערות</h3>
       ) : (

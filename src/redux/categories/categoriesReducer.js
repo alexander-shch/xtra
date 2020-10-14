@@ -1,6 +1,7 @@
 const INTIAL_STATE = {
-  loading: false,
+  loading: true,
   categories: [],
+  singleCategory: null,
   error: null,
 };
 
@@ -34,12 +35,15 @@ const categoriesReducer = (state = INTIAL_STATE, action) => {
         ),
         loading: false,
       };
-
+    case 'GET_SINGLE_CATEGORY_SUCSESS':
+      return { ...state, singleCategory: action.payload, loading: false };
     case 'GET_CATEGORIES_FAILED':
     case 'ADD_NEW_CATEGORY_FAILED':
     case 'UPDATE_CATEGORY_FAILED':
     case 'DELETE_CATEGORY_FAILED':
       return { ...state, loading: false, error: action.payload };
+    case 'CLEAR_SINGLE':
+      return { ...state, singleCategory: null, error: null };
     default:
       return state;
   }

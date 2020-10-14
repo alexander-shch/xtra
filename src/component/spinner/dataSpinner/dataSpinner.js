@@ -1,10 +1,12 @@
 import React from 'react';
 import SingleDataSpinner from './singleDataSpinner';
 
-const DataSpinner = () => {
+const DataSpinner = ({ linesNum }) => {
+  const lines = linesNum ? linesNum : 3;
+
   return (
     <>
-      {Array.from({ length: 5 }, (item, index) => (
+      {Array.from({ length: lines }, (item, index) => (
         <SingleDataSpinner key={index} />
       ))}
     </>

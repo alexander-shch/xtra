@@ -16,6 +16,7 @@ const AddUpdateVatList = ({
   getSingleVatItem,
   singleVatItem,
   clearSingle,
+  error,
 }) => {
   const vatID = match.params.vatID;
 
@@ -36,11 +37,11 @@ const AddUpdateVatList = ({
       const { title, duplicate, vat, active } = singleVatItem;
       setVatItem({ title, duplicate, vat, active });
     }
-    if (singleVatItem && singleVatItem.error) {
+    if (error) {
       history.push('/settings/VAT-multipliers');
       clearSingle();
     } // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [singleVatItem]);
+  }, [singleVatItem, error]);
 
   let { title, duplicate, vat, active } = vatItem;
 

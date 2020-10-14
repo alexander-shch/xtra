@@ -42,3 +42,18 @@ export const deleteCategory = (categoryID) => (dispatch) => {
     })
     .catch((err) => dispatch({ type: 'DELETE_CATEGORY_FAILED', payload: err }));
 };
+
+export const getSingleCategory = (categoryID) => (dispatch) => {
+  dispatch({ type: 'GET_SINGLE_CATEGORY_START' });
+  callFetch(`${URL}/categories/${categoryID}`, 'GET')
+    .then((data) =>
+      dispatch({ type: 'GET_SINGLE_CATEGORY_SUCSESS', payload: data })
+    )
+    .catch((err) =>
+      dispatch({ type: 'GET_SINGLE_CATEGORY_FAILED', payload: err })
+    );
+};
+
+export const clearSingle = () => ({
+  type: 'CLEAR_SINGLE',
+});

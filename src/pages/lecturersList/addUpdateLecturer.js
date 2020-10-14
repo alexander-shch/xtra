@@ -11,19 +11,20 @@ const AddUpdateLecturer = ({
   history,
   addNewLecture,
   updateLecture,
-  lectures,
   lecturesLoading,
+  getSingleLecture,
+  singleLecture,
+  error,
+  clearSingle,
+  innerSinglePageLoading,
+  inProcess,
 }) => {
   const lectureID = match.params.LecturerID;
-  const isUrlValid = () => {
-    return lectures.some((lecture) => lecture._id === lectureID);
-  };
-
-  const singleLecture =
-    lectureID && lectures.length !== 0 && isUrlValid()
-      ? lectures.filter((item) => item._id === lectureID)
-      : null;
-
+  useEffect(() => {
+    if (lectureID) {
+      getSingleLecture(lectureID);
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const [lectureDeteils, setLectureDetails] = useState({
     name: '',
     idNumber: '',
@@ -31,7 +32,7 @@ const AddUpdateLecturer = ({
     phone: '',
     address: { address: '' },
     hourlyRate: '',
-    duplicator: '',
+    duplicator: null,
     active: true,
     details: '',
     description: '',
@@ -40,38 +41,41 @@ const AddUpdateLecturer = ({
   });
 
   useEffect(() => {
-    if (lectureID && lectures.length !== 0 && !isUrlValid()) {
-      history.push('/lecturers');
-    }
-    if (singleLecture && isUrlValid()) {
-      const name = singleLecture[0].name;
-      const idNumber = singleLecture[0].idNumber;
-      const phone = singleLecture[0].phone;
-      const email = singleLecture[0].email;
-      const address = singleLecture[0].address.address;
-      const hourlyRate = singleLecture[0].hourlyRate;
-      const duplicator = singleLecture[0].duplicator;
-      const details = singleLecture[0].details;
-      const description = singleLecture[0].description;
-      const experience = singleLecture[0].experience;
-      const teaching = singleLecture[0].teaching;
-      const active = singleLecture[0].active;
-      setLectureDetails({
+    if (singleLecture) {
+      const {
         name,
         idNumber,
-        phone,
         email,
-        address: { address: address },
+        phone,
+        address: { address },
         hourlyRate,
-        duplicator,
+        duplicator: { _id },
+        active,
         details,
         description,
         experience,
         teaching,
+      } = singleLecture;
+      setLectureDetails({
+        name,
+        idNumber,
+        email,
+        phone,
+        address: { address },
+        hourlyRate,
+        duplicator: _id,
         active,
+        details,
+        description,
+        experience,
+        teaching,
       });
+    }
+    if (error) {
+      history.push('/lecturers');
+      clearSingle();
     } // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [singleLecture, error]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -112,6 +116,10 @@ const AddUpdateLecturer = ({
           vatList={vatList}
           lectureDeteils={lectureDeteils}
           lecturesLoading={lecturesLoading}
+          lectureID={lectureID}
+          clearSingle={clearSingle}
+          innerSinglePageLoading={innerSinglePageLoading}
+          inProcess={inProcess}
         />
         {singleLecture ? <UpdateLectureForm id={lectureID} /> : null}
       </UpdatePageContainer>

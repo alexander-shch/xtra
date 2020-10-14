@@ -43,9 +43,6 @@ export const getSingleVatItem = (ID) => (dispatch) => {
   dispatch({ type: 'GET_SINGLE_VAT_START' });
   callFetch(`${URL}/pay-duplicator/${ID}`, 'GET')
     .then((data) => {
-      if (data.error) {
-        dispatch({ type: 'GET_SINGLE_VAT_FAILED', payload: data });
-      }
       dispatch({ type: 'GET_SINGLE_VAT_SUCSESS', payload: data });
     })
     .catch((err) => dispatch({ type: 'GET_SINGLE_VAT_FAILED', payload: err }));

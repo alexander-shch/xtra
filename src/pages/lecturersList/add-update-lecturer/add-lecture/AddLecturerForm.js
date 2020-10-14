@@ -6,6 +6,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import MyButton from '../../../../component/my-button/MyButton';
 import SelectInput from '../../../../component/inputs/select-input/SelectInput';
 import { withRouter } from 'react-router-dom';
+import Spinner from '../../../../componnent/spinner/Spinner';
 const AddLecturerForm = ({
   history,
   handleChange,
@@ -13,7 +14,10 @@ const AddLecturerForm = ({
   lectureDeteils,
   handleSubmit,
   handleEditorChange,
-  lecturesLoading,
+  inProcess,
+  lectureID,
+  clearSingle,
+  innerSinglePageLoading,
 }) => {
   const {
     name,
@@ -90,9 +94,15 @@ const AddLecturerForm = ({
           <select
             required
             name='duplicator'
+<<<<<<< HEAD:src/pages/LecturersList/Add-update-Lecturer/add-lecture/AddLecturerForm.js
+            className='selectbuildingInput'
+            value={duplicator ? duplicator : '1'}
+            onChange={handdleChange}
+=======
             className='.selectbuildingInput'
             defaultValue={duplicator !== '' ? duplicator : '1'}
             onChange={handleChange}
+>>>>>>> master:src/pages/lecturersList/add-update-lecturer/add-lecture/AddLecturerForm.js
           >
             <option value='1' disabled hidden>
               בחר מכפיל
@@ -103,7 +113,7 @@ const AddLecturerForm = ({
               </option>
             ))}
           </select>
-          <label className='selectInputLabael'>בחר מכפיל שכר</label>
+          <label className='selectInputLabael'> מכפיל שכר</label>
         </div>
         <SelectInput
           name='active'
@@ -112,9 +122,9 @@ const AddLecturerForm = ({
           handleChange={handleChange}
           required
         />
-
         <div className='editor'>
           <label>פרטים על המרצה</label>
+
           <Editor
             apiKey='mwj83bdxn8dsq4sd6vz3oqclxlahbuzdhctyaoq2wfwmff1g'
             initialValue={details}
@@ -166,12 +176,17 @@ const AddLecturerForm = ({
         />
       </div>
       <div className='buttons'>
-        <MyButton save loading={lecturesLoading}>
+        <MyButton save loading={inProcess}>
           שמור
         </MyButton>
         <MyButton
           type='button'
-          onClick={() => history.push('/lecturers')}
+          onClick={() => {
+            history.push('/lecturers');
+            if (lectureID) {
+              clearSingle();
+            }
+          }}
           forgot
         >
           ביטול

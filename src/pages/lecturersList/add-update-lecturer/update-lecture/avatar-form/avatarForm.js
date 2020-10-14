@@ -12,7 +12,12 @@ const AvatarImg = styled.div`
   background-image: url(${(props) => props.img});
 `;
 
-const AvatarForm = ({ lecture, avatarLoading, id, setAvatarImg }) => {
+const ImgPlaceHolder = styled.div`
+  height: 150px;
+  width: 150px;
+`;
+
+const AvatarForm = ({ singleLecture, avatarLoading, id, setAvatarImg }) => {
   const [imgFile, setImgFile] = useState({ img: null });
   const { img } = imgFile;
 
@@ -34,13 +39,15 @@ const AvatarForm = ({ lecture, avatarLoading, id, setAvatarImg }) => {
     }
   };
 
-  const avatarImg = lecture[0].avatar
-    ? `http://localhost:3005/uploads/${lecture[0].avatar.name}`
+  const avatarImg = singleLecture.avatar
+    ? `http://localhost:3005/uploads/${singleLecture.avatar.name}`
     : 'https://via.placeholder.com/150';
 
   return (
     <div className='avatar-container'>
-      {avatarLoading ? <Spinner /> : <AvatarImg img={avatarImg} />}
+      <ImgPlaceHolder>
+        {avatarLoading ? <Spinner /> : <AvatarImg img={avatarImg} />}
+      </ImgPlaceHolder>
 
       <div className='fileInput-container'>
         <MyButton save loading={avatarLoading} onClick={() => imgSubmit()}>
