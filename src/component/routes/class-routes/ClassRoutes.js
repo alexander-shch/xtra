@@ -19,7 +19,7 @@ import { setAlert } from '../../../redux/my-alert/myAlert.action';
 import { getBuildingsData } from '../../../redux/buildings/buildings.actions';
 import { closeSettingMenu } from '../../../redux/settingsView/settings.actions';
 import Spinner from '../../spinner/spinner';
-const ClassList = lazy(() => import('../../../pages/class/ClassList'));
+const ClassList = lazy(() => import('../../../pages/class/class-list'));
 const EditClass = lazy(() =>
   import('../../../pages/class/edit-class/EditClass')
 );
