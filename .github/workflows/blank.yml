@@ -19,6 +19,9 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    - name: Setup YARN
+      run: npm install -g yarn
+
     - name: Set up Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
@@ -26,17 +29,17 @@ jobs:
 
     - name: Install dependencies
       working-directory: ${{ env.workdir-client }}
-      run: npm install
+      run: yarn
 
     - name: Run the tests and generate coverage report
       working-directory: ${{ env.workdir-client }}
-      run: npm test -- --coverage
+      run: yarn test
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
 
     - name: Build
       working-directory: ${{ env.workdir-client }}
-      run: npm run build
+      run: yarn build
       
   
