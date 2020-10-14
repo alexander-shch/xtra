@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import TableTop from '../../../../../componnent/table-top/Tabletop';
 import MyButton from '../../../../../componnent/My-button/MyButton';
 import SingleLectureNote from '../../../../../componnent/single-items/SingleLecureNote';
 import DataSpinner from '../../../../../componnent/spinner/dataSpinner/DataSpiner';
-
 import CommentPopUp from './note-popup/CommentPopUp';
 
 const CommentList = ({ singleLecture, loading, addNewNote, setAlert }) => {
