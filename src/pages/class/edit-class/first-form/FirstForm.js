@@ -1,7 +1,7 @@
 import React from 'react';
 import './firstForm.style.scss';
-import InputField from '../../../../componnent/inputes/input-field/InputField';
-import MyButton from '../../../../componnent/My-button/MyButton';
+import InputField from '../../../../component/inputs/input-field/InputField';
+import MyButton from '../../../../component/my-button/MyButton';
 import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
@@ -9,7 +9,7 @@ const element = <FontAwesomeIcon icon={faSave} />;
 
 const FirstForm = ({
   buildings,
-  handdleChange,
+  handleChange,
   handleSubmit,
   classDetails,
   history,
@@ -25,7 +25,7 @@ const FirstForm = ({
           type='text'
           label='שם הכיתה'
           value={name}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
           required
         />
@@ -35,7 +35,7 @@ const FirstForm = ({
             name='building'
             className='buildingSelector'
             defaultValue={building !== null ? building : '1'}
-            onChange={handdleChange}
+            onChange={handleChange}
           >
             <option value='1' disabled hidden>
               בחר בניין
@@ -57,7 +57,7 @@ const FirstForm = ({
           type='number'
           label='מקסימלי'
           value={maxStudents}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
           required
         />
@@ -66,7 +66,7 @@ const FirstForm = ({
           type='number'
           label='מינימלי'
           value={minStudents}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
           required
         />
