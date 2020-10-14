@@ -1,10 +1,10 @@
 import React from 'react';
 import MyButton from '../../component/my-button/myButton';
 import { SettingSectionContainer } from '../../component/global-style/settingSection';
-import SingleClass from '../../component/single-items/single-class/singleClass';
 import TableTop from '../../component/table-top/Tabletop';
 import { withRouter } from 'react-router-dom';
 import SingleItemContainer from '../../component/single-items/singleItemContainer';
+import SingleClass from '../../component/single-items/single-class/SingleClass';
 
 const ClassList = ({ match, history, classes, buildings, loading }) => {
   return (

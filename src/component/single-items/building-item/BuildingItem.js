@@ -1,8 +1,8 @@
 import React from 'react';
-import OptionButton from '../../my-button/option-button/optionButton';
 import { withRouter } from 'react-router-dom';
 import { SingleItem } from '../../global-style/settingSection';
 import DeleteButton from '../../my-button/delete-button/deleteButton';
+import OptionButton from '../../my-button/option-button/optionButton';
 
 const BuildingItem = ({ match, history, item }) => {
   return (
@@ -11,7 +11,7 @@ const BuildingItem = ({ match, history, item }) => {
       <div className='buttons'>
         <OptionButton
           onClick={() =>
-            history.push(`${match.path}/updateBulding/${item._id}`)
+            history.push(`${match.path}/updateBuilding/${item._id}`)
           }
           edit
         >

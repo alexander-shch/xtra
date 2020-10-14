@@ -1,7 +1,8 @@
 import React from 'react';
+import { ButtonContainer } from '../global-style/popUpsStyle';
 import Spinner from '../spinner/spinner';
+import { CustomButtonContainer } from './myButton.style';
 
-import { CustomButtonContainer, ButtonContainer } from './MyButton.style';
 
 const MyButton = ({ children, loading, ...props }) => {
   return (
