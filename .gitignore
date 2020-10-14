@@ -1,23 +1,6 @@
-node_modules/
-/build
-/coverage
-/yarn-error.log
-
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-node_modules/
-/.pnp
-.pnp.js
-.metals
+/node_modules
 /coverage
 /build
-.vscode
-
-
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-.vscode
-.DS_store
+/.vscode
+/.metals
+.DS_Store

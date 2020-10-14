@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import FilesList from './filesForm/filesList';
+import React from 'react';
 import CommentList from './lecture-comment-form/commentList';
-import AvatarForm from './avatar-Form/avatarForm';
+import AvatarForm from './avatar-form/avatarForm';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { setAlert } from '../../../../redux/my-alert/myAlert.action';
@@ -9,10 +8,12 @@ import { closeConfirmMessage } from '../../../../redux/on-delete/delete.action';
 import DeleteBox from '../../../../component/delete-box/deleteBox';
 import {
   addNewNote,
+  deleteFile,
   deleteNote,
   setAvatarImg,
   uploadCv,
 } from '../../../../redux/lectures/lectures.action';
+import FilesLIst from './files-form/filesList';
 
 const UpdateLectureForm = ({
   id,
@@ -49,7 +50,7 @@ const UpdateLectureForm = ({
         setAvatarImg={setAvatarImg}
       />
       <h4>חוזה וקבצים</h4>
-      <FilesList
+      <FilesLIst
         id={id}
         uploadCv={uploadCv}
         singleLecture={singleLecture}
