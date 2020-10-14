@@ -12,10 +12,10 @@ import Spinner from '../../spinner/spinner';
 import WithSpinner from '../../spinner/withSpinner';
 import DeleteBox from '../../delete-box/deleteBox';
 import { closeConfirmMessage } from '../../../redux/on-delete/delete.action';
-import AddUpdateCategory from '../../../pages/categories/add-update-category/addUpdateCategory';
+import AddOrUpdateCategory from '../../../pages/categories/add-update-category/addOrUpdateCategory';
 import { clearSingle } from '../../../redux/buildings/buildings.actions';
 
-const AddUpdateCategoryWithSpinner = WithSpinner(AddUpdateCategory);
+const AddUpdateCategoryWithSpinner = WithSpinner(AddOrUpdateCategory);
 const CategoriesList = lazy(() =>
   import('../../../pages/categories/categoriesList')
 );
@@ -57,7 +57,7 @@ const CategoriesRoutes = ({
         <Route
           exact
           path={`${match.path}/addNewCategory`}
-          render={() => <AddUpdateCategory addNewCategory={addNewCategory} />}
+          render={() => <AddOrUpdateCategory addNewCategory={addNewCategory} />}
         />
         <Route
           path={`${match.path}/updateCategory/:categotyID`}
