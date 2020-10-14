@@ -4,7 +4,7 @@ import { SettingSectionContainer } from '../../component/global-style/settingSec
 import TableTop from '../../component/table-top/Tabletop';
 import { withRouter } from 'react-router-dom';
 import SingleItemContainer from '../../component/single-items/singleItemContainer';
-import SingleClass from '../../component/single-items/single-class/SingleClass';
+import SingleClass from '../../component/single-items/single-class/singleClass';
 
 const ClassList = ({ match, history, classes, buildings, loading }) => {
   return (
