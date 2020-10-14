@@ -1,10 +1,10 @@
 import React from 'react';
-import { SettingSectionContainer } from '../../component/global-style/settingSection';
+import { SettingSectionContainer } from '../../component/global-style/settingsSection';
 import TableTop from '../../component/table-top/Tabletop';
 import MyButton from '../../component/my-button/button';
 import { withRouter } from 'react-router-dom';
-import SingleCategory from '../../component/single-items/single-category/singleCategory';
 import SingleItemContainer from '../../component/single-items/singleItemContainer';
+import singleCategory from '../../component/single-items/single-category/singleCat';
 
 const CategoriesList = ({ history, match, categories, ...otherProps }) => {
   return (
@@ -19,7 +19,7 @@ const CategoriesList = ({ history, match, categories, ...otherProps }) => {
       <TableTop tableProps={['תחום', 'אפשרויות']} />
 
       <SingleItemContainer
-        SingleComponent={SingleCategory}
+        SingleComponent={singleCategory}
         data={categories}
         loading={otherProps.loading}
       />

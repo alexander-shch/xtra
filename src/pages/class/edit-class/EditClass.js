@@ -6,9 +6,9 @@ import SecondForm from './second-form/SecondForm';
 import UpdateSingle from './update-singel-date/UpdateSingle';
 import { withRouter } from 'react-router-dom';
 import DeleteDate from '../../../component/delete-box/deleteBox';
-import { UpdatePageContainer } from '../../../component/global-style/settingSection';
 import MyAlert from '../../../component/my-alert/MyAlert';
 import WithSpinner from '../../../component/spinner/withSpinner';
+import { UpdatePageContainer } from '../../../component/global-style/settingsSection';
 
 const CalendarWithSpinner = WithSpinner(Calendar);
 

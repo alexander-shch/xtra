@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { UpdatePageContainer } from '../../../component/global-style/settingSection';
 import InputField from '../../../component/inputs/input-field/InputField';
 import SelectInput from '../../../component/inputs/select-input/SelectInput';
 import MyButton from '../../../component/my-button/button';
@@ -8,6 +7,7 @@ import { withRouter } from 'react-router-dom';
 import './addUpdateCategory.style.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
+import { UpdatePageContainer } from '../../../component/global-style/settingsSection';
 
 const element = <FontAwesomeIcon icon={faSave} />;
 

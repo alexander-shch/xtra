@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { UpdatePageContainer } from '../../component/global-style/settingSection';
+import { UpdatePageContainer } from '../../component/global-style/settingsSection';
 import InputField from '../../component/inputs/input-field/InputField';
 import MyButton from '../../component/my-button/button';
 import { withRouter } from 'react-router-dom';

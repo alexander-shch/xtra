@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import BookList from '../../../pages/book-list/BookList';
+import BookList from '../../../pages/book-list/booksList';
 
 const BookListRoutes = ({ match }) => {
   return (

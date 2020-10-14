@@ -1,10 +1,10 @@
 import React from 'react';
 import MyButton from '../../component/my-button/button';
-import { SettingSectionContainer } from '../../component/global-style/settingSection';
+import { SettingSectionContainer } from '../../component/global-style/settingsSection';
 import TableTop from '../../component/table-top/Tabletop';
 import { withRouter } from 'react-router-dom';
 import SingleItemContainer from '../../component/single-items/singleItemContainer';
-import SingleClass from '../../component/single-items/single-class/singleClass';
+import singleClass from '../../component/single-items/single-class/single-class';
 
 const ClassList = ({ match, history, classes, buildings, loading }) => {
   return (
@@ -19,7 +19,7 @@ const ClassList = ({ match, history, classes, buildings, loading }) => {
       <TableTop tableProps={['בניין', 'כיתה', 'אפשרויות']} />
 
       <SingleItemContainer
-        SingleComponent={SingleClass}
+        SingleComponent={singleClass}
         data={classes}
         loading={loading}
         buildings={buildings}

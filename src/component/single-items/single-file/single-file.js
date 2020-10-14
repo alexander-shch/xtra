@@ -1,7 +1,7 @@
 import React from 'react';
-import { SingleItem } from '../../global-style/settingSection';
+import { SingleItem } from '../../global-style/settingsSection';
 import DeleteButton from '../../my-button/delete-button/deleteBtn';
-import DownLoadButton from '../../my-button/download-button/downLoadButton';
+import DownLoadButton from '../../my-button/download-button';
 
 const SingleFile = ({ item }) => {
   return (
