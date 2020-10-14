@@ -17,7 +17,7 @@ import { clearSingle } from '../../../redux/buildings/buildings.actions';
 
 const AddUpdateCategoryWithSpinner = WithSpinner(AddOrUpdateCategory);
 const CategoriesList = lazy(() =>
-  import('../../../pages/categories/categoriesList')
+  import('../../../pages/categories/categoryList')
 );
 
 const CategoriesRoutes = ({

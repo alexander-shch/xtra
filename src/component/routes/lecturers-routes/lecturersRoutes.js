@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import LecturersList from '../../../pages/lecturers-list/lecturersList';
+import LecturersList from '../../../pages/lecturers-list/lecturerList';
 import AddUpdateLecturer from '../../../pages/lecturers-list/addUpdateLecturer';
 import { connect } from 'react-redux';
 import {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './avatarForm.style.scss';
-import MyButton from '../../../../../component/my-button/myButton';
+import MyButton from '../../../../../component/my-button/button';
 import Spinner from '../../../../../component/spinner/spinner';
 import styled from 'styled-components';
 

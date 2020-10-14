@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import AddLecturerForm from './add-update-lecturer/add-lecture/AddLecturerForm';
+import AddLecturerForm from './add-update-lecturer/add-lecture/addLectureForm';
 import UpdateLectureForm from './add-update-lecturer/update-lecture/updateLectureForm';
 import { UpdatePageContainer } from '../../component/global-style/settingSection';
 import { withRouter } from 'react-router-dom';

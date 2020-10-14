@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import BuildingsRoutes from '../buildings-routes/BuildingsRoutes';
+import BuildingsRoutes from '../buildings-routes/buildingsRoutes';
 import ClassRoutes from '../class-routes/ClassRoutes';
 import CourseRoutes from '../course-routes/courseRoutes';
 import BookListRoutes from '../book-list-routes/BookListRoutes';

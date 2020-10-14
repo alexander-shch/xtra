@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { UpdatePageContainer } from '../../../component/global-style/settingSection';
 import InputField from '../../../component/inputs/input-field/InputField';
 import SelectInput from '../../../component/inputs/select-input/SelectInput';
-import MyButton from '../../../component/my-button/myButton';
+import MyButton from '../../../component/my-button/button';
 import TextArea from '../../../component/inputs/text-area/TextArea';
 import { withRouter } from 'react-router-dom';
 import './addUpdateCategory.style.scss';

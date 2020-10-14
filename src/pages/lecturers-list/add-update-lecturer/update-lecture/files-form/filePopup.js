@@ -5,7 +5,7 @@ import {
   ButtonContainer,
 } from '../../../../../component/global-style/popUpsStyle';
 import InputField from '../../../../../component/inputs/input-field/InputField';
-import MyButton from '../../../../../component/my-button/myButton';
+import MyButton from '../../../../../component/my-button/button';
 
 const FilePopUp = ({ handleFileChange, setFilePopUpView, cvSubmit, loading }) => {
   return (

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import FilePopUp from './filePopup';
-import MyButton from '../../../../../component/my-button/myButton';
+import MyButton from '../../../../../component/my-button/button';
 import TableTop from '../../../../../component/table-top/Tabletop';
 import DataSpinner from '../../../../../component/spinner/dataSpinner/dataSpinner';
 import SingleFile from '../../../../../component/single-items/singleFile/singleFile';

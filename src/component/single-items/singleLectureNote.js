@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { SingleItem } from '../global-style/settingSection';
-import DeleteButton from '../my-button/delete-button/deleteButton';
+import DeleteButton from '../my-button/delete-button/deleteBtn';
 
 const SingleLectureNote = ({ item }) => {
   return (

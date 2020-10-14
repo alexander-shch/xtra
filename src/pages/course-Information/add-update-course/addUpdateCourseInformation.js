@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { UpdatePageContainer } from '../../../component/global-style/settingSection';
-import MyButton from '../../../component/my-button/myButton';
+import MyButton from '../../../component/my-button/button';
 import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave } from '@fortawesome/free-solid-svg-icons';

@@ -1,5 +1,5 @@
 import React from 'react';
-import MyButton from '../../component/my-button/myButton';
+import MyButton from '../../component/my-button/button';
 import TableTop from '../../component/table-top/Tabletop';
 import { SettingSectionContainer } from '../../component/global-style/settingSection';
 import { withRouter } from 'react-router-dom';

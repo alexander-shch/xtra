@@ -3,7 +3,7 @@ import InputField from '../../../../component/inputs/input-field/InputField';
 import TextArea from '../../../../component/inputs/text-area/TextArea';
 import './addLectureForm.style.scss';
 import { Editor } from '@tinymce/tinymce-react';
-import MyButton from '../../../../component/my-button/myButton';
+import MyButton from '../../../../component/my-button/button';
 import SelectInput from '../../../../component/inputs/select-input/SelectInput';
 import { withRouter } from 'react-router-dom';
 const AddLecturerForm = ({
