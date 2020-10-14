@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import BuildingsRoutes from '../buildings-routes/buildingsRoutes';
-import ClassRoutes from '../class-routes/ClassRoutes';
+import BuildingsRoutes from '../buildings-routes/buildings-routes';
+import ClassRoutes from '../class-routes';
 import CourseRoutes from '../course-routes/courseRoutes';
-import BookListRoutes from '../book-list-routes/BookListRoutes';
+import BookListRoutes from '../book-list-routes';
 import VatRoutes from '../vat-routes/VatRoutes';
 import CatagoriesRoutes from '../categories/catagoriesRoutes';
 

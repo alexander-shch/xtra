@@ -14,7 +14,7 @@ import Spinner from '../../spinner/spinner';
 import WithSpinner from '../../spinner/withSpinner';
 import DeleteBox from '../../delete-box/deleteBox';
 const AddUpdateBuilding = lazy(() =>
-  import('../../../pages/buildings/add-update-buildings/addUpdateBuilding')
+  import('../../../pages/buildings/add-update-buildings')
 );
 const Buildings = lazy(() => import('../../../pages/buildings/buildings'));
 

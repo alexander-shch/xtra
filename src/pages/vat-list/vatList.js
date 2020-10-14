@@ -3,8 +3,8 @@ import MyButton from '../../component/my-button/button';
 import { withRouter } from 'react-router-dom';
 import { SettingSectionContainer } from '../../component/global-style/settingsSection';
 import TableTop from '../../component/table-top/Tabletop';
-import SingleVatItem from '../../component/single-items/vatList/SingleVatItem';
 import SingleItemContainer from '../../component/single-items/singleItemContainer';
+import SingleVatItem from '../../component/single-items/vatList/single-vat-item';
 
 const VatList = ({ history, match, vatList, loading }) => {
   return (

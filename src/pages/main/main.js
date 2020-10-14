@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../../component/header/header';
 import { Switch, Route } from 'react-router-dom';
 import Dashboard from '../../component/dashboard/dashboard';
-import SettingsRoutes from '../../component/routes/setting-routes/settingsRoutes';
+import SettingsRoutes from '../../component/routes/setting-routes';
 import LecturersRoutes from '../../component/routes/lecturers-routes/lecturersRoutes';
 
 const Main = () => {
