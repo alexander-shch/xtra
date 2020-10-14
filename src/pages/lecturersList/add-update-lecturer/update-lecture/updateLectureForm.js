@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import FilesList from './filesForm/filesList';
 import CommentList from './lecture-comment-form/commentList';
-import AvatarForm from './avatar-Form/avatarForm';
+import AvatarForm from './avatar-form/avatarForm';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { setAlert } from '../../../../redux/my-alert/myAlert.action';
@@ -13,6 +12,7 @@ import {
   setAvatarImg,
   uploadCv,
 } from '../../../../redux/lectures/lectures.action';
+import FilesLIst from './files-form/filesList';
 
 const UpdateLectureForm = ({
   id,
@@ -61,7 +61,7 @@ const UpdateLectureForm = ({
         setAvatarImg={setAvatarImg}
       />
       <h4>חוזה וקבצים</h4>
-      <FilesList handleCvChange={handleCvChange} cvSubmit={cvSubmit} />
+      <FilesLIst handleCvChange={handleCvChange} cvSubmit={cvSubmit} />
       <div>
         <h4>הערות על המרצה</h4>
         <CommentList
