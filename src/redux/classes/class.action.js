@@ -1,5 +1,5 @@
 import { callFetch, URL, jewishHolyUrl } from '../../utils/actionUtils';
-import { setAlert } from '../my-alert/myAlert.action';
+import { setAlert } from '../my-Alert/alert.action';
 
 export const getClassesData = () => (dispatch) => {
   dispatch({ type: 'CLASSES_FETCH_START' });

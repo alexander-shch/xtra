@@ -4,7 +4,7 @@ import CommentList from './lecture-comment-form/commentList';
 import AvatarForm from './avatar-Form/avatarForm';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { setAlert } from '../../../../redux/my-alert/myAlert.action';
+import { setAlert } from '../../../../redux/my-Alert/alert.action';
 import { closeConfirmMessage } from '../../../../redux/on-delete/delete.action';
 import DeleteBox from '../../../../component/delete-box/deleteBox';
 import {
