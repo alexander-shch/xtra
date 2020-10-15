@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import AddLecturerForm from './Add-Update-Lecturer/Add-Lecturer/AddLecturerForm';
-import UpdateLectureForm from './Add-Update-Lecturer/update-lecture/UpdateLectureForm';
+import UpdateLectureForm from './Add-Update-Lecturer/Update-Lecturer/UpdateLectureForm';
 import { UpdatePageContainer } from '../../components/global-style/SettingSection';
 import { withRouter } from 'react-router-dom';
 import MyAlert from '../../components/My-Alert/MyAlert';
