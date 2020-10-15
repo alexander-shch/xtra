@@ -1,10 +1,10 @@
 import React from 'react';
-import MyButton from '../../componnent/My-button/MyButton';
+import MyButton from '../../components/My-button/MyButton';
 import { withRouter } from 'react-router-dom';
-import { SettingSectionContainer } from '../../componnent/global-style/SettingSection';
-import TableTop from '../../componnent/table-top/Tabletop';
-import SingleVatItem from '../../componnent/single-items/vatList/SingleVatItem';
-import SingleItemContainer from '../../componnent/single-items/singleItemContainer';
+import { SettingSectionContainer } from '../../components/global-style/SettingSection';
+import TableTop from '../../components/Table-top/Tabletop';
+import SingleVatItem from '../../components/Single-Items/vatList/SingleVatItem';
+import SingleItemContainer from '../../components/Single-Items/SingleItemContainer';
 
 const VatList = ({ history, match, vatList, loading }) => {
   return (

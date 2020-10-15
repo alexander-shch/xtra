@@ -4,7 +4,7 @@ import { setUserLog } from './Redux/userReducer/user.actions';
 import SignIn from './pages/SignIn/SignIn';
 import Main from './pages/Main/Main';
 import { Route } from 'react-router-dom';
-import Spinner from './componnent/spinner/Spinner';
+import Spinner from './components/spinner/Spinner';
 
 const App = ({ userLoged, setUserLog, loading }: any) => {
   useEffect(() => {

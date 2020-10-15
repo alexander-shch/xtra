@@ -1,6 +1,6 @@
 import React from 'react';
-import InputField from '../../../../componnent/inputes/input-field/InputField';
-import SelectInput from '../../../../componnent/inputes/select-input/SelectInput';
+import InputField from '../../../../components/inputs/input-field/InputField';
+import SelectInput from '../../../../components/inputs/select-input/SelectInput';
 import './CourseInfoForm.style.scss';
 
 const CourseInfoForm = ({ courseDetails, handleChange }) => {

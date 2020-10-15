@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import InputField from '../../componnent/inputes/input-field/InputField';
-import SelectInput from '../../componnent/inputes/select-input/SelectInput';
-import { UpdatePageContainer } from '../../componnent/global-style/SettingSection';
-import MyButton from '../../componnent/My-button/MyButton';
+import InputField from '../../components/inputs/input-field/InputField';
+import SelectInput from '../../components/inputs/select-input/SelectInput';
+import { UpdatePageContainer } from '../../components/global-style/SettingSection';
+import MyButton from '../../components/My-button/MyButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
 import { withRouter } from 'react-router-dom';
