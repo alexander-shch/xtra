@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import userReducer from './userReduser/userReduser';
+import userReducer from './userReducer/userReducer';
 import settingsView from './settingsView/settingsReducer';
 import BuildingsReducer from './buildings/BuildingsReducer';
 import classesReducer from './classes/classesReducer';

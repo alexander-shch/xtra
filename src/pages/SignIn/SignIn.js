@@ -7,7 +7,7 @@ import {
   setUserLog,
   getToken,
   signInFailed,
-} from '../../Redux/userReduser/user.actions';
+} from '../../Redux/userReducer/user.actions';
 
 const SignIn = ({ setUserLog, getToken, signInFailed }) => {
   const [UserDetail, setUserDetail] = useState({

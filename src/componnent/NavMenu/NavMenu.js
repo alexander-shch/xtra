@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './NavMenu.style.scss';
 import { connect } from 'react-redux';
-import { onsignOut } from '../../Redux/userReduser/user.actions';
+import { onsignOut } from '../../Redux/userReducer/user.actions';
 import { toggleView } from '../../Redux/settingsView/settings.actions';
 import Settings from '../settings/Settings';
 
