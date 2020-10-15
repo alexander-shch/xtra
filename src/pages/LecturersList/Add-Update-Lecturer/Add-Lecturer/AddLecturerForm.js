@@ -6,7 +6,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import MyButton from '../../../../components/My-button/MyButton';
 import SelectInput from '../../../../components/inputs/select-input/SelectInput';
 import { withRouter } from 'react-router-dom';
-import Spinner from '../../../../components/spinner/Spinner';
+
 const AddLecturerForm = ({
   history,
   handdleChange,
@@ -17,7 +17,6 @@ const AddLecturerForm = ({
   inProcess,
   lectureID,
   clearSingle,
-  innerSinglePageLoading,
 }) => {
   const {
     name,
@@ -32,10 +31,9 @@ const AddLecturerForm = ({
     description,
     experience,
     teaching,
+    notes
   } = lectureDeteils;
-  return innerSinglePageLoading ? (
-    <Spinner />
-  ) : (
+  return (
     <form onSubmit={handdleSubmit}>
       <div className='add-lecture-form'>
         <InputField
@@ -164,9 +162,10 @@ const AddLecturerForm = ({
           hebrew='true'
         />
         <TextArea
-          name='internalNotes'
+          name='notes'
           type='text'
           label='הערות'
+          value={notes}
           handleChange={handdleChange}
           hebrew='true'
         />
@@ -189,7 +188,7 @@ const AddLecturerForm = ({
         </MyButton>
       </div>
     </form>
-  );
+  )
 };
 
 export default withRouter(AddLecturerForm);

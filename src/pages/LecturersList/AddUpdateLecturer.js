@@ -4,6 +4,7 @@ import UpdateLectureForm from './Add-Update-Lecturer/Update-Lecturer/UpdateLectu
 import { UpdatePageContainer } from '../../components/global-style/SettingSection';
 import { withRouter } from 'react-router-dom';
 import MyAlert from '../../components/My-Alert/MyAlert';
+import Spinner from '../../components/spinner/Spinner';
 
 const AddUpdateLecturer = ({
   vatList,
@@ -38,6 +39,7 @@ const AddUpdateLecturer = ({
     description: '',
     experience: '',
     teaching: '',
+    notes:''
   });
 
   useEffect(() => {
@@ -55,6 +57,7 @@ const AddUpdateLecturer = ({
         description,
         experience,
         teaching,
+        notes
       } = singleLecture;
       setLectureDetails({
         name,
@@ -69,6 +72,7 @@ const AddUpdateLecturer = ({
         description,
         experience,
         teaching,
+        notes
       });
     }
     if (error) {
@@ -108,6 +112,7 @@ const AddUpdateLecturer = ({
   return (
     <>
       <MyAlert />
+      {innerSinglePageLoading?<Spinner/>:
       <UpdatePageContainer>
         <AddLecturerForm
           handdleChange={handdleChange}
@@ -118,11 +123,10 @@ const AddUpdateLecturer = ({
           lecturesLoading={lecturesLoading}
           lectureID={lectureID}
           clearSingle={clearSingle}
-          innerSinglePageLoading={innerSinglePageLoading}
           inProcess={inProcess}
         />
         {singleLecture ? <UpdateLectureForm id={lectureID} /> : null}
-      </UpdatePageContainer>
+      </UpdatePageContainer>}
     </>
   );
 };
