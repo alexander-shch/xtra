@@ -1,5 +1,5 @@
 import React from 'react';
-import FilesList from './FilesForm/FilesList';
+import FilesList from './FilesForm/FileList';
 import AvatarForm from './Avatars-Form/AvatarForm';
 import { setAvatarImg } from '../../../../Redux/Lectures/lectures.action';
 import { connect } from 'react-redux';
