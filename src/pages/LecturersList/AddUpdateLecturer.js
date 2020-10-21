@@ -4,6 +4,8 @@ import UpdateLectureForm from './Add-Update-Lecturer/Update-Lecturer/UpdateLectu
 import { UpdatePageContainer } from '../../components/global-style/SettingSection';
 import { withRouter } from 'react-router-dom';
 import MyAlert from '../../components/My-Alert/MyAlert';
+import Spinner from '../../components/spinner/Spinner';
+
 
 const AddUpdateLecturer = ({
   vatList,
@@ -18,11 +20,15 @@ const AddUpdateLecturer = ({
   clearSingle,
   innerSinglePageLoading,
   inProcess,
+  setAlert,
 }) => {
   const lectureID = match.params.LecturerID;
   useEffect(() => {
     if (lectureID) {
       getSingleLecture(lectureID);
+      return () => {
+        clearSingle()
+      }
     } // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const [lectureDeteils, setLectureDetails] = useState({
@@ -55,6 +61,7 @@ const AddUpdateLecturer = ({
         description,
         experience,
         teaching,
+        notes
       } = singleLecture;
       setLectureDetails({
         name,
@@ -69,19 +76,25 @@ const AddUpdateLecturer = ({
         description,
         experience,
         teaching,
+        notes
       });
     }
     if (error) {
       history.push('/lecturers');
-      clearSingle();
     } // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [singleLecture, error]);
 
   const handdleSubmit = async (e) => {
+    const { duplicator } = lectureDeteils
     e.preventDefault();
     if (!singleLecture) {
       try {
-        await addNewLecture(lectureDeteils, history);
+        if (!duplicator) {
+          setAlert('יש לבחור מכפיל', 'error')
+          return
+        } else {
+          await addNewLecture(lectureDeteils, history)
+        }
       } catch (err) {
         console.log(err);
       }
@@ -108,21 +121,22 @@ const AddUpdateLecturer = ({
   return (
     <>
       <MyAlert />
-      <UpdatePageContainer>
-        <AddLecturerForm
-          handdleChange={handdleChange}
-          handleEditorChange={handleEditorChange}
-          handdleSubmit={handdleSubmit}
-          vatList={vatList}
-          lectureDeteils={lectureDeteils}
-          lecturesLoading={lecturesLoading}
-          lectureID={lectureID}
-          clearSingle={clearSingle}
-          innerSinglePageLoading={innerSinglePageLoading}
-          inProcess={inProcess}
-        />
-        {singleLecture ? <UpdateLectureForm id={lectureID} /> : null}
-      </UpdatePageContainer>
+      {innerSinglePageLoading ? <Spinner /> :
+        <UpdatePageContainer>
+          <AddLecturerForm
+            handdleChange={handdleChange}
+            handleEditorChange={handleEditorChange}
+            handdleSubmit={handdleSubmit}
+            vatList={vatList}
+            lectureDeteils={lectureDeteils}
+            lecturesLoading={lecturesLoading}
+            lectureID={lectureID}
+            clearSingle={clearSingle}
+
+            inProcess={inProcess}
+          />
+          {singleLecture ? <UpdateLectureForm id={lectureID} /> : null}
+        </UpdatePageContainer>}
     </>
   );
 };

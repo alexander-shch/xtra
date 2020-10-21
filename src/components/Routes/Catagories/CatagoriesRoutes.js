@@ -11,11 +11,9 @@ import {
 } from '../../../Redux/categories/categories.action';
 import AddUpdateCategory from '../../../pages/Categories/Add-Update-Category/AddUpdateCategory';
 import Spinner from '../../spinner/Spinner';
-import WithSpinner from '../../spinner/WithSpinner';
 import DeleteBox from '../../delete-box/DeleteBox';
 import { closeConfirmMessage } from '../../../Redux/on-delete/delete.action';
 
-const AddUpdateCategoryWithSpinner = WithSpinner(AddUpdateCategory);
 const CategoriesList = lazy(() =>
   import('../../../pages/Categories/CategoriesList')
 );
@@ -30,10 +28,7 @@ const CategoriesRoutes = ({
   confirmMessageData,
   closeConfirmMessage,
   loading,
-  getSingleCategory,
-  singleCategory,
-  clearSingle,
-  error,
+  ...props
 }) => {
   useEffect(() => {
     getCategories();
@@ -62,14 +57,9 @@ const CategoriesRoutes = ({
         <Route
           path={`${match.path}/updateCategory/:categotyID`}
           render={() => (
-            <AddUpdateCategoryWithSpinner
-              loading={loading}
-              getSingleCategory={getSingleCategory}
-              singleCategory={singleCategory}
-              categories={categories}
+            <AddUpdateCategory
               updateCategoty={updateCategoty}
-              clearSingle={clearSingle}
-              error={error}
+              {...props}
             />
           )}
         />
@@ -83,6 +73,7 @@ const mapStateToProps = (state) => ({
   confirmMessageData: state.delete,
   singleCategory: state.categories.singleCategory,
   error: state.categories.error,
+  innerSinglePageLoading: state.categories.innerSinglePageLoading
 });
 
 const mapDispatchToProps = (dispatch) => ({

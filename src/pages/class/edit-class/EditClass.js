@@ -9,6 +9,7 @@ import DeleteDate from '../../../components/delete-box/DeleteDate';
 import { UpdatePageContainer } from '../../../components/global-style/SettingSection';
 import WithSpinner from '../../../components/spinner/WithSpinner';
 import MyAlert from '../../../components/My-Alert/MyAlert';
+import Spinner from '../../../components/spinner/Spinner';
 
 const CalendarWithSpinner = WithSpinner(Calendar);
 
@@ -17,25 +18,28 @@ const EditClass = ({
   match,
   addNewClass,
   history,
-  updateClass,
-  setAvailability,
-  loading,
-  updateAvailability,
-  deleteAvailability,
+  process,
   calenderLoading,
   setAlert,
-  jewsihHolydays,
   getSingleClass,
   singleClass,
-  clearSingle,
-  error,
+  jewsihHolydays,
+  ...props
 }) => {
+  const { innerSinglePageLoading, error, clearSingle, deleteAvailability, updateAvailability, setAvailability, updateClass } = props
   const classID = match.params.classID;
 
   useEffect(() => {
+    if (classID && !singleClass) {
+      getSingleClass(classID)
+    }
     if (classID) {
-      getSingleClass(classID);
-    } // eslint-disable-next-line react-hooks/exhaustive-deps
+      return () => {
+        clearSingle()
+      }
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [classDetails, setClassDetails] = useState({
@@ -51,7 +55,6 @@ const EditClass = ({
     }
     if (error) {
       history.push('/settings/list-classes');
-      clearSingle();
     } // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [singleClass, error]);
 
@@ -228,56 +231,57 @@ const EditClass = ({
   return (
     <>
       <MyAlert />
-      <UpdatePageContainer>
-        <div className='classForm'>
-          <h3>{title}</h3>
+      {innerSinglePageLoading ? <Spinner /> :
+        <UpdatePageContainer>
+          <div className='classForm'>
+            <h3>{title}</h3>
 
-          <FirstForm
-            loading={loading}
-            buildings={buildings}
-            handleSubmit={handleSubmit}
-            handdleChange={handdleChange}
-            classDetails={classDetails}
-            clearSingle={clearSingle}
-          />
-          {classID ? (
-            <>
-              <SecondForm
-                onDayChange={onDayChange}
-                handleDatesSubmit={handleDatesSubmit}
-                dateHanddleChange={dateHanddleChange}
-                dateDetails={dateDetails}
-              />
-              <div className='clendar-container'>
-                <CalendarWithSpinner
-                  loading={calenderLoading}
-                  lastDate={lastUpdatedDate}
-                  events={events}
-                  jewsihHolydays={jewsihHolydays}
-                  setDateClick={setDateClick}
-                  setEventClick={setEventClick}
-                />
-              </div>
-              {updateSingleBoxDisplay ? (
-                <UpdateSingle
-                  dateDetails={dateDetails}
-                  dateHanddleChange={dateHanddleChange}
+            <FirstForm
+              loading={process}
+              buildings={buildings}
+              handleSubmit={handleSubmit}
+              handdleChange={handdleChange}
+              classDetails={classDetails}
+              clearSingle={clearSingle}
+            />
+            {classID ? (
+              <>
+                <SecondForm
+                  onDayChange={onDayChange}
                   handleDatesSubmit={handleDatesSubmit}
-                  openDeleteBox={openDeleteBox}
-                  closeSingleBox={closeSingleBox}
+                  dateHanddleChange={dateHanddleChange}
+                  dateDetails={dateDetails}
                 />
-              ) : null}
-              {confirmMsgView ? (
-                <DeleteDate
-                  item={confirmMsg}
-                  delteItem={delteItem}
-                  close={closeDeleteBox}
-                />
-              ) : null}
-            </>
-          ) : null}
-        </div>
-      </UpdatePageContainer>
+                <div className='clendar-container'>
+                  <CalendarWithSpinner
+                    loading={calenderLoading}
+                    lastDate={lastUpdatedDate}
+                    events={events}
+                    jewsihHolydays={jewsihHolydays}
+                    setDateClick={setDateClick}
+                    setEventClick={setEventClick}
+                  />
+                </div>
+                {updateSingleBoxDisplay ? (
+                  <UpdateSingle
+                    dateDetails={dateDetails}
+                    dateHanddleChange={dateHanddleChange}
+                    handleDatesSubmit={handleDatesSubmit}
+                    openDeleteBox={openDeleteBox}
+                    closeSingleBox={closeSingleBox}
+                  />
+                ) : null}
+                {confirmMsgView ? (
+                  <DeleteDate
+                    item={confirmMsg}
+                    delteItem={delteItem}
+                    close={closeDeleteBox}
+                  />
+                ) : null}
+              </>
+            ) : null}
+          </div>
+        </UpdatePageContainer>}
     </>
   );
 };

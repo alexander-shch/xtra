@@ -2,12 +2,15 @@ const INTIAL_STATE = {
   buildings: [],
   isPending: true,
   process: false,
+  innerSinglePageLoading: true,
   singleBuilding: null,
   error: null,
 };
 
 const BuildingsReducer = (state = INTIAL_STATE, action) => {
   switch (action.type) {
+    case 'GET_SINGLE_BUILDING_START':
+      return { ...state, innerSinglePageLoading: true }
     case 'BUILDING_FETCH_START':
     case 'DELETE_BUILDING_START':
       return { ...state, isPending: true };
@@ -16,12 +19,13 @@ const BuildingsReducer = (state = INTIAL_STATE, action) => {
       return { ...state, process: true };
     case 'BUILDING_FETCH_SUCSESS':
       return {
+        ...state,
         buildings: action.payload,
         isPending: false,
         error: null,
       };
     case 'GET_SINGLE_BUILDING_SUCSESS':
-      return { ...state, isPending: false, singleBuilding: action.payload };
+      return { ...state, isPending: false, singleBuilding: action.payload, innerSinglePageLoading: false };
     case 'POST_NEW_BUILDING_SUCSESS':
       return {
         ...state,
@@ -54,10 +58,10 @@ const BuildingsReducer = (state = INTIAL_STATE, action) => {
     case 'POST_NEW_BUILDING_FAILED':
     case 'BUILDING_FETCH_FAILED':
     case 'GET_SINGLE_BUILDING_FAILED':
-      return { ...state, isPending: false, error: action.payload };
+      return { ...state, isPending: false, error: action.payload, innerSinglePageLoading: false };
 
     case 'CLEAR_SINGLE':
-      return { ...state, error: null, singleBuilding: null };
+      return { ...state, error: null, singleBuilding: null, innerSinglePageLoading: true };
     default:
       return state;
   }

@@ -6,7 +6,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import MyButton from '../../../../components/My-button/MyButton';
 import SelectInput from '../../../../components/inputs/select-input/SelectInput';
 import { withRouter } from 'react-router-dom';
-import Spinner from '../../../../components/spinner/Spinner';
+import SelectProps from '../../../../components/inputs/selectProps/SelectProps'
 const AddLecturerForm = ({
   history,
   handdleChange,
@@ -17,7 +17,6 @@ const AddLecturerForm = ({
   inProcess,
   lectureID,
   clearSingle,
-  innerSinglePageLoading,
 }) => {
   const {
     name,
@@ -32,10 +31,10 @@ const AddLecturerForm = ({
     description,
     experience,
     teaching,
+    notes
   } = lectureDeteils;
-  return innerSinglePageLoading ? (
-    <Spinner />
-  ) : (
+
+  return (
     <form onSubmit={handdleSubmit}>
       <div className='add-lecture-form'>
         <InputField
@@ -92,25 +91,16 @@ const AddLecturerForm = ({
           hebrew='true'
           required
         />
-        <div className='selectContianer'>
-          <select
-            required
-            name='duplicator'
-            className='selectbuildingInput'
-            value={duplicator ? duplicator : '1'}
-            onChange={handdleChange}
-          >
-            <option value='1' disabled hidden>
-              בחר מכפיל
-            </option>
-            {vatList.map((item) => (
-              <option key={item._id} value={item._id}>
-                {item.title}
-              </option>
-            ))}
-          </select>
-          <label className='selectInputLabael'> מכפיל שכר</label>
-        </div>
+
+        <SelectProps
+          props={vatList}
+          name='duplicator'
+          value={duplicator}
+          selectTitle='בחר מכפיל'
+          keyToDisplay='title'
+          label='מכפילי שכר'
+          handdleChange={handdleChange}
+        />
         <SelectInput
           name='active'
           label='פעיל'
@@ -164,9 +154,10 @@ const AddLecturerForm = ({
           hebrew='true'
         />
         <TextArea
-          name='internalNotes'
+          name='notes'
           type='text'
           label='הערות'
+          value={notes}
           handleChange={handdleChange}
           hebrew='true'
         />
@@ -180,12 +171,11 @@ const AddLecturerForm = ({
           onClick={() => {
             history.push('/lecturers');
             if (lectureID) {
-              clearSingle();
             }
           }}
           forgot
         >
-          ביטול
+          חזרה
         </MyButton>
       </div>
     </form>

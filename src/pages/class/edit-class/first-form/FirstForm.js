@@ -2,6 +2,7 @@ import React from 'react';
 import './firstForm.style.scss';
 import InputField from '../../../../components/inputs/input-field/InputField';
 import MyButton from '../../../../components/My-button/MyButton';
+import SelectProps from '../../../../components/inputs/selectProps/SelectProps'
 import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
@@ -14,7 +15,6 @@ const FirstForm = ({
   classDetails,
   history,
   loading,
-  clearSingle,
 }) => {
   const { name, minStudents, maxStudents, building } = classDetails;
   return (
@@ -29,25 +29,15 @@ const FirstForm = ({
           hebrew='true'
           required
         />
-        <div className='selectbuildingInput'>
-          <select
-            required
-            name='building'
-            className='buildingSelector'
-            defaultValue={building !== null ? building : '1'}
-            onChange={handdleChange}
-          >
-            <option value='1' disabled hidden>
-              בחר בניין
-            </option>
-            {buildings.map((item) => (
-              <option key={item._id} value={item._id}>
-                {item.name}
-              </option>
-            ))}
-          </select>
-          <label className='selectInputLabael'>בחר בניין</label>
-        </div>
+         <SelectProps
+          props={buildings}
+          name='building'
+          value={building}
+          selectTitle='בחר בניין'
+          keyToDisplay='name'
+          label='בחר בניין'
+          handdleChange={handdleChange}
+        />
       </div>
       <h4>מספר תלמידים</h4>
 
@@ -80,13 +70,10 @@ const FirstForm = ({
           type='button'
           onClick={() => {
             history.push('/settings/list-classes');
-            if (!classDetails) {
-              clearSingle();
-            }
           }}
           forgot
         >
-          ביטול
+          חזרה
         </MyButton>
       </div>
     </form>

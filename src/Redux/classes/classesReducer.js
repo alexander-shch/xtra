@@ -10,9 +10,10 @@ import {
 } from './classes.utiles';
 
 const INTIAL_STATE = {
-  pageLoading: false,
+  loading: false,
   calenderLoading: false,
   process: false,
+  innerSinglePageLoading: true,
   classes: [],
   singleClass: null,
   jewsihHolydays: [],
@@ -21,8 +22,10 @@ const INTIAL_STATE = {
 
 const classesReducer = (state = INTIAL_STATE, action) => {
   switch (action.type) {
+    case 'GET_SINGLE_CLASS_START':
+      return { ...state, innerSinglePageLoading: true }
     case 'CLASSES_FETCH_START':
-      return { ...state, pageLoading: true };
+      return { ...state, loading: true };
     case 'DELETE_CLASS_START':
     case 'UPDATE_CLASS_START':
     case 'ADD_NEW_CLASS_START':
@@ -31,11 +34,11 @@ const classesReducer = (state = INTIAL_STATE, action) => {
       return {
         ...state,
         process: false,
-        pageLoading: false,
+        loading: false,
         classes: action.payload,
       };
     case 'GET_SINGLE_CLASS_SUCCESS':
-      return { ...state, singleClass: action.payload };
+      return { ...state, singleClass: action.payload, innerSinglePageLoading: false };
     case 'SET_AVAILABILITY_START':
     case 'UPDATE_AVAILABILTY_START':
     case 'DELETE_AVAILABILTY_START':
@@ -45,6 +48,7 @@ const classesReducer = (state = INTIAL_STATE, action) => {
         ...state,
         classes: [...state.classes, action.payload],
         process: false,
+        innerSinglePageLoading: false,
         singleClass: action.payload,
       };
     case 'UPDATE_CLASS_SUCCESS':
@@ -98,10 +102,10 @@ const classesReducer = (state = INTIAL_STATE, action) => {
         ...state,
         error: action.payload,
         process: false,
-        pageLoading: false,
+        loading: false,
       };
     case 'CLEAR_SINGLE':
-      return { ...state, singleClass: null, error: null };
+      return { ...state, singleClass: null, error: null, innerSinglePageLoading: true };
     default:
       return state;
   }

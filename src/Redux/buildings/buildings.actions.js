@@ -2,34 +2,16 @@ import { callFetch, URL } from '../../utils/actionUtils';
 
 export const getBuildingsData = () => (dispatch) => {
   dispatch({ type: 'BUILDING_FETCH_START' });
-  fetch(`${URL}/buildings`, {
-    method: 'GET',
-    cache: 'no-cache',
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    },
-  })
-    .then((res) => res.json())
+  callFetch(`${URL}/buildings`, 'GET')
     .then((data) => dispatch({ type: 'BUILDING_FETCH_SUCSESS', payload: data }))
     .catch((err) => dispatch({ type: 'BUILDING_FETCH_FAILED', payload: err }));
 };
 
 export const addNewBuilding = (name, active) => (dispatch) => {
   const booleanActive = JSON.parse(active);
-  dispatch({ type: 'POST_NEW_BUILDING_START' });
-  fetch(`${URL}/buildings`, {
-    method: 'POST',
-    cache: 'no-cache',
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      name: name,
-      active: booleanActive,
-    }),
-  })
-    .then((res) => res.json())
+  const buildingObj={name,active:booleanActive}
+  dispatch({ type: 'POST_NEW_BUILDING_START' })
+  callFetch(`${URL}/buildings`,'POST',buildingObj)
     .then((data) => {
       dispatch({ type: 'POST_NEW_BUILDING_SUCSESS', payload: data });
     })
@@ -38,21 +20,11 @@ export const addNewBuilding = (name, active) => (dispatch) => {
     );
 };
 
-export const updateBuilding = (itemid, name, active) => (dispatch) => {
+export const updateBuilding = (itemid, name, active) => (dispatch) => { 
   const booleanActive = JSON.parse(active);
-  dispatch({ type: 'UPDATE_BUILDING_START' });
-  fetch(`${URL}/buildings/${itemid}`, {
-    method: 'PUT',
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      name: name,
-      active: booleanActive,
-    }),
-  })
-    .then((res) => res.json())
+  const buildingObj={name,active:booleanActive}
+  dispatch({ type: 'UPDATE_BUILDING_START' })
+  callFetch(`${URL}/buildings/${itemid}`,'PUT',buildingObj)
     .then((data) =>
       dispatch({ type: 'UPDATE_BUILDING_SUCSESS', payload: data })
     )
@@ -61,14 +33,7 @@ export const updateBuilding = (itemid, name, active) => (dispatch) => {
 
 export const deleteBuilding = (itemid) => (dispatch) => {
   dispatch({ type: 'DELETE_BUILDING_START' });
-  fetch(`${URL}/buildings/${itemid}`, {
-    method: 'DELETE',
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-      'Content-Type': 'application/json',
-    },
-  })
-    .then((res) => res.json())
+  callFetch(`${URL}/buildings/${itemid}`, 'DELETE')
     .then((data) => {
       if (data.deleted) {
         dispatch({

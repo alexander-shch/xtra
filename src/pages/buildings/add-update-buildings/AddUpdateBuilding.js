@@ -6,6 +6,7 @@ import MyButton from '../../../components/My-button/MyButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
 import { withRouter } from 'react-router-dom';
+import Spinner from '../../../components/spinner/Spinner';
 
 const element = <FontAwesomeIcon icon={faSave} />;
 
@@ -15,11 +16,10 @@ const AddUpdateBuilding = ({
   updateBuilding,
   match,
   getSingleBuilding,
-  singleBuilding,
-  clearSingle,
-  error,
-  process,
+  ...otherProps
 }) => {
+  const { clearSingle, error, innerSinglePageLoading, singleBuilding, } = otherProps
+
   const buildingID = match.params.BuildingId;
   const [buildingDetails, setBuildingDetail] = useState({
     name: '',
@@ -29,7 +29,11 @@ const AddUpdateBuilding = ({
   useEffect(() => {
     if (buildingID) {
       getSingleBuilding(buildingID);
-    } // eslint-disable-next-line react-hooks/exhaustive-deps
+      return () => {
+        clearSingle()
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -68,42 +72,41 @@ const AddUpdateBuilding = ({
   };
   const cancel = () => {
     history.push('/settings/buildings/');
-    if (buildingID) {
-      clearSingle();
-    }
+
   };
 
   return (
-    <UpdatePageContainer>
-      <h3>{buildingID ? 'עריכה' : 'הוספה'}</h3>
-      <form onSubmit={handleSubmit}>
-        <InputField
-          name='name'
-          type='text'
-          label='שם המקום'
-          value={name}
-          handleChange={handdleChange}
-          hebrew='true'
-          required
-        />
-        <SelectInput
-          name='active'
-          label='פעיל'
-          value={active}
-          handleChange={handdleChange}
-          required
-        />
-        <div className='buttons'>
-          <MyButton save loading={process}>
-            {element}
+    innerSinglePageLoading ? <Spinner /> :
+      <UpdatePageContainer>
+        <h3>{buildingID ? 'עריכה' : 'הוספה'}</h3>
+        <form onSubmit={handleSubmit}>
+          <InputField
+            name='name'
+            type='text'
+            label='שם המקום'
+            value={name}
+            handleChange={handdleChange}
+            hebrew='true'
+            required
+          />
+          <SelectInput
+            name='active'
+            label='פעיל'
+            value={active}
+            handleChange={handdleChange}
+            required
+          />
+          <div className='buttons'>
+            <MyButton >
+              {element}
+            </MyButton>
+            <MyButton type='button' onClick={() => cancel()} forgot>
+              חזרה
           </MyButton>
-          <MyButton type='button' onClick={() => cancel()} forgot>
-            חזרה
-          </MyButton>
-        </div>
-      </form>
-    </UpdatePageContainer>
-  );
+          </div>
+        </form>
+      </UpdatePageContainer>
+  )
 };
 
 export default withRouter(AddUpdateBuilding);
