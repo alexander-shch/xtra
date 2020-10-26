@@ -7,6 +7,7 @@ import MyButton from '../../../../components/My-button/MyButton';
 import SelectInput from '../../../../components/inputs/select-input/SelectInput';
 import { withRouter } from 'react-router-dom';
 import SelectProps from '../../../../components/inputs/selectProps/SelectProps'
+
 const AddLecturerForm = ({
   history,
   handdleChange,
@@ -33,7 +34,6 @@ const AddLecturerForm = ({
     teaching,
     notes
   } = lectureDeteils;
-
   return (
     <form onSubmit={handdleSubmit}>
       <div className='add-lecture-form'>
@@ -179,7 +179,7 @@ const AddLecturerForm = ({
         </MyButton>
       </div>
     </form>
-  );
+  )
 };
 
 export default withRouter(AddLecturerForm);
