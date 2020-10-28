@@ -26,17 +26,25 @@ const EditClass = ({
   jewsihHolydays,
   ...props
 }) => {
-  const { innerSinglePageLoading, error, clearSingle, deleteAvailability, updateAvailability, setAvailability, updateClass } = props
+  const {
+    innerSinglePageLoading,
+    error,
+    clearSingle,
+    deleteAvailability,
+    updateAvailability,
+    setAvailability,
+    updateClass,
+  } = props;
   const classID = match.params.classID;
 
   useEffect(() => {
     if (classID && !singleClass) {
-      getSingleClass(classID)
+      getSingleClass(classID);
     }
     if (classID) {
       return () => {
-        clearSingle()
-      }
+        clearSingle();
+      };
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -51,7 +59,12 @@ const EditClass = ({
   useEffect(() => {
     if (singleClass) {
       const { name, minStudents, maxStudents, building } = singleClass;
-      setClassDetails({ name, minStudents, maxStudents, building });
+      setClassDetails({
+        name,
+        minStudents,
+        maxStudents,
+        building: building._id,
+      });
     }
     if (error) {
       history.push('/settings/list-classes');
@@ -231,7 +244,9 @@ const EditClass = ({
   return (
     <>
       <MyAlert />
-      {innerSinglePageLoading ? <Spinner /> :
+      {innerSinglePageLoading ? (
+        <Spinner />
+      ) : (
         <UpdatePageContainer>
           <div className='classForm'>
             <h3>{title}</h3>
@@ -281,7 +296,8 @@ const EditClass = ({
               </>
             ) : null}
           </div>
-        </UpdatePageContainer>}
+        </UpdatePageContainer>
+      )}
     </>
   );
 };

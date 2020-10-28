@@ -18,7 +18,12 @@ const AddUpdateBuilding = ({
   getSingleBuilding,
   ...otherProps
 }) => {
-  const { clearSingle, error, innerSinglePageLoading, singleBuilding, } = otherProps
+  const {
+    clearSingle,
+    error,
+    innerSinglePageLoading,
+    singleBuilding,
+  } = otherProps;
 
   const buildingID = match.params.BuildingId;
   const [buildingDetails, setBuildingDetail] = useState({
@@ -30,8 +35,8 @@ const AddUpdateBuilding = ({
     if (buildingID) {
       getSingleBuilding(buildingID);
       return () => {
-        clearSingle()
-      }
+        clearSingle();
+      };
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -72,41 +77,39 @@ const AddUpdateBuilding = ({
   };
   const cancel = () => {
     history.push('/settings/buildings/');
-
   };
 
-  return (
-    innerSinglePageLoading ? <Spinner /> :
-      <UpdatePageContainer>
-        <h3>{buildingID ? 'עריכה' : 'הוספה'}</h3>
-        <form onSubmit={handleSubmit}>
-          <InputField
-            name='name'
-            type='text'
-            label='שם המקום'
-            value={name}
-            handleChange={handdleChange}
-            hebrew='true'
-            required
-          />
-          <SelectInput
-            name='active'
-            label='פעיל'
-            value={active}
-            handleChange={handdleChange}
-            required
-          />
-          <div className='buttons'>
-            <MyButton >
-              {element}
-            </MyButton>
-            <MyButton type='button' onClick={() => cancel()} forgot>
-              חזרה
+  return innerSinglePageLoading ? (
+    <Spinner />
+  ) : (
+    <UpdatePageContainer>
+      <h3>{buildingID ? 'עריכה' : 'הוספה'}</h3>
+      <form onSubmit={handleSubmit}>
+        <InputField
+          name='name'
+          type='text'
+          label='שם המקום'
+          value={name}
+          handleChange={handdleChange}
+          hebrew='true'
+          required
+        />
+        <SelectInput
+          name='active'
+          label='פעיל'
+          value={active}
+          handleChange={handdleChange}
+          required
+        />
+        <div className='buttons'>
+          <MyButton>{element}</MyButton>
+          <MyButton type='button' onClick={() => cancel()} forgot>
+            חזרה
           </MyButton>
-          </div>
-        </form>
-      </UpdatePageContainer>
-  )
+        </div>
+      </form>
+    </UpdatePageContainer>
+  );
 };
 
 export default withRouter(AddUpdateBuilding);

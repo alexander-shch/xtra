@@ -6,7 +6,6 @@ import { withRouter } from 'react-router-dom';
 import MyAlert from '../../components/My-Alert/MyAlert';
 import Spinner from '../../components/spinner/Spinner';
 
-
 const AddUpdateLecturer = ({
   vatList,
   match,
@@ -27,8 +26,8 @@ const AddUpdateLecturer = ({
     if (lectureID) {
       getSingleLecture(lectureID);
       return () => {
-        clearSingle()
-      }
+        clearSingle();
+      };
     } // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const [lectureDeteils, setLectureDetails] = useState({
@@ -61,7 +60,7 @@ const AddUpdateLecturer = ({
         description,
         experience,
         teaching,
-        notes
+        notes,
       } = singleLecture;
       setLectureDetails({
         name,
@@ -76,7 +75,7 @@ const AddUpdateLecturer = ({
         description,
         experience,
         teaching,
-        notes
+        notes,
       });
     }
     if (error) {
@@ -85,15 +84,15 @@ const AddUpdateLecturer = ({
   }, [singleLecture, error]);
 
   const handdleSubmit = async (e) => {
-    const { duplicator } = lectureDeteils
+    const { duplicator } = lectureDeteils;
     e.preventDefault();
     if (!singleLecture) {
       try {
         if (!duplicator) {
-          setAlert('יש לבחור מכפיל', 'error')
-          return
+          setAlert('יש לבחור מכפיל', 'error');
+          return;
         } else {
-          await addNewLecture(lectureDeteils, history)
+          await addNewLecture(lectureDeteils, history);
         }
       } catch (err) {
         console.log(err);
@@ -121,7 +120,9 @@ const AddUpdateLecturer = ({
   return (
     <>
       <MyAlert />
-      {innerSinglePageLoading ? <Spinner /> :
+      {innerSinglePageLoading ? (
+        <Spinner />
+      ) : (
         <UpdatePageContainer>
           <AddLecturerForm
             handdleChange={handdleChange}
@@ -132,11 +133,11 @@ const AddUpdateLecturer = ({
             lecturesLoading={lecturesLoading}
             lectureID={lectureID}
             clearSingle={clearSingle}
-
             inProcess={inProcess}
           />
           {singleLecture ? <UpdateLectureForm id={lectureID} /> : null}
-        </UpdatePageContainer>}
+        </UpdatePageContainer>
+      )}
     </>
   );
 };

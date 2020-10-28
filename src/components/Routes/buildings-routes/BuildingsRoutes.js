@@ -17,7 +17,6 @@ const AddUpdateBuilding = lazy(() =>
 );
 const Buildings = lazy(() => import('../../../pages/buildings/Buildings'));
 
-
 const BuildingsRoutes = ({
   match,
   getBuildingsData,
@@ -69,12 +68,12 @@ const BuildingsRoutes = ({
 };
 
 const mapStateToProps = (state) => ({
-  loading: state.buildings.isPending,
+  loading: state.buildings.loading,
   data: state.buildings.buildings,
   confirmMessageData: state.delete,
   singleBuilding: state.buildings.singleBuilding,
   error: state.buildings.error,
-  innerSinglePageLoading: state.buildings.innerSinglePageLoading
+  innerSinglePageLoading: state.buildings.innerSinglePageLoading,
 });
 
 const mapDispatchToProps = (dispatch) => ({

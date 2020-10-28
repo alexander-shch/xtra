@@ -2,10 +2,10 @@ import React from 'react';
 import './firstForm.style.scss';
 import InputField from '../../../../components/inputs/input-field/InputField';
 import MyButton from '../../../../components/My-button/MyButton';
-import SelectProps from '../../../../components/inputs/selectProps/SelectProps'
 import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
+import SelectInputProps from '../../../../components/inputs/selectProps/SelectInputProps';
 const element = <FontAwesomeIcon icon={faSave} />;
 
 const FirstForm = ({
@@ -17,6 +17,7 @@ const FirstForm = ({
   loading,
 }) => {
   const { name, minStudents, maxStudents, building } = classDetails;
+
   return (
     <form onSubmit={handleSubmit}>
       <div className='name-and-building'>
@@ -29,11 +30,12 @@ const FirstForm = ({
           hebrew='true'
           required
         />
-         <SelectProps
+        <SelectInputProps
           props={buildings}
           name='building'
           value={building}
           selectTitle='בחר בניין'
+          keyToValue='_id'
           keyToDisplay='name'
           label='בחר בניין'
           handdleChange={handdleChange}
