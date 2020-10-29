@@ -43,6 +43,7 @@ const AddUpdateLecturer = ({
     description: '',
     experience: '',
     teaching: '',
+    notes:''
   });
 
   useEffect(() => {
