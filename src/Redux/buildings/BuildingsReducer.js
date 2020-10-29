@@ -1,27 +1,36 @@
 const INTIAL_STATE = {
   buildings: [],
-  isPending: true,
+  loading: true,
   process: false,
+  innerSinglePageLoading: true,
   singleBuilding: null,
   error: null,
 };
 
 const BuildingsReducer = (state = INTIAL_STATE, action) => {
   switch (action.type) {
+    case 'GET_SINGLE_BUILDING_START':
+      return { ...state, innerSinglePageLoading: true };
     case 'BUILDING_FETCH_START':
     case 'DELETE_BUILDING_START':
-      return { ...state, isPending: true };
+      return { ...state, loading: true };
     case 'POST_NEW_BUILDING_START':
     case 'UPDATE_BUILDING_START':
       return { ...state, process: true };
     case 'BUILDING_FETCH_SUCSESS':
       return {
+        ...state,
         buildings: action.payload,
-        isPending: false,
+        loading: false,
         error: null,
       };
     case 'GET_SINGLE_BUILDING_SUCSESS':
-      return { ...state, isPending: false, singleBuilding: action.payload };
+      return {
+        ...state,
+        loading: false,
+        singleBuilding: action.payload,
+        innerSinglePageLoading: false,
+      };
     case 'POST_NEW_BUILDING_SUCSESS':
       return {
         ...state,
@@ -37,7 +46,7 @@ const BuildingsReducer = (state = INTIAL_STATE, action) => {
       buildings[index] = action.payload;
       return {
         ...state,
-        isPending: false,
+        loading: false,
         process: false,
         buildings,
         singleBuilding: action.payload,
@@ -48,16 +57,26 @@ const BuildingsReducer = (state = INTIAL_STATE, action) => {
         buildings: state.buildings.filter(
           (item) => item._id !== action.payload
         ),
-        isPending: false,
+        loading: false,
       };
     case 'DELETE_BUILDING_FAILED':
     case 'POST_NEW_BUILDING_FAILED':
     case 'BUILDING_FETCH_FAILED':
     case 'GET_SINGLE_BUILDING_FAILED':
-      return { ...state, isPending: false, error: action.payload };
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+        innerSinglePageLoading: false,
+      };
 
     case 'CLEAR_SINGLE':
-      return { ...state, error: null, singleBuilding: null };
+      return {
+        ...state,
+        error: null,
+        singleBuilding: null,
+        innerSinglePageLoading: true,
+      };
     default:
       return state;
   }

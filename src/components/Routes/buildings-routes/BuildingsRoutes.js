@@ -11,14 +11,11 @@ import {
 } from '../../../Redux/buildings/buildings.actions';
 import { closeConfirmMessage } from '../../../Redux/on-delete/delete.action';
 import Spinner from '../../spinner/Spinner';
-import WithSpinner from '../../spinner/WithSpinner';
 import DeleteBox from '../../delete-box/DeleteBox';
 const AddUpdateBuilding = lazy(() =>
   import('../../../pages/buildings/add-update-buildings/AddUpdateBuilding')
 );
 const Buildings = lazy(() => import('../../../pages/buildings/Buildings'));
-
-const UpdateBuildingWithSpinner = WithSpinner(AddUpdateBuilding);
 
 const BuildingsRoutes = ({
   match,
@@ -30,10 +27,6 @@ const BuildingsRoutes = ({
   closeConfirmMessage,
   deleteBuilding,
   getSingleBuilding,
-  singleBuilding,
-  clearSingle,
-  error,
-  process,
   ...otherProps
 }) => {
   useEffect(() => {
@@ -62,14 +55,10 @@ const BuildingsRoutes = ({
         <Route
           path={`${match.path}/updateBulding/:BuildingId/`}
           render={() => (
-            <UpdateBuildingWithSpinner
-              process={process}
-              loading={otherProps.loading}
+            <AddUpdateBuilding
               updateBuilding={updateBuilding}
-              singleBuilding={singleBuilding}
               getSingleBuilding={getSingleBuilding}
-              error={error}
-              clearSingle={clearSingle}
+              {...otherProps}
             />
           )}
         />
@@ -79,12 +68,12 @@ const BuildingsRoutes = ({
 };
 
 const mapStateToProps = (state) => ({
-  loading: state.buildings.isPending,
+  loading: state.buildings.loading,
   data: state.buildings.buildings,
   confirmMessageData: state.delete,
   singleBuilding: state.buildings.singleBuilding,
   error: state.buildings.error,
-  process: state.buildings.process,
+  innerSinglePageLoading: state.buildings.innerSinglePageLoading,
 });
 
 const mapDispatchToProps = (dispatch) => ({

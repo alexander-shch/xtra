@@ -11,6 +11,7 @@ import {
   getSingleLecture,
   clearSingle,
 } from '../../../Redux/Lectures/lectures.action';
+import { setAlert } from '../../../Redux/My-Alert/myAlert.action'
 import { closeConfirmMessage } from '../../../Redux/on-delete/delete.action';
 import { getvatList } from '../../../Redux/Vat/vat.action';
 import DeleteBox from '../../delete-box/DeleteBox';
@@ -34,6 +35,7 @@ const LecturersRoutes = ({
   error,
   clearSingle,
   innerSinglePageLoading,
+  setAlert,
 }) => {
   useEffect(() => {
     getLectures();
@@ -69,6 +71,7 @@ const LecturersRoutes = ({
               addNewLecture={addNewLecture}
               inProcess={inProcess}
               updateLecture={updateLecture}
+              setAlert={setAlert}
             />
           )}
         />
@@ -84,6 +87,7 @@ const LecturersRoutes = ({
               clearSingle={clearSingle}
               innerSinglePageLoading={innerSinglePageLoading}
               inProcess={inProcess}
+
             />
           )}
         />
@@ -114,6 +118,7 @@ const mapDispatchToProps = (dispatch) => ({
   closeConfirmMessage: () => dispatch(closeConfirmMessage()),
   getSingleLecture: (id) => dispatch(getSingleLecture(id)),
   clearSingle: () => dispatch(clearSingle()),
+  setAlert: (text, style) => dispatch(setAlert(text, style))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LecturersRoutes);

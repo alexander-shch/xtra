@@ -8,19 +8,19 @@ import { withRouter } from 'react-router-dom';
 import './AddUpdateCategory.style.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
+import Spinner from '../../../components/spinner/Spinner';
 
 const element = <FontAwesomeIcon icon={faSave} />;
 
 const AddUpdateCategory = ({
   history,
   match,
-  singleCategory,
   addNewCategory,
   updateCategoty,
-  getSingleCategory,
-  clearSingle,
-  error,
+  ...props
 }) => {
+  const { getSingleCategory, clearSingle, error, singleCategory, innerSinglePageLoading } = props
+
   const categoryId = match.params.categotyID;
   const [domainDetails, setDomainDetails] = useState({
     title: '',
@@ -45,8 +45,12 @@ const AddUpdateCategory = ({
   useEffect(() => {
     if (categoryId) {
       getSingleCategory(categoryId);
-    } // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    }
+    return () => {
+      clearSingle()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [categoryId]);
 
   useEffect(() => {
     if (singleCategory) {
@@ -88,7 +92,6 @@ const AddUpdateCategory = ({
     }
     if (error) {
       history.push('/settings/Categories-list');
-      clearSingle();
     } // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [singleCategory, error]);
 
@@ -157,14 +160,8 @@ const AddUpdateCategory = ({
     const { name, value } = e.target;
     setDomainDetails({ ...domainDetails, [name]: value });
   };
-  const cancel = () => {
-    history.push('/settings/Categories-list');
-    if (categoryId) {
-      clearSingle();
-    }
-  };
 
-  return (
+  return (innerSinglePageLoading ? <Spinner /> :
     <UpdatePageContainer>
       <h3>הוספת תחום</h3>
       <form onSubmit={handleSubmit}>
@@ -308,7 +305,7 @@ const AddUpdateCategory = ({
         <SelectInput name='active' handleChange={handleChange} label='פעיל' />
         <div className='buttons'>
           <MyButton>{element}</MyButton>
-          <MyButton type='button' onClick={() => cancel()} forgot>
+          <MyButton type='button' onClick={() => history.push('/settings/Categories-list')} forgot>
             ביטול
           </MyButton>
         </div>

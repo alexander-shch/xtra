@@ -9,7 +9,7 @@ const INTAIL_STATE = {
   inProcess: true,
   innerSinglePageLoading: true,
   avatarLoading: false,
-  noteLoading: true,
+  noteLoading: false,
   fileSpinner: false,
   lectures: [],
   singleLecture: null,
@@ -112,7 +112,7 @@ const lecturesReducer = (state = INTAIL_STATE, action) => {
         downLoadSpinner: false,
       };
     case 'CLEAR_SINGLE':
-      return { ...state, singleLecture: null, error: null };
+      return { ...state, singleLecture: null, error: null,innerSinglePageLoading:true };
     default:
       return state;
   }

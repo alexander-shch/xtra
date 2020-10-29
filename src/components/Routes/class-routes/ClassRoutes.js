@@ -30,24 +30,19 @@ const ClassRoutes = ({
   match,
   buildings,
   classes,
-  loading,
+  process,
   deleteClass,
   addNewClass,
-  updateClass,
-  setAvailability,
-  updateAvailability,
-  deleteAvailability,
   pageLoading,
   calenderLoading,
   getJewishHolydays,
-  jewsihHolydays,
   setAlert,
   closeConfirmMessage,
   confirmMessageData,
   getSingleClass,
   singleClass,
-  clearSingle,
-  error,
+  jewsihHolydays,
+  ...props
 }) => {
   useEffect(() => {
     getclassesData();
@@ -83,7 +78,7 @@ const ClassRoutes = ({
             <EditClass
               classes={classes}
               buildings={buildings}
-              loading={loading}
+              process={process}
               addNewClass={addNewClass}
               setAlert={setAlert}
             />
@@ -92,25 +87,17 @@ const ClassRoutes = ({
         <Route
           path={`${match.path}/updateClass/:classID/`}
           render={() =>
-            pageLoading ? (
-              <Spinner />
-            ) : (
-              <EditClass
-                getSingleClass={getSingleClass}
-                buildings={buildings}
-                singleClass={singleClass}
-                loading={loading}
-                calenderLoading={calenderLoading}
-                updateClass={updateClass}
-                setAvailability={setAvailability}
-                updateAvailability={updateAvailability}
-                deleteAvailability={deleteAvailability}
-                setAlert={setAlert}
-                jewsihHolydays={jewsihHolydays}
-                clearSingle={clearSingle}
-                error={error}
-              />
-            )
+            <EditClass
+              getSingleClass={getSingleClass}
+              buildings={buildings}
+              singleClass={singleClass}
+              process={process}
+              calenderLoading={calenderLoading}
+              setAlert={setAlert}
+              jewsihHolydays={jewsihHolydays}
+              {...props}
+            />
+
           }
         />
       </Suspense>
@@ -122,12 +109,13 @@ const mapStateToProps = (state) => ({
   buildings: state.buildings.buildings,
   classes: state.classes.classes,
   singleClass: state.classes.singleClass,
-  loading: state.classes.process,
+  process: state.classes.process,
   error: state.classes.error,
-  pageLoading: state.classes.pageLoading,
+  pageLoading: state.classes.loading,
   calenderLoading: state.classes.calenderLoading,
   jewsihHolydays: state.classes.jewsihHolydays,
   confirmMessageData: state.delete,
+  innerSinglePageLoading: state.classes.innerSinglePageLoading
 });
 
 const mapDispatchToProps = (dispatch) => ({

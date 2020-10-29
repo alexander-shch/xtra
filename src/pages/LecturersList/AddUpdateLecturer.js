@@ -19,11 +19,15 @@ const AddUpdateLecturer = ({
   clearSingle,
   innerSinglePageLoading,
   inProcess,
+  setAlert,
 }) => {
   const lectureID = match.params.LecturerID;
   useEffect(() => {
     if (lectureID) {
       getSingleLecture(lectureID);
+      return () => {
+        clearSingle();
+      };
     } // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const [lectureDeteils, setLectureDetails] = useState({
@@ -57,7 +61,7 @@ const AddUpdateLecturer = ({
         description,
         experience,
         teaching,
-        notes
+        notes,
       } = singleLecture;
       setLectureDetails({
         name,
@@ -72,20 +76,25 @@ const AddUpdateLecturer = ({
         description,
         experience,
         teaching,
-        notes
+        notes,
       });
     }
     if (error) {
       history.push('/lecturers');
-      clearSingle();
     } // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [singleLecture, error]);
 
   const handdleSubmit = async (e) => {
+    const { duplicator } = lectureDeteils;
     e.preventDefault();
     if (!singleLecture) {
       try {
-        await addNewLecture(lectureDeteils, history);
+        if (!duplicator) {
+          setAlert('יש לבחור מכפיל', 'error');
+          return;
+        } else {
+          await addNewLecture(lectureDeteils, history);
+        }
       } catch (err) {
         console.log(err);
       }
@@ -112,21 +121,24 @@ const AddUpdateLecturer = ({
   return (
     <>
       <MyAlert />
-      {innerSinglePageLoading?<Spinner/>:
-      <UpdatePageContainer>
-        <AddLecturerForm
-          handdleChange={handdleChange}
-          handleEditorChange={handleEditorChange}
-          handdleSubmit={handdleSubmit}
-          vatList={vatList}
-          lectureDeteils={lectureDeteils}
-          lecturesLoading={lecturesLoading}
-          lectureID={lectureID}
-          clearSingle={clearSingle}
-          inProcess={inProcess}
-        />
-        {singleLecture ? <UpdateLectureForm id={lectureID} /> : null}
-      </UpdatePageContainer>}
+      {innerSinglePageLoading ? (
+        <Spinner />
+      ) : (
+        <UpdatePageContainer>
+          <AddLecturerForm
+            handdleChange={handdleChange}
+            handleEditorChange={handleEditorChange}
+            handdleSubmit={handdleSubmit}
+            vatList={vatList}
+            lectureDeteils={lectureDeteils}
+            lecturesLoading={lecturesLoading}
+            lectureID={lectureID}
+            clearSingle={clearSingle}
+            inProcess={inProcess}
+          />
+          {singleLecture ? <UpdateLectureForm id={lectureID} /> : null}
+        </UpdatePageContainer>
+      )}
     </>
   );
 };

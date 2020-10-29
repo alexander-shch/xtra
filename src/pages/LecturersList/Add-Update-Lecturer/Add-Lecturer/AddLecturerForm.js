@@ -6,7 +6,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import MyButton from '../../../../components/My-button/MyButton';
 import SelectInput from '../../../../components/inputs/select-input/SelectInput';
 import { withRouter } from 'react-router-dom';
-
+import SelectInputProps from '../../../../components/inputs/selectProps/SelectInputProps';
 const AddLecturerForm = ({
   history,
   handdleChange,
@@ -16,7 +16,6 @@ const AddLecturerForm = ({
   handleEditorChange,
   inProcess,
   lectureID,
-  clearSingle,
 }) => {
   const {
     name,
@@ -31,7 +30,7 @@ const AddLecturerForm = ({
     description,
     experience,
     teaching,
-    notes
+    notes,
   } = lectureDeteils;
   return (
     <form onSubmit={handdleSubmit}>
@@ -90,25 +89,17 @@ const AddLecturerForm = ({
           hebrew='true'
           required
         />
-        <div className='selectContianer'>
-          <select
-            required
-            name='duplicator'
-            className='selectbuildingInput'
-            value={duplicator ? duplicator : '1'}
-            onChange={handdleChange}
-          >
-            <option value='1' disabled hidden>
-              בחר מכפיל
-            </option>
-            {vatList.map((item) => (
-              <option key={item._id} value={item._id}>
-                {item.title}
-              </option>
-            ))}
-          </select>
-          <label className='selectInputLabael'> מכפיל שכר</label>
-        </div>
+
+        <SelectInputProps
+          props={vatList}
+          name='duplicator'
+          value={duplicator}
+          selectTitle='בחר מכפיל'
+          keyToValue='_id'
+          keyToDisplay='title'
+          label='מכפילי שכר'
+          handdleChange={handdleChange}
+        />
         <SelectInput
           name='active'
           label='פעיל'
@@ -179,16 +170,15 @@ const AddLecturerForm = ({
           onClick={() => {
             history.push('/lecturers');
             if (lectureID) {
-              clearSingle();
             }
           }}
           forgot
         >
-          ביטול
+          חזרה
         </MyButton>
       </div>
     </form>
-  )
+  );
 };
 
 export default withRouter(AddLecturerForm);

@@ -1,5 +1,6 @@
 const INTIAL_STATE = {
   loading: true,
+  innerSinglePageLoading: true,
   categories: [],
   singleCategory: null,
   error: null,
@@ -40,8 +41,10 @@ const categoriesReducer = (state = INTIAL_STATE, action) => {
         ),
         loading: false,
       };
+    case 'GET_SINGLE_CATEGORY_START':
+      return { ...state, innerSinglePageLoading: true }
     case 'GET_SINGLE_CATEGORY_SUCSESS':
-      return { ...state, singleCategory: action.payload, loading: false };
+      return { ...state, singleCategory: action.payload, innerSinglePageLoading: false };
     case 'GET_CATEGORIES_FAILED':
     case 'ADD_NEW_CATEGORY_FAILED':
     case 'UPDATE_CATEGORY_FAILED':
@@ -49,7 +52,7 @@ const categoriesReducer = (state = INTIAL_STATE, action) => {
     case 'GET_SINGLE_CATEGORY_FAILED':
       return { ...state, loading: false, error: action.payload };
     case 'CLEAR_SINGLE':
-      return { ...state, singleCategory: null, error: null };
+      return { ...state, singleCategory: null, error: null, innerSinglePageLoading: true };
     default:
       return state;
   }

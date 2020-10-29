@@ -1,6 +1,7 @@
 const INITAL_STATE = {
   vatList: [],
   loading: true,
+  innerSinglePageLoading: true,
   singleVatItem: null,
   error: null,
 };
@@ -14,8 +15,10 @@ const vatReducer = (state = INITAL_STATE, action) => {
       return { ...state, loading: true };
     case 'GET_VAT_LIST_SUCSESS':
       return { ...state, loading: false, vatList: action.payload };
+    case 'GET_SINGLE_VAT_START':
+      return { ...state, innerSinglePageLoading: true }
     case 'GET_SINGLE_VAT_SUCSESS':
-      return { ...state, singleVatItem: action.payload };
+      return { ...state, singleVatItem: action.payload, innerSinglePageLoading: false };
     case 'ADD_VAT_ITEM_SUCSESS':
       return {
         ...state,
@@ -47,7 +50,7 @@ const vatReducer = (state = INITAL_STATE, action) => {
     case 'GET_SINGLE_VAT_FAILED':
       return { ...state, loading: false, error: action.payload };
     case 'CLEAR_SINGLE':
-      return { ...state, singleVatItem: null };
+      return { ...state, singleVatItem: null, innerSinglePageLoading: true };
     default:
       return state;
   }
