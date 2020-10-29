@@ -23,8 +23,8 @@ const SelectInputProps = ({
         <option value='1' disabled hidden>
           {selectTitle}
         </option>
-        {props.map((item) => (
-          <option key={item._id} value={item[keyToValue]}>
+        {props.map((item, index) => (
+          <option key={index} value={item[keyToValue]}>
             {item[keyToDisplay]}
           </option>
         ))}
