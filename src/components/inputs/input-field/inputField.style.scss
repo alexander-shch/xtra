@@ -23,6 +23,9 @@ $main-color: black;
       border: 1px solid #9d9d9d;
       border-radius: 0.25rem;
     }
+    &.error {
+      border: 1px solid red;
+    }
 
     &.small {
       height: 25px;

@@ -18,12 +18,16 @@ const FilesLIst = ({ uploadCv, id, singleLecture, fileSpinner }) => {
   };
 
   const cvSubmit = async () => {
-    let formData = new FormData();
-    formData.append('file', cv[0]);
-    try {
-      await uploadCv(id, formData);
-    } catch (err) {
-      console.log(err);
+    if (!cv) {
+      return;
+    } else {
+      let formData = new FormData();
+      formData.append('file', cv[0]);
+      try {
+        await uploadCv(id, formData);
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
