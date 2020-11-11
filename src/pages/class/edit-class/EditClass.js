@@ -99,8 +99,7 @@ const EditClass = ({
     if (!building) {
       setAlert('לא נבחר בניין', 'error');
       return;
-    }
-    if (minStudents > maxStudents) {
+    } else if (Number(minStudents) > Number(maxStudents)) {
       setAlert('מספר תלמידים מינמלי גדול ממקסימלי', 'error');
       return;
     }
