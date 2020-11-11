@@ -3,6 +3,7 @@ import './avatarForm.style.scss';
 import MyButton from '../../../../../components/My-button/MyButton';
 import Spinner from '../../../../../components/spinner/Spinner';
 import styled from 'styled-components';
+import { isImage } from '../../../lecturesUtils/lectureUtils';
 
 const AvatarImg = styled.div`
   height: 150px;
@@ -28,6 +29,10 @@ const AvatarForm = ({ singleLecture, avatarLoading, id, setAvatarImg }) => {
 
   const imgSubmit = async () => {
     if (!img) {
+      return;
+    }
+    if (!isImage(img[0].name)) {
+      console.log('bad Format');
       return;
     }
     let fromData = new FormData();
