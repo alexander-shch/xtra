@@ -32,7 +32,7 @@ const getStyle = (props) => {
     ? downloadStyle
     : props.view
     ? viewStyle
-    : !props.view
+    : props.view === false
     ? cantViewStyle
     : editStyle;
 };
