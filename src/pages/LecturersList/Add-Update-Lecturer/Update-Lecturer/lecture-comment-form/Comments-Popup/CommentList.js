@@ -44,13 +44,15 @@ const CommentList = ({ singleLecture, loading, addNewNote, setAlert }) => {
       <MyButton onClick={() => setNewCommentView(true)} addButtonStyle>
         הוסף הערה
       </MyButton>
-      <TableTop tableProps={['הערה', 'תאריך', 'אפשרויות']} />
+      <TableTop tableProps={['הערה', 'מחבר', 'תאריך', 'אפשרויות']} />
       {loading ? (
         <DataSpinner linesNum={notesArr.length} />
       ) : notesArr.length === 0 ? (
         <h3>אין הערות</h3>
       ) : (
-        notesArr.map((item) => <SingleLecturerNote key={item._id} item={item} />)
+        notesArr.map((item) => (
+          <SingleLecturerNote key={item._id} item={item} />
+        ))
       )}
     </>
   );

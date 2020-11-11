@@ -4,7 +4,7 @@ import './Tabletop.style.scss';
 const TableTop = ({ tableProps }) => {
   const tableTitles = tableProps.map((item) => {
     return (
-      <div key={item} className={item === 'תאריך' ? 'date' : 'tableTopTitle'}>
+      <div key={item} className='tableTopTitle'>
         <span>{item}</span>
       </div>
     );

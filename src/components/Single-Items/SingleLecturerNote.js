@@ -7,7 +7,8 @@ const SingleLectureNote = ({ item }) => {
   return (
     <SingleItem>
       <p className='itemName'>{item.text}</p>
-      <span className='itemName date'>{item.created.slice(0, 10)}</span>
+      <span className='itemName'>{item.user.name}</span>
+      <span className='itemName'>{item.created.slice(0, 10)}</span>
       <div className='buttons'>
         <DeleteButton item={item} addFunction={'deleteNote'} />
       </div>

@@ -11,20 +11,15 @@ $main-color: black;
     padding: 0.2em 0;
     font-size: 1rem;
     line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-image: none;
+    background-clip: padding-box;
+    border: 1px solid #9d9d9d;
+    border-radius: 0.25rem;
 
     &.hebrewInput {
       direction: rtl;
-    }
-    &.textInput {
-      color: #495057;
-      background-color: #fff;
-      background-image: none;
-      background-clip: padding-box;
-      border: 1px solid #9d9d9d;
-      border-radius: 0.25rem;
-    }
-    &.error {
-      border: 1px solid red;
     }
 
     &.small {
@@ -33,6 +28,10 @@ $main-color: black;
 
     &:focus {
       outline: none;
+    }
+
+    &.redBorder {
+      border-right: 4px solid #800000;
     }
   }
 
@@ -65,4 +64,8 @@ $main-color: black;
     text-align: end;
     display: block;
   }
+}
+
+.requiredField {
+  color: red;
 }
