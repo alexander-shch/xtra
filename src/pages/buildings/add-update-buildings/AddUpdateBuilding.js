@@ -3,12 +3,9 @@ import InputField from '../../../components/inputs/input-field/InputField';
 import SelectInput from '../../../components/inputs/select-input/SelectInput';
 import { UpdatePageContainer } from '../../../components/global-style/SettingSection';
 import MyButton from '../../../components/My-button/MyButton';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSave } from '@fortawesome/free-solid-svg-icons';
 import { withRouter } from 'react-router-dom';
 import Spinner from '../../../components/spinner/Spinner';
-
-const element = <FontAwesomeIcon icon={faSave} />;
+import { saveIcon } from '../../../utils/fontAwesome';
 
 const AddUpdateBuilding = ({
   history,
@@ -102,7 +99,7 @@ const AddUpdateBuilding = ({
           required
         />
         <div className='buttons'>
-          <MyButton>{element}</MyButton>
+          <MyButton>{saveIcon}</MyButton>
           <MyButton type='button' onClick={() => cancel()} forgot>
             חזרה
           </MyButton>

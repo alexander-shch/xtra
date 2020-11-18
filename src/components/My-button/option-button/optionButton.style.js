@@ -11,6 +11,16 @@ const deleteStyle = css`
 const downloadStyle = css`
   background-color: #40bf40;
 `;
+
+const viewStyle = css`
+  background-color: #0099ff;
+`;
+
+const cantViewStyle = css`
+  background-color: #cccccc;
+  cursor: no-drop;
+`;
+
 const spin = {
   spinAnimation: 'fa-spin 2s infinite linear',
 };
@@ -20,6 +30,10 @@ const getStyle = (props) => {
     ? deleteStyle
     : props.download
     ? downloadStyle
+    : props.view
+    ? viewStyle
+    : props.view === false
+    ? cantViewStyle
     : editStyle;
 };
 

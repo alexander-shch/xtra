@@ -6,6 +6,7 @@ import CourseRoutes from '../Course-Routes/CourseRoutes';
 import BookListRoutes from '../book-list-routes/BookListRoutes';
 import VatRoutes from '../vat-routes/VatRoutes';
 import CatagoriesRoutes from '../Catagories/CatagoriesRoutes';
+import SemestersRoutes from '../semesters-routes/SemestrersRoutes';
 
 const SettingsRoutes = () => {
   return (
@@ -16,6 +17,7 @@ const SettingsRoutes = () => {
       <Route path='/settings/Course-books' component={BookListRoutes} />
       <Route path='/settings/VAT-multipliers' component={VatRoutes} />
       <Route path='/settings/Categories-list' component={CatagoriesRoutes} />
+      <Route path='/settings/Semesters' component={SemestersRoutes} />
     </>
   );
 };
