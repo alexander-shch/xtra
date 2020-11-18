@@ -43,7 +43,7 @@ const AddUpdateLecturer = ({
     description: '',
     experience: '',
     teaching: '',
-    notes:''
+    notes: '',
   });
 
   useEffect(() => {
@@ -87,6 +87,7 @@ const AddUpdateLecturer = ({
   const handdleSubmit = async (e) => {
     const { duplicator } = lectureDeteils;
     e.preventDefault();
+
     if (!singleLecture) {
       try {
         if (!duplicator) {

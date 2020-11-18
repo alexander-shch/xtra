@@ -32,6 +32,7 @@ const AddLecturerForm = ({
     teaching,
     notes,
   } = lectureDeteils;
+
   return (
     <form onSubmit={handdleSubmit}>
       <div className='add-lecture-form'>
