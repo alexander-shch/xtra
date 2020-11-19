@@ -9,7 +9,7 @@ import Settings from '../settings/Settings';
 const NavMenu = ({ signOut, toggleView, settingsView, userName }) => {
   const navMenuArray = [
     { linkTitle: 'לובי', linkUrl: '/', className: 'single-link' },
-    { linkTitle: 'קורסים', linkUrl: '/', className: 'single-link' },
+    { linkTitle: 'קורסים', linkUrl: '/courses', className: 'single-link' },
     { linkTitle: 'מרצים', linkUrl: '/lecturers', className: 'single-link' },
     { linkTitle: 'נרשמים', linkUrl: '/', className: 'single-link' },
     { linkTitle: 'דוחות', linkUrl: '/', className: 'single-link' },

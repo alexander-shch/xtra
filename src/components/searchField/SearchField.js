@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import InputField from '../inputs/input-field/InputField';
 import { connect } from 'react-redux';
-import { changeSearchField } from '../../Redux/search/search.action';
+import {
+  changeSearchField,
+  cleanSearchField,
+} from '../../Redux/search/search.action';
 
-const SearchField = ({ changeSearchField }) => {
+const SearchField = ({ changeSearchField, cleanSearchField }) => {
+  useEffect(() => {
+    return () => {
+      cleanSearchField();
+    };
+  });
   return (
     <InputField label='חפש' handleChange={changeSearchField} hebrew='true' />
   );
@@ -11,6 +19,7 @@ const SearchField = ({ changeSearchField }) => {
 
 const mapDispatchToProps = (dispatch) => ({
   changeSearchField: (event) => dispatch(changeSearchField(event.target.value)),
+  cleanSearchField: () => dispatch(cleanSearchField()),
 });
 
 export default connect(null, mapDispatchToProps)(SearchField);

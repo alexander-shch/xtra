@@ -16,7 +16,8 @@ export const PopUpContainer = Styled.div`
     position: fixed;
     z-index: 11;
     top: 25%;
-    border: 1px solid ${primaryColor};
+    
+    box-shadow:3px 3px 5px 6px #ccc;
 `;
 export const BoxHeader = Styled.div`
       background-color: ${primaryColor};

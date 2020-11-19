@@ -1,0 +1,22 @@
+.tabs-container {
+  box-shadow: 3px 0px 5px 6px #ccc;
+  width: 60%;
+  margin: auto;
+  display: flex;
+  padding: 20px 10px 20px 10px;
+  justify-content: center;
+  flex-direction: row-reverse;
+  margin-top: 20px;
+  .tabs-links {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    flex-direction: row-reverse;
+    span {
+      cursor: pointer;
+      &.active {
+        text-decoration: underline;
+      }
+    }
+  }
+}
