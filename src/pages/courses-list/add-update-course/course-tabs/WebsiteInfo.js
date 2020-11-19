@@ -4,7 +4,7 @@ import TextArea from '../../../../components/inputs/text-area/TextArea';
 import MyButton from '../../../../components/My-button/MyButton';
 import { InputFlex } from '../../../../components/global-style/formsStyle';
 
-const WebsiteInfo = () => {
+const WebsiteInfo = ({ goBack }) => {
   return (
     <form>
       <InputFlex>
@@ -95,8 +95,8 @@ const WebsiteInfo = () => {
 
       <div className='buttons'>
         <MyButton>שמור</MyButton>
-        <MyButton type='button' forgot>
-          ביטול
+        <MyButton onClick={() => goBack()} type='button' forgot>
+          חזרה
         </MyButton>
       </div>
     </form>
