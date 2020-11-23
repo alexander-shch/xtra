@@ -4,7 +4,6 @@ import SelectInput from '../../../../../components/inputs/select-input/SelectInp
 import SelectInputProps from '../../../../../components/inputs/selectProps/SelectInputProps';
 import TextArea from '../../../../../components/inputs/text-area/TextArea';
 import MyButton from '../../../../../components/My-button/MyButton';
-import { withRouter } from 'react-router-dom';
 import './generalDetails.style.scss';
 
 const GeneralDetails = ({ categories, goBack }) => {
@@ -49,7 +48,7 @@ const GeneralDetails = ({ categories, goBack }) => {
       />
       <InputField
         name='classNotes'
-        type='number'
+        type='text'
         label='הערות לקביעת מועדי מפגשים'
         hebrew='true'
       />

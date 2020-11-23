@@ -44,7 +44,8 @@ export const OptinButtonContainer = styled.button`
   border-radius: 5px;
   cursor: pointer;
   margin: 2px;
-  width: 30px;
+  width: ${(props) => (props.list ? '20px' : '30px')};
+  padding: 0;
   ${getStyle}
   svg {
     animation: ${(props) => (props.spin ? spin.spinAnimation : null)};

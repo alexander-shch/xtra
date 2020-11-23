@@ -1,21 +1,20 @@
 .tabs-container {
-  box-shadow: 3px 0px 5px 6px #ccc;
-  width: 60%;
-  margin: auto;
-  display: flex;
   padding: 20px 10px 20px 10px;
-  justify-content: center;
-  flex-direction: row-reverse;
-  margin-top: 20px;
+
   .tabs-links {
     display: flex;
-    width: 100%;
-    justify-content: space-around;
     flex-direction: row-reverse;
     span {
       cursor: pointer;
+      padding: 15px 15px 25px;
+      font-weight: 500;
+      border-bottom: 1px solid #848484;
+      width: 100%;
+      text-align: center;
       &.active {
-        text-decoration: underline;
+        color: #4775d1;
+        border: 1px solid #848484;
+        border-bottom: 0;
       }
     }
   }

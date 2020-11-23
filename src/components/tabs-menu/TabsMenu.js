@@ -5,11 +5,11 @@ const TabsMenu = ({ currentTab, setCurrentTab, tabLinks }) => {
   return (
     <div className='tabs-container'>
       <div className='tabs-links'>
-        {tabLinks.map((tab) => (
+        {tabLinks.map((tab, i) => (
           <span
-            className={currentTab === `${tab}` ? 'active' : ''}
+            className={currentTab === i ? 'active' : ''}
             key={tab}
-            onClick={() => setCurrentTab(tab)}
+            onClick={() => setCurrentTab(i)}
           >
             {tab}
           </span>

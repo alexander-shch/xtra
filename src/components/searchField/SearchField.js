@@ -6,14 +6,19 @@ import {
   cleanSearchField,
 } from '../../Redux/search/search.action';
 
-const SearchField = ({ changeSearchField, cleanSearchField }) => {
+const SearchField = ({ changeSearchField, cleanSearchField, placeholder }) => {
   useEffect(() => {
     return () => {
       cleanSearchField();
     };
   });
   return (
-    <InputField label='חפש' handleChange={changeSearchField} hebrew='true' />
+    <InputField
+      placeholder={placeholder}
+      label='חפש'
+      handleChange={changeSearchField}
+      hebrew='true'
+    />
   );
 };
 

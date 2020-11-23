@@ -7,8 +7,8 @@ import FilesTab from './course-tabs/FilesTab';
 import InterestedList from './course-tabs/InterstedList';
 import { withRouter } from 'react-router-dom';
 
-const AddUpdateCourse = ({ history, categories }) => {
-  const [currentTab, setCurrentTab] = useState('פרטים כללים');
+const AddUpdateCourse = ({ history, categories, lectures, searchField }) => {
+  const [currentTab, setCurrentTab] = useState(0);
   let tabLinks = ['פרטים כללים', 'מידע לאתר', 'קבצים', 'רשימת מתעניינים'];
 
   const goBack = () => {
@@ -17,13 +17,19 @@ const AddUpdateCourse = ({ history, categories }) => {
 
   const toggleTab = () => {
     switch (currentTab) {
-      case 'פרטים כללים':
+      case 0:
         return <GeneralDetails categories={categories} goBack={goBack} />;
-      case 'מידע לאתר':
-        return <WebsiteInfo goBack={goBack} />;
-      case 'קבצים':
+      case 1:
+        return (
+          <WebsiteInfo
+            goBack={goBack}
+            lectures={lectures}
+            searchField={searchField}
+          />
+        );
+      case 2:
         return <FilesTab />;
-      case 'רשימת מתעניינים':
+      case 3:
         return <InterestedList />;
       default:
         return null;
@@ -31,12 +37,14 @@ const AddUpdateCourse = ({ history, categories }) => {
   };
   return (
     <>
-      <TabsMenu
-        currentTab={currentTab}
-        setCurrentTab={setCurrentTab}
-        tabLinks={tabLinks}
-      />
-      <UpdatePageContainer>{toggleTab()}</UpdatePageContainer>
+      <UpdatePageContainer>
+        <TabsMenu
+          currentTab={currentTab}
+          setCurrentTab={setCurrentTab}
+          tabLinks={tabLinks}
+        />
+        {toggleTab()}
+      </UpdatePageContainer>
     </>
   );
 };

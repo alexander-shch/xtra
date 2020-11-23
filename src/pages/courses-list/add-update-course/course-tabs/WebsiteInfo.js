@@ -3,8 +3,9 @@ import InputField from '../../../../components/inputs/input-field/InputField';
 import TextArea from '../../../../components/inputs/text-area/TextArea';
 import MyButton from '../../../../components/My-button/MyButton';
 import { InputFlex } from '../../../../components/global-style/formsStyle';
+import LectureSelector from '../../../../components/lexture-selctor/LectureSelector';
 
-const WebsiteInfo = ({ goBack }) => {
+const WebsiteInfo = ({ goBack, lectures, searchField }) => {
   return (
     <form>
       <InputFlex>
@@ -92,6 +93,7 @@ const WebsiteInfo = ({ goBack }) => {
           hebrew='true'
         />
       </InputFlex>
+      <LectureSelector lectures={lectures} searchField={searchField} />
 
       <div className='buttons'>
         <MyButton>שמור</MyButton>
