@@ -1,0 +1,8 @@
+.dateInputs {
+  margin: 10px;
+  display: flex;
+  flex-direction: row-reverse;
+  input[type='date'] {
+    margin-left: 10px;
+  }
+}

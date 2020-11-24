@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const SettingSectionContainer = styled.div`
-  width: 80%;
+  width: 75%;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -19,11 +19,11 @@ export const SettingSectionContainer = styled.div`
 
 export const UpdatePageContainer = styled.div`
   margin: auto;
-  margin-top: 10px;
-  width: 70%;
+  margin-top: 25px;
+  width: 60%;
   padding: 10px;
   background-color: white;
-  border: 2px solid #ff6633;
+  box-shadow: 3px 3px 5px 6px #ccc;
   text-align: end;
   h4,
   h3 {
@@ -47,7 +47,7 @@ export const SingleItem = styled.div`
     flex-wrap: wrap;
     display: flex;
     width: 30%;
-    justify-content: end;
+    justify-content: flex-start;
   }
   .itemName {
     margin-right: 5px;

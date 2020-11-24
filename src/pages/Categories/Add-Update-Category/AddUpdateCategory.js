@@ -19,7 +19,13 @@ const AddUpdateCategory = ({
   updateCategoty,
   ...props
 }) => {
-  const { getSingleCategory, clearSingle, error, singleCategory, innerSinglePageLoading } = props
+  const {
+    getSingleCategory,
+    clearSingle,
+    error,
+    singleCategory,
+    innerSinglePageLoading,
+  } = props;
 
   const categoryId = match.params.categotyID;
   const [domainDetails, setDomainDetails] = useState({
@@ -45,9 +51,9 @@ const AddUpdateCategory = ({
   useEffect(() => {
     if (categoryId) {
       getSingleCategory(categoryId);
-    }
-    return () => {
-      clearSingle()
+      return () => {
+        clearSingle();
+      };
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryId]);
@@ -161,7 +167,9 @@ const AddUpdateCategory = ({
     setDomainDetails({ ...domainDetails, [name]: value });
   };
 
-  return (innerSinglePageLoading ? <Spinner /> :
+  return innerSinglePageLoading ? (
+    <Spinner />
+  ) : (
     <UpdatePageContainer>
       <h3>הוספת תחום</h3>
       <form onSubmit={handleSubmit}>
@@ -305,7 +313,11 @@ const AddUpdateCategory = ({
         <SelectInput name='active' handleChange={handleChange} label='פעיל' />
         <div className='buttons'>
           <MyButton>{element}</MyButton>
-          <MyButton type='button' onClick={() => history.push('/settings/Categories-list')} forgot>
+          <MyButton
+            type='button'
+            onClick={() => history.push('/settings/Categories-list')}
+            forgot
+          >
             ביטול
           </MyButton>
         </div>

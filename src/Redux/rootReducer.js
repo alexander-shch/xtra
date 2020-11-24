@@ -9,6 +9,7 @@ import searchField from '../Redux/search/searchReducer';
 import lecturesReducer from '../Redux/Lectures/lecturesReducer';
 import myAlertReducer from '../Redux/My-Alert/myAlert.reducer';
 import deleteReducer from '../Redux/on-delete/delete.reducer';
+import semesterReducer from '../Redux/semester/semester.reducer';
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   lectures: lecturesReducer,
   alert: myAlertReducer,
   delete: deleteReducer,
+  semesters: semesterReducer,
 });
 
 export default rootReducer;

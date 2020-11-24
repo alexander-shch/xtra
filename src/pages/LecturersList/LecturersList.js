@@ -15,14 +15,12 @@ const LecturersList = ({
   listLoading,
   searchField,
 }) => {
-  let filterLectures = lectures.filter(({ name, email, phone }) => {
-    if (!searchField) {
-      return lectures;
-    } else {
-      const testString = `${name} ${email} ${phone}`;
-      return testString.includes(searchField);
-    }
-  });
+  let filterLectures = searchField
+    ? lectures.filter(({ name, email, phone }) => {
+        const testString = `${name} ${email} ${phone}`;
+        return testString.includes(searchField);
+      })
+    : lectures;
 
   return (
     <SettingSectionContainer>

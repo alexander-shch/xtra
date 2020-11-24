@@ -2,7 +2,7 @@ import React from 'react';
 
 import './inputField.style.scss';
 
-const InputField = ({ handleChange, label, ...restData }) => {
+const InputField = ({ handleChange, label, placeholder, ...restData }) => {
   return (
     <div className='groupInput'>
       <label className='form-input-label'>
@@ -14,6 +14,7 @@ const InputField = ({ handleChange, label, ...restData }) => {
           className={`form-input  ${restData.hebrew ? 'hebrewInput' : ''} 
            ${restData.required && !restData.value ? 'redBorder' : ''}
           `}
+          placeholder={placeholder ? placeholder : ''}
           onChange={handleChange}
           {...restData}
         />

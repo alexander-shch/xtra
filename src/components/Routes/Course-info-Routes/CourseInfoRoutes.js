@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 import CourseInformation from '../../../pages/Course-Information/CourseInformation';
 import AddUpdateCourseInfo from '../../../pages/Course-Information/Add-update-course/AddUpdateCourseInfo';
 
-const CourseRoutes = ({ match }) => {
+const CourseInfoRoutes = ({ match }) => {
   return (
     <>
       <Route
@@ -19,4 +19,4 @@ const CourseRoutes = ({ match }) => {
   );
 };
 
-export default CourseRoutes;
+export default CourseInfoRoutes;
