@@ -1,2 +1,7 @@
 email: admin@gmail.com
 password: o87y3hu4g
+
+old app access:
+
+email: valka@valka.co.il
+password: 12345
