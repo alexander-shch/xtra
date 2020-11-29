@@ -3,62 +3,85 @@ import InputField from '../../../../../components/inputs/input-field/InputField'
 import SelectInput from '../../../../../components/inputs/select-input/SelectInput';
 import SelectInputProps from '../../../../../components/inputs/selectProps/SelectInputProps';
 import TextArea from '../../../../../components/inputs/text-area/TextArea';
-import MyButton from '../../../../../components/My-button/MyButton';
+
 import './generalDetails.style.scss';
 
-const GeneralDetails = ({ categories, goBack }) => {
+const GeneralDetails = ({ categories, courseData, handdleChange }) => {
+  const {
+    title,
+    minStudents,
+    maxStudents,
+    assignToClassComments,
+    schedulingComments,
+    active,
+    catagory,
+  } = courseData;
   return (
-    <form>
+    <>
+      <InputField
+        name='title'
+        value={title}
+        type='text'
+        label='שם הקורס'
+        handleChange={handdleChange}
+        hebrew='true'
+      />
+
       <div className='general-first-row'>
         <InputField
-          name='minStudent'
+          name='minStudents'
           type='number'
           label='מספר תלמידים מינמלי '
           hebrew='true'
+          value={minStudents}
+          handleChange={handdleChange}
           required
         />
         <InputField
-          name='maxStudent'
+          name='maxStudents'
           type='number'
           label='מספר תלמידים מקסימלי '
           hebrew='true'
+          value={maxStudents}
+          handleChange={handdleChange}
           required
         />
+
         <SelectInputProps
           props={categories}
-          name='categories'
+          name='catagory'
           selectTitle='בחר תחום'
           keyToValue='_id'
           keyToDisplay='title'
           label='תחום'
-          // handdleChange={handdleChange}
+          value={catagory}
+          handdleChange={handdleChange}
         />
       </div>
       <SelectInput
         name='active'
         label='מוצג באתר'
-        // handleChange={handdleChange}
+        value={active}
+        handleChange={handdleChange}
         required
       />
       <TextArea
-        name='notes'
+        name='assignToClassComments'
         type='text'
         label='הערות לשיבוץ כיתה'
+        value={assignToClassComments}
+        handleChange={handdleChange}
         hebrew='true'
       />
       <InputField
-        name='classNotes'
+        name='schedulingComments'
         type='text'
+        value={schedulingComments}
         label='הערות לקביעת מועדי מפגשים'
+        handleChange={handdleChange}
         hebrew='true'
       />
-      <div className='buttons'>
-        <MyButton>שמור</MyButton>
-        <MyButton onClick={() => goBack()} type='button' forgot>
-          חזרה
-        </MyButton>
-      </div>
-    </form>
+    </>
   );
 };
 

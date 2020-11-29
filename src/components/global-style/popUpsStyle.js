@@ -6,6 +6,11 @@ export const FlexContainer = Styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index: 1;
 `;
 
 export const PopUpContainer = Styled.div`
