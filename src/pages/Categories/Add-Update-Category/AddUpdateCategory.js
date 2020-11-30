@@ -278,7 +278,7 @@ const AddUpdateCategory = ({
         </div>
         <div className='inputFlex half'>
           <InputField
-            name='minStudent'
+            name='minStudents'
             type='number'
             label='מספר תלמידים מינמלי'
             handleChange={handleChange}

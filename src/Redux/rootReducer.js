@@ -10,6 +10,7 @@ import lecturesReducer from '../Redux/Lectures/lecturesReducer';
 import myAlertReducer from '../Redux/My-Alert/myAlert.reducer';
 import deleteReducer from '../Redux/on-delete/delete.reducer';
 import semesterReducer from '../Redux/semester/semester.reducer';
+import courseListReducer from '../Redux/course-list/courseList.reducer';
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   alert: myAlertReducer,
   delete: deleteReducer,
   semesters: semesterReducer,
+  courseList: courseListReducer,
 });
 
 export default rootReducer;

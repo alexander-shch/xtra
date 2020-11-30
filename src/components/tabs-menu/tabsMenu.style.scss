@@ -16,6 +16,10 @@
         border: 1px solid #848484;
         border-bottom: 0;
       }
+      &.disable {
+        cursor: no-drop;
+        opacity: 0.5;
+      }
     }
   }
 }
