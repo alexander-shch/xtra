@@ -45,15 +45,6 @@ const FirstForm = ({
 
       <div className='studNum'>
         <InputField
-          name='maxStudents'
-          type='number'
-          label='מקסימלי'
-          value={maxStudents}
-          handleChange={handdleChange}
-          hebrew='true'
-          required
-        />
-        <InputField
           name='minStudents'
           type='number'
           label='מינימלי'
@@ -62,12 +53,18 @@ const FirstForm = ({
           hebrew='true'
           required
         />
+        <InputField
+          name='maxStudents'
+          type='number'
+          label='מקסימלי'
+          value={maxStudents}
+          handleChange={handdleChange}
+          hebrew='true'
+          required
+        />
       </div>
 
       <div className='buttons'>
-        <MyButton save loading={loading}>
-          {element}
-        </MyButton>
         <MyButton
           type='button'
           onClick={() => {
@@ -76,6 +73,9 @@ const FirstForm = ({
           forgot
         >
           חזרה
+        </MyButton>
+        <MyButton save loading={loading}>
+          {element}
         </MyButton>
       </div>
     </form>

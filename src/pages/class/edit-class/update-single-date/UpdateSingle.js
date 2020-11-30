@@ -41,15 +41,15 @@ const UpdateSingle = ({
           value={toTime}
         />
         <div className='singleBtns'>
-          <MyButton>עדכן</MyButton>
-          <MyButton type='button' onClick={closeSingleBox} forgot>
-            חזרה
-          </MyButton>
           {availabilityId ? (
             <MyButton delete onClick={openDeleteBox} type='button'>
               מחק זמינות
             </MyButton>
           ) : null}
+          <MyButton>עדכן</MyButton>
+          <MyButton type='button' onClick={closeSingleBox} forgot>
+            חזרה
+          </MyButton>
         </div>
       </form>
     </div>

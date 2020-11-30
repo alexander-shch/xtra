@@ -125,14 +125,14 @@ const AddUpdateSemester = ({
           required
         />
         <div className='buttons'>
-          <MyButton>{saveIcon}</MyButton>
           <MyButton
             type='button'
             onClick={() => history.push('/settings/Semesters')}
             forgot
-          >
+            >
             חזרה
           </MyButton>
+          <MyButton>{saveIcon}</MyButton>
         </div>
       </form>
     </UpdatePageContainer>

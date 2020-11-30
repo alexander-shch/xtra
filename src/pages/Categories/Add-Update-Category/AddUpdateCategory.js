@@ -312,14 +312,14 @@ const AddUpdateCategory = ({
         </div>
         <SelectInput name='active' handleChange={handleChange} label='פעיל' />
         <div className='buttons'>
-          <MyButton>{element}</MyButton>
           <MyButton
             type='button'
             onClick={() => history.push('/settings/Categories-list')}
             forgot
-          >
+            >
             ביטול
           </MyButton>
+          <MyButton>{element}</MyButton>
         </div>
       </form>
     </UpdatePageContainer>

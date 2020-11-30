@@ -28,6 +28,16 @@ const GeneralDetails = ({ categories, courseData, handdleChange }) => {
       />
 
       <div className='general-first-row'>
+        <SelectInputProps
+          props={categories}
+          name='catagory'
+          selectTitle='בחר תחום'
+          keyToValue='_id'
+          keyToDisplay='title'
+          label='תחום'
+          value={catagory}
+          handdleChange={handdleChange}
+        />
         <InputField
           name='minStudents'
           type='number'
@@ -45,17 +55,6 @@ const GeneralDetails = ({ categories, courseData, handdleChange }) => {
           value={maxStudents}
           handleChange={handdleChange}
           required
-        />
-
-        <SelectInputProps
-          props={categories}
-          name='catagory'
-          selectTitle='בחר תחום'
-          keyToValue='_id'
-          keyToDisplay='title'
-          label='תחום'
-          value={catagory}
-          handdleChange={handdleChange}
         />
       </div>
       <SelectInput

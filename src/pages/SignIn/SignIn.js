@@ -53,10 +53,10 @@ const SignIn = ({ setUserLog, getToken, signInFailed }) => {
           required
         />
         <div className='sign-in-buttons'>
-          <MyButton type='button' forgot>
-            ?שכחת סיסמה
-          </MyButton>
           <MyButton type='submit'>כניסה</MyButton>
+          <MyButton type='button' forgot>
+            שכחת סיסמה?
+          </MyButton>
         </div>
       </form>
     </div>

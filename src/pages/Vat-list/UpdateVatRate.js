@@ -31,10 +31,10 @@ const UpdateVatRate = ({ history }) => {
           required
         />
         <div className='buttons'>
-          <MyButton>{element}</MyButton>
           <MyButton type='button' onClick={() => cancel()} forgot>
             ביטול
           </MyButton>
+          <MyButton>{element}</MyButton>
         </div>
       </form>
     </UpdatePageContainer>

@@ -162,9 +162,6 @@ const AddLecturerForm = ({
         />
       </div>
       <div className='buttons'>
-        <MyButton save loading={inProcess}>
-          שמור
-        </MyButton>
         <MyButton
           type='button'
           onClick={() => {
@@ -175,6 +172,9 @@ const AddLecturerForm = ({
           forgot
         >
           חזרה
+        </MyButton>
+        <MyButton save loading={inProcess}>
+          שמור
         </MyButton>
       </div>
     </form>

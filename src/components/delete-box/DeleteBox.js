@@ -6,7 +6,6 @@ import {
   BoxHeader,
   BoxContent,
   ButtonContainer,
-  PopUpModal,
 } from '../global-style/popUpsStyle';
 
 const DeleteBox = ({

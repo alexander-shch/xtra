@@ -13,6 +13,7 @@ const SelectInputProps = ({
 }) => {
   return (
     <div className='selectInput'>
+      <label className='selectInputLabel'>{label}</label>
       <select
         required
         name={name}
@@ -29,7 +30,6 @@ const SelectInputProps = ({
           </option>
         ))}
       </select>
-      <label className='selectInputLabel'>{label}</label>
     </div>
   );
 };

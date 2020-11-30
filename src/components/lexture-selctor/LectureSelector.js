@@ -33,7 +33,7 @@ const LectureSelector = ({ lectures, searchField }) => {
       <div className='lecture-selctor-container'>
         <div className='list-container'>
           <SearchField placeholder={'חפש לפי שם המרצה'} />
-          <label>:רשימת מרצים</label>
+          <label>רשימת מרצים:</label>
           <div className='lecture-select-list'>
             {filterLectures.map((lecture) => (
               <SingleLectureSelect
@@ -45,7 +45,7 @@ const LectureSelector = ({ lectures, searchField }) => {
           </div>
         </div>
         <div className='list-container'>
-          <label>:מרצים משויכים לקורס זה</label>
+          <label>מרצים משויכים לקורס זה:</label>
           <div className='lecture-select-list'>
             {selctedLecture.length === 0 ? (
               <span>אין מרצים משוייכים</span>

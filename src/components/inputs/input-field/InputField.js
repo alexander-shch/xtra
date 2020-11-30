@@ -6,8 +6,8 @@ const InputField = ({ handleChange, label, placeholder, ...restData }) => {
   return (
     <div className='groupInput'>
       <label className='form-input-label'>
-        {restData.required ? <span className='requiredField'>*</span> : ''}
         {label}
+        {restData.required ? <span className='requiredField'>*</span> : ''}
       </label>
       <div className='input-continer'>
         <input

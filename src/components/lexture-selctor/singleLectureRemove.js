@@ -4,7 +4,6 @@ import OptionButton from '../My-button/option-button/OptionButton';
 const SingleLectureRemove = ({ lecture, removeLecture }) => {
   return (
     <div>
-      <span>{lecture.name}</span>
       <OptionButton
         list={'true'}
         delete
@@ -13,6 +12,7 @@ const SingleLectureRemove = ({ lecture, removeLecture }) => {
       >
         -
       </OptionButton>
+      <span>{lecture.name}</span>
     </div>
   );
 };

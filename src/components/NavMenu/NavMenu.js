@@ -27,15 +27,15 @@ const NavMenu = ({ signOut, toggleView, settingsView, userName }) => {
 
   return (
     <>
-      <span className='greetUser'>{userName},שלום</span>
+      <span className='greetUser'>שלום, {userName}</span>
       <div className='menu-container'>
         <div className='menu-links-container'>{menuLinks}</div>
         <div className='icon-menu-container'>
-          <div className='iconLink' onClick={() => signOut()}>
-            SIGN OUT
-          </div>
           <div className='iconLink settings-icon' onClick={() => toggleView()}>
             &#9881;
+          </div>
+          <div className='iconLink' onClick={() => signOut()}>
+            SIGN OUT
           </div>
           {settingsView ? <Settings toggleView={toggleView} /> : null}
         </div>
