@@ -16,7 +16,13 @@ const AddUpdateVatList = ({
   updateVatItem,
   ...props
 }) => {
-  const { getSingleVatItem, singleVatItem, clearSingle, error, innerSinglePageLoading } = props
+  const {
+    getSingleVatItem,
+    singleVatItem,
+    clearSingle,
+    error,
+    innerSinglePageLoading,
+  } = props;
 
   const vatID = match.params.vatID;
 
@@ -24,8 +30,8 @@ const AddUpdateVatList = ({
     if (vatID) {
       getSingleVatItem(vatID);
       return () => {
-        clearSingle()
-      }
+        clearSingle();
+      };
     } // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const [vatItem, setVatItem] = useState({
@@ -66,7 +72,7 @@ const AddUpdateVatList = ({
     }
     history.push('/settings/VAT-multipliers');
   };
-  const handdleChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setVatItem({ ...vatItem, [name]: value });
   };
@@ -74,51 +80,52 @@ const AddUpdateVatList = ({
     history.push('/settings/VAT-multipliers');
   };
 
-  return (
-    innerSinglePageLoading ? <Spinner /> :
-      <UpdatePageContainer>
-        <h3>{vatID ? 'עריכה' : 'הוספה'}</h3>
-        <form onSubmit={handleSubmit}>
-          <InputField
-            name='title'
-            type='text'
-            label='כותרת'
-            value={title}
-            handleChange={handdleChange}
-            hebrew='true'
-            required
-          />
-          <InputField
-            name='duplicate'
-            type='number'
-            label='מכפילי שכר'
-            value={duplicate}
-            handleChange={handdleChange}
-            hebrew='true'
-            required
-          />
-          <SelectInput
-            name='vat'
-            label='האם להוסיף מעמ'
-            value={vat}
-            handleChange={handdleChange}
-            required
-          />
-          <SelectInput
-            name='active'
-            label='פעיל'
-            value={active}
-            handleChange={handdleChange}
-            required
-          />
-          <div className='buttons'>
-            <MyButton type='button' onClick={() => cancel()} forgot>
-              ביטול
-            </MyButton>
-            <MyButton>{element}</MyButton>
-          </div>
-        </form>
-      </UpdatePageContainer>
+  return innerSinglePageLoading ? (
+    <Spinner />
+  ) : (
+    <UpdatePageContainer>
+      <h3>{vatID ? 'עריכה' : 'הוספה'}</h3>
+      <form onSubmit={handleSubmit}>
+        <InputField
+          name='title'
+          type='text'
+          label='כותרת'
+          value={title}
+          handleChange={handleChange}
+          hebrew='true'
+          required
+        />
+        <InputField
+          name='duplicate'
+          type='number'
+          label='מכפילי שכר'
+          value={duplicate}
+          handleChange={handleChange}
+          hebrew='true'
+          required
+        />
+        <SelectInput
+          name='vat'
+          label='האם להוסיף מעמ'
+          value={vat}
+          handleChange={handleChange}
+          required
+        />
+        <SelectInput
+          name='active'
+          label='פעיל'
+          value={active}
+          handleChange={handleChange}
+          required
+        />
+        <div className='buttons'>
+          <MyButton type='button' onClick={() => cancel()} forgot>
+            ביטול
+          </MyButton>
+          <MyButton>{element}</MyButton>
+        </div>
+      </form>
+    </UpdatePageContainer>
   );
 };
 

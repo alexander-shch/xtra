@@ -10,7 +10,11 @@ import {
   addNewCourse,
   getSingleCourse,
   clearSingle,
+  deleteCourse,
+  updateCourse,
 } from '../../../Redux/course-list/courseList.action';
+import DeleteBox from '../../delete-box/DeleteBox';
+import { closeConfirmMessage } from '../../../Redux/on-delete/delete.action';
 
 const CoursesListRoutes = ({
   match,
@@ -26,7 +30,11 @@ const CoursesListRoutes = ({
   listLoading,
   singleCourse,
   addNewCourse,
-  inProcsess,
+  inProcess,
+  deleteCourse,
+  confirmMessageData,
+  closeConfirmMessage,
+  updateCourse,
 }) => {
   useEffect(() => {
     getCategories();
@@ -36,11 +44,22 @@ const CoursesListRoutes = ({
   }, []);
   return (
     <>
+      <DeleteBox
+        confirmMessageData={confirmMessageData}
+        closeConfirmMessage={closeConfirmMessage}
+        deleteFunction={deleteCourse}
+      />
       <Route
         exact
         path={`${match.path}`}
         render={() => (
-          <CoursesList courseList={courseList} listLoading={listLoading} />
+          <CoursesList
+            searchField={searchField}
+            courseList={courseList}
+            listLoading={listLoading}
+            categories={categories}
+            deleteCourse={deleteCourse}
+          />
         )}
       />
       <Route
@@ -52,7 +71,7 @@ const CoursesListRoutes = ({
             categories={categories}
             lectures={lectures}
             addNewCourse={addNewCourse}
-            inProcsess={inProcsess}
+            inProcess={inProcess}
           />
         )}
       />
@@ -66,7 +85,8 @@ const CoursesListRoutes = ({
             getSingleCourse={getSingleCourse}
             clearSingle={clearSingle}
             singleCourse={singleCourse}
-            inProcsess={inProcsess}
+            updateCourse={updateCourse}
+            inProcess={inProcess}
           />
         )}
       />
@@ -81,7 +101,8 @@ const mapStateToProps = (state) => ({
   courseList: state.courseList.courseList,
   listLoading: state.courseList.listLoading,
   singleCourse: state.courseList.singleCourse,
-  inProcsess: state.courseList.inProcsess,
+  inProcess: state.courseList.inProcess,
+  confirmMessageData: state.delete,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -91,6 +112,9 @@ const mapDispatchToProps = (dispatch) => ({
   getSingleCourse: (id) => dispatch(getSingleCourse(id)),
   clearSingle: () => dispatch(clearSingle()),
   addNewCourse: (data, history) => dispatch(addNewCourse(data, history)),
+  deleteCourse: (id) => dispatch(deleteCourse(id)),
+  closeConfirmMessage: () => dispatch(closeConfirmMessage()),
+  updateCourse: (id, data) => dispatch(updateCourse(id, data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CoursesListRoutes);

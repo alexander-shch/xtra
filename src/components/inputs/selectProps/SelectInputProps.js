@@ -9,7 +9,7 @@ const SelectInputProps = ({
   keyToDisplay,
   label,
   keyToValue,
-  handdleChange,
+  handleChange,
 }) => {
   return (
     <div className='selectInput'>
@@ -19,7 +19,7 @@ const SelectInputProps = ({
         name={name}
         className='Selector'
         value={value ? value : '1'}
-        onChange={handdleChange}
+        onChange={handleChange}
       >
         <option value='1' disabled hidden>
           {selectTitle}

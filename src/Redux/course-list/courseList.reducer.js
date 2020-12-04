@@ -1,6 +1,6 @@
 const INTAIL_STATE = {
   listLoading: true,
-  inProcsess: false,
+  inProcess: false,
   innerSinglePageLoading: true,
   courseList: [],
   singleCourse: null,
@@ -10,9 +10,11 @@ const INTAIL_STATE = {
 const courseListReducer = (state = INTAIL_STATE, action) => {
   switch (action.type) {
     case 'GET_COURSE_START':
+    case 'DELETE_COURSE_START':
       return { ...state, listLoading: true };
     case 'ADD_NEW_COURSE_START':
-      return { ...state, inProcsess: true };
+    case 'UPDATE_COURSE_START':
+      return { ...state, inProcess: true };
     case 'GET_SINGLE_COURSE_START':
       return { ...state, innerSinglePageLoading: true };
     case 'GET_COURSE_SUCCESS':
@@ -25,7 +27,7 @@ const courseListReducer = (state = INTAIL_STATE, action) => {
     case 'ADD_NEW_COURSE_SUCCESS':
       return {
         ...state,
-        inProcsess: false,
+        inProcess: false,
         courseList: [...state.courseList, action.payload],
         singleCourse: action.payload,
       };
@@ -35,14 +37,36 @@ const courseListReducer = (state = INTAIL_STATE, action) => {
         innerSinglePageLoading: false,
         singleCourse: action.payload,
       };
+    case 'UPDATE_COURSE_SUCCESS':
+      let { courseList } = state;
+      let index = courseList.findIndex(
+        (item) => item._id === action.payload._id
+      );
+      courseList[index] = action.payload;
+      return {
+        ...state,
+        courseList,
+        inProcess: false,
+        singleCourse: action.payload,
+      };
+    case 'DELETE_COURSE_SUCCESS':
+      return {
+        ...state,
+        listLoading: false,
+        courseList: state.courseList.filter(
+          (course) => course._id !== action.payload
+        ),
+      };
     case 'GET_COURSE_FAILED':
     case 'ADD_NEW_COURSE_FAILED':
     case 'GET_SINGLE_COURSE_FAILED':
+    case 'DELETE_COURSE_FAILED':
+    case 'UPDATE_COURSE_FAILED':
       return {
         ...state,
         listLoading: false,
         innerSinglePageLoading: false,
-        inProcsess: false,
+        inProcess: false,
         error: action.payload,
       };
     case 'CLEAR_SINGLE':

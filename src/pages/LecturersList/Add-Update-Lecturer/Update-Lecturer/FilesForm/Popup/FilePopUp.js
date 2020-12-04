@@ -8,7 +8,7 @@ import InputField from '../../../../../../components/inputs/input-field/InputFie
 import MyButton from '../../../../../../components/My-button/MyButton';
 
 const FilePopUp = ({
-  handdleFileChange,
+  handleFileChange,
   setFilePopUpView,
   cvSubmit,
   loading,
@@ -20,7 +20,7 @@ const FilePopUp = ({
           name='fileName'
           type='file'
           label='בחר קובץ'
-          handleChange={handdleFileChange}
+          handleChange={handleFileChange}
           hebrew='true'
           required
         />

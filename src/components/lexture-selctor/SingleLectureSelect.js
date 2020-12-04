@@ -6,7 +6,7 @@ const SingleLectureSelect = ({ lecture, addLecture }) => {
     <div>
       <OptionButton
         list={'true'}
-        onClick={() => addLecture(lecture)}
+        onClick={() => addLecture(lecture._id)}
         type='button'
       >
         +

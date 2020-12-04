@@ -4,11 +4,20 @@ import DeleteButton from '../../My-button/delete-button/DeleteButton';
 import OptionButton from '../../My-button/option-button/OptionButton';
 import { withRouter } from 'react-router-dom';
 
-const SingleCourse = ({ item, match, history }) => {
+const SingleCourse = ({ item, match, history, categoriesObj }) => {
+  const getCategoryName = () => {
+    if (item.category && categoriesObj) {
+      if (item.category in categoriesObj) {
+        return categoriesObj[item.category];
+      }
+    } else {
+      return 'לא משויך תחום';
+    }
+  };
   return (
     <SingleItem>
       <span className='itemName'>{item.title}</span>
-      <span className='itemName'>{item.title}</span>
+      <span className='itemName'>{getCategoryName()}</span>
       <div className='buttons'>
         <OptionButton
           onClick={() => history.push(`${match.path}/updateCourse/${item._id}`)}

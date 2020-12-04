@@ -5,45 +5,40 @@ import { InputFlex } from '../../../../components/global-style/formsStyle';
 import LectureSelector from '../../../../components/lexture-selctor/LectureSelector';
 
 const WebsiteInfo = ({
-  handdleNestedChange,
-  handdleChange,
+  handleNestedChange,
+  handleChange,
   courseData,
   lectures,
   searchField,
+  addLecture,
+  removeLecture,
 }) => {
   const {
+    progress,
     requirements,
     meetingsCount,
     meetingLength,
     target,
     marketing,
+    assignedLecturers,
     extTitles,
   } = courseData;
   return (
     <>
       <InputFlex>
-        <InputField name='title' type='text' label='שם הקורס' hebrew='true' />
-        <InputField
-          name='title'
-          handleChange={handdleNestedChange}
-          value={extTitles.title}
-          type='text'
-          label='כותרת באתר '
-          hebrew='true'
-        />
         <TextArea
           name='target'
           type='text'
           label='מטרת הקורס'
           value={target}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
           small='true'
         />
 
         <InputField
           name='target'
-          handleChange={handdleNestedChange}
+          handleChange={handleNestedChange}
           value={extTitles.target}
           type='text'
           label='כותרת באתר '
@@ -52,20 +47,22 @@ const WebsiteInfo = ({
         <InputField
           name='requirements'
           value={requirements}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           type='text'
           label='דרישות/ידע מקדים'
           hebrew='true'
         />
         <InputField
           name='requirements'
-          handleChange={handdleNestedChange}
+          handleChange={handleNestedChange}
           value={extTitles.requirements}
           type='text'
           label='כותרת באתר '
           hebrew='true'
         />
         <InputField
+          value={progress}
+          handleChange={handleChange}
           name='progress'
           type='text'
           label='איך הקורס יקדם אתכם'
@@ -73,7 +70,7 @@ const WebsiteInfo = ({
         />
         <InputField
           name='progress'
-          handleChange={handdleNestedChange}
+          handleChange={handleNestedChange}
           value={extTitles.progress}
           type='text'
           label='כותרת באתר '
@@ -83,7 +80,7 @@ const WebsiteInfo = ({
       <InputField
         name='marketing'
         value={marketing}
-        handleChange={handdleChange}
+        handleChange={handleChange}
         type='text'
         label='עיגול שיווקי'
         hebrew='true'
@@ -94,12 +91,12 @@ const WebsiteInfo = ({
           value={meetingsCount}
           type='number'
           label='מספר מפגשים'
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
         />
         <InputField
           name='meetingsCount'
-          handleChange={handdleNestedChange}
+          handleChange={handleNestedChange}
           value={extTitles.meetingsCount}
           type='text'
           label='כותרת באתר '
@@ -110,19 +107,25 @@ const WebsiteInfo = ({
           value={meetingLength}
           type='text'
           label='אורך כל מפגש'
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
         />
         <InputField
           name='meetingLength'
-          handleChange={handdleNestedChange}
+          handleChange={handleNestedChange}
           value={extTitles.meetingLength}
           type='text'
           label='כותרת באתר '
           hebrew='true'
         />
       </InputFlex>
-      <LectureSelector lectures={lectures} searchField={searchField} />
+      <LectureSelector
+        addLecture={addLecture}
+        removeLecture={removeLecture}
+        assignedLecturers={assignedLecturers}
+        lectures={lectures}
+        searchField={searchField}
+      />
     </>
   );
 };

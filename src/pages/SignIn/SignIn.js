@@ -16,7 +16,7 @@ const SignIn = ({ setUserLog, getToken, signInFailed }) => {
   });
   const { email, password } = UserDetail;
 
-  const handdleChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setUserDetail({ ...UserDetail, [name]: value });
   };
@@ -41,7 +41,7 @@ const SignIn = ({ setUserLog, getToken, signInFailed }) => {
           type='email'
           label=' דואל'
           value={email}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           required
         />
         <InputField
@@ -49,7 +49,7 @@ const SignIn = ({ setUserLog, getToken, signInFailed }) => {
           type='password'
           label='סיסמה'
           value={password}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           required
         />
         <div className='sign-in-buttons'>

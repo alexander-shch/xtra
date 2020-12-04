@@ -4,7 +4,7 @@ import MyButton from '../../../../components/My-button/MyButton';
 import './updateSingle.style.scss';
 
 const UpdateSingle = ({
-  dateHanddleChange,
+  dateHandleChange,
   dateDetails,
   openDeleteBox,
   closeSingleBox,
@@ -17,7 +17,7 @@ const UpdateSingle = ({
       <h3>עידכון זמינות</h3>
       <form onSubmit={handleDatesSubmit} className='dateForm'>
         <DataInput
-          handleChange={dateHanddleChange}
+          handleChange={dateHandleChange}
           name='from'
           label='מתאריך'
           type='date'
@@ -26,7 +26,7 @@ const UpdateSingle = ({
         />
 
         <DataInput
-          handleChange={dateHanddleChange}
+          handleChange={dateHandleChange}
           name='fromTime'
           label='משעה'
           type='time'
@@ -34,7 +34,7 @@ const UpdateSingle = ({
         />
 
         <DataInput
-          handleChange={dateHanddleChange}
+          handleChange={dateHandleChange}
           name='toTime'
           label='עד שעה'
           type='time'

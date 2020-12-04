@@ -16,14 +16,14 @@ const INTIAL_STATE = {
   innerSinglePageLoading: true,
   classes: [],
   singleClass: null,
-  jewsihHolydays: [],
+  jewishHolydays: [],
   error: null,
 };
 
 const classesReducer = (state = INTIAL_STATE, action) => {
   switch (action.type) {
     case 'GET_SINGLE_CLASS_START':
-      return { ...state, innerSinglePageLoading: true }
+      return { ...state, innerSinglePageLoading: true };
     case 'CLASSES_FETCH_START':
       return { ...state, loading: true };
     case 'DELETE_CLASS_START':
@@ -38,7 +38,11 @@ const classesReducer = (state = INTIAL_STATE, action) => {
         classes: action.payload,
       };
     case 'GET_SINGLE_CLASS_SUCCESS':
-      return { ...state, singleClass: action.payload, innerSinglePageLoading: false };
+      return {
+        ...state,
+        singleClass: action.payload,
+        innerSinglePageLoading: false,
+      };
     case 'SET_AVAILABILITY_START':
     case 'UPDATE_AVAILABILTY_START':
     case 'DELETE_AVAILABILTY_START':
@@ -88,7 +92,7 @@ const classesReducer = (state = INTIAL_STATE, action) => {
     case 'GET_HOLYDAYS_SUCCESS':
       return {
         ...state,
-        jewsihHolydays: holyDaysTodisplay(action.payload),
+        jewishHolydays: holyDaysTodisplay(action.payload),
       };
 
     case 'SET_AVAILABILITY_FAILED':
@@ -105,7 +109,12 @@ const classesReducer = (state = INTIAL_STATE, action) => {
         loading: false,
       };
     case 'CLEAR_SINGLE':
-      return { ...state, singleClass: null, error: null, innerSinglePageLoading: true };
+      return {
+        ...state,
+        singleClass: null,
+        error: null,
+        innerSinglePageLoading: true,
+      };
     default:
       return state;
   }

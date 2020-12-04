@@ -7,7 +7,7 @@ const SingleLectureRemove = ({ lecture, removeLecture }) => {
       <OptionButton
         list={'true'}
         delete
-        onClick={() => removeLecture(lecture)}
+        onClick={() => removeLecture(lecture._id)}
         type='button'
       >
         -

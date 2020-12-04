@@ -6,7 +6,7 @@ import TextArea from '../../../../../components/inputs/text-area/TextArea';
 
 import './generalDetails.style.scss';
 
-const GeneralDetails = ({ categories, courseData, handdleChange }) => {
+const GeneralDetails = ({ categories, courseData, handleChange }) => {
   const {
     title,
     minStudents,
@@ -14,7 +14,7 @@ const GeneralDetails = ({ categories, courseData, handdleChange }) => {
     assignToClassComments,
     schedulingComments,
     active,
-    catagory,
+    category,
   } = courseData;
   return (
     <>
@@ -23,20 +23,20 @@ const GeneralDetails = ({ categories, courseData, handdleChange }) => {
         value={title}
         type='text'
         label='שם הקורס'
-        handleChange={handdleChange}
+        handleChange={handleChange}
         hebrew='true'
       />
 
       <div className='general-first-row'>
         <SelectInputProps
           props={categories}
-          name='catagory'
+          name='category'
           selectTitle='בחר תחום'
           keyToValue='_id'
           keyToDisplay='title'
           label='תחום'
-          value={catagory}
-          handdleChange={handdleChange}
+          value={category}
+          handleChange={handleChange}
         />
         <InputField
           name='minStudents'
@@ -44,7 +44,7 @@ const GeneralDetails = ({ categories, courseData, handdleChange }) => {
           label='מספר תלמידים מינמלי '
           hebrew='true'
           value={minStudents}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           required
         />
         <InputField
@@ -53,7 +53,7 @@ const GeneralDetails = ({ categories, courseData, handdleChange }) => {
           label='מספר תלמידים מקסימלי '
           hebrew='true'
           value={maxStudents}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           required
         />
       </div>
@@ -61,7 +61,7 @@ const GeneralDetails = ({ categories, courseData, handdleChange }) => {
         name='active'
         label='מוצג באתר'
         value={active}
-        handleChange={handdleChange}
+        handleChange={handleChange}
         required
       />
       <TextArea
@@ -69,7 +69,7 @@ const GeneralDetails = ({ categories, courseData, handdleChange }) => {
         type='text'
         label='הערות לשיבוץ כיתה'
         value={assignToClassComments}
-        handleChange={handdleChange}
+        handleChange={handleChange}
         hebrew='true'
       />
       <InputField
@@ -77,7 +77,7 @@ const GeneralDetails = ({ categories, courseData, handdleChange }) => {
         type='text'
         value={schedulingComments}
         label='הערות לקביעת מועדי מפגשים'
-        handleChange={handdleChange}
+        handleChange={handleChange}
         hebrew='true'
       />
     </>

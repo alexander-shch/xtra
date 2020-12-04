@@ -90,10 +90,10 @@ const AddUpdateCategory = ({
         numberOfSessionsSiteTitle: count.title,
         sessionLength: length.value,
         sessionLengthSiteTitle: length.title,
-        minStudents,
-        maxStudents,
-        studentPrice,
-        price,
+        minStudents: minStudents === null ? '' : minStudents,
+        maxStudents: maxStudents === null ? '' : maxStudents,
+        studentPrice: studentPrice === null ? '' : studentPrice,
+        price: price === null ? '' : price,
       });
     }
     if (error) {
@@ -316,7 +316,7 @@ const AddUpdateCategory = ({
             type='button'
             onClick={() => history.push('/settings/Categories-list')}
             forgot
-            >
+          >
             ביטול
           </MyButton>
           <MyButton>{element}</MyButton>
