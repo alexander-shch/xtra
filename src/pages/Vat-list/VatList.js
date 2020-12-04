@@ -12,15 +12,15 @@ const VatList = ({ history, match, vatList, loading }) => {
       <div className='addButtons'>
         <MyButton
           addButtonStyle
-          onClick={() => history.push(`${match.path}/updateVatRate`)}
-        >
-          עידכון מע"מ
-        </MyButton>
-        <MyButton
-          addButtonStyle
           onClick={() => history.push(`${match.path}/addNewVat`)}
         >
           הוספה
+        </MyButton>
+        <MyButton
+          addButtonStyle
+          onClick={() => history.push(`${match.path}/updateVatRate`)}
+        >
+          עידכון מע"מ
         </MyButton>
       </div>
       <h4>מכפילי שכר</h4>

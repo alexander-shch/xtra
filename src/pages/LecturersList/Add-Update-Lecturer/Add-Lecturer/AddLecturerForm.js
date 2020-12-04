@@ -9,10 +9,10 @@ import { withRouter } from 'react-router-dom';
 import SelectInputProps from '../../../../components/inputs/selectProps/SelectInputProps';
 const AddLecturerForm = ({
   history,
-  handdleChange,
+  handleChange,
   vatList,
   lectureDeteils,
-  handdleSubmit,
+  handleSubmit,
   handleEditorChange,
   inProcess,
   lectureID,
@@ -34,14 +34,14 @@ const AddLecturerForm = ({
   } = lectureDeteils;
 
   return (
-    <form onSubmit={handdleSubmit}>
+    <form onSubmit={handleSubmit}>
       <div className='add-lecture-form'>
         <InputField
           name='name'
           type='text'
           label='שם המרצה'
           value={name}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
           required
         />
@@ -50,7 +50,7 @@ const AddLecturerForm = ({
           type='number'
           label='תז'
           value={idNumber}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
           required
         />
@@ -59,7 +59,7 @@ const AddLecturerForm = ({
           type='text'
           value={phone}
           label='טלפון'
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
           required
         />
@@ -68,7 +68,7 @@ const AddLecturerForm = ({
           type='email'
           label='דוא"ל'
           value={email}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
           required
         />
@@ -77,7 +77,7 @@ const AddLecturerForm = ({
           type='text'
           label='כתובת'
           value={address.address}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
           required
         />
@@ -86,7 +86,7 @@ const AddLecturerForm = ({
           type='number'
           label='שכר לשעה'
           value={hourlyRate}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
           required
         />
@@ -99,13 +99,13 @@ const AddLecturerForm = ({
           keyToValue='_id'
           keyToDisplay='title'
           label='מכפילי שכר'
-          handdleChange={handdleChange}
+          handleChange={handleChange}
         />
         <SelectInput
           name='active'
           label='פעיל'
           value={active}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           required
         />
         <div className='editor'>
@@ -134,7 +134,7 @@ const AddLecturerForm = ({
           type='text'
           label='תיאור'
           value={description}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
         />
         <TextArea
@@ -142,7 +142,7 @@ const AddLecturerForm = ({
           type='text'
           label='נסיון קודם'
           value={experience}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
         />
         <TextArea
@@ -150,7 +150,7 @@ const AddLecturerForm = ({
           type='text'
           label='מקצועות לימוד'
           value={teaching}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
         />
         <TextArea
@@ -158,14 +158,11 @@ const AddLecturerForm = ({
           type='text'
           label='הערות'
           value={notes}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
         />
       </div>
       <div className='buttons'>
-        <MyButton save loading={inProcess}>
-          שמור
-        </MyButton>
         <MyButton
           type='button'
           onClick={() => {
@@ -176,6 +173,9 @@ const AddLecturerForm = ({
           forgot
         >
           חזרה
+        </MyButton>
+        <MyButton save loading={inProcess}>
+          שמור
         </MyButton>
       </div>
     </form>

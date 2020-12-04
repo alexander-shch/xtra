@@ -90,10 +90,10 @@ const AddUpdateCategory = ({
         numberOfSessionsSiteTitle: count.title,
         sessionLength: length.value,
         sessionLengthSiteTitle: length.title,
-        minStudents,
-        maxStudents,
-        studentPrice,
-        price,
+        minStudents: minStudents === null ? '' : minStudents,
+        maxStudents: maxStudents === null ? '' : maxStudents,
+        studentPrice: studentPrice === null ? '' : studentPrice,
+        price: price === null ? '' : price,
       });
     }
     if (error) {
@@ -278,7 +278,7 @@ const AddUpdateCategory = ({
         </div>
         <div className='inputFlex half'>
           <InputField
-            name='minStudent'
+            name='minStudents'
             type='number'
             label='מספר תלמידים מינמלי'
             handleChange={handleChange}
@@ -312,7 +312,6 @@ const AddUpdateCategory = ({
         </div>
         <SelectInput name='active' handleChange={handleChange} label='פעיל' />
         <div className='buttons'>
-          <MyButton>{element}</MyButton>
           <MyButton
             type='button'
             onClick={() => history.push('/settings/Categories-list')}
@@ -320,6 +319,7 @@ const AddUpdateCategory = ({
           >
             ביטול
           </MyButton>
+          <MyButton>{element}</MyButton>
         </div>
       </form>
     </UpdatePageContainer>

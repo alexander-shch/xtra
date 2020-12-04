@@ -1,61 +1,77 @@
 import React from 'react';
 import InputField from '../../../../components/inputs/input-field/InputField';
 import TextArea from '../../../../components/inputs/text-area/TextArea';
-import MyButton from '../../../../components/My-button/MyButton';
 import { InputFlex } from '../../../../components/global-style/formsStyle';
 import LectureSelector from '../../../../components/lexture-selctor/LectureSelector';
 
-const WebsiteInfo = ({ goBack, lectures, searchField }) => {
+const WebsiteInfo = ({
+  handleNestedChange,
+  handleChange,
+  courseData,
+  lectures,
+  searchField,
+  addLecture,
+  removeLecture,
+}) => {
+  const {
+    progress,
+    requirements,
+    meetingsCount,
+    meetingLength,
+    target,
+    marketing,
+    assignedLecturers,
+    extTitles,
+  } = courseData;
   return (
-    <form>
+    <>
       <InputFlex>
-        <InputField
-          name='title'
-          type='text'
-          label='שם הקורס'
-          hebrew='true'
-          required
-        />
-        <InputField
-          name='courseGoalsSiteTitle'
-          type='text'
-          label='כותרת באתר '
-          hebrew='true'
-        />
         <TextArea
-          name='courseGoals'
+          name='target'
           type='text'
           label='מטרת הקורס'
+          value={target}
+          handleChange={handleChange}
           hebrew='true'
           small='true'
         />
 
         <InputField
-          name='courseGoalsSiteTitle'
+          name='target'
+          handleChange={handleNestedChange}
+          value={extTitles.target}
           type='text'
           label='כותרת באתר '
           hebrew='true'
         />
         <InputField
-          name='preliminaryKnowledge'
+          name='requirements'
+          value={requirements}
+          handleChange={handleChange}
           type='text'
           label='דרישות/ידע מקדים'
           hebrew='true'
         />
         <InputField
-          name='preliminaryKnowledgeSiteTitle'
+          name='requirements'
+          handleChange={handleNestedChange}
+          value={extTitles.requirements}
           type='text'
           label='כותרת באתר '
           hebrew='true'
         />
         <InputField
-          name='howPromoteYou'
+          value={progress}
+          handleChange={handleChange}
+          name='progress'
           type='text'
           label='איך הקורס יקדם אתכם'
           hebrew='true'
         />
         <InputField
-          name='howPromoteYouSiteTitle'
+          name='progress'
+          handleChange={handleNestedChange}
+          value={extTitles.progress}
           type='text'
           label='כותרת באתר '
           hebrew='true'
@@ -63,45 +79,54 @@ const WebsiteInfo = ({ goBack, lectures, searchField }) => {
       </InputFlex>
       <InputField
         name='marketing'
+        value={marketing}
+        handleChange={handleChange}
         type='text'
         label='עיגול שיווקי'
         hebrew='true'
       />
       <InputFlex>
         <InputField
-          name='numberOfSessions'
+          name='meetingsCount'
+          value={meetingsCount}
           type='number'
           label='מספר מפגשים'
+          handleChange={handleChange}
           hebrew='true'
         />
         <InputField
-          name='numberOfSessionsSiteTitle'
+          name='meetingsCount'
+          handleChange={handleNestedChange}
+          value={extTitles.meetingsCount}
           type='text'
           label='כותרת באתר '
           hebrew='true'
         />
         <InputField
-          name='sessionLength'
+          name='meetingLength'
+          value={meetingLength}
           type='text'
           label='אורך כל מפגש'
+          handleChange={handleChange}
           hebrew='true'
         />
         <InputField
-          name='sessionLengthSiteTitle'
+          name='meetingLength'
+          handleChange={handleNestedChange}
+          value={extTitles.meetingLength}
           type='text'
           label='כותרת באתר '
           hebrew='true'
         />
       </InputFlex>
-      <LectureSelector lectures={lectures} searchField={searchField} />
-
-      <div className='buttons'>
-        <MyButton>שמור</MyButton>
-        <MyButton onClick={() => goBack()} type='button' forgot>
-          חזרה
-        </MyButton>
-      </div>
-    </form>
+      <LectureSelector
+        addLecture={addLecture}
+        removeLecture={removeLecture}
+        assignedLecturers={assignedLecturers}
+        lectures={lectures}
+        searchField={searchField}
+      />
+    </>
   );
 };
 

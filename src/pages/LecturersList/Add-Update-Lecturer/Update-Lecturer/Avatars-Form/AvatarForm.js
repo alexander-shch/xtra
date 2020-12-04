@@ -22,7 +22,7 @@ const AvatarForm = ({ singleLecture, avatarLoading, id, setAvatarImg }) => {
   const [imgFile, setImgFile] = useState({ img: null });
   const { img } = imgFile;
 
-  const handdleImgChange = (e) => {
+  const handleImgChange = (e) => {
     const { files } = e.target;
     setImgFile({ img: files });
   };
@@ -58,7 +58,7 @@ const AvatarForm = ({ singleLecture, avatarLoading, id, setAvatarImg }) => {
         <MyButton save loading={avatarLoading} onClick={() => imgSubmit()}>
           שמור תמונה
         </MyButton>
-        <input type='file' name='file' onChange={handdleImgChange} />
+        <input type='file' name='file' onChange={handleImgChange} />
       </div>
     </div>
   );

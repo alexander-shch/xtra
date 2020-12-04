@@ -9,7 +9,7 @@ const Calendar = ({
   setDateClick,
   setEventClick,
   lastDate,
-  jewsihHolydays,
+  jewishHolydays,
 }) => {
   const eventsToDisplay = events
     ? events.map((item) => {
@@ -55,7 +55,7 @@ const Calendar = ({
         plugins={[dayGridPlugin, interactionPlugin]}
         select={handleDateSelect}
         eventClick={handleEventClick}
-        eventSources={[jewsihHolydays, eventsToDisplay]}
+        eventSources={[jewishHolydays, eventsToDisplay]}
       />
     </>
   );

@@ -41,13 +41,13 @@ const ClassRoutes = ({
   confirmMessageData,
   getSingleClass,
   singleClass,
-  jewsihHolydays,
+  jewishHolydays,
   ...props
 }) => {
   useEffect(() => {
     getclassesData();
     getBuildingsData();
-    if (jewsihHolydays.length === 0) {
+    if (jewishHolydays.length === 0) {
       getJewishHolydays();
     } // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -86,7 +86,7 @@ const ClassRoutes = ({
         />
         <Route
           path={`${match.path}/updateClass/:classID/`}
-          render={() =>
+          render={() => (
             <EditClass
               getSingleClass={getSingleClass}
               buildings={buildings}
@@ -94,11 +94,10 @@ const ClassRoutes = ({
               process={process}
               calenderLoading={calenderLoading}
               setAlert={setAlert}
-              jewsihHolydays={jewsihHolydays}
+              jewishHolydays={jewishHolydays}
               {...props}
             />
-
-          }
+          )}
         />
       </Suspense>
     </>
@@ -113,9 +112,9 @@ const mapStateToProps = (state) => ({
   error: state.classes.error,
   pageLoading: state.classes.loading,
   calenderLoading: state.classes.calenderLoading,
-  jewsihHolydays: state.classes.jewsihHolydays,
+  jewishHolydays: state.classes.jewishHolydays,
   confirmMessageData: state.delete,
-  innerSinglePageLoading: state.classes.innerSinglePageLoading
+  innerSinglePageLoading: state.classes.innerSinglePageLoading,
 });
 
 const mapDispatchToProps = (dispatch) => ({

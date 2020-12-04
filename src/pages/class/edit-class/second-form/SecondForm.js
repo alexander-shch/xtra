@@ -3,7 +3,7 @@ import DataInput from '../../../../components/inputs/date-input/DateInput';
 import MyButton from '../../../../components/My-button/MyButton';
 import './secondForm.style.scss';
 const SecondForm = ({
-  dateHanddleChange,
+  dateHandleChange,
   handleDatesSubmit,
   onDayChange,
   dateDetails,
@@ -24,7 +24,7 @@ const SecondForm = ({
       <h4>זמינות</h4>
       <form onSubmit={handleDatesSubmit} className='dateForm'>
         <DataInput
-          handleChange={dateHanddleChange}
+          handleChange={dateHandleChange}
           name='from'
           value={from}
           label='מתאריך'
@@ -32,7 +32,7 @@ const SecondForm = ({
           min={today}
         />
         <DataInput
-          handleChange={dateHanddleChange}
+          handleChange={dateHandleChange}
           name='to'
           value={to}
           label='עד תאריך'
@@ -40,14 +40,14 @@ const SecondForm = ({
           min={from}
         />
         <DataInput
-          handleChange={dateHanddleChange}
+          handleChange={dateHandleChange}
           name='fromTime'
           value={fromTime}
           label='משעה'
           type='time'
         />
         <DataInput
-          handleChange={dateHanddleChange}
+          handleChange={dateHandleChange}
           name='toTime'
           value={toTime}
           label='עד שעה'

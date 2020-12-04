@@ -56,7 +56,7 @@ const AddUpdateSemester = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [singleSemester, error]);
 
-  const handdleChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setSemesterData({ ...semesterData, [name]: value });
   };
@@ -98,19 +98,19 @@ const AddUpdateSemester = ({
           type='text'
           label='כותרת'
           hebrew='true'
-          handleChange={handdleChange}
+          handleChange={handleChange}
           required
         />
         <div className='dateInputs'>
           <DataInput
-            handleChange={handdleChange}
+            handleChange={handleChange}
             name='startDate'
             value={startDate}
             label='תאריך התחלה'
             type='date'
           />
           <DataInput
-            handleChange={handdleChange}
+            handleChange={handleChange}
             name='endDate'
             value={endDate}
             label='תאריך סיום'
@@ -118,14 +118,13 @@ const AddUpdateSemester = ({
           />
         </div>
         <SelectInput
-          handleChange={handdleChange}
+          handleChange={handleChange}
           name='active'
           value={active}
           label='פעיל'
           required
         />
         <div className='buttons'>
-          <MyButton>{saveIcon}</MyButton>
           <MyButton
             type='button'
             onClick={() => history.push('/settings/Semesters')}
@@ -133,6 +132,7 @@ const AddUpdateSemester = ({
           >
             חזרה
           </MyButton>
+          <MyButton>{saveIcon}</MyButton>
         </div>
       </form>
     </UpdatePageContainer>

@@ -9,16 +9,17 @@ const SelectInputProps = ({
   keyToDisplay,
   label,
   keyToValue,
-  handdleChange,
+  handleChange,
 }) => {
   return (
     <div className='selectInput'>
+      <label className='selectInputLabel'>{label}</label>
       <select
         required
         name={name}
         className='Selector'
         value={value ? value : '1'}
-        onChange={handdleChange}
+        onChange={handleChange}
       >
         <option value='1' disabled hidden>
           {selectTitle}
@@ -29,7 +30,6 @@ const SelectInputProps = ({
           </option>
         ))}
       </select>
-      <label className='selectInputLabel'>{label}</label>
     </div>
   );
 };

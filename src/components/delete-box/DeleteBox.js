@@ -31,7 +31,7 @@ const DeleteBox = ({
   };
 
   return confirmMessageDisplay ? (
-    <FlexContainer>
+    <FlexContainer onClick={() => closeConfirmMessage()}>
       <PopUpContainer>
         <BoxHeader>
           <h5>מחיקה</h5>

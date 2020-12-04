@@ -3,62 +3,84 @@ import InputField from '../../../../../components/inputs/input-field/InputField'
 import SelectInput from '../../../../../components/inputs/select-input/SelectInput';
 import SelectInputProps from '../../../../../components/inputs/selectProps/SelectInputProps';
 import TextArea from '../../../../../components/inputs/text-area/TextArea';
-import MyButton from '../../../../../components/My-button/MyButton';
+
 import './generalDetails.style.scss';
 
-const GeneralDetails = ({ categories, goBack }) => {
+const GeneralDetails = ({ categories, courseData, handleChange }) => {
+  const {
+    title,
+    minStudents,
+    maxStudents,
+    assignToClassComments,
+    schedulingComments,
+    active,
+    category,
+  } = courseData;
   return (
-    <form>
+    <>
+      <InputField
+        name='title'
+        value={title}
+        type='text'
+        label='שם הקורס'
+        handleChange={handleChange}
+        hebrew='true'
+      />
+
       <div className='general-first-row'>
-        <InputField
-          name='minStudent'
-          type='number'
-          label='מספר תלמידים מינמלי '
-          hebrew='true'
-          required
-        />
-        <InputField
-          name='maxStudent'
-          type='number'
-          label='מספר תלמידים מקסימלי '
-          hebrew='true'
-          required
-        />
         <SelectInputProps
           props={categories}
-          name='categories'
+          name='category'
           selectTitle='בחר תחום'
           keyToValue='_id'
           keyToDisplay='title'
           label='תחום'
-          // handdleChange={handdleChange}
+          value={category}
+          handleChange={handleChange}
+        />
+        <InputField
+          name='minStudents'
+          type='number'
+          label='מספר תלמידים מינמלי '
+          hebrew='true'
+          value={minStudents}
+          handleChange={handleChange}
+          required
+        />
+        <InputField
+          name='maxStudents'
+          type='number'
+          label='מספר תלמידים מקסימלי '
+          hebrew='true'
+          value={maxStudents}
+          handleChange={handleChange}
+          required
         />
       </div>
       <SelectInput
         name='active'
         label='מוצג באתר'
-        // handleChange={handdleChange}
+        value={active}
+        handleChange={handleChange}
         required
       />
       <TextArea
-        name='notes'
+        name='assignToClassComments'
         type='text'
         label='הערות לשיבוץ כיתה'
+        value={assignToClassComments}
+        handleChange={handleChange}
         hebrew='true'
       />
       <InputField
-        name='classNotes'
+        name='schedulingComments'
         type='text'
+        value={schedulingComments}
         label='הערות לקביעת מועדי מפגשים'
+        handleChange={handleChange}
         hebrew='true'
       />
-      <div className='buttons'>
-        <MyButton>שמור</MyButton>
-        <MyButton onClick={() => goBack()} type='button' forgot>
-          חזרה
-        </MyButton>
-      </div>
-    </form>
+    </>
   );
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import DataSpinner from '../spinner/DataSpinner/DataSpiner';
+import DataSpinner from '../spinner/DataSpinner/DataSpinner';
 
 const SingleItemContainer = ({
   loading,
