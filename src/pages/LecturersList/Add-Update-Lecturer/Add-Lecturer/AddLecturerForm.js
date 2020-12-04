@@ -32,6 +32,7 @@ const AddLecturerForm = ({
     teaching,
     notes,
   } = lectureDeteils;
+
   return (
     <form onSubmit={handleSubmit}>
       <div className='add-lecture-form'>

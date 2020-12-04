@@ -1,4 +1,5 @@
 import { callFetch, URL } from '../../utils/actionUtils';
+import { setAlert } from '../My-Alert/myAlert.action';
 
 export const getvatList = () => (dispatch) => {
   dispatch({ type: 'GET_VAT_LIST_START' });
@@ -51,3 +52,20 @@ export const getSingleVatItem = (ID) => (dispatch) => {
 export const clearSingle = () => ({
   type: 'CLEAR_SINGLE',
 });
+
+export const getVatRate = () => (dispatch) => {
+  dispatch({ type: 'GET_VAT_RATE_START' });
+  callFetch(`${URL}/settings/vat`, 'GET')
+    .then((data) => dispatch({ type: 'GET_VAT_RATE_SUCSESS', payload: data }))
+    .catch((err) => dispatch({ type: 'GET_VAT_RATE_FAILED', payload: err }));
+};
+
+export const updateVat = (vatValue) => (dispatch) => {
+  dispatch({ type: 'UPDATE_VAT_RATE_START' });
+  callFetch(`${URL}/settings/vat`, 'POST', vatValue)
+    .then((data) => {
+      dispatch({ type: 'UPDATE_VAT_RATE_SUCSESS', payload: data });
+      dispatch(setAlert('מעמ עודכן', 'success'));
+    })
+    .catch((err) => dispatch({ type: 'UPDATE_VAT_RATE_FAILED', payload: err }));
+};

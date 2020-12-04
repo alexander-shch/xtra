@@ -7,8 +7,8 @@ import DeleteButton from '../../My-button/delete-button/DeleteButton';
 const SingleClass = ({ item, match, history }) => {
   return (
     <SingleItem>
-      <span className='itemName'>{item.building.name}</span>
-      <span className='itemName'>{item.name}</span>
+      <span className='itemName'>{item?.building?.name}</span>
+      <span className='itemName'>{item?.name}</span>
       <div className='buttons'>
         <OptionButton
           onClick={() => history.push(`${match.path}/updateClass/${item._id}`)}

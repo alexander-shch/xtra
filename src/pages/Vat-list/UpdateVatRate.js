@@ -7,26 +7,35 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
 const element = <FontAwesomeIcon icon={faSave} />;
 
-const UpdateVatRate = ({ history }) => {
-  const [vatRate, setVatRate] = useState(17);
+const UpdateVatRate = ({ history, vatRate, ...props }) => {
+  const { updateVat, setAlert } = props;
+  const [rate, setRate] = useState(vatRate.value);
 
   const handleChange = (e) => {
     const { value } = e.target;
-    setVatRate(value);
+    setRate(value);
   };
   const cancel = () => {
     history.push('/settings/VAT-multipliers');
   };
+
+  const handdleSubmit = (e) => {
+    e.preventDefault();
+    try {
+      updateVat({ value: rate });
+    } catch (err) {
+      setAlert('מעמ לא עודכן', 'error');
+    }
+  };
+
   return (
     <UpdatePageContainer>
       <h3>עידכון מע"מ</h3>
-      <form>
+      <form onSubmit={handdleSubmit}>
         <InputField
           name='vatRate'
           type='number'
           label='מע"מ'
-          value={vatRate}
-          handleChange={handleChange}
           hebrew='true'
           required
         />

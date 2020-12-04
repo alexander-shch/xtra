@@ -64,6 +64,7 @@ const lecturesReducer = (state = INTAIL_STATE, action) => {
         inProcess: false,
         lectures: [...state.lectures, action.payload],
         singleLecture: action.payload,
+        innerSinglePageLoading: false,
       };
     case 'UPDATE_LECTURE_SUCCESS':
     case 'SET_AVATAR_IMG_SUCCESS':

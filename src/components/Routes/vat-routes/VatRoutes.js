@@ -11,11 +11,16 @@ import {
   deleteVatItem,
   getSingleVatItem,
   clearSingle,
+  getVatRate,
+  updateVat,
 } from '../../../Redux/Vat/vat.action';
+import { setAlert } from '../../../Redux/My-Alert/myAlert.action';
 import { closeConfirmMessage } from '../../../Redux/on-delete/delete.action';
 import DeleteBox from '../../delete-box/DeleteBox';
+import WithSpinner from '../../spinner/WithSpinner';
+import MyAlert from '../../My-Alert/MyAlert';
 
-
+const UpdateVatRateWithSpinner = WithSpinner(UpdateVatRate);
 
 const VatRoutes = ({
   match,
@@ -26,10 +31,15 @@ const VatRoutes = ({
   loading,
   confirmMessageData,
   closeConfirmMessage,
+  updateVatRate,
+  getVatRate,
+  vatRate,
+  vatRateLoading,
   ...props
 }) => {
   useEffect(() => {
     getvatList();
+    getVatRate();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
@@ -39,6 +49,7 @@ const VatRoutes = ({
         closeConfirmMessage={closeConfirmMessage}
         deleteFunction={deleteVatItem}
       />
+      <MyAlert />
       <Switch>
         <Route
           exact
@@ -48,7 +59,13 @@ const VatRoutes = ({
         <Route
           exact
           path='/settings/VAT-multipliers/updateVatRate'
-          render={() => <UpdateVatRate />}
+          render={() => (
+            <UpdateVatRateWithSpinner
+              loading={vatRateLoading}
+              vatRate={vatRate}
+              {...props}
+            />
+          )}
         />
         <Route
           exact
@@ -58,10 +75,7 @@ const VatRoutes = ({
         <Route
           path={`${match.path}/updateVatItem/:vatID`}
           render={() => (
-            <AddUpdateVatList
-              updateVatItem={updateVatItem}
-              {...props}
-            />
+            <AddUpdateVatList updateVatItem={updateVatItem} {...props} />
           )}
         />
       </Switch>
@@ -75,7 +89,9 @@ const mapStateToProps = (state) => ({
   confirmMessageData: state.delete,
   singleVatItem: state.vat.singleVatItem,
   error: state.vat.error,
-  innerSinglePageLoading: state.vat.innerSinglePageLoading
+  innerSinglePageLoading: state.vat.innerSinglePageLoading,
+  vatRate: state.vat.vatRate,
+  vatRateLoading: state.vat.vatRateLoading,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -86,6 +102,9 @@ const mapDispatchToProps = (dispatch) => ({
   closeConfirmMessage: () => dispatch(closeConfirmMessage()),
   getSingleVatItem: (id) => dispatch(getSingleVatItem(id)),
   clearSingle: () => dispatch(clearSingle()),
+  getVatRate: () => dispatch(getVatRate()),
+  updateVat: (vatValue) => dispatch(updateVat(vatValue)),
+  setAlert: (text, style) => dispatch(setAlert(text, style)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(VatRoutes);

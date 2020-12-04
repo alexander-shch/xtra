@@ -87,6 +87,7 @@ const AddUpdateLecturer = ({
   const handleSubmit = async (e) => {
     const { duplicator } = lectureDeteils;
     e.preventDefault();
+
     if (!singleLecture) {
       try {
         if (!duplicator) {
