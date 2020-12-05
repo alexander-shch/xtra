@@ -33,6 +33,8 @@ const UpdateVatRate = ({ history, vatRate, ...props }) => {
       <h3>עידכון מע"מ</h3>
       <form onSubmit={handdleSubmit}>
         <InputField
+          handleChange={handleChange}
+          value={rate}
           name='vatRate'
           type='number'
           label='מע"מ'

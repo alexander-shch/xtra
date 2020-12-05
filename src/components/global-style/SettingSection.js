@@ -45,8 +45,7 @@ export const SingleItem = styled.div`
     flex-wrap: wrap;
     display: flex;
     width: 30%;
-    justify-content: flex-start;
-
+    justify-content: flex-end;
   }
   .itemName {
     margin-right: 5px;
