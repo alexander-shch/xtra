@@ -10,7 +10,7 @@ const element = <FontAwesomeIcon icon={faSave} />;
 
 const FirstForm = ({
   buildings,
-  handdleChange,
+  handleChange,
   handleSubmit,
   classDetails,
   history,
@@ -26,7 +26,7 @@ const FirstForm = ({
           type='text'
           label='שם הכיתה'
           value={name}
-          handleChange={handdleChange}
+          handleChange={handleChange}
           hebrew='true'
           required
         />
@@ -38,36 +38,33 @@ const FirstForm = ({
           keyToValue='_id'
           keyToDisplay='name'
           label='בחר בניין'
-          handdleChange={handdleChange}
+          handleChange={handleChange}
         />
       </div>
       <h4>מספר תלמידים</h4>
 
       <div className='studNum'>
         <InputField
-          name='maxStudents'
-          type='number'
-          label='מקסימלי'
-          value={maxStudents}
-          handleChange={handdleChange}
-          hebrew='true'
-          required
-        />
-        <InputField
           name='minStudents'
           type='number'
           label='מינימלי'
           value={minStudents}
-          handleChange={handdleChange}
+          handleChange={handleChange}
+          hebrew='true'
+          required
+        />
+        <InputField
+          name='maxStudents'
+          type='number'
+          label='מקסימלי'
+          value={maxStudents}
+          handleChange={handleChange}
           hebrew='true'
           required
         />
       </div>
 
       <div className='buttons'>
-        <MyButton save loading={loading}>
-          {element}
-        </MyButton>
         <MyButton
           type='button'
           onClick={() => {
@@ -76,6 +73,9 @@ const FirstForm = ({
           forgot
         >
           חזרה
+        </MyButton>
+        <MyButton save loading={loading}>
+          {element}
         </MyButton>
       </div>
     </form>

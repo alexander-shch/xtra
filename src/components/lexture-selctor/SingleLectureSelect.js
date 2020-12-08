@@ -4,14 +4,14 @@ import OptionButton from '../My-button/option-button/OptionButton';
 const SingleLectureSelect = ({ lecture, addLecture }) => {
   return (
     <div>
-      <span>{lecture.name}</span>
       <OptionButton
         list={'true'}
-        onClick={() => addLecture(lecture)}
+        onClick={() => addLecture(lecture._id)}
         type='button'
       >
         +
       </OptionButton>
+      <span>{lecture.name}</span>
     </div>
   );
 };

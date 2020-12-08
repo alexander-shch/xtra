@@ -9,7 +9,7 @@ const DeleteButton = ({
   deleteConfirmMessage,
   addFunction,
 }) => {
-  const handdleDeleteClick = (item) => {
+  const handleDeleteClick = (item) => {
     if (confirmMessageDisplay) {
       return;
     } else {
@@ -21,7 +21,7 @@ const DeleteButton = ({
     : item;
   return (
     <>
-      <OptionButton onClick={() => handdleDeleteClick(itemToDelete)} delete>
+      <OptionButton onClick={() => handleDeleteClick(itemToDelete)} delete>
         &#10008;
       </OptionButton>
     </>

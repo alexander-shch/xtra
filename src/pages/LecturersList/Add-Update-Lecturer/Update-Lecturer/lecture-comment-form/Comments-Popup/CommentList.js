@@ -3,7 +3,7 @@ import CommentPopUp from './Comment-PopUp';
 import MyButton from '../../../../../../components/My-button/MyButton';
 import SingleLecturerNote from '../../../../../../components/Single-Items/SingleLecturerNote';
 import TableTop from '../../../../../../components/Table-top/Tabletop';
-import DataSpinner from '../../../../../../components/spinner/DataSpinner/DataSpiner';
+import DataSpinner from '../../../../../../components/spinner/DataSpinner/DataSpinner';
 
 const CommentList = ({ singleLecture, loading, addNewNote, setAlert }) => {
   const notesArr = singleLecture.internalNotes;

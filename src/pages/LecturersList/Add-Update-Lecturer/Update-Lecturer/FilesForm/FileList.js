@@ -3,7 +3,7 @@ import TableTop from '../../../../../components/Table-top/Tabletop';
 import MyButton from '../../../../../components/My-button/MyButton';
 import FilePopUp from './Popup/FilePopUp';
 import SingleFile from '../../../../../components/Single-Items/singleFile/SingleFile';
-import DataSpinner from '../../../../../components/spinner/DataSpinner/DataSpiner';
+import DataSpinner from '../../../../../components/spinner/DataSpinner/DataSpinner';
 
 const FilesLIst = ({ uploadCv, id, singleLecture, fileSpinner }) => {
   const fileArr = singleLecture.files;
@@ -12,7 +12,7 @@ const FilesLIst = ({ uploadCv, id, singleLecture, fileSpinner }) => {
   const [cvFile, setCvFile] = useState({ cv: null });
   const { cv } = cvFile;
 
-  const handdleCvChange = (e) => {
+  const handleCvChange = (e) => {
     const { files } = e.target;
     setCvFile({ cv: files });
   };
@@ -36,7 +36,7 @@ const FilesLIst = ({ uploadCv, id, singleLecture, fileSpinner }) => {
       {filePopUpView ? (
         <FilePopUp
           cvSubmit={cvSubmit}
-          handdleFileChange={handdleCvChange}
+          handleFileChange={handleCvChange}
           setFilePopUpView={setFilePopUpView}
           loading={fileSpinner}
         />

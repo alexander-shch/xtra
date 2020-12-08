@@ -30,6 +30,30 @@ export const getSingleCourse = (courseID) => (dispatch) => {
     );
 };
 
+export const deleteCourse = (courseID) => (dispatch) => {
+  dispatch({ type: 'DELETE_COURSE_START' });
+  callFetch(`${URL}/courses/${courseID}`, 'DELETE')
+    .then((data) => {
+      if (data.deleted) {
+        dispatch({ type: 'DELETE_COURSE_SUCCESS', payload: courseID });
+      } else {
+        throw new Error('cant delete this');
+      }
+    })
+    .catch((err) => dispatch({ type: 'DELETE_COURSE_FAILED', payload: err }));
+};
+
+export const updateCourse = (courseID, courseData) => (dispatch) => {
+  dispatch({ type: 'UPDATE_COURSE_START' });
+  callFetch(`${URL}/courses/${courseID}`, 'PUT', courseData)
+    .then((data) => {
+      console.log(data);
+      dispatch({ type: 'UPDATE_COURSE_SUCCESS', payload: data });
+      dispatch(setAlert('קורס עודכן בהצלחה', 'success'));
+    })
+    .catch((err) => dispatch({ type: 'UPDATE_COURSE_FAILED', payload: err }));
+};
+
 export const clearSingle = () => ({
   type: 'CLEAR_SINGLE',
 });

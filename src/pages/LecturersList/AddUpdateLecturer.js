@@ -84,7 +84,7 @@ const AddUpdateLecturer = ({
     } // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [singleLecture, error]);
 
-  const handdleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     const { duplicator } = lectureDeteils;
     e.preventDefault();
 
@@ -112,7 +112,7 @@ const AddUpdateLecturer = ({
     setLectureDetails({ ...lectureDeteils, details: content });
   };
 
-  const handdleChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     name === 'address'
       ? setLectureDetails({ ...lectureDeteils, address: { address: value } })
@@ -127,9 +127,9 @@ const AddUpdateLecturer = ({
       ) : (
         <UpdatePageContainer>
           <AddLecturerForm
-            handdleChange={handdleChange}
+            handleChange={handleChange}
             handleEditorChange={handleEditorChange}
-            handdleSubmit={handdleSubmit}
+            handleSubmit={handleSubmit}
             vatList={vatList}
             lectureDeteils={lectureDeteils}
             lecturesLoading={lecturesLoading}

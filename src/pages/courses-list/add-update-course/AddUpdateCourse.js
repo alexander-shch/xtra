@@ -19,7 +19,8 @@ const AddUpdateCourse = ({
   clearSingle,
   singleCourse,
   addNewCourse,
-  inProcsess,
+  inProcess,
+  updateCourse,
 }) => {
   const courseID = match.params.courseID;
   useEffect(() => {
@@ -43,10 +44,12 @@ const AddUpdateCourse = ({
     maxStudents: '',
     minStudents: '',
     schedulingComments: '',
-    catagory: null,
+    category: null,
     meetingLength: '',
     meetingsCount: '',
     target: '',
+    progress: '',
+    assignedLecturers: [],
     extTitles: {
       marketing: '',
       meetingLength: '',
@@ -69,10 +72,12 @@ const AddUpdateCourse = ({
         maxStudents,
         minStudents,
         schedulingComments,
-        catagory,
+        category,
         meetingLength,
         meetingsCount,
         target,
+        progress,
+        assignedLecturers,
         extTitles,
       } = singleCourse;
       setCourseData({
@@ -81,13 +86,15 @@ const AddUpdateCourse = ({
         requirements,
         assignToClassComments,
         marketing,
-        maxStudents,
-        minStudents,
+        maxStudents: maxStudents === null ? '' : maxStudents,
+        minStudents: minStudents === null ? '' : minStudents,
         schedulingComments,
-        catagory,
-        meetingLength,
-        meetingsCount,
+        category,
+        meetingLength: meetingLength === null ? '' : meetingLength,
+        meetingsCount: meetingsCount === null ? '' : meetingsCount,
         target,
+        progress,
+        assignedLecturers: assignedLecturers ? assignedLecturers : [],
         extTitles: {
           marketing: extTitles.marketing,
           progress: extTitles.progress,
@@ -101,13 +108,13 @@ const AddUpdateCourse = ({
     }
   }, [singleCourse]);
 
-  const { catagory } = courseData;
+  const { category } = courseData;
   useEffect(() => {
-    //open alert on catagory change
+    //open alert on category change
     if (!firstLoad) {
       setAlertView(true);
     } // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [catagory]);
+  }, [category]);
 
   useEffect(() => {
     //close alert after confirmation
@@ -131,15 +138,15 @@ const AddUpdateCourse = ({
     history.push('/courses');
   };
 
-  const handdleChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === 'catagory' && firstLoad) {
+    if (name === 'category' && firstLoad) {
       setFirstLoad(false);
     }
     setCourseData({ ...courseData, [name]: value });
   };
 
-  const handdleNestedChange = (e) => {
+  const handleNestedChange = (e) => {
     const { extTitles } = courseData;
     const { name, value } = e.target;
     setCourseData({
@@ -147,11 +154,36 @@ const AddUpdateCourse = ({
       extTitles: { ...extTitles, [name]: value },
     });
   };
-  const handdleSubmit = async (e) => {
+  const { assignedLecturers } = courseData;
+
+  const addLecture = (lectureID) => {
+    if (assignedLecturers.includes(lectureID)) {
+      return;
+    }
+    setCourseData({
+      ...courseData,
+      assignedLecturers: [...assignedLecturers, lectureID],
+    });
+  };
+
+  const removeLecture = (lectureID) => {
+    setCourseData({
+      ...courseData,
+      assignedLecturers: assignedLecturers.filter((item) => item !== lectureID),
+    });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!singleCourse) {
       try {
         await addNewCourse(courseData, history);
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      try {
+        await updateCourse(courseID, courseData);
       } catch (err) {
         console.log(err);
       }
@@ -163,18 +195,21 @@ const AddUpdateCourse = ({
 
   const onAlertConfirm = () => {
     //set the fields after alert confirmation
-    let selectedCatagory = categories.find((item) => item._id === catagory);
-    if (selectedCatagory && !firstLoad) {
-      let sc = selectedCatagory.courseDefaults;
+    let selectedCategory = categories.find((item) => item._id === category);
+    if (selectedCategory && !firstLoad) {
+      let sc = selectedCategory.courseDefaults;
       setCourseData({
         ...courseData,
-        minStudents: sc.minStudents,
-        maxStudents: sc.maxStudents,
-        meetingLength: sc.session.length.value,
-        meetingsCount: sc.session.count.value,
+        minStudents: sc.minStudents === null ? '' : sc.minStudents,
+        maxStudents: sc.maxStudents === null ? '' : sc.maxStudents,
+        meetingLength:
+          sc.session.length.value === null ? '' : sc.session.length.value,
+        meetingsCount:
+          sc.session.count.value === null ? '' : sc.session.count.value,
         target: sc.goals.value,
         requirements: sc.preliminaryKnowledge.value,
         marketing: sc.marketing,
+        progress: sc.promotion.value,
         extTitles: {
           progress: sc.promotion.title,
           requirements: sc.preliminaryKnowledge.title,
@@ -194,17 +229,19 @@ const AddUpdateCourse = ({
           <GeneralDetails
             categories={categories}
             courseData={courseData}
-            handdleChange={handdleChange}
+            handleChange={handleChange}
           />
         );
       case 1:
         return (
           <WebsiteInfo
-            handdleNestedChange={handdleNestedChange}
+            handleNestedChange={handleNestedChange}
+            addLecture={addLecture}
+            removeLecture={removeLecture}
             lectures={lectures}
             searchField={searchField}
             courseData={courseData}
-            handdleChange={handdleChange}
+            handleChange={handleChange}
           />
         );
       case 2:
@@ -236,15 +273,15 @@ const AddUpdateCourse = ({
           tabLinks={tabLinks}
           changeTab={changeTab}
         />
-        <form onSubmit={handdleSubmit}>
+        <form onSubmit={handleSubmit}>
           {toggleTab()}
           {currentTab === 3 ? null : (
             <div className='buttons'>
-              <MyButton save loading={inProcsess}>
-                שמור
-              </MyButton>
               <MyButton onClick={() => goBack()} type='button' forgot>
                 חזרה
+              </MyButton>
+              <MyButton save loading={inProcess}>
+                שמור
               </MyButton>
             </div>
           )}

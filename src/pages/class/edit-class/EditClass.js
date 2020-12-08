@@ -23,7 +23,7 @@ const EditClass = ({
   setAlert,
   getSingleClass,
   singleClass,
-  jewsihHolydays,
+  jewishHolydays,
   ...props
 }) => {
   const {
@@ -122,18 +122,19 @@ const EditClass = ({
   const handleDatesSubmit = async (e) => {
     e.preventDefault();
     const { from, to, fromTime, toTime, availabilityId } = dateDetails;
-    if (
-      from.length < 1 ||
-      to.length < 1 ||
-      fromTime.length < 1 ||
-      toTime.length < 1
-    ) {
+    let inputsArr = [from, to, fromTime, toTime];
+
+    if (inputsArr.some((input) => input.length < 1)) {
       setAlert('יש למלא תאריכים ושעות', 'error');
       return;
     }
 
     if (isTimeValid(toTime, fromTime) < 45) {
       setAlert('טווח של 45 דק מינמום', 'error');
+      return;
+    }
+    if (!isTimePass(from, fromTime)) {
+      setAlert('זמן התחלה עבר', 'error');
       return;
     } else {
       setLastUpdatedDate(from);
@@ -155,6 +156,16 @@ const EditClass = ({
     let fromTimeDate = new Date(0, 0, 0, fromTimeArr[0], fromTimeArr[1]);
     let minutes = Math.round((toTimeDate - fromTimeDate) / (1000 * 60));
     return minutes;
+  };
+
+  const isTimePass = (from, fromTime) => {
+    let fromDate = new Date(`${from}T${fromTime}`);
+    console.log(fromDate);
+    if (fromDate < new Date()) {
+      return false;
+    } else {
+      return true;
+    }
   };
 
   const setDateClick = useCallback(
@@ -194,7 +205,7 @@ const EditClass = ({
     setConfirmMsg({ confirmMsgView: true, name: eventName });
   };
 
-  const delteItem = async () => {
+  const deleteItem = async () => {
     const { availabilityId, from } = dateDetails;
     setLastUpdatedDate(from);
     try {
@@ -221,12 +232,12 @@ const EditClass = ({
     });
   };
   //----------------------------------------------------------------
-  const handdleChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setClassDetails({ ...classDetails, [name]: value });
   };
 
-  const dateHanddleChange = (e) => {
+  const dateHandleChange = (e) => {
     const { name, value } = e.target;
     setDateDetails({ ...dateDetails, [name]: value });
   };
@@ -255,7 +266,7 @@ const EditClass = ({
               loading={process}
               buildings={buildings}
               handleSubmit={handleSubmit}
-              handdleChange={handdleChange}
+              handleChange={handleChange}
               classDetails={classDetails}
               clearSingle={clearSingle}
             />
@@ -264,15 +275,15 @@ const EditClass = ({
                 <SecondForm
                   onDayChange={onDayChange}
                   handleDatesSubmit={handleDatesSubmit}
-                  dateHanddleChange={dateHanddleChange}
+                  dateHandleChange={dateHandleChange}
                   dateDetails={dateDetails}
                 />
-                <div className='clendar-container'>
+                <div className='calendar-container'>
                   <CalendarWithSpinner
                     loading={calenderLoading}
                     lastDate={lastUpdatedDate}
                     events={events}
-                    jewsihHolydays={jewsihHolydays}
+                    jewishHolydays={jewishHolydays}
                     setDateClick={setDateClick}
                     setEventClick={setEventClick}
                   />
@@ -280,7 +291,7 @@ const EditClass = ({
                 {updateSingleBoxDisplay ? (
                   <UpdateSingle
                     dateDetails={dateDetails}
-                    dateHanddleChange={dateHanddleChange}
+                    dateHandleChange={dateHandleChange}
                     handleDatesSubmit={handleDatesSubmit}
                     openDeleteBox={openDeleteBox}
                     closeSingleBox={closeSingleBox}
@@ -289,7 +300,7 @@ const EditClass = ({
                 {confirmMsgView ? (
                   <DeleteDate
                     item={confirmMsg}
-                    delteItem={delteItem}
+                    deleteItem={deleteItem}
                     close={closeDeleteBox}
                   />
                 ) : null}

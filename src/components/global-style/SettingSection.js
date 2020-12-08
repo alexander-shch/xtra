@@ -4,7 +4,7 @@ export const SettingSectionContainer = styled.div`
   width: 75%;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
   margin: 50px auto 0;
   h4 {
     width: 100%;
@@ -24,7 +24,6 @@ export const UpdatePageContainer = styled.div`
   padding: 10px;
   background-color: white;
   box-shadow: 3px 3px 5px 6px #ccc;
-  text-align: end;
   h4,
   h3 {
     text-align: center;
@@ -42,12 +41,11 @@ export const SingleItem = styled.div`
   border-bottom: 1px solid darkgrey;
   padding: 2px 0;
   align-items: center;
-  flex-direction: row-reverse;
   .buttons {
     flex-wrap: wrap;
     display: flex;
     width: 30%;
-    justify-content: flex-start;
+    justify-content: flex-end;
   }
   .itemName {
     margin-right: 5px;

@@ -11,7 +11,7 @@ const UpdateVatRate = ({ history, vatRate, ...props }) => {
   const { updateVat, setAlert } = props;
   const [rate, setRate] = useState(vatRate.value);
 
-  const handdleChange = (e) => {
+  const handleChange = (e) => {
     const { value } = e.target;
     setRate(value);
   };
@@ -33,19 +33,19 @@ const UpdateVatRate = ({ history, vatRate, ...props }) => {
       <h3>עידכון מע"מ</h3>
       <form onSubmit={handdleSubmit}>
         <InputField
+          handleChange={handleChange}
+          value={rate}
           name='vatRate'
           type='number'
           label='מע"מ'
-          value={rate}
-          handleChange={handdleChange}
           hebrew='true'
           required
         />
         <div className='buttons'>
-          <MyButton>{element}</MyButton>
           <MyButton type='button' onClick={() => cancel()} forgot>
             ביטול
           </MyButton>
+          <MyButton>{element}</MyButton>
         </div>
       </form>
     </UpdatePageContainer>

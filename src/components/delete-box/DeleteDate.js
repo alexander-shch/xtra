@@ -8,7 +8,7 @@ import {
   ButtonContainer,
 } from '../global-style/popUpsStyle';
 
-const DeleteDate = ({ delteItem, close, item }) => {
+const DeleteDate = ({ deleteItem, close, item }) => {
   return (
     <FlexContainer>
       <PopUpContainer>
@@ -19,7 +19,7 @@ const DeleteDate = ({ delteItem, close, item }) => {
           <h4>האם אתה בטוח שברצונך למחוק?</h4>
           <span>{item.name}</span>
           <ButtonContainer>
-            <MyButton onClick={() => delteItem()}>אישור</MyButton>
+            <MyButton onClick={() => deleteItem()}>אישור</MyButton>
             <MyButton onClick={() => close()} forgot>
               ביטול
             </MyButton>
