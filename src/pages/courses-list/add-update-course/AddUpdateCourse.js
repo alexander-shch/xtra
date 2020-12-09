@@ -21,6 +21,7 @@ const AddUpdateCourse = ({
   addNewCourse,
   inProcess,
   updateCourse,
+  lecturesLoading,
 }) => {
   const courseID = match.params.courseID;
   useEffect(() => {
@@ -242,6 +243,7 @@ const AddUpdateCourse = ({
             searchField={searchField}
             courseData={courseData}
             handleChange={handleChange}
+            lecturesLoading={lecturesLoading}
           />
         );
       case 2:

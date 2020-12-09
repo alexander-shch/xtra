@@ -12,6 +12,7 @@ const WebsiteInfo = ({
   searchField,
   addLecture,
   removeLecture,
+  lecturesLoading,
 }) => {
   const {
     progress,
@@ -125,6 +126,7 @@ const WebsiteInfo = ({
         assignedLecturers={assignedLecturers}
         lectures={lectures}
         searchField={searchField}
+        lecturesLoading={lecturesLoading}
       />
     </>
   );

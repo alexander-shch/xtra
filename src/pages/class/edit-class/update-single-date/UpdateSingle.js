@@ -1,5 +1,5 @@
 import React from 'react';
-import DataInput from '../../../../components/inputs/date-input/DateInput';
+import DateInput from '../../../../components/inputs/date-input/DateInput';
 import MyButton from '../../../../components/My-button/MyButton';
 import './updateSingle.style.scss';
 
@@ -16,7 +16,7 @@ const UpdateSingle = ({
     <div className='updateSingle'>
       <h3>עידכון זמינות</h3>
       <form onSubmit={handleDatesSubmit} className='dateForm'>
-        <DataInput
+        <DateInput
           handleChange={dateHandleChange}
           name='from'
           label='מתאריך'
@@ -25,7 +25,7 @@ const UpdateSingle = ({
           min={today}
         />
 
-        <DataInput
+        <DateInput
           handleChange={dateHandleChange}
           name='fromTime'
           label='משעה'
@@ -33,7 +33,7 @@ const UpdateSingle = ({
           value={fromTime}
         />
 
-        <DataInput
+        <DateInput
           handleChange={dateHandleChange}
           name='toTime'
           label='עד שעה'

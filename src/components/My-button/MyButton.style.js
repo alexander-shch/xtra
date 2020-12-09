@@ -50,12 +50,26 @@ const deleteStyle = css`
   }
 `;
 
+const generateStyle = css`
+  margin: 0;
+  height: 33px;
+  border-radius: 0.25rem 0 0 0.25rem;
+  background-color: #5f9ea0;
+  &:focus {
+    outline: 0;
+  }
+  &:hover {
+    background-color: #417879;
+  }
+`;
+
 const getButtonStyles = (props) => {
   let style = buttonStyles;
   let styleObj = {
     forgot: forgotStyle,
     addButtonStyle: addStyle,
     delete: deleteStyle,
+    generate: generateStyle,
   };
 
   let objArr = Object.keys(styleObj);

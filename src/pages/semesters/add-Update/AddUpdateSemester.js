@@ -5,7 +5,7 @@ import { UpdatePageContainer } from '../../../components/global-style/SettingSec
 import MyButton from '../../../components/My-button/MyButton';
 import { saveIcon } from '../../../utils/fontAwesome';
 import { withRouter } from 'react-router-dom';
-import DataInput from '../../../components/inputs/date-input/DateInput';
+import DateInput from '../../../components/inputs/date-input/DateInput';
 import './semesterForm.style.scss';
 import Spinner from '../../../components/spinner/Spinner';
 
@@ -102,19 +102,17 @@ const AddUpdateSemester = ({
           required
         />
         <div className='dateInputs'>
-          <DataInput
+          <DateInput
             handleChange={handleChange}
             name='startDate'
             value={startDate}
             label='תאריך התחלה'
-            type='date'
           />
-          <DataInput
+          <DateInput
             handleChange={handleChange}
             name='endDate'
             value={endDate}
             label='תאריך סיום'
-            type='date'
           />
         </div>
         <SelectInput

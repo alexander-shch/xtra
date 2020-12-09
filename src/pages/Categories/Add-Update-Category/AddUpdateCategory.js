@@ -16,7 +16,7 @@ const AddUpdateCategory = ({
   history,
   match,
   addNewCategory,
-  updateCategoty,
+  updateCategory,
   ...props
 }) => {
   const {
@@ -27,7 +27,7 @@ const AddUpdateCategory = ({
     innerSinglePageLoading,
   } = props;
 
-  const categoryId = match.params.categotyID;
+  const categoryId = match.params.categoryID;
   const [domainDetails, setDomainDetails] = useState({
     title: '',
     courseGoals: '',
@@ -147,7 +147,7 @@ const AddUpdateCategory = ({
     e.preventDefault();
     if (singleCategory) {
       try {
-        await updateCategoty(categoryId, objToServer);
+        await updateCategory(categoryId, objToServer);
       } catch (err) {
         console.log(err);
       }
@@ -261,7 +261,7 @@ const AddUpdateCategory = ({
           />
           <InputField
             name='sessionLength'
-            type='text'
+            type='number'
             label='אורך כל מפגש'
             handleChange={handleChange}
             hebrew='true'

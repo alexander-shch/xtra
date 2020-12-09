@@ -1,5 +1,5 @@
 import React from 'react';
-import DataInput from '../../../../components/inputs/date-input/DateInput';
+import DateInput from '../../../../components/inputs/date-input/DateInput';
 import MyButton from '../../../../components/My-button/MyButton';
 import './secondForm.style.scss';
 const SecondForm = ({
@@ -23,7 +23,7 @@ const SecondForm = ({
     <>
       <h4>זמינות</h4>
       <form onSubmit={handleDatesSubmit} className='dateForm'>
-        <DataInput
+        <DateInput
           handleChange={dateHandleChange}
           name='from'
           value={from}
@@ -31,7 +31,7 @@ const SecondForm = ({
           type='date'
           min={today}
         />
-        <DataInput
+        <DateInput
           handleChange={dateHandleChange}
           name='to'
           value={to}
@@ -39,14 +39,14 @@ const SecondForm = ({
           type='date'
           min={from}
         />
-        <DataInput
+        <DateInput
           handleChange={dateHandleChange}
           name='fromTime'
           value={fromTime}
           label='משעה'
           type='time'
         />
-        <DataInput
+        <DateInput
           handleChange={dateHandleChange}
           name='toTime'
           value={toTime}

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {
   getCategories,
   addNewCategory,
-  updateCategoty,
+  updateCategory,
   deleteCategory,
   getSingleCategory,
   clearSingle,
@@ -23,7 +23,7 @@ const CategoriesRoutes = ({
   getCategories,
   categories,
   addNewCategory,
-  updateCategoty,
+  updateCategory,
   deleteCategory,
   confirmMessageData,
   closeConfirmMessage,
@@ -55,12 +55,9 @@ const CategoriesRoutes = ({
           render={() => <AddUpdateCategory addNewCategory={addNewCategory} />}
         />
         <Route
-          path={`${match.path}/updateCategory/:categotyID`}
+          path={`${match.path}/updateCategory/:categoryID`}
           render={() => (
-            <AddUpdateCategory
-              updateCategoty={updateCategoty}
-              {...props}
-            />
+            <AddUpdateCategory updateCategory={updateCategory} {...props} />
           )}
         />
       </Suspense>
@@ -73,14 +70,14 @@ const mapStateToProps = (state) => ({
   confirmMessageData: state.delete,
   singleCategory: state.categories.singleCategory,
   error: state.categories.error,
-  innerSinglePageLoading: state.categories.innerSinglePageLoading
+  innerSinglePageLoading: state.categories.innerSinglePageLoading,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getCategories: () => dispatch(getCategories()),
   addNewCategory: (objToServer) => dispatch(addNewCategory(objToServer)),
-  updateCategoty: (categoryID, objToServer) =>
-    dispatch(updateCategoty(categoryID, objToServer)),
+  updateCategory: (categoryID, objToServer) =>
+    dispatch(updateCategory(categoryID, objToServer)),
   deleteCategory: (categoryID) => dispatch(deleteCategory(categoryID)),
   closeConfirmMessage: () => dispatch(closeConfirmMessage()),
   getSingleCategory: (id) => dispatch(getSingleCategory(id)),

@@ -6,6 +6,8 @@ import Main from './pages/Main/Main';
 import { Route } from 'react-router-dom';
 import Spinner from './components/spinner/Spinner';
 
+
+
 const App = ({ userLoged, setUserLog, loading }: any) => {
   useEffect(() => {
     setUserLog();

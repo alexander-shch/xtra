@@ -3,6 +3,7 @@ import SingleLectureSelect from './SingleLectureSelect';
 import SingleLectureRemove from './singleLectureRemove';
 import './lectureSelector.style.scss';
 import SearchField from '../searchField/SearchField';
+import LectureSelectSpinner from '../../components/spinner/lectureSelect-spinner/LectureSelectSpinner';
 
 const LectureSelector = ({
   lectures,
@@ -10,6 +11,7 @@ const LectureSelector = ({
   assignedLecturers,
   addLecture,
   removeLecture,
+  lecturesLoading,
 }) => {
   let filterLectures = searchField
     ? lectures.filter(({ name }) => {
@@ -22,7 +24,9 @@ const LectureSelector = ({
     assignedLecturers.includes(item._id)
   );
 
-  return (
+  return lecturesLoading ? (
+    <LectureSelectSpinner />
+  ) : (
     <>
       <div className='lecture-selctor-container'>
         <div className='list-container'>

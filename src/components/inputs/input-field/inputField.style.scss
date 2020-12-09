@@ -4,6 +4,9 @@ $main-color: black;
 .groupInput {
   margin: 5px auto;
   width: 100%;
+  &.withButton {
+    margin: 0;
+  }
 
   .form-input {
     display: block;
@@ -18,10 +21,6 @@ $main-color: black;
     border: 1px solid #9d9d9d;
     border-radius: 0.25rem;
 
-    &.hebrewInput {
-      direction: rtl;
-    }
-
     &.small {
       height: 25px;
     }
@@ -33,12 +32,19 @@ $main-color: black;
     &.redBorder {
       border-right: 4px solid #800000;
     }
+    &.withButton {
+      border-radius: 0 0.25rem 0.25rem 0;
+      border-left: 0;
+    }
   }
 
   .input-continer {
     position: relative;
     min-height: 1px;
     margin: 5px;
+    &.withButton {
+      margin: 5px 5px 0 0;
+    }
   }
 
   input[type='password'] {

@@ -18,7 +18,7 @@ export const addNewCategory = (objToServer) => (dispatch) => {
     );
 };
 
-export const updateCategoty = (categoryID, objToServer) => (dispatch) => {
+export const updateCategory = (categoryID, objToServer) => (dispatch) => {
   dispatch({ type: 'UPDATE_CATEGORY_START' });
   callFetch(`${URL}/categories/${categoryID}`, 'PUT', objToServer)
     .then((data) =>

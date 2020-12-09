@@ -1,11 +1,14 @@
 import styled from 'styled-components';
 
 export const SettingSectionContainer = styled.div`
+  background-color: white;
   width: 75%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   margin: 50px auto 0;
+  border: 1px solid #474d5338;
+  padding: 20px;
   h4 {
     width: 100%;
     text-align: right;
@@ -18,12 +21,13 @@ export const SettingSectionContainer = styled.div`
 `;
 
 export const UpdatePageContainer = styled.div`
+  background-color: white;
   margin: auto;
   margin-top: 25px;
-  width: 60%;
+  width: 55%;
   padding: 10px;
   background-color: white;
-  box-shadow: 3px 3px 5px 6px #ccc;
+  border: 1px solid #474d5338;
   h4,
   h3 {
     text-align: center;

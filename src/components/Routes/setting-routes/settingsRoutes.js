@@ -7,6 +7,7 @@ import VatRoutes from '../vat-routes/VatRoutes';
 import CatagoriesRoutes from '../Catagories/CatagoriesRoutes';
 import SemestersRoutes from '../semesters-routes/SemestrersRoutes';
 import CoursesInfoRoutes from '../../Routes/Course-info-Routes/CourseInfoRoutes';
+import CouponRoutes from '../coupon-routes/CouponRoutes';
 
 const SettingsRoutes = () => {
   return (
@@ -21,6 +22,7 @@ const SettingsRoutes = () => {
       <Route path='/settings/VAT-multipliers' component={VatRoutes} />
       <Route path='/settings/Categories-list' component={CatagoriesRoutes} />
       <Route path='/settings/Semesters' component={SemestersRoutes} />
+      <Route path='/settings/coupons' component={CouponRoutes} />
     </>
   );
 };

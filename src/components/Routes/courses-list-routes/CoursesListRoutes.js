@@ -35,6 +35,7 @@ const CoursesListRoutes = ({
   confirmMessageData,
   closeConfirmMessage,
   updateCourse,
+  lecturesLoading,
 }) => {
   useEffect(() => {
     getCategories();
@@ -87,6 +88,7 @@ const CoursesListRoutes = ({
             singleCourse={singleCourse}
             updateCourse={updateCourse}
             inProcess={inProcess}
+            lecturesLoading={lecturesLoading}
           />
         )}
       />
@@ -103,6 +105,7 @@ const mapStateToProps = (state) => ({
   singleCourse: state.courseList.singleCourse,
   inProcess: state.courseList.inProcess,
   confirmMessageData: state.delete,
+  lecturesLoading: state.lectures.listLoading,
 });
 
 const mapDispatchToProps = (dispatch) => ({

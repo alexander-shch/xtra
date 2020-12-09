@@ -12,3 +12,16 @@ export const InputFlex = Styled.div`
   }
 
 `;
+
+export const DateInputs = Styled.div`
+ margin: 10px;
+  display: flex;
+  .date-input{
+    margin-left: 10px;
+  }
+`;
+
+export const Flex = Styled.div`
+display:flex;
+align-items: flex-end;
+`;

@@ -4,14 +4,16 @@ import './inputField.style.scss';
 
 const InputField = ({ handleChange, label, placeholder, ...restData }) => {
   return (
-    <div className='groupInput'>
+    <div className={`groupInput ${restData.withbutton ? 'withButton' : ''}`}>
       <label className='form-input-label'>
         {label}
         {restData.required ? <span className='requiredField'>*</span> : ''}
       </label>
-      <div className='input-continer'>
+      <div
+        className={`input-continer ${restData.withbutton ? 'withButton' : ''}`}
+      >
         <input
-          className={`form-input  ${restData.hebrew ? 'hebrewInput' : ''} 
+          className={`form-input  ${restData.withbutton ? 'withButton' : ''} 
            ${restData.required && !restData.value ? 'redBorder' : ''}
           `}
           placeholder={placeholder ? placeholder : ''}

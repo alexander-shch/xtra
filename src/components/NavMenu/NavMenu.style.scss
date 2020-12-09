@@ -18,6 +18,22 @@
     .single-link {
       text-decoration: none;
       color: inherit;
+      position: relative;
+      &.active {
+        color: #ff6633;
+        &::before {
+          content: ' ';
+          position: absolute;
+          border: solid 40px transparent;
+          border-top: solid 4px transparent;
+          border-width: 10px;
+          left: 50%;
+          margin-left: -10px;
+          border-color: #f1f1f1 transparent transparent transparent;
+          transform: rotate(180deg);
+          top: 19px;
+        }
+      }
     }
   }
 
