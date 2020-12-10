@@ -3,7 +3,6 @@ import AddLecturerForm from './Add-Update-Lecturer/Add-Lecturer/AddLecturerForm'
 import UpdateLectureForm from './Add-Update-Lecturer/Update-Lecturer/UpdateLectureForm';
 import { UpdatePageContainer } from '../../components/global-style/SettingSection';
 import { withRouter } from 'react-router-dom';
-import MyAlert from '../../components/My-Alert/MyAlert';
 import Spinner from '../../components/spinner/Spinner';
 
 const AddUpdateLecturer = ({
@@ -121,7 +120,6 @@ const AddUpdateLecturer = ({
 
   return (
     <>
-      <MyAlert />
       {innerSinglePageLoading ? (
         <Spinner />
       ) : (

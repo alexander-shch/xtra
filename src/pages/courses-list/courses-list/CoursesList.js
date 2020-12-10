@@ -49,24 +49,28 @@ const CoursesList = ({
     }
   };
   return (
-    <SettingSectionContainer>
-      <MyButton
-        onClick={() => history.push(`${match.path}/addNewCourse`)}
-        addButtonStyle
-      >
-        הוספת קורס
-      </MyButton>
-      <SearchField placeholder='חפש לפי שם קורס' />
-      <CheckBoxes categories={categories} handleCheck={handleCheck} />
-      <h4>רשימה</h4>
-      <TableTop tableProps={['שם הקורס', 'תחום', 'אפשרויות']} />
-      <SingleItemContainer
-        SingleComponent={SingleCourse}
-        data={filterCourse()}
-        categoriesObj={categoriesObj}
-        loading={listLoading}
-      />
-    </SettingSectionContainer>
+    <>
+      <SettingSectionContainer>
+        <MyButton
+          onClick={() => history.push(`${match.path}/addNewCourse`)}
+          addButtonStyle
+        >
+          הוספת קורס
+        </MyButton>
+        <SearchField placeholder='חפש לפי שם קורס' />
+        <CheckBoxes categories={categories} handleCheck={handleCheck} />
+      </SettingSectionContainer>
+      <SettingSectionContainer>
+        <h4>רשימת קורסים</h4>
+        <TableTop tableProps={['שם הקורס', 'תחום', 'אפשרויות']} />
+        <SingleItemContainer
+          SingleComponent={SingleCourse}
+          data={filterCourse()}
+          categoriesObj={categoriesObj}
+          loading={listLoading}
+        />
+      </SettingSectionContainer>
+    </>
   );
 };
 

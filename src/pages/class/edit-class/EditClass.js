@@ -8,7 +8,6 @@ import { withRouter } from 'react-router-dom';
 import DeleteDate from '../../../components/delete-box/DeleteDate';
 import { UpdatePageContainer } from '../../../components/global-style/SettingSection';
 import WithSpinner from '../../../components/spinner/WithSpinner';
-import MyAlert from '../../../components/My-Alert/MyAlert';
 import Spinner from '../../../components/spinner/Spinner';
 
 const CalendarWithSpinner = WithSpinner(Calendar);
@@ -254,14 +253,12 @@ const EditClass = ({
   const { updateSingleBoxDisplay } = dateDetails;
   return (
     <>
-      <MyAlert />
       {innerSinglePageLoading ? (
         <Spinner />
       ) : (
-        <UpdatePageContainer>
-          <div className='classForm'>
+        <>
+          <UpdatePageContainer>
             <h3>{title}</h3>
-
             <FirstForm
               loading={process}
               buildings={buildings}
@@ -270,14 +267,18 @@ const EditClass = ({
               classDetails={classDetails}
               clearSingle={clearSingle}
             />
-            {classID ? (
-              <>
+          </UpdatePageContainer>
+          {classID ? (
+            <>
+              <UpdatePageContainer>
                 <SecondForm
                   onDayChange={onDayChange}
                   handleDatesSubmit={handleDatesSubmit}
                   dateHandleChange={dateHandleChange}
                   dateDetails={dateDetails}
                 />
+              </UpdatePageContainer>
+              <UpdatePageContainer>
                 <div className='calendar-container'>
                   <CalendarWithSpinner
                     loading={calenderLoading}
@@ -288,26 +289,24 @@ const EditClass = ({
                     setEventClick={setEventClick}
                   />
                 </div>
-                {updateSingleBoxDisplay ? (
-                  <UpdateSingle
-                    dateDetails={dateDetails}
-                    dateHandleChange={dateHandleChange}
-                    handleDatesSubmit={handleDatesSubmit}
-                    openDeleteBox={openDeleteBox}
-                    closeSingleBox={closeSingleBox}
-                  />
-                ) : null}
-                {confirmMsgView ? (
-                  <DeleteDate
-                    item={confirmMsg}
-                    deleteItem={deleteItem}
-                    close={closeDeleteBox}
-                  />
-                ) : null}
-              </>
-            ) : null}
-          </div>
-        </UpdatePageContainer>
+                <UpdateSingle
+                  view={updateSingleBoxDisplay}
+                  dateDetails={dateDetails}
+                  dateHandleChange={dateHandleChange}
+                  handleDatesSubmit={handleDatesSubmit}
+                  openDeleteBox={openDeleteBox}
+                  closeSingleBox={closeSingleBox}
+                />
+                <DeleteDate
+                  view={confirmMsgView}
+                  item={confirmMsg}
+                  deleteItem={deleteItem}
+                  close={closeDeleteBox}
+                />
+              </UpdatePageContainer>
+            </>
+          ) : null}
+        </>
       )}
     </>
   );

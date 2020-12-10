@@ -31,7 +31,7 @@ const LecturersList = ({
         הוספת מרצה
       </MyButton>
       <SearchField placeholder='חפש לפי שם / טלפון / דוא"ל' />
-      <h4>מרצים</h4>
+      <h4>רשימת מרצים</h4>
       <TableTop
         tableProps={[
           'שם המרצה ',

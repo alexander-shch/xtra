@@ -12,9 +12,11 @@ import {
   clearSingle,
   deleteCourse,
   updateCourse,
+  uploadCourseFile,
 } from '../../../Redux/course-list/courseList.action';
 import DeleteBox from '../../delete-box/DeleteBox';
 import { closeConfirmMessage } from '../../../Redux/on-delete/delete.action';
+import { getAllCoupons } from '../../../Redux/coupons/coupons.actions';
 
 const CoursesListRoutes = ({
   match,
@@ -36,11 +38,16 @@ const CoursesListRoutes = ({
   closeConfirmMessage,
   updateCourse,
   lecturesLoading,
+  getAllCoupons,
+  couponsList,
+  uploadCourseFile,
 }) => {
   useEffect(() => {
     getCategories();
     getLectures();
     getCourseList();
+    getAllCoupons();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
@@ -73,6 +80,7 @@ const CoursesListRoutes = ({
             lectures={lectures}
             addNewCourse={addNewCourse}
             inProcess={inProcess}
+            couponsList={couponsList}
           />
         )}
       />
@@ -89,6 +97,8 @@ const CoursesListRoutes = ({
             updateCourse={updateCourse}
             inProcess={inProcess}
             lecturesLoading={lecturesLoading}
+            couponsList={couponsList}
+            uploadCourseFile={uploadCourseFile}
           />
         )}
       />
@@ -106,6 +116,7 @@ const mapStateToProps = (state) => ({
   inProcess: state.courseList.inProcess,
   confirmMessageData: state.delete,
   lecturesLoading: state.lectures.listLoading,
+  couponsList: state.coupons.couponsList,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -118,6 +129,9 @@ const mapDispatchToProps = (dispatch) => ({
   deleteCourse: (id) => dispatch(deleteCourse(id)),
   closeConfirmMessage: () => dispatch(closeConfirmMessage()),
   updateCourse: (id, data) => dispatch(updateCourse(id, data)),
+  getAllCoupons: () => dispatch(getAllCoupons()),
+  uploadCourseFile: (courseID, formData) =>
+    dispatch(uploadCourseFile(courseID, formData)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CoursesListRoutes);

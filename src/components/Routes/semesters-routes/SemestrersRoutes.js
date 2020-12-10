@@ -13,7 +13,6 @@ import {
 } from '../../../Redux/semester/semester.action';
 import { setAlert } from '../../../Redux/My-Alert/myAlert.action';
 import { closeConfirmMessage } from '../../../Redux/on-delete/delete.action';
-import MyAlert from '../../My-Alert/MyAlert';
 import DeleteBox from '../../delete-box/DeleteBox';
 
 const SemestersRoutes = ({
@@ -40,7 +39,6 @@ const SemestersRoutes = ({
 
   return (
     <>
-      <MyAlert />
       <DeleteBox
         confirmMessageData={confirmMessageData}
         closeConfirmMessage={closeConfirmMessage}

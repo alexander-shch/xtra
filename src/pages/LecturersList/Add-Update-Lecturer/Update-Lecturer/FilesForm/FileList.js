@@ -4,7 +4,7 @@ import MyButton from '../../../../../components/My-button/MyButton';
 import FilePopUp from './Popup/FilePopUp';
 import SingleFile from '../../../../../components/Single-Items/singleFile/SingleFile';
 import DataSpinner from '../../../../../components/spinner/DataSpinner/DataSpinner';
-
+import { downLoadFile } from '../../../../../Redux/Lectures/lectures.action';
 const FilesLIst = ({ uploadCv, id, singleLecture, fileSpinner }) => {
   const fileArr = singleLecture.files;
   const [filePopUpView, setFilePopUpView] = useState(false);
@@ -50,7 +50,13 @@ const FilesLIst = ({ uploadCv, id, singleLecture, fileSpinner }) => {
       ) : fileArr.length === 0 ? (
         <h3>אין קבצים</h3>
       ) : (
-        fileArr.map((item) => <SingleFile key={item._id} item={item} />)
+        fileArr.map((item) => (
+          <SingleFile
+            downLoadFunction={downLoadFile}
+            key={item._id}
+            item={item}
+          />
+        ))
       )}
     </>
   );

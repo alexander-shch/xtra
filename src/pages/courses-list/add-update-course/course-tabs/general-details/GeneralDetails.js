@@ -6,7 +6,12 @@ import TextArea from '../../../../../components/inputs/text-area/TextArea';
 
 import './generalDetails.style.scss';
 
-const GeneralDetails = ({ categories, courseData, handleChange }) => {
+const GeneralDetails = ({
+  categories,
+  courseData,
+  handleChange,
+  couponsList,
+}) => {
   const {
     title,
     minStudents,
@@ -15,6 +20,7 @@ const GeneralDetails = ({ categories, courseData, handleChange }) => {
     schedulingComments,
     active,
     category,
+    coupon,
   } = courseData;
   return (
     <>
@@ -79,6 +85,17 @@ const GeneralDetails = ({ categories, courseData, handleChange }) => {
         label='הערות לקביעת מועדי מפגשים'
         handleChange={handleChange}
         hebrew='true'
+      />
+      <SelectInputProps
+        props={couponsList}
+        name='coupon'
+        value={coupon}
+        selectTitle='בחר קופון'
+        keyToValue='_id'
+        keyToDisplay='title'
+        label='קופון משויך'
+        canBeEmpty={true}
+        handleChange={handleChange}
       />
     </>
   );

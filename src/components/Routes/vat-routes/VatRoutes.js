@@ -18,7 +18,6 @@ import { setAlert } from '../../../Redux/My-Alert/myAlert.action';
 import { closeConfirmMessage } from '../../../Redux/on-delete/delete.action';
 import DeleteBox from '../../delete-box/DeleteBox';
 import WithSpinner from '../../spinner/WithSpinner';
-import MyAlert from '../../My-Alert/MyAlert';
 
 const UpdateVatRateWithSpinner = WithSpinner(UpdateVatRate);
 
@@ -49,7 +48,6 @@ const VatRoutes = ({
         closeConfirmMessage={closeConfirmMessage}
         deleteFunction={deleteVatItem}
       />
-      <MyAlert />
       <Switch>
         <Route
           exact

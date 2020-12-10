@@ -10,6 +10,7 @@ const SelectInputProps = ({
   label,
   keyToValue,
   handleChange,
+  canBeEmpty,
 }) => {
   return (
     <div className='selectInput'>
@@ -24,6 +25,8 @@ const SelectInputProps = ({
         <option value='1' disabled hidden>
           {selectTitle}
         </option>
+
+        {canBeEmpty ? <option value={''}>ללא</option> : ''}
         {props.map((item, index) => (
           <option key={index} value={item[keyToValue]}>
             {item[keyToDisplay]}

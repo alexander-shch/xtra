@@ -8,8 +8,8 @@ import {
   ButtonContainer,
 } from '../global-style/popUpsStyle';
 
-const DeleteDate = ({ deleteItem, close, item }) => {
-  return (
+const DeleteDate = ({ deleteItem, close, item, view }) => {
+  return view ? (
     <FlexContainer>
       <PopUpContainer>
         <BoxHeader>
@@ -27,7 +27,7 @@ const DeleteDate = ({ deleteItem, close, item }) => {
         </BoxContent>
       </PopUpContainer>
     </FlexContainer>
-  );
+  ) : null;
 };
 
 export default DeleteDate;

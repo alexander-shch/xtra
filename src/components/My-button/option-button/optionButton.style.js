@@ -1,23 +1,23 @@
 import styled, { css } from 'styled-components';
 
 const editStyle = css`
-  background-color: #ffc107;
+  color: #ffc107;
 `;
 
 const deleteStyle = css`
-  background-color: #ff0000;
+  color: #ff0000;
 `;
 
 const downloadStyle = css`
-  background-color: #40bf40;
+  color: #40bf40;
 `;
 
 const viewStyle = css`
-  background-color: #0099ff;
+  color: #0099ff;
 `;
 
 const cantViewStyle = css`
-  background-color: #cccccc;
+  color: #cccccc;
   cursor: no-drop;
 `;
 
@@ -38,10 +38,9 @@ const getStyle = (props) => {
 };
 
 export const OptinButtonContainer = styled.button`
-  border: none;
-  color: white;
   font-size: 20px;
-  border-radius: 5px;
+  border: 1px solid;
+  background-color: white;
   cursor: pointer;
   margin: 2px;
   width: ${(props) => (props.list ? '20px' : '30px')};

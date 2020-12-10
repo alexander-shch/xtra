@@ -6,7 +6,7 @@ export const SettingSectionContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin: 50px auto 0;
+  margin: 15px auto 0;
   border: 1px solid #474d5338;
   padding: 20px;
   h4 {
@@ -55,6 +55,10 @@ export const SingleItem = styled.div`
     margin-right: 5px;
     width: 90%;
     text-align: right;
+    &.expired {
+      text-decoration: line-through;
+      color: darkorange;
+    }
     &.date {
       text-align: left;
     }

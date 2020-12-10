@@ -5,6 +5,7 @@ import SignIn from './pages/SignIn/SignIn';
 import Main from './pages/Main/Main';
 import { Route } from 'react-router-dom';
 import Spinner from './components/spinner/Spinner';
+import MyAlert from './components/My-Alert/MyAlert';
 
 
 
@@ -14,10 +15,13 @@ const App = ({ userLoged, setUserLog, loading }: any) => {
   }, [setUserLog]);
 
   return (
+    <>
+    <MyAlert/>
     <Route
       path='/'
       render={() => (userLoged ? <Main /> : loading ? <Spinner /> : <SignIn />)}
     ></Route>
+    </>
   );
 };
 

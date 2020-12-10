@@ -22,6 +22,8 @@ const AddUpdateCourse = ({
   inProcess,
   updateCourse,
   lecturesLoading,
+  couponsList,
+  uploadCourseFile,
 }) => {
   const courseID = match.params.courseID;
   useEffect(() => {
@@ -50,7 +52,9 @@ const AddUpdateCourse = ({
     meetingsCount: '',
     target: '',
     progress: '',
+    coupon: '',
     assignedLecturers: [],
+    files: [],
     extTitles: {
       marketing: '',
       meetingLength: '',
@@ -79,6 +83,8 @@ const AddUpdateCourse = ({
         target,
         progress,
         assignedLecturers,
+        coupon,
+        files,
         extTitles,
       } = singleCourse;
       setCourseData({
@@ -95,6 +101,8 @@ const AddUpdateCourse = ({
         meetingsCount: meetingsCount === null ? '' : meetingsCount,
         target,
         progress,
+        coupon,
+        files: files ? files : [],
         assignedLecturers: assignedLecturers ? assignedLecturers : [],
         extTitles: {
           marketing: extTitles.marketing,
@@ -222,7 +230,7 @@ const AddUpdateCourse = ({
       });
     }
   };
-
+  const filesList = courseData.files ? courseData.files : [];
   const toggleTab = () => {
     switch (currentTab) {
       case 0:
@@ -231,6 +239,7 @@ const AddUpdateCourse = ({
             categories={categories}
             courseData={courseData}
             handleChange={handleChange}
+            couponsList={couponsList}
           />
         );
       case 1:
@@ -247,7 +256,13 @@ const AddUpdateCourse = ({
           />
         );
       case 2:
-        return <FilesTab />;
+        return (
+          <FilesTab
+            courseID={courseID}
+            uploadCourseFile={uploadCourseFile}
+            filesList={filesList}
+          />
+        );
       case 3:
         return <InterestedList />;
       default:
@@ -277,7 +292,7 @@ const AddUpdateCourse = ({
         />
         <form onSubmit={handleSubmit}>
           {toggleTab()}
-          {currentTab === 3 ? null : (
+          {currentTab === 3 || currentTab === 2 ? null : (
             <div className='buttons'>
               <MyButton onClick={() => goBack()} type='button' forgot>
                 חזרה

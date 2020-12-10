@@ -9,10 +9,11 @@ const UpdateSingle = ({
   openDeleteBox,
   closeSingleBox,
   handleDatesSubmit,
+  view,
 }) => {
   const { from, availabilityId, fromTime, toTime } = dateDetails;
   let today = new Date().toISOString().slice(0, 10);
-  return (
+  return view ? (
     <div className='updateSingle'>
       <h3>עידכון זמינות</h3>
       <form onSubmit={handleDatesSubmit} className='dateForm'>
@@ -53,7 +54,7 @@ const UpdateSingle = ({
         </div>
       </form>
     </div>
-  );
+  ) : null;
 };
 
 export default UpdateSingle;

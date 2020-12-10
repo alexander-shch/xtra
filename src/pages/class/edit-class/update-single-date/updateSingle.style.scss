@@ -1,5 +1,5 @@
 .updateSingle {
-  width: 60%;
+  width: 55%;
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -9,6 +9,7 @@
   top: 35%;
   z-index: 10;
   background-color: white;
+  margin: auto;
 
   .singleBtns {
     display: flex;

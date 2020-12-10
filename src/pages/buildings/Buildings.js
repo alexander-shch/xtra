@@ -15,7 +15,7 @@ const Buildings = ({ match, history, data, ...otherProps }) => {
       >
         הוספת בניין
       </MyButton>
-      <h4>רשימה</h4>
+      <h4>רשימת בניינים</h4>
       <TableTop tableProps={['שם הבניין', 'אפשרויות']} />
 
       <SingleItemContainer

@@ -12,7 +12,12 @@ const SingleLectureRemove = ({ lecture, removeLecture }) => {
       >
         -
       </OptionButton>
-      <span>{lecture.name}</span>
+      <span
+        className='lectureSelect'
+        onDoubleClick={() => removeLecture(lecture._id)}
+      >
+        {lecture.name}
+      </span>
     </div>
   );
 };

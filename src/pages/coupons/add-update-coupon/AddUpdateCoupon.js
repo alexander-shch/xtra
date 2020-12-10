@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { UpdatePageContainer } from '../../../components/global-style/SettingSection';
 import InputField from '../../../components/inputs/input-field/InputField';
 import SelectInput from '../../../components/inputs/select-input/SelectInput';
@@ -7,9 +7,25 @@ import { DateInputs, Flex } from '../../../components/global-style/formsStyle';
 import MyButton from '../../../components/My-button/MyButton';
 import { codeGenerator } from '../../../utils/coupons.utils';
 import { saveIcon } from '../../../utils/fontAwesome';
+import { withRouter } from 'react-router-dom';
+import { setAlert } from '../../../Redux/My-Alert/myAlert.action';
+import Spinner from '../../../components/spinner/Spinner';
 
-const AddUpdateCoupon = ({ addNewCoupon }) => {
+const AddUpdateCoupon = ({
+  match,
+  history,
+  addNewCoupon,
+  getSingleCoupon,
+  updateCoupon,
+  clearSingle,
+  error,
+  singleCoupon,
+  innerPageLoading,
+  process,
+}) => {
+  const couponID = match.params.couponID;
   const [couponData, setCouponData] = useState({
+    title: '',
     code: '',
     isPercent: true,
     discount: '',
@@ -17,6 +33,41 @@ const AddUpdateCoupon = ({ addNewCoupon }) => {
     effectiveFrom: '',
     effectiveTo: '',
   });
+
+  useEffect(() => {
+    if (couponID) {
+      getSingleCoupon(couponID);
+      return () => {
+        clearSingle();
+      };
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
+    if (singleCoupon) {
+      const {
+        title,
+        code,
+        isPercent,
+        discount,
+        active,
+        effectiveFrom,
+        effectiveTo,
+      } = singleCoupon;
+      setCouponData({
+        title,
+        code,
+        isPercent,
+        discount,
+        active,
+        effectiveFrom: effectiveFrom ? effectiveFrom.slice(0, 10) : '',
+        effectiveTo: effectiveTo ? effectiveTo.slice(0, 10) : '',
+      });
+    }
+    if (error) {
+      history.push('/settings/coupons');
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [singleCoupon, error]);
 
   const generateCoupon = () => {
     setCouponData({ ...couponData, code: codeGenerator(6) });
@@ -28,14 +79,22 @@ const AddUpdateCoupon = ({ addNewCoupon }) => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (couponID) {
+      try {
+        updateCoupon(couponData, couponID);
+      } catch (err) {
+        setAlert('לא ניתן לעדכן קופון', 'error');
+      }
+    }
     try {
       addNewCoupon(couponData);
     } catch (err) {
-      console.log(err);
+      setAlert('לא ניתן ליצור קופון חדש', 'error');
     }
   };
 
   const {
+    title,
     code,
     isPercent,
     discount,
@@ -43,10 +102,19 @@ const AddUpdateCoupon = ({ addNewCoupon }) => {
     effectiveFrom,
     effectiveTo,
   } = couponData;
-  return (
+  return innerPageLoading ? (
+    <Spinner />
+  ) : (
     <UpdatePageContainer>
       <form onSubmit={handleSubmit}>
-        <InputField name='title' type='text' label='כותרת' required />
+        <InputField
+          name='title'
+          type='text'
+          label='כותרת'
+          value={title}
+          handleChange={handleChange}
+          required
+        />
         <Flex>
           <InputField
             name='code'
@@ -67,14 +135,12 @@ const AddUpdateCoupon = ({ addNewCoupon }) => {
             label='מתאריך'
             value={effectiveFrom}
             handleChange={handleChange}
-            required
           />
           <DateInput
             name='effectiveTo'
             label='עד תאריך'
             value={effectiveTo}
             handleChange={handleChange}
-            required
           />
         </DateInputs>
         <InputField
@@ -98,9 +164,15 @@ const AddUpdateCoupon = ({ addNewCoupon }) => {
           handleChange={handleChange}
         />
         <div className='buttons'>
-          <MyButton>{saveIcon}</MyButton>
-          <MyButton type='button' forgot>
+          <MyButton
+            onClick={() => history.push('/settings/coupons')}
+            type='button'
+            forgot
+          >
             חזרה
+          </MyButton>
+          <MyButton save loading={process}>
+            {saveIcon}
           </MyButton>
         </div>
       </form>
@@ -108,4 +180,4 @@ const AddUpdateCoupon = ({ addNewCoupon }) => {
   );
 };
 
-export default AddUpdateCoupon;
+export default withRouter(AddUpdateCoupon);

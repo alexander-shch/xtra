@@ -15,13 +15,12 @@ export const FlexContainer = Styled.div`
 
 export const PopUpContainer = Styled.div`
     padding:${(props) => (props.padding ? '20px' : '0')};
-    width: 50%;
-    height: 25vh;
+    width: 30%;
+    height: 20vh;
     background-color: white;
     position: fixed;
     top: 25%;
-    right: 25%;
-    box-shadow:3px 3px 5px 6px #ccc;
+    border: 1px solid #474d5338;
 `;
 export const BoxHeader = Styled.div`
       background-color: ${primaryColor};

@@ -11,7 +11,12 @@ const SingleLectureSelect = ({ lecture, addLecture }) => {
       >
         +
       </OptionButton>
-      <span>{lecture.name}</span>
+      <span
+        className='lectureSelect'
+        onDoubleClick={() => addLecture(lecture._id)}
+      >
+        {lecture.name}
+      </span>
     </div>
   );
 };

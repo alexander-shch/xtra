@@ -3,8 +3,10 @@ import { SettingSectionContainer } from '../../../components/global-style/Settin
 import MyButton from '../../../components/My-button/MyButton';
 import TableTop from '../../../components/Table-top/Tabletop';
 import { withRouter } from 'react-router-dom';
+import SingleCoupon from '../../../components/Single-Items/single-coupon/SingleCoupon';
+import SingleItemContainer from '../../../components/Single-Items/SingleItemContainer';
 
-const CouponsList = ({ match, history }) => {
+const CouponsList = ({ match, history, couponsList, listLoading }) => {
   return (
     <SettingSectionContainer>
       <MyButton
@@ -16,7 +18,7 @@ const CouponsList = ({ match, history }) => {
       <h4>קופונים</h4>
       <TableTop
         tableProps={[
-          'תאריך',
+          'בתוקף עד',
           'כותרת',
           'קוד הטבה',
           'הנחה',
@@ -25,11 +27,11 @@ const CouponsList = ({ match, history }) => {
         ]}
       />
 
-      {/* <SingleItemContainer
-      SingleComponent={BuildingItem}
-      data={data}
-      loading={otherProps.loading}
-    /> */}
+      <SingleItemContainer
+        SingleComponent={SingleCoupon}
+        data={couponsList}
+        loading={listLoading}
+      />
     </SettingSectionContainer>
   );
 };

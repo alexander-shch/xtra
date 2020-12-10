@@ -31,6 +31,7 @@ const SecondForm = ({
           type='date'
           min={today}
         />
+
         <DateInput
           handleChange={dateHandleChange}
           name='to'
@@ -39,6 +40,7 @@ const SecondForm = ({
           type='date'
           min={from}
         />
+
         <DateInput
           handleChange={dateHandleChange}
           name='fromTime'
@@ -53,6 +55,7 @@ const SecondForm = ({
           label='עד שעה'
           type='time'
         />
+
         <select
           multiple
           onChange={onDayChange}
