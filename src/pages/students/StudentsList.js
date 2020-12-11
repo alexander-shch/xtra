@@ -1,10 +1,10 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-const LecturersList = () => (
+const StudentsList = () => (
     <div>
-        <h1>Students List</h1>
+        <h1>Students</h1>
     </div>
 );
 
-export default withRouter(LecturersList);
+export default withRouter(StudentsList);
