@@ -3,8 +3,19 @@ import React from 'react';
 import './inputField.style.scss';
 
 const InputField = ({ handleChange, label, placeholder, ...restData }) => {
+  const setClass = (restData) => {
+    if (restData.withbutton) {
+      return 'withButton';
+    }
+    if (restData.file) {
+      return 'file';
+    } else {
+      return '';
+    }
+  };
+
   return (
-    <div className={`groupInput ${restData.withbutton ? 'withButton' : ''}`}>
+    <div className={`groupInput ${setClass(restData)}`}>
       <label className='form-input-label'>
         {label}
         {restData.required ? <span className='requiredField'>*</span> : ''}

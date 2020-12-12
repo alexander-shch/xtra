@@ -14,6 +14,7 @@ const INTAIL_STATE = {
   lectures: [],
   singleLecture: null,
   error: null,
+  deleteList: [],
 };
 
 const lecturesReducer = (state = INTAIL_STATE, action) => {
@@ -30,15 +31,22 @@ const lecturesReducer = (state = INTAIL_STATE, action) => {
     case 'DELETE_NOTE_START':
       return { ...state, noteLoading: true };
     case 'UPLOAD_CV_START':
-    case 'DELETE_FILE_START':
       return { ...state, fileSpinner: true };
+    case 'DELETE_FILE_START':
+      const { deleteList: newList } = state;
+      newList.push(action.payload);
+      return { ...state, deleteList: newList };
     case 'UPLOAD_CV_SUCCESS':
       return { ...state, singleLecture: action.payload, fileSpinner: false };
     case 'DELETE_FILE_SUCCESS':
+      const { deleteList } = state;
+      const filterList = deleteList.filter(
+        (item) => item === action.payload._id
+      );
       return {
         ...state,
         singleLecture: deleteFile(state, action.payload),
-        fileSpinner: false,
+        deleteList: filterList,
       };
     case 'SET_AVATAR_IMG_START':
       return { ...state, avatarLoading: true };

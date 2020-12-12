@@ -45,6 +45,7 @@ export const SingleItem = styled.div`
   border-bottom: 1px solid darkgrey;
   padding: 2px 0;
   align-items: center;
+  opacity: ${(props) => (props.$opacity ? 0.3 : 1)};
   .buttons {
     flex-wrap: wrap;
     display: flex;

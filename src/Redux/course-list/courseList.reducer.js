@@ -38,6 +38,7 @@ const courseListReducer = (state = INTAIL_STATE, action) => {
         singleCourse: action.payload,
       };
     case 'UPDATE_COURSE_SUCCESS':
+    case 'UPLOAD_COURSE_FILE_SUCCESS':
       let { courseList } = state;
       let index = courseList.findIndex(
         (item) => item._id === action.payload._id
@@ -49,6 +50,9 @@ const courseListReducer = (state = INTAIL_STATE, action) => {
         inProcess: false,
         singleCourse: action.payload,
       };
+    case 'UPLOAD_COURSE_FILE_START':
+      return { ...state };
+
     case 'DELETE_COURSE_SUCCESS':
       return {
         ...state,

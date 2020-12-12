@@ -26,15 +26,15 @@ const FilePopUp = ({
         />
 
         <ButtonContainer>
-          <MyButton onClick={() => cvSubmit()} save loading={loading}>
-            העלה קובץ
-          </MyButton>
           <MyButton
             type='button'
             onClick={() => setFilePopUpView(false)}
             forgot
           >
             סגור
+          </MyButton>
+          <MyButton onClick={() => cvSubmit()} save loading={loading}>
+            העלה קובץ
           </MyButton>
         </ButtonContainer>
       </PopUpContainer>

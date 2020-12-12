@@ -3,10 +3,8 @@ import TableTop from '../../../../../components/Table-top/Tabletop';
 import MyButton from '../../../../../components/My-button/MyButton';
 import FilePopUp from './Popup/FilePopUp';
 import SingleFile from '../../../../../components/Single-Items/singleFile/SingleFile';
-import DataSpinner from '../../../../../components/spinner/DataSpinner/DataSpinner';
 import { downLoadFile } from '../../../../../Redux/Lectures/lectures.action';
-const FilesLIst = ({ uploadCv, id, singleLecture, fileSpinner }) => {
-  const fileArr = singleLecture.files;
+const FilesLIst = ({ uploadCv, id, fileSpinner, files, deleteList }) => {
   const [filePopUpView, setFilePopUpView] = useState(false);
 
   const [cvFile, setCvFile] = useState({ cv: null });
@@ -45,13 +43,12 @@ const FilesLIst = ({ uploadCv, id, singleLecture, fileSpinner }) => {
         הוסף קובץ
       </MyButton>
       <TableTop tableProps={['כותרת', 'אפשרויות']} />
-      {fileSpinner ? (
-        <DataSpinner linesNum={fileArr.length} />
-      ) : fileArr.length === 0 ? (
+      {files.length === 0 ? (
         <h3>אין קבצים</h3>
       ) : (
-        fileArr.map((item) => (
+        files.map((item) => (
           <SingleFile
+            deleteList={deleteList}
             downLoadFunction={downLoadFile}
             key={item._id}
             item={item}

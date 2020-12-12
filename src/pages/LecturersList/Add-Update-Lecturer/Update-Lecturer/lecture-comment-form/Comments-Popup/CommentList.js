@@ -3,10 +3,14 @@ import CommentPopUp from './Comment-PopUp';
 import MyButton from '../../../../../../components/My-button/MyButton';
 import SingleLecturerNote from '../../../../../../components/Single-Items/SingleLecturerNote';
 import TableTop from '../../../../../../components/Table-top/Tabletop';
-import DataSpinner from '../../../../../../components/spinner/DataSpinner/DataSpinner';
 
-const CommentList = ({ singleLecture, loading, addNewNote, setAlert }) => {
-  const notesArr = singleLecture.internalNotes;
+const CommentList = ({
+  singleLecture,
+  addNewNote,
+  setAlert,
+  notes,
+  loading,
+}) => {
   const lectureID = singleLecture._id;
 
   const [newCommentview, setNewCommentView] = useState(false);
@@ -38,6 +42,7 @@ const CommentList = ({ singleLecture, loading, addNewNote, setAlert }) => {
           setNewCommentView={setNewCommentView}
           handleChange={handleChange}
           noteSubmit={noteSubmit}
+          loading={loading}
         />
       ) : null}
 
@@ -45,14 +50,10 @@ const CommentList = ({ singleLecture, loading, addNewNote, setAlert }) => {
         הוסף הערה
       </MyButton>
       <TableTop tableProps={['הערה', 'מחבר', 'תאריך', 'אפשרויות']} />
-      {loading ? (
-        <DataSpinner linesNum={notesArr.length} />
-      ) : notesArr.length === 0 ? (
+      {notes.length === 0 ? (
         <h3>אין הערות</h3>
       ) : (
-        notesArr.map((item) => (
-          <SingleLecturerNote key={item._id} item={item} />
-        ))
+        notes.map((item) => <SingleLecturerNote key={item._id} item={item} />)
       )}
     </>
   );

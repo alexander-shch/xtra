@@ -152,7 +152,11 @@ const AddUpdateCourse = ({
     if (name === 'category' && firstLoad) {
       setFirstLoad(false);
     }
-    setCourseData({ ...courseData, [name]: value });
+    if (name === 'coupon' && value === '') {
+      setCourseData({ ...courseData, coupon: null });
+    } else {
+      setCourseData({ ...courseData, [name]: value });
+    }
   };
 
   const handleNestedChange = (e) => {

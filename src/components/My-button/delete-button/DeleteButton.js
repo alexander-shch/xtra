@@ -8,6 +8,7 @@ const DeleteButton = ({
   confirmMessageDisplay,
   deleteConfirmMessage,
   addFunction,
+  makeDisable,
 }) => {
   const handleDeleteClick = (item) => {
     if (confirmMessageDisplay) {
@@ -21,7 +22,11 @@ const DeleteButton = ({
     : item;
   return (
     <>
-      <OptionButton onClick={() => handleDeleteClick(itemToDelete)} delete>
+      <OptionButton
+        makeDisable={makeDisable}
+        onClick={() => handleDeleteClick(itemToDelete)}
+        delete
+      >
         &#10008;
       </OptionButton>
     </>

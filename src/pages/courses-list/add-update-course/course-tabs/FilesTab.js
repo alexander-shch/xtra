@@ -7,7 +7,6 @@ import TableTop from '../../../../components/Table-top/Tabletop';
 
 const FilesTab = ({ courseID, uploadCourseFile, filesList }) => {
   const [fileToUpload, setFileToUpload] = useState({ file: null });
-  console.log(filesList);
   const handleFileChange = (e) => {
     const { files } = e.target;
     setFileToUpload({ file: files });
@@ -37,7 +36,7 @@ const FilesTab = ({ courseID, uploadCourseFile, filesList }) => {
           type='file'
           label='בחר קובץ'
           handleChange={handleFileChange}
-          hebrew='true'
+          file={1}
           required
         />
         <MyButton onClick={() => fileSubmit()} type='button'>

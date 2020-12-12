@@ -8,7 +8,12 @@ import {
   ButtonContainer,
 } from '../../../../../../components/global-style/popUpsStyle';
 
-const CommentPopUp = ({ setNewCommentView, handleChange, noteSubmit }) => {
+const CommentPopUp = ({
+  setNewCommentView,
+  handleChange,
+  noteSubmit,
+  loading,
+}) => {
   return (
     <FlexContainer>
       <PopUpContainer padding>
@@ -21,13 +26,15 @@ const CommentPopUp = ({ setNewCommentView, handleChange, noteSubmit }) => {
             handleChange={handleChange}
           />
           <ButtonContainer>
-            <MyButton>אישור</MyButton>
             <MyButton
               type='button'
               onClick={() => setNewCommentView(false)}
               forgot
             >
               ביטול
+            </MyButton>
+            <MyButton save loading={loading}>
+              אישור
             </MyButton>
           </ButtonContainer>
         </form>

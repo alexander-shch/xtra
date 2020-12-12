@@ -83,7 +83,7 @@ export const uploadCv = (lectureID, formData) => (dispatch) => {
 };
 
 export const deleteFile = (lectureID, fileID) => (dispatch) => {
-  dispatch({ type: 'DELETE_FILE_START' });
+  dispatch({ type: 'DELETE_FILE_START', payload: fileID });
   callFetch(`${URL}/lecturer/${lectureID}/file/${fileID}`, 'DELETE')
     .then(() => {
       dispatch({ type: 'DELETE_FILE_SUCCESS', payload: { lectureID, fileID } });

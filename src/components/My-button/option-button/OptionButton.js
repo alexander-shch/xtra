@@ -1,9 +1,13 @@
 import React from 'react';
 
-import { OptinButtonContainer } from './optionButton.style';
+import { OptionButtonContainer } from './optionButton.style';
 
-const OptionButton = ({ children, ...props }) => {
-  return <OptinButtonContainer {...props}>{children}</OptinButtonContainer>;
+const OptionButton = ({ children, makeDisable, ...props }) => {
+  return (
+    <OptionButtonContainer disabled={makeDisable} {...props}>
+      {children}
+    </OptionButtonContainer>
+  );
 };
 
 export default OptionButton;

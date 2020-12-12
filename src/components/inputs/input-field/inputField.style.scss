@@ -7,6 +7,10 @@ $main-color: black;
   &.withButton {
     margin: 0;
   }
+  &.file {
+    margin: 0;
+    width: 230px;
+  }
 
   .form-input {
     display: block;

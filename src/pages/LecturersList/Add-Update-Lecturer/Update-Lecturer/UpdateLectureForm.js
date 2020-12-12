@@ -30,6 +30,9 @@ const UpdateLectureForm = ({
   OnDeleteFunction,
   deleteFile,
   fileSpinner,
+  files,
+  deleteList,
+  notes,
 }) => {
   const deleteFunctions = {
     deleteNote: deleteNote,
@@ -53,13 +56,15 @@ const UpdateLectureForm = ({
       <FilesList
         id={id}
         uploadCv={uploadCv}
-        singleLecture={singleLecture}
         fileSpinner={fileSpinner}
+        files={files}
+        deleteList={deleteList}
       />
       <div>
         <h4>הערות על המרצה</h4>
         <CommentList
           addNewNote={addNewNote}
+          notes={notes}
           singleLecture={singleLecture}
           loading={noteLoading}
           setAlert={setAlert}
@@ -73,8 +78,11 @@ const mapStateToProps = (state) => ({
   noteLoading: state.lectures.noteLoading,
   confirmMessageData: state.delete,
   singleLecture: state.lectures.singleLecture,
+  files: state.lectures.singleLecture.files,
+  notes: state.lectures.singleLecture.internalNotes,
   OnDeleteFunction: state.delete.addDeleteFunction,
   fileSpinner: state.lectures.fileSpinner,
+  deleteList: state.lectures.deleteList,
 });
 
 const mapDispatchToProps = (dispatch) => ({
