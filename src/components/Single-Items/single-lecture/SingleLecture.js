@@ -3,13 +3,27 @@ import OptionButton from '../../My-button/option-button/OptionButton';
 import { SingleItem } from '../../global-style/SettingSection';
 import { withRouter } from 'react-router-dom';
 import DeleteButton from '../../My-button/delete-button/DeleteButton';
-const SingleLecture = ({ match, history, item }) => {
+
+const SingleLecture = ({ match, history, item, width }) => {
+  let isMobile = width <= 800 ? true : false;
   return (
     <SingleItem>
-      <span className='itemName'>{item.name}</span>
-      <span className='itemName'>{item.phone}</span>
-      <span className='itemName'>{item.email}</span>
-      <span className='itemName'>{item.hourlyRate}</span>
+      <span className='itemName'>
+        {isMobile ? <span className='mobileTitle'>שם המרצה</span> : null}
+        {item.name}
+      </span>
+      <span className='itemName'>
+        {isMobile ? <span className='mobileTitle'>טלפון </span> : null}
+        {item.phone}
+      </span>
+      <span className='itemName'>
+        {isMobile ? <span className='mobileTitle'>מייל </span> : null}
+        {item.email}
+      </span>
+      <span className='itemName'>
+        {isMobile ? <span className='mobileTitle'>שכר שעתי</span> : null}
+        {item.hourlyRate}
+      </span>
       <div className='buttons'>
         <OptionButton
           onClick={() =>

@@ -7,6 +7,7 @@ import SearchField from '../../../components/searchField/SearchField';
 import SingleItemContainer from '../../../components/Single-Items/SingleItemContainer';
 import SingleCourse from '../../../components/Single-Items/single-course/SingleCourse';
 import CheckBoxes from '../../../components/checkbox/CheckBoxes';
+import { useWindowSize } from '../../../utils/windowSize';
 
 const CoursesList = ({
   history,
@@ -16,6 +17,7 @@ const CoursesList = ({
   categories,
   searchField,
 }) => {
+  const { width } = useWindowSize();
   const [checked, setChecked] = useState([]);
 
   let categoriesObj = categories
@@ -62,7 +64,7 @@ const CoursesList = ({
       </SettingSectionContainer>
       <SettingSectionContainer>
         <h4>רשימת קורסים</h4>
-        <TableTop tableProps={['שם הקורס', 'תחום', 'אפשרויות']} />
+        <TableTop width={width} tableProps={['שם הקורס', 'תחום', 'אפשרויות']} />
         <SingleItemContainer
           SingleComponent={SingleCourse}
           data={filterCourse()}

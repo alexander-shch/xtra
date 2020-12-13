@@ -1,4 +1,5 @@
 import Styled from 'styled-components';
+import { device } from '../../utils/responsive.utils';
 
 const primaryColor = '#ff6633';
 
@@ -21,6 +22,10 @@ export const PopUpContainer = Styled.div`
     position: fixed;
     top: 25%;
     border: 1px solid #474d5338;
+    @media ${device.mobile} {
+      width:60%;
+      height:30vh;
+    }
 `;
 export const BoxHeader = Styled.div`
       background-color: ${primaryColor};

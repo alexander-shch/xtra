@@ -9,9 +9,9 @@ export const getBuildingsData = () => (dispatch) => {
 
 export const addNewBuilding = (name, active) => (dispatch) => {
   const booleanActive = JSON.parse(active);
-  const buildingObj={name,active:booleanActive}
-  dispatch({ type: 'POST_NEW_BUILDING_START' })
-  callFetch(`${URL}/buildings`,'POST',buildingObj)
+  const buildingObj = { name, active: booleanActive };
+  dispatch({ type: 'POST_NEW_BUILDING_START' });
+  callFetch(`${URL}/buildings`, 'POST', buildingObj)
     .then((data) => {
       dispatch({ type: 'POST_NEW_BUILDING_SUCSESS', payload: data });
     })
@@ -20,11 +20,11 @@ export const addNewBuilding = (name, active) => (dispatch) => {
     );
 };
 
-export const updateBuilding = (itemid, name, active) => (dispatch) => { 
+export const updateBuilding = (itemid, name, active) => (dispatch) => {
   const booleanActive = JSON.parse(active);
-  const buildingObj={name,active:booleanActive}
-  dispatch({ type: 'UPDATE_BUILDING_START' })
-  callFetch(`${URL}/buildings/${itemid}`,'PUT',buildingObj)
+  const buildingObj = { name, active: booleanActive };
+  dispatch({ type: 'UPDATE_BUILDING_START' });
+  callFetch(`${URL}/buildings/${itemid}`, 'PUT', buildingObj)
     .then((data) =>
       dispatch({ type: 'UPDATE_BUILDING_SUCSESS', payload: data })
     )
@@ -32,7 +32,7 @@ export const updateBuilding = (itemid, name, active) => (dispatch) => {
 };
 
 export const deleteBuilding = (itemid) => (dispatch) => {
-  dispatch({ type: 'DELETE_BUILDING_START' });
+  dispatch({ type: 'DELETE_BUILDING_START', payload: itemid });
   callFetch(`${URL}/buildings/${itemid}`, 'DELETE')
     .then((data) => {
       if (data.deleted) {

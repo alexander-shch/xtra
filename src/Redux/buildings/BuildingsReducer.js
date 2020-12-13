@@ -5,6 +5,7 @@ const INTIAL_STATE = {
   innerSinglePageLoading: true,
   singleBuilding: null,
   error: null,
+  deleteList: [],
 };
 
 const BuildingsReducer = (state = INTIAL_STATE, action) => {
@@ -13,7 +14,9 @@ const BuildingsReducer = (state = INTIAL_STATE, action) => {
       return { ...state, innerSinglePageLoading: true };
     case 'BUILDING_FETCH_START':
     case 'DELETE_BUILDING_START':
-      return { ...state, loading: true };
+      const { deleteList: newList } = state;
+      newList.push(action.payload);
+      return { ...state, deleteList: newList };
     case 'POST_NEW_BUILDING_START':
     case 'UPDATE_BUILDING_START':
       return { ...state, process: true };
@@ -52,12 +55,16 @@ const BuildingsReducer = (state = INTIAL_STATE, action) => {
         singleBuilding: action.payload,
       };
     case 'DELETE_BUILDING_SUCSESS':
+      const filterList = state.deleteList.filter(
+        (item) => item === action.payload._id
+      );
       return {
         ...state,
         buildings: state.buildings.filter(
           (item) => item._id !== action.payload
         ),
         loading: false,
+        deleteList: filterList,
       };
     case 'DELETE_BUILDING_FAILED':
     case 'POST_NEW_BUILDING_FAILED':

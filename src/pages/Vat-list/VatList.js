@@ -5,8 +5,10 @@ import { SettingSectionContainer } from '../../components/global-style/SettingSe
 import TableTop from '../../components/Table-top/Tabletop';
 import SingleVatItem from '../../components/Single-Items/vatList/SingleVatItem';
 import SingleItemContainer from '../../components/Single-Items/SingleItemContainer';
+import { useWindowSize } from '../../utils/windowSize';
 
 const VatList = ({ history, match, vatList, loading }) => {
+  const { width } = useWindowSize();
   return (
     <SettingSectionContainer>
       <div className='addButtons'>
@@ -25,6 +27,7 @@ const VatList = ({ history, match, vatList, loading }) => {
       </div>
       <h4>מכפילי שכר</h4>
       <TableTop
+        width={width}
         tableProps={['כותרת', 'מכפילי שכר', 'האם להוסיף מע"מ', 'אפשרויות']}
       />
       <SingleItemContainer

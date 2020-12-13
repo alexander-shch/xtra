@@ -4,7 +4,8 @@ import DeleteButton from '../../My-button/delete-button/DeleteButton';
 import OptionButton from '../../My-button/option-button/OptionButton';
 import { withRouter } from 'react-router-dom';
 
-const SingleCourse = ({ item, match, history, categoriesObj }) => {
+const SingleCourse = ({ item, match, history, categoriesObj, width }) => {
+  let isMobile = width <= 800 ? true : false;
   const getCategoryName = () => {
     if (item.category && categoriesObj) {
       if (item.category in categoriesObj) {
@@ -16,8 +17,14 @@ const SingleCourse = ({ item, match, history, categoriesObj }) => {
   };
   return (
     <SingleItem>
-      <span className='itemName'>{item.title}</span>
-      <span className='itemName'>{getCategoryName()}</span>
+      <span className='itemName'>
+        {isMobile ? <span className='mobileTitle'>שם הקורס</span> : null}
+        {item.title}
+      </span>
+      <span className='itemName'>
+        {isMobile ? <span className='mobileTitle'>תחום </span> : null}
+        {getCategoryName()}
+      </span>
       <div className='buttons'>
         <OptionButton
           onClick={() => history.push(`${match.path}/updateCourse/${item._id}`)}

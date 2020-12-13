@@ -40,7 +40,6 @@ const lecturesReducer = (state = INTAIL_STATE, action) => {
     case 'UPLOAD_CV_SUCCESS':
       return { ...state, singleLecture: action.payload, fileSpinner: false };
     case 'DELETE_FILE_SUCCESS':
-      // const { deleteList } = state;
       const filterList = deleteList.filter(
         (item) => item === action.payload._id
       );

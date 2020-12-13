@@ -74,6 +74,7 @@ const mapStateToProps = (state) => ({
   singleBuilding: state.buildings.singleBuilding,
   error: state.buildings.error,
   innerSinglePageLoading: state.buildings.innerSinglePageLoading,
+  deleteList: state.buildings.deleteList,
 });
 
 const mapDispatchToProps = (dispatch) => ({

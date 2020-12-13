@@ -4,13 +4,23 @@ import OptionButton from '../../My-button/option-button/OptionButton';
 import { withRouter } from 'react-router-dom';
 import DeleteButton from '../../My-button/delete-button/DeleteButton';
 
-const SingleVatItem = ({ item, match, history }) => {
+const SingleVatItem = ({ item, match, history, width }) => {
+  let isMobile = width <= 800 ? true : false;
   const BooleanToHebrew = item.vat ? 'כן' : 'לא';
   return (
     <SingleItem>
-      <span className='itemName'>{item.title}</span>
-      <span className='itemName'>{item.duplicate}</span>
-      <span className='itemName'>{BooleanToHebrew}</span>
+      <span className='itemName'>
+        {isMobile ? <span className='mobileTitle'>כותרת </span> : null}
+        {item.title}
+      </span>
+      <span className='itemName'>
+        {isMobile ? <span className='mobileTitle'>מכפיל שכר </span> : null}
+        {item.duplicate}
+      </span>
+      <span className='itemName'>
+        {isMobile ? <span className='mobileTitle'>כולל מעמ </span> : null}
+        {BooleanToHebrew}
+      </span>
       <div className='buttons'>
         <OptionButton
           onClick={() =>

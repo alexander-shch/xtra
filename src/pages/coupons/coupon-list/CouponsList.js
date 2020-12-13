@@ -5,8 +5,10 @@ import TableTop from '../../../components/Table-top/Tabletop';
 import { withRouter } from 'react-router-dom';
 import SingleCoupon from '../../../components/Single-Items/single-coupon/SingleCoupon';
 import SingleItemContainer from '../../../components/Single-Items/SingleItemContainer';
+import { useWindowSize } from '../../../utils/windowSize';
 
 const CouponsList = ({ match, history, couponsList, listLoading }) => {
+  const { width } = useWindowSize();
   return (
     <SettingSectionContainer>
       <MyButton
@@ -25,6 +27,7 @@ const CouponsList = ({ match, history, couponsList, listLoading }) => {
           'באחוזים?',
           'אפשרויות',
         ]}
+        width={width}
       />
 
       <SingleItemContainer

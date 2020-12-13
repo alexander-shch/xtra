@@ -4,7 +4,8 @@ import { SingleItem } from '../../global-style/SettingSection';
 import { withRouter } from 'react-router-dom';
 import DeleteButton from '../../My-button/delete-button/DeleteButton';
 import { alertIcon } from '../../../utils/fontAwesome';
-const SingleCoupon = ({ match, history, item }) => {
+const SingleCoupon = ({ match, history, item, width }) => {
+  let isMobile = width <= 800 ? true : false;
   const setDate = (item) => {
     let date = new Date(item);
     let day = date.getDate();
@@ -22,13 +23,26 @@ const SingleCoupon = ({ match, history, item }) => {
   return (
     <SingleItem>
       <span className={`itemName ${isCouponExpired ? 'expired' : ''}`}>
+        {isMobile ? <span className='mobileTitle'>בתוקף עד </span> : null}
         {date}
         <span title={'פג תוקף'}>{isCouponExpired ? alertIcon : ''} </span>
       </span>
-      <span className='itemName'>{title}</span>
-      <span className='itemName'>{item.code}</span>
-      <span className='itemName'>{item.discount}</span>
-      <span className='itemName'>{isPercent}</span>
+      <span className='itemName'>
+        {isMobile ? <span className='mobileTitle'>כותרת </span> : null}
+        {title}
+      </span>
+      <span className='itemName'>
+        {isMobile ? <span className='mobileTitle'>קוד הטבה </span> : null}
+        {item.code}
+      </span>
+      <span className='itemName'>
+        {isMobile ? <span className='mobileTitle'>הנחה </span> : null}
+        {item.discount}
+      </span>
+      <span className='itemName'>
+        {isMobile ? <span className='mobileTitle'>באחוזים?</span> : null}
+        {isPercent}
+      </span>
       <div className='buttons'>
         <OptionButton
           onClick={() => history.push(`${match.path}/updateCoupon/${item._id}`)}

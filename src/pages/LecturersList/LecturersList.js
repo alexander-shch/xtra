@@ -5,7 +5,7 @@ import TableTop from '../../components/Table-top/Tabletop';
 import SearchField from '../../components/searchField/SearchField';
 import { withRouter } from 'react-router-dom';
 import SingleLecture from '../../components/Single-Items/single-lecture/SingleLecture';
-
+import { useWindowSize } from '../../utils/windowSize';
 import SingleItemContainer from '../../components/Single-Items/SingleItemContainer';
 
 const LecturersList = ({
@@ -21,7 +21,7 @@ const LecturersList = ({
         return testString.includes(searchField);
       })
     : lectures;
-
+  const { width } = useWindowSize();
   return (
     <SettingSectionContainer>
       <MyButton
@@ -40,6 +40,7 @@ const LecturersList = ({
           'שכר ברוטו לשעה',
           'אפשרויות',
         ]}
+        width={width}
       />
       <SingleItemContainer
         loading={listLoading}
