@@ -68,6 +68,7 @@ const UpdateLectureForm = ({
           singleLecture={singleLecture}
           loading={noteLoading}
           setAlert={setAlert}
+          deleteList={deleteList}
         />
       </div>
     </>

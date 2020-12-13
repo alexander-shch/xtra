@@ -2,12 +2,8 @@ import React from 'react';
 
 import { OptionButtonContainer } from './optionButton.style';
 
-const OptionButton = ({ children, makeDisable, ...props }) => {
-  return (
-    <OptionButtonContainer disabled={makeDisable} {...props}>
-      {children}
-    </OptionButtonContainer>
-  );
+const OptionButton = ({ children, ...props }) => {
+  return <OptionButtonContainer {...props}>{children}</OptionButtonContainer>;
 };
 
 export default OptionButton;

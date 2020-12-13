@@ -40,6 +40,7 @@ export const UpdatePageContainer = styled.div`
 `;
 
 export const SingleItem = styled.div`
+  position: relative;
   width: 100%;
   display: flex;
   border-bottom: 1px solid darkgrey;

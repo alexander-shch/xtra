@@ -18,6 +18,7 @@ const INTAIL_STATE = {
 };
 
 const lecturesReducer = (state = INTAIL_STATE, action) => {
+  let { deleteList } = state;
   switch (action.type) {
     case 'GET_LECTURES_START':
     case 'DELETE_LECTURE_START':
@@ -28,10 +29,10 @@ const lecturesReducer = (state = INTAIL_STATE, action) => {
     case 'UPDATE_LECTURE_START':
       return { ...state, inProcess: true };
     case 'ADD_NEW_NOTE_START':
-    case 'DELETE_NOTE_START':
       return { ...state, noteLoading: true };
     case 'UPLOAD_CV_START':
       return { ...state, fileSpinner: true };
+    case 'DELETE_NOTE_START':
     case 'DELETE_FILE_START':
       const { deleteList: newList } = state;
       newList.push(action.payload);
@@ -39,7 +40,7 @@ const lecturesReducer = (state = INTAIL_STATE, action) => {
     case 'UPLOAD_CV_SUCCESS':
       return { ...state, singleLecture: action.payload, fileSpinner: false };
     case 'DELETE_FILE_SUCCESS':
-      const { deleteList } = state;
+      // const { deleteList } = state;
       const filterList = deleteList.filter(
         (item) => item === action.payload._id
       );
@@ -99,10 +100,12 @@ const lecturesReducer = (state = INTAIL_STATE, action) => {
         singleLecture: addNoteToSingleLecture(state, action.payload),
       };
     case 'DELETE_NOTE_SUCCESS':
+      let fList = deleteList.filter((item) => item === action.payload._id);
       return {
         ...state,
         noteLoading: false,
         singleLecture: deleteSingleNote(state, action.payload),
+        deleteList: fList,
       };
     case 'GET_LECTURES_FAILED':
     case 'ADD_NEW_LECTURE_FAILED':

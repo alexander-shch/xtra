@@ -10,6 +10,7 @@ const CommentList = ({
   setAlert,
   notes,
   loading,
+  deleteList,
 }) => {
   const lectureID = singleLecture._id;
 
@@ -53,7 +54,13 @@ const CommentList = ({
       {notes.length === 0 ? (
         <h3>אין הערות</h3>
       ) : (
-        notes.map((item) => <SingleLecturerNote key={item._id} item={item} />)
+        notes.map((item) => (
+          <SingleLecturerNote
+            deleteList={deleteList}
+            key={item._id}
+            item={item}
+          />
+        ))
       )}
     </>
   );

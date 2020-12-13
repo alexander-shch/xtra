@@ -64,7 +64,7 @@ export const addNewNote = (lectureID, text) => (dispatch) => {
 };
 
 export const deleteNote = (lectureID, noteID) => (dispatch) => {
-  dispatch({ type: 'DELETE_NOTE_START' });
+  dispatch({ type: 'DELETE_NOTE_START', payload: noteID });
   callFetch(`${URL}/lecturer/${lectureID}/notes/${noteID}`, 'DELETE')
     .then(() => {
       dispatch({ type: 'DELETE_NOTE_SUCCESS', payload: { lectureID, noteID } });
