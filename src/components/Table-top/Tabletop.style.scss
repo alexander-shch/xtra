@@ -11,6 +11,10 @@
     margin-right: 5px;
     width: 60%;
     text-align: right;
+    span {
+      width: 90%;
+      margin-right: 5px;
+    }
     &:last-child {
       width: 20%;
       text-align: left;
