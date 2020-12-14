@@ -57,49 +57,22 @@ export const SingleItem = styled.div`
   padding: 2px 0;
   align-items: center;
   opacity: ${(props) => (props.$opacity ? 0.3 : 1)};
-  @media ${device.mobile} {
-    border: none;
-    flex-wrap: wrap;
-  }
+
   &:last-child {
     border-bottom: none;
   }
-  .content {
-    display: flex;
-    width: 100%;
-    @media ${device.mobile} {
-      flex-direction: column;
-      width: 70%;
-    }
-  }
 
   .buttons {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     display: flex;
-    width: 34%;
+    width: 30%;
     justify-content: flex-end;
-    @media ${device.mobile} {
-      width: 100%;
-      flex-wrap: nowrap;
-    }
   }
   .itemName {
     margin-right: 5px;
     width: 90%;
     text-align: right;
-    @media ${device.mobile} {
-      width: 100%;
-    }
-    .mobileTitle {
-      display: none;
-      @media ${device.mobile} {
-        display: inline-block;
-        min-width: 105px;
-        margin-left: 5px;
-        background-color: #ff6633;
-        color: white;
-      }
-    }
+
     &.expired {
       text-decoration: line-through;
       color: darkorange;
@@ -109,9 +82,6 @@ export const SingleItem = styled.div`
     }
     &:last-child {
       width: 20%;
-      @media ${device.mobile} {
-        width: 100%;
-      }
     }
   }
 `;

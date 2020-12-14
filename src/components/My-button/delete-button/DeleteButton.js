@@ -8,6 +8,7 @@ const DeleteButton = ({
   confirmMessageDisplay,
   deleteConfirmMessage,
   addFunction,
+  additionalData,
 }) => {
   const handleDeleteClick = (item) => {
     if (confirmMessageDisplay) {
@@ -16,8 +17,12 @@ const DeleteButton = ({
       deleteConfirmMessage(item);
     }
   };
-  const itemToDelete = addFunction
-    ? { ...item, addFunction: addFunction }
+  const itemToDelete = additionalData
+    ? {
+        ...item,
+        addFunction: additionalData.deleteFunctionString,
+        pageID: additionalData.id,
+      }
     : item;
   return (
     <>

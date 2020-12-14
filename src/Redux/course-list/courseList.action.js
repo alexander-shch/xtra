@@ -65,6 +65,21 @@ export const uploadCourseFile = (courseID, formData) => (dispatch) => {
     );
 };
 
+export const deleteCourseFile = (courseID, fileID) => (dispatch) => {
+  dispatch({ type: 'DELETE_COURSE_FILE_START', payload: fileID });
+  callFetch(`${URL}/courses/${courseID}/file/${fileID}`, 'DELETE')
+    .then((data) => {
+      dispatch({
+        type: 'DELETE_COURSE_FILE_SUCCESS',
+        payload: { data, fileID },
+      });
+      dispatch(setAlert('קובץ נמחק בהצלחה', 'success'));
+    })
+    .catch((err) =>
+      dispatch({ type: 'DELETE_COURSE_FILE_FAILED', payload: err })
+    );
+};
+
 // export const downLoadCourseFile = (item) => {
 //   return fetch(`${URL}/files/${item._id}`, {
 //     method: 'GET',

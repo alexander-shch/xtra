@@ -5,17 +5,10 @@ import { SingleItem } from '../../global-style/SettingSection';
 import DeleteButton from '../../My-button/delete-button/DeleteButton';
 
 const SingleClass = ({ item, match, history, width }) => {
-  let isMobile = width <= 800 ? true : false;
   return (
     <SingleItem>
-      <span className='itemName'>
-        {isMobile ? <span className='mobileTitle'>שם הבניין</span> : null}
-        {item.building.name}
-      </span>
-      <span className='itemName'>
-        {isMobile ? <span className='mobileTitle'>שם הכיתה</span> : null}
-        {item.name}
-      </span>
+      <span className='itemName'>{item.building.name}</span>
+      <span className='itemName'>{item.name}</span>
 
       <div className='buttons'>
         <OptionButton

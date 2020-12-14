@@ -5,7 +5,13 @@ import MyButton from '../../../../components/My-button/MyButton';
 import SingleFile from '../../../../components/Single-Items/singleFile/SingleFile';
 import TableTop from '../../../../components/Table-top/Tabletop';
 
-const FilesTab = ({ courseID, uploadCourseFile, filesList }) => {
+const FilesTab = ({
+  courseID,
+  uploadCourseFile,
+  filesList,
+  deleteList,
+  inProcess,
+}) => {
   const [fileToUpload, setFileToUpload] = useState({ file: null });
   const handleFileChange = (e) => {
     const { files } = e.target;
@@ -39,7 +45,12 @@ const FilesTab = ({ courseID, uploadCourseFile, filesList }) => {
           file={1}
           required
         />
-        <MyButton onClick={() => fileSubmit()} type='button'>
+        <MyButton
+          save
+          loading={inProcess}
+          onClick={() => fileSubmit()}
+          type='button'
+        >
           העלה קובץ
         </MyButton>
       </Flex>
@@ -49,8 +60,13 @@ const FilesTab = ({ courseID, uploadCourseFile, filesList }) => {
         return (
           <SingleFile
             // downLoadFunction={downLoadCourseFile}
+            deleteList={deleteList}
             key={item._id}
             item={item}
+            additionalData={{
+              deleteFunctionString: 'deleteCourseFile',
+              id: courseID,
+            }}
           />
         );
       })}

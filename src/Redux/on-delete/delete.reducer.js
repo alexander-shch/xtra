@@ -2,6 +2,7 @@ const INTIAL_STATE = {
   confirmMessageDisplay: false,
   itemToDelete: null,
   addDeleteFunction: null,
+  pageID: null,
 };
 
 const deleteReducer = (state = INTIAL_STATE, action) => {
@@ -11,6 +12,7 @@ const deleteReducer = (state = INTIAL_STATE, action) => {
         confirmMessageDisplay: true,
         itemToDelete: action.payload,
         addDeleteFunction: action.payload.addFunction,
+        pageID: action.payload.pageID,
       };
     case 'CLOSE_DELETE_CONFIRM':
       return { confirmMessageDisplay: false, itemToDelete: null };

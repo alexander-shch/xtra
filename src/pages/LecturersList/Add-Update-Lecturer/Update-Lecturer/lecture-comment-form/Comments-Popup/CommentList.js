@@ -59,6 +59,7 @@ const CommentList = ({
             deleteList={deleteList}
             key={item._id}
             item={item}
+            lectureID={lectureID}
           />
         ))
       )}

@@ -33,6 +33,7 @@ const UpdateLectureForm = ({
   files,
   deleteList,
   notes,
+  lectureId,
 }) => {
   const deleteFunctions = {
     deleteNote: deleteNote,
@@ -44,7 +45,7 @@ const UpdateLectureForm = ({
         confirmMessageData={confirmMessageData}
         closeConfirmMessage={closeConfirmMessage}
         deleteFunction={deleteFunctions[OnDeleteFunction]}
-        additionalData={id}
+        pageID={lectureId}
       />
       <AvatarForm
         id={id}
@@ -82,6 +83,7 @@ const mapStateToProps = (state) => ({
   files: state.lectures.singleLecture.files,
   notes: state.lectures.singleLecture.internalNotes,
   OnDeleteFunction: state.delete.addDeleteFunction,
+  lectureId: state.delete.pageID,
   fileSpinner: state.lectures.fileSpinner,
   deleteList: state.lectures.deleteList,
 });

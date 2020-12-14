@@ -9,6 +9,10 @@ import { useWindowSize } from '../../../utils/windowSize';
 
 const CouponsList = ({ match, history, couponsList, listLoading }) => {
   const { width } = useWindowSize();
+  let tableTitles =
+    width <= 800
+      ? ['כותרת', 'אפשרויות']
+      : ['כותרת', 'בתוקף עד', 'קוד הטבה', 'הנחה', 'באחוזים?', 'אפשרויות'];
   return (
     <SettingSectionContainer>
       <MyButton
@@ -18,17 +22,7 @@ const CouponsList = ({ match, history, couponsList, listLoading }) => {
         הוספת קופון
       </MyButton>
       <h4>קופונים</h4>
-      <TableTop
-        tableProps={[
-          'בתוקף עד',
-          'כותרת',
-          'קוד הטבה',
-          'הנחה',
-          'באחוזים?',
-          'אפשרויות',
-        ]}
-        width={width}
-      />
+      <TableTop tableProps={tableTitles} />
 
       <SingleItemContainer
         SingleComponent={SingleCoupon}

@@ -13,6 +13,7 @@ import {
   deleteCourse,
   updateCourse,
   uploadCourseFile,
+  deleteCourseFile,
 } from '../../../Redux/course-list/courseList.action';
 import DeleteBox from '../../delete-box/DeleteBox';
 import { closeConfirmMessage } from '../../../Redux/on-delete/delete.action';
@@ -41,6 +42,10 @@ const CoursesListRoutes = ({
   getAllCoupons,
   couponsList,
   uploadCourseFile,
+  deleteCourseFile,
+  OnDeleteFunction,
+  courseID,
+  deleteList,
 }) => {
   useEffect(() => {
     getCategories();
@@ -50,12 +55,18 @@ const CoursesListRoutes = ({
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const deleteFunctions = {
+    deleteCourse: deleteCourse,
+    deleteCourseFile: deleteCourseFile,
+  };
   return (
     <>
       <DeleteBox
         confirmMessageData={confirmMessageData}
         closeConfirmMessage={closeConfirmMessage}
-        deleteFunction={deleteCourse}
+        deleteFunction={deleteFunctions[OnDeleteFunction]}
+        pageID={courseID}
       />
       <Route
         exact
@@ -99,6 +110,8 @@ const CoursesListRoutes = ({
             lecturesLoading={lecturesLoading}
             couponsList={couponsList}
             uploadCourseFile={uploadCourseFile}
+            deleteCourseFile={deleteCourseFile}
+            deleteList={deleteList}
           />
         )}
       />
@@ -117,6 +130,9 @@ const mapStateToProps = (state) => ({
   confirmMessageData: state.delete,
   lecturesLoading: state.lectures.listLoading,
   couponsList: state.coupons.couponsList,
+  OnDeleteFunction: state.delete.addDeleteFunction,
+  courseID: state.delete.pageID,
+  deleteList: state.courseList.deleteList,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -132,6 +148,8 @@ const mapDispatchToProps = (dispatch) => ({
   getAllCoupons: () => dispatch(getAllCoupons()),
   uploadCourseFile: (courseID, formData) =>
     dispatch(uploadCourseFile(courseID, formData)),
+  deleteCourseFile: (courseID, fileID) =>
+    dispatch(deleteCourseFile(courseID, fileID)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CoursesListRoutes);

@@ -52,6 +52,10 @@ const FilesLIst = ({ uploadCv, id, fileSpinner, files, deleteList }) => {
             downLoadFunction={downLoadFile}
             key={item._id}
             item={item}
+            additionalData={{
+              deleteFunctionString: 'deleteFile',
+              id: id,
+            }}
           />
         ))
       )}

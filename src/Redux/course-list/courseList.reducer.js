@@ -5,6 +5,7 @@ const INTAIL_STATE = {
   courseList: [],
   singleCourse: null,
   error: null,
+  deleteList: [],
 };
 
 const courseListReducer = (state = INTAIL_STATE, action) => {
@@ -51,7 +52,7 @@ const courseListReducer = (state = INTAIL_STATE, action) => {
         singleCourse: action.payload,
       };
     case 'UPLOAD_COURSE_FILE_START':
-      return { ...state };
+      return { ...state, inProcess: true };
 
     case 'DELETE_COURSE_SUCCESS':
       return {
@@ -61,11 +62,27 @@ const courseListReducer = (state = INTAIL_STATE, action) => {
           (course) => course._id !== action.payload
         ),
       };
+    case 'DELETE_COURSE_FILE_START':
+      return {
+        ...state,
+        deleteList: [...state.deleteList, action.payload],
+      };
+
+    case 'DELETE_COURSE_FILE_SUCCESS':
+      let filterDeleteList = state.deleteList.filter(
+        (item) => item !== action.payload.fileID
+      );
+      return {
+        ...state,
+        singleCourse: action.payload.data,
+        deleteList: filterDeleteList,
+      };
     case 'GET_COURSE_FAILED':
     case 'ADD_NEW_COURSE_FAILED':
     case 'GET_SINGLE_COURSE_FAILED':
     case 'DELETE_COURSE_FAILED':
     case 'UPDATE_COURSE_FAILED':
+    case 'DELETE_COURSE_FILE_FAILED':
       return {
         ...state,
         listLoading: false,

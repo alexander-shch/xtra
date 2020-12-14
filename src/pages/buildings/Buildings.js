@@ -5,10 +5,8 @@ import MyButton from '../../components/My-button/MyButton';
 import TableTop from '../../components/Table-top/Tabletop';
 import { withRouter } from 'react-router-dom';
 import SingleItemContainer from '../../components/Single-Items/SingleItemContainer';
-import { useWindowSize } from '../../utils/windowSize';
 
 const Buildings = ({ match, history, data, ...otherProps }) => {
-  const { width } = useWindowSize();
   return (
     <SettingSectionContainer>
       <MyButton
@@ -18,7 +16,7 @@ const Buildings = ({ match, history, data, ...otherProps }) => {
         הוספת בניין
       </MyButton>
       <h4>רשימת בניינים</h4>
-      <TableTop width={width} tableProps={['שם הבניין', 'אפשרויות']} />
+      <TableTop tableProps={['שם הבניין', 'אפשרויות']} />
 
       <SingleItemContainer
         SingleComponent={BuildingItem}

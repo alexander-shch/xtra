@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { device } from '../../../utils/responsive.utils';
 
 const editStyle = css`
   color: #ffc107;
@@ -49,10 +48,5 @@ export const OptionButtonContainer = styled.button`
   ${getStyle}
   svg {
     animation: ${(props) => (props.spin ? spin.spinAnimation : null)};
-  }
-  @media ${device.mobile} {
-    width: 50%;
-    height: 40px;
-    font-size: 24px;
   }
 `;

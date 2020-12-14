@@ -9,18 +9,13 @@ const SingleVatItem = ({ item, match, history, width }) => {
   const BooleanToHebrew = item.vat ? 'כן' : 'לא';
   return (
     <SingleItem>
-      <span className='itemName'>
-        {isMobile ? <span className='mobileTitle'>כותרת </span> : null}
-        {item.title}
-      </span>
-      <span className='itemName'>
-        {isMobile ? <span className='mobileTitle'>מכפיל שכר </span> : null}
-        {item.duplicate}
-      </span>
-      <span className='itemName'>
-        {isMobile ? <span className='mobileTitle'>כולל מעמ </span> : null}
-        {BooleanToHebrew}
-      </span>
+      <span className='itemName'>{item.title}</span>
+      {!isMobile ? (
+        <>
+          <span className='itemName'>{item.duplicate}</span>
+          <span className='itemName'>{BooleanToHebrew}</span>
+        </>
+      ) : null}
       <div className='buttons'>
         <OptionButton
           onClick={() =>

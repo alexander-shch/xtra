@@ -5,10 +5,8 @@ import TableTop from '../../../components/Table-top/Tabletop';
 import { withRouter } from 'react-router-dom';
 import SingleItemContainer from '../../../components/Single-Items/SingleItemContainer';
 import SingleSemester from '../../../components/Single-Items/single-semester/SingleSemester';
-import { useWindowSize } from '../../../utils/windowSize';
 
 const SemestersList = ({ history, match, semestersList, listLoading }) => {
-  const { width } = useWindowSize();
   return (
     <SettingSectionContainer>
       <MyButton
@@ -18,10 +16,7 @@ const SemestersList = ({ history, match, semestersList, listLoading }) => {
         הוספת סמסטר
       </MyButton>
       <h4>רשימת סמסטרים</h4>
-      <TableTop
-        width={width}
-        tableProps={['תאריך התחלה', 'כותרת', 'אפשרויות']}
-      />
+      <TableTop tableProps={['תאריך התחלה', 'כותרת', 'אפשרויות']} />
 
       <SingleItemContainer
         SingleComponent={SingleSemester}

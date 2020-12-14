@@ -9,6 +9,10 @@ import { useWindowSize } from '../../utils/windowSize';
 
 const VatList = ({ history, match, vatList, loading }) => {
   const { width } = useWindowSize();
+  let tableTitles =
+    width <= 800
+      ? ['כותרת', 'אפשרויות']
+      : ['כותרת', 'מכפילי שכר', 'האם להוסיף מע"מ', 'אפשרויות'];
   return (
     <SettingSectionContainer>
       <div className='addButtons'>
@@ -26,10 +30,7 @@ const VatList = ({ history, match, vatList, loading }) => {
         </MyButton>
       </div>
       <h4>מכפילי שכר</h4>
-      <TableTop
-        width={width}
-        tableProps={['כותרת', 'מכפילי שכר', 'האם להוסיף מע"מ', 'אפשרויות']}
-      />
+      <TableTop tableProps={tableTitles} />
       <SingleItemContainer
         loading={loading}
         data={vatList}

@@ -34,9 +34,7 @@ const lecturesReducer = (state = INTAIL_STATE, action) => {
       return { ...state, fileSpinner: true };
     case 'DELETE_NOTE_START':
     case 'DELETE_FILE_START':
-      const { deleteList: newList } = state;
-      newList.push(action.payload);
-      return { ...state, deleteList: newList };
+      return { ...state, deleteList: [...state.deleteList, action.payload] };
     case 'UPLOAD_CV_SUCCESS':
       return { ...state, singleLecture: action.payload, fileSpinner: false };
     case 'DELETE_FILE_SUCCESS':

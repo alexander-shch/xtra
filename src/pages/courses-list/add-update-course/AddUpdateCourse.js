@@ -24,6 +24,8 @@ const AddUpdateCourse = ({
   lecturesLoading,
   couponsList,
   uploadCourseFile,
+  deleteCourseFile,
+  deleteList,
 }) => {
   const courseID = match.params.courseID;
   useEffect(() => {
@@ -52,7 +54,7 @@ const AddUpdateCourse = ({
     meetingsCount: '',
     target: '',
     progress: '',
-    coupon: '',
+    coupon: null,
     assignedLecturers: [],
     files: [],
     extTitles: {
@@ -265,6 +267,9 @@ const AddUpdateCourse = ({
             courseID={courseID}
             uploadCourseFile={uploadCourseFile}
             filesList={filesList}
+            deleteCourseFile={deleteCourseFile}
+            deleteList={deleteList}
+            inProcess={inProcess}
           />
         );
       case 3:

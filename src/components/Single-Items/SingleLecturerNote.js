@@ -4,7 +4,7 @@ import DisableOverlay from '../disable-overlay/DisableOverlay';
 import { SingleItem } from '../global-style/SettingSection';
 import DeleteButton from '../My-button/delete-button/DeleteButton';
 
-const SingleLectureNote = ({ item, deleteList }) => {
+const SingleLectureNote = ({ item, deleteList, lectureID }) => {
   let beforeDelete = deleteList ? deleteList.includes(item._id) : false;
   return (
     <SingleItem $opacity={beforeDelete}>
@@ -13,7 +13,14 @@ const SingleLectureNote = ({ item, deleteList }) => {
       <span className='itemName'>{item.user.name}</span>
       <span className='itemName'>{item.created.slice(0, 10)}</span>
       <div className='buttons'>
-        <DeleteButton item={item} addFunction={'deleteNote'} />
+        <DeleteButton
+          item={item}
+          addFunction={'deleteNote'}
+          additionalData={{
+            deleteFunctionString: 'deleteNote',
+            id: lectureID,
+          }}
+        />
       </div>
     </SingleItem>
   );

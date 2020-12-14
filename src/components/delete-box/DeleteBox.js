@@ -12,14 +12,14 @@ const DeleteBox = ({
   closeConfirmMessage,
   deleteFunction,
   confirmMessageData,
-  additionalData,
+  pageID,
 }) => {
   const { confirmMessageDisplay, itemToDelete } = confirmMessageData;
 
-  const onDelete = async (deleteFunction, itemToDelete, additionalData) => {
+  const onDelete = async (deleteFunction, itemToDelete, pageID) => {
     try {
-      if (additionalData) {
-        await deleteFunction(additionalData, itemToDelete._id);
+      if (pageID) {
+        await deleteFunction(pageID, itemToDelete._id);
       } else {
         await deleteFunction(itemToDelete._id);
       }
@@ -41,9 +41,7 @@ const DeleteBox = ({
           {/* <span>{item.name}</span> */}
           <ButtonContainer>
             <MyButton
-              onClick={() =>
-                onDelete(deleteFunction, itemToDelete, additionalData)
-              }
+              onClick={() => onDelete(deleteFunction, itemToDelete, pageID)}
             >
               אישור
             </MyButton>

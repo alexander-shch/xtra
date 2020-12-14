@@ -1,7 +1,7 @@
 import React from 'react';
 import './Tabletop.style.scss';
 
-const TableTop = ({ tableProps, width }) => {
+const TableTop = ({ tableProps }) => {
   const tableTitles = tableProps.map((item) => {
     return (
       <div key={item} className='tableTopTitle'>
@@ -10,9 +10,7 @@ const TableTop = ({ tableProps, width }) => {
     );
   });
 
-  return width !== undefined && width <= 800 ? null : (
-    <div className='tableTop'>{tableTitles}</div>
-  );
+  return <div className='tableTop'>{tableTitles}</div>;
 };
 
 export default TableTop;

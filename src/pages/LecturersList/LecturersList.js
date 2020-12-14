@@ -22,6 +22,10 @@ const LecturersList = ({
       })
     : lectures;
   const { width } = useWindowSize();
+  let tableTitles =
+    width <= 800
+      ? ['שם המרצה', 'אפשרויות']
+      : ['שם המרצה ', 'טלפון', 'דוא"ל ', 'שכר ברוטו לשעה', 'אפשרויות'];
   return (
     <SettingSectionContainer>
       <MyButton
@@ -32,16 +36,7 @@ const LecturersList = ({
       </MyButton>
       <SearchField placeholder='חפש לפי שם / טלפון / דוא"ל' />
       <h4>רשימת מרצים</h4>
-      <TableTop
-        tableProps={[
-          'שם המרצה ',
-          'טלפון',
-          'דוא"ל ',
-          'שכר ברוטו לשעה',
-          'אפשרויות',
-        ]}
-        width={width}
-      />
+      <TableTop tableProps={tableTitles} />
       <SingleItemContainer
         loading={listLoading}
         data={filterLectures}
