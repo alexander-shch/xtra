@@ -6,7 +6,14 @@ import SingleItemContainer from '../../components/Single-Items/SingleItemContain
 import TableTop from '../../components/Table-top/Tabletop';
 import SingleClass from '../../components/Single-Items/Single-class/SingleClass';
 
-const ClassList = ({ match, history, classes, buildings, loading }) => {
+const ClassList = ({
+  match,
+  history,
+  classes,
+  buildings,
+  loading,
+  deleteList,
+}) => {
   return (
     <SettingSectionContainer>
       <MyButton
@@ -16,9 +23,10 @@ const ClassList = ({ match, history, classes, buildings, loading }) => {
         הוספת כיתה
       </MyButton>
       <h4>רשימה</h4>
-      <TableTop tableProps={['בניין', 'כיתה', 'אפשרויות']} />
+      <TableTop tableProps={['שם הכיתה', 'בניין', 'אפשרויות']} />
 
       <SingleItemContainer
+        deleteList={deleteList}
         SingleComponent={SingleClass}
         data={classes}
         loading={loading}

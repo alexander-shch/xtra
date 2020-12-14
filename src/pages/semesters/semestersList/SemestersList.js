@@ -6,7 +6,13 @@ import { withRouter } from 'react-router-dom';
 import SingleItemContainer from '../../../components/Single-Items/SingleItemContainer';
 import SingleSemester from '../../../components/Single-Items/single-semester/SingleSemester';
 
-const SemestersList = ({ history, match, semestersList, listLoading }) => {
+const SemestersList = ({
+  history,
+  match,
+  semestersList,
+  listLoading,
+  deleteList,
+}) => {
   return (
     <SettingSectionContainer>
       <MyButton
@@ -19,6 +25,7 @@ const SemestersList = ({ history, match, semestersList, listLoading }) => {
       <TableTop tableProps={['תאריך התחלה', 'כותרת', 'אפשרויות']} />
 
       <SingleItemContainer
+        deleteList={deleteList}
         SingleComponent={SingleSemester}
         data={semestersList}
         loading={listLoading}

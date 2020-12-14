@@ -34,6 +34,7 @@ const VatRoutes = ({
   getVatRate,
   vatRate,
   vatRateLoading,
+  deleteList,
   ...props
 }) => {
   useEffect(() => {
@@ -52,7 +53,13 @@ const VatRoutes = ({
         <Route
           exact
           path={`${match.path}`}
-          render={() => <VatList vatList={vatList} loading={loading} />}
+          render={() => (
+            <VatList
+              vatList={vatList}
+              loading={loading}
+              deleteList={deleteList}
+            />
+          )}
         />
         <Route
           exact
@@ -86,10 +93,11 @@ const mapStateToProps = (state) => ({
   loading: state.vat.loading,
   confirmMessageData: state.delete,
   singleVatItem: state.vat.singleVatItem,
-  error: state.vat.error,
+  error: state.vat.singlePageError,
   innerSinglePageLoading: state.vat.innerSinglePageLoading,
   vatRate: state.vat.vatRate,
   vatRateLoading: state.vat.vatRateLoading,
+  deleteList: state.vat.deleteList,
 });
 
 const mapDispatchToProps = (dispatch) => ({

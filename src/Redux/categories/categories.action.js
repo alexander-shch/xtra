@@ -22,32 +22,32 @@ export const updateCategory = (categoryID, objToServer) => (dispatch) => {
   dispatch({ type: 'UPDATE_CATEGORY_START' });
   callFetch(`${URL}/categories/${categoryID}`, 'PUT', objToServer)
     .then((data) =>
-      dispatch({ type: 'UPDATE_CATEGORY_SUCSESS', payload: data })
+      dispatch({ type: 'UPDATE_CATEGORY_SUCCESS', payload: data })
     )
     .catch((err) => dispatch({ type: 'UPDATE_CATEGORY_FAILED', payload: err }));
 };
 
 export const deleteCategory = (categoryID) => (dispatch) => {
-  dispatch({ type: 'DELETE_CATEGORY_START' });
+  dispatch({ type: 'DELETE_CATEGORY_START', payload: categoryID });
   callFetch(`${URL}/categories/${categoryID}`, 'DELETE')
     .then((data) => {
       if (data.deleted) {
         dispatch({
-          type: 'DELETE_CATEGORY_SUCSESS',
+          type: 'DELETE_CATEGORY_SUCCESS',
           payload: categoryID,
         });
       } else {
         throw new Error('cant delete this building');
       }
     })
-    .catch((err) => dispatch({ type: 'DELETE_CATEGORY_FAIELD', payload: err }));
+    .catch((err) => dispatch({ type: 'DELETE_CATEGORY_FAILED', payload: err }));
 };
 
 export const getSingleCategory = (categoryID) => (dispatch) => {
   dispatch({ type: 'GET_SINGLE_CATEGORY_START' });
   callFetch(`${URL}/categories/${categoryID}`, 'GET')
     .then((data) =>
-      dispatch({ type: 'GET_SINGLE_CATEGORY_SUCSESS', payload: data })
+      dispatch({ type: 'GET_SINGLE_CATEGORY_SUCCESS', payload: data })
     )
     .catch((err) =>
       dispatch({ type: 'GET_SINGLE_CATEGORY_FAILED', payload: err })

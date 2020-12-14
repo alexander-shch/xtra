@@ -30,6 +30,7 @@ const CouponRoutes = ({
   closeConfirmMessage,
   confirmMessageData,
   error,
+  deleteList,
 }) => {
   useEffect(() => {
     getAllCoupons();
@@ -47,13 +48,19 @@ const CouponRoutes = ({
           exact
           path={`${match.path}`}
           render={() => (
-            <CouponsList couponsList={couponsList} listLoading={listLoading} />
+            <CouponsList
+              couponsList={couponsList}
+              listLoading={listLoading}
+              deleteList={deleteList}
+            />
           )}
         />
         <Route
           exact
           path={`${match.path}/addNewCoupon`}
-          render={() => <AddUpdateCoupon addNewCoupon={addNewCoupon} />}
+          render={() => (
+            <AddUpdateCoupon addNewCoupon={addNewCoupon} process={process} />
+          )}
         />
 
         <Route
@@ -81,8 +88,9 @@ const mapStateToProps = (state) => ({
   innerPageLoading: state.coupons.innerPageLoading,
   singleCoupon: state.coupons.singleCoupon,
   process: state.coupons.process,
-  error: state.coupons.error,
+  error: state.coupons.singlePageError,
   confirmMessageData: state.delete,
+  deleteList: state.coupons.deleteList,
 });
 
 const mapDispatchToProps = (dispatch) => ({

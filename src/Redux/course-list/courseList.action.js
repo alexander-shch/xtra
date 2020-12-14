@@ -31,7 +31,7 @@ export const getSingleCourse = (courseID) => (dispatch) => {
 };
 
 export const deleteCourse = (courseID) => (dispatch) => {
-  dispatch({ type: 'DELETE_COURSE_START' });
+  dispatch({ type: 'DELETE_COURSE_START', payload: courseID });
   callFetch(`${URL}/courses/${courseID}`, 'DELETE')
     .then((data) => {
       if (data.deleted) {

@@ -6,7 +6,13 @@ import { withRouter } from 'react-router-dom';
 import SingleCategory from '../../components/Single-Items/single-category/SingleCategory';
 import SingleItemContainer from '../../components/Single-Items/SingleItemContainer';
 
-const CategoriesList = ({ history, match, categories, ...otherProps }) => {
+const CategoriesList = ({
+  history,
+  match,
+  categories,
+  deleteList,
+  ...otherProps
+}) => {
   return (
     <SettingSectionContainer>
       <MyButton
@@ -19,6 +25,7 @@ const CategoriesList = ({ history, match, categories, ...otherProps }) => {
       <TableTop tableProps={['תחום', 'אפשרויות']} />
 
       <SingleItemContainer
+        deleteList={deleteList}
         SingleComponent={SingleCategory}
         data={categories}
         loading={otherProps.loading}

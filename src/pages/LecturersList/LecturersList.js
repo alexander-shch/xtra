@@ -14,6 +14,7 @@ const LecturersList = ({
   lectures,
   listLoading,
   searchField,
+  deleteList,
 }) => {
   let filterLectures = searchField
     ? lectures.filter(({ name, email, phone }) => {
@@ -38,6 +39,7 @@ const LecturersList = ({
       <h4>רשימת מרצים</h4>
       <TableTop tableProps={tableTitles} />
       <SingleItemContainer
+        deleteList={deleteList}
         loading={listLoading}
         data={filterLectures}
         SingleComponent={SingleLecture}

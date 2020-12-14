@@ -78,6 +78,7 @@ const CoursesListRoutes = ({
             listLoading={listLoading}
             categories={categories}
             deleteCourse={deleteCourse}
+            deleteList={deleteList}
           />
         )}
       />

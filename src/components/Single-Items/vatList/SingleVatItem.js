@@ -3,12 +3,17 @@ import { SingleItem } from '../../global-style/SettingSection';
 import OptionButton from '../../My-button/option-button/OptionButton';
 import { withRouter } from 'react-router-dom';
 import DeleteButton from '../../My-button/delete-button/DeleteButton';
+import DisableOverlay from '../../disable-overlay/DisableOverlay';
 
-const SingleVatItem = ({ item, match, history, width }) => {
+const SingleVatItem = ({ item, match, history, width, ...otherProps }) => {
+  let beforeDelete = otherProps.deleteList
+    ? otherProps.deleteList.includes(item._id)
+    : false;
   let isMobile = width <= 800 ? true : false;
   const BooleanToHebrew = item.vat ? 'כן' : 'לא';
   return (
-    <SingleItem>
+    <SingleItem $opacity={beforeDelete}>
+      <DisableOverlay disable={beforeDelete} />
       <span className='itemName'>{item.title}</span>
       {!isMobile ? (
         <>

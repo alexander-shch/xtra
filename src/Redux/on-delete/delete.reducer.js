@@ -1,11 +1,11 @@
-const INTIAL_STATE = {
+const INITIAL_STATE = {
   confirmMessageDisplay: false,
   itemToDelete: null,
   addDeleteFunction: null,
   pageID: null,
 };
 
-const deleteReducer = (state = INTIAL_STATE, action) => {
+const deleteReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'DISPLAY_DELETE_CONFIRM':
       return {

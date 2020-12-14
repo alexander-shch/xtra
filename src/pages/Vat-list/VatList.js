@@ -7,7 +7,7 @@ import SingleVatItem from '../../components/Single-Items/vatList/SingleVatItem';
 import SingleItemContainer from '../../components/Single-Items/SingleItemContainer';
 import { useWindowSize } from '../../utils/windowSize';
 
-const VatList = ({ history, match, vatList, loading }) => {
+const VatList = ({ history, match, vatList, loading, deleteList }) => {
   const { width } = useWindowSize();
   let tableTitles =
     width <= 800
@@ -32,6 +32,7 @@ const VatList = ({ history, match, vatList, loading }) => {
       <h4>מכפילי שכר</h4>
       <TableTop tableProps={tableTitles} />
       <SingleItemContainer
+        deleteList={deleteList}
         loading={loading}
         data={vatList}
         SingleComponent={SingleVatItem}

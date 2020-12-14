@@ -11,8 +11,9 @@ const INTAIL_STATE = {
 const courseListReducer = (state = INTAIL_STATE, action) => {
   switch (action.type) {
     case 'GET_COURSE_START':
-    case 'DELETE_COURSE_START':
       return { ...state, listLoading: true };
+    case 'DELETE_COURSE_START':
+      return { ...state, deleteList: [...state.deleteList, action.payload] };
     case 'ADD_NEW_COURSE_START':
     case 'UPDATE_COURSE_START':
       return { ...state, inProcess: true };
@@ -55,9 +56,12 @@ const courseListReducer = (state = INTAIL_STATE, action) => {
       return { ...state, inProcess: true };
 
     case 'DELETE_COURSE_SUCCESS':
+      let filterList = state.deleteList.filter(
+        (item) => item === action.payload
+      );
       return {
         ...state,
-        listLoading: false,
+        deleteList: filterList,
         courseList: state.courseList.filter(
           (course) => course._id !== action.payload
         ),

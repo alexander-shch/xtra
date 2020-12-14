@@ -1,10 +1,10 @@
-const INTIAL_STATE = {
+const INITIAL_STATE = {
   view: false,
   content: null,
   style: null,
 };
 
-const myAlertReducer = (state = INTIAL_STATE, action) => {
+const myAlertReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'SET_ALERT_MESSAGE':
       return {

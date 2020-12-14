@@ -12,10 +12,7 @@ const BuildingItem = ({ match, history, width, item, ...otherProps }) => {
   return (
     <SingleItem $opacity={beforeDelete}>
       <DisableOverlay disable={beforeDelete} />
-      <span className='itemName'>
-        {width <= 800 ? <span className='mobileTitle'>שם הבניין</span> : null}
-        {item.name}
-      </span>
+      <span className='itemName'>{item.name}</span>
       <div className='buttons'>
         <OptionButton
           onClick={() =>

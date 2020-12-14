@@ -1,6 +1,6 @@
 import {
-  updateAvailabilty,
-  setAvailabilty,
+  updateAvailability,
+  setAvailability,
   updateClass,
   deleteAvailability,
   holyDaysTodisplay,
@@ -9,7 +9,7 @@ import {
   deleteSingle,
 } from './classes.utiles';
 
-const INTIAL_STATE = {
+const INITIAL_STATE = {
   loading: false,
   calenderLoading: false,
   process: false,
@@ -18,18 +18,21 @@ const INTIAL_STATE = {
   singleClass: null,
   jewishHolydays: [],
   error: null,
+  singlePageError: null,
+  deleteList: [],
 };
 
-const classesReducer = (state = INTIAL_STATE, action) => {
+const classesReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'GET_SINGLE_CLASS_START':
       return { ...state, innerSinglePageLoading: true };
     case 'CLASSES_FETCH_START':
       return { ...state, loading: true };
-    case 'DELETE_CLASS_START':
     case 'UPDATE_CLASS_START':
     case 'ADD_NEW_CLASS_START':
       return { ...state, process: true };
+    case 'DELETE_CLASS_START':
+      return { ...state, deleteList: [...state.deleteList, action.payload] };
     case 'CLASSES_FETCH_SUCCESS':
       return {
         ...state,
@@ -44,8 +47,8 @@ const classesReducer = (state = INTIAL_STATE, action) => {
         innerSinglePageLoading: false,
       };
     case 'SET_AVAILABILITY_START':
-    case 'UPDATE_AVAILABILTY_START':
-    case 'DELETE_AVAILABILTY_START':
+    case 'UPDATE_AVAILABILITY_START':
+    case 'DELETE_AVAILABILITY_START':
       return { ...state, calenderLoading: true };
     case 'ADD_CLASS_SUCCESS':
       return {
@@ -65,18 +68,18 @@ const classesReducer = (state = INTIAL_STATE, action) => {
     case 'SET_AVAILABILITY_SUCCESS':
       return {
         ...state,
-        classes: setAvailabilty(state, action.payload),
+        classes: setAvailability(state, action.payload),
         calenderLoading: false,
         singleClass: pushToSingle(state, action.payload),
       };
-    case 'UPDATE_AVAILABILTY_SUCCESS':
+    case 'UPDATE_AVAILABILITY_SUCCESS':
       return {
         ...state,
-        classes: updateAvailabilty(state, action.payload),
+        classes: updateAvailability(state, action.payload),
         calenderLoading: false,
         singleClass: updateSingle(state, action.payload),
       };
-    case 'DELETE_AVAILABILTY_SUCCESS':
+    case 'DELETE_AVAILABILITY_SUCCESS':
       return {
         ...state,
         classes: deleteAvailability(state, action.payload),
@@ -87,7 +90,7 @@ const classesReducer = (state = INTIAL_STATE, action) => {
       return {
         ...state,
         classes: state.classes.filter((item) => item._id !== action.payload),
-        process: false,
+        deleteList: state.deleteList.filter((item) => item === action.payload),
       };
     case 'GET_HOLYDAYS_SUCCESS':
       return {
@@ -96,24 +99,26 @@ const classesReducer = (state = INTIAL_STATE, action) => {
       };
 
     case 'SET_AVAILABILITY_FAILED':
-    case 'DELETE_AVAILABILTY_FAILED':
-    case 'UPDATE_AVAILABILTY_FAILED':
+    case 'DELETE_AVAILABILITY_FAILED':
+    case 'UPDATE_AVAILABILITY_FAILED':
     case 'CLASSES_FETCH_FAILED':
     case 'ADD_CLASS_FAILED':
     case 'GET_HOLYDAYS_FAILED':
-    case 'GET_SINGLE_CLASS_FAILED':
       return {
         ...state,
         error: action.payload,
         process: false,
         loading: false,
       };
+    case 'GET_SINGLE_CLASS_FAILED':
+      return { ...state, singlePageError: action.payload };
     case 'CLEAR_SINGLE':
       return {
         ...state,
         singleClass: null,
         error: null,
         innerSinglePageLoading: true,
+        singlePageError: null,
       };
     default:
       return state;

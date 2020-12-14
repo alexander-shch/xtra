@@ -41,7 +41,7 @@ export const getSingleCoupon = (couponID) => (dispatch) => {
 };
 
 export const deleteCoupon = (couponID) => (dispatch) => {
-  dispatch({ type: 'DELETE_COUPON_START' });
+  dispatch({ type: 'DELETE_COUPON_START', payload: couponID });
   callFetch(`${URL}/coupons/${couponID}`, 'DELETE')
     .then((data) => {
       if (data.deleted) {

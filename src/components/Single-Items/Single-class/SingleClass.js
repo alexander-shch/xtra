@@ -3,12 +3,17 @@ import { withRouter } from 'react-router-dom';
 import OptionButton from '../../My-button/option-button/OptionButton';
 import { SingleItem } from '../../global-style/SettingSection';
 import DeleteButton from '../../My-button/delete-button/DeleteButton';
+import DisableOverlay from '../../disable-overlay/DisableOverlay';
 
-const SingleClass = ({ item, match, history, width }) => {
+const SingleClass = ({ item, match, history, ...otherProps }) => {
+  let beforeDelete = otherProps.deleteList
+    ? otherProps.deleteList.includes(item._id)
+    : false;
   return (
-    <SingleItem>
-      <span className='itemName'>{item.building.name}</span>
+    <SingleItem $opacity={beforeDelete}>
+      <DisableOverlay disable={beforeDelete} />
       <span className='itemName'>{item.name}</span>
+      <span className='itemName'>{item.building.name}</span>
 
       <div className='buttons'>
         <OptionButton

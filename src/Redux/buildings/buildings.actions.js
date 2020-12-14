@@ -3,7 +3,7 @@ import { callFetch, URL } from '../../utils/actionUtils';
 export const getBuildingsData = () => (dispatch) => {
   dispatch({ type: 'BUILDING_FETCH_START' });
   callFetch(`${URL}/buildings`, 'GET')
-    .then((data) => dispatch({ type: 'BUILDING_FETCH_SUCSESS', payload: data }))
+    .then((data) => dispatch({ type: 'BUILDING_FETCH_SUCCESS', payload: data }))
     .catch((err) => dispatch({ type: 'BUILDING_FETCH_FAILED', payload: err }));
 };
 
@@ -13,7 +13,7 @@ export const addNewBuilding = (name, active) => (dispatch) => {
   dispatch({ type: 'POST_NEW_BUILDING_START' });
   callFetch(`${URL}/buildings`, 'POST', buildingObj)
     .then((data) => {
-      dispatch({ type: 'POST_NEW_BUILDING_SUCSESS', payload: data });
+      dispatch({ type: 'POST_NEW_BUILDING_SUCCESS', payload: data });
     })
     .catch((err) =>
       dispatch({ type: 'POST_NEW_BUILDING_FAILED', payload: err })
@@ -26,7 +26,7 @@ export const updateBuilding = (itemid, name, active) => (dispatch) => {
   dispatch({ type: 'UPDATE_BUILDING_START' });
   callFetch(`${URL}/buildings/${itemid}`, 'PUT', buildingObj)
     .then((data) =>
-      dispatch({ type: 'UPDATE_BUILDING_SUCSESS', payload: data })
+      dispatch({ type: 'UPDATE_BUILDING_SUCCESS', payload: data })
     )
     .catch((err) => dispatch({ type: 'UPDATE_BUILDING_FAILED', payload: err }));
 };
@@ -37,7 +37,7 @@ export const deleteBuilding = (itemid) => (dispatch) => {
     .then((data) => {
       if (data.deleted) {
         dispatch({
-          type: 'DELETE_BUILDING_SUCSESS',
+          type: 'DELETE_BUILDING_SUCCESS',
           payload: itemid,
         });
       } else {
@@ -51,7 +51,7 @@ export const getSingleBuilding = (ID) => (dispatch) => {
   dispatch({ type: 'GET_SINGLE_BUILDING_START' });
   callFetch(`${URL}/buildings/${ID}`, 'GET')
     .then((data) => {
-      dispatch({ type: 'GET_SINGLE_BUILDING_SUCSESS', payload: data });
+      dispatch({ type: 'GET_SINGLE_BUILDING_SUCCESS', payload: data });
     })
     .catch((err) =>
       dispatch({ type: 'GET_SINGLE_BUILDING_FAILED', payload: err })

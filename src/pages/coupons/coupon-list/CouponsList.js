@@ -7,7 +7,13 @@ import SingleCoupon from '../../../components/Single-Items/single-coupon/SingleC
 import SingleItemContainer from '../../../components/Single-Items/SingleItemContainer';
 import { useWindowSize } from '../../../utils/windowSize';
 
-const CouponsList = ({ match, history, couponsList, listLoading }) => {
+const CouponsList = ({
+  match,
+  history,
+  couponsList,
+  listLoading,
+  deleteList,
+}) => {
   const { width } = useWindowSize();
   let tableTitles =
     width <= 800
@@ -25,6 +31,7 @@ const CouponsList = ({ match, history, couponsList, listLoading }) => {
       <TableTop tableProps={tableTitles} />
 
       <SingleItemContainer
+        deleteList={deleteList}
         SingleComponent={SingleCoupon}
         data={couponsList}
         loading={listLoading}

@@ -28,6 +28,7 @@ const CategoriesRoutes = ({
   confirmMessageData,
   closeConfirmMessage,
   loading,
+  deleteList,
   ...props
 }) => {
   useEffect(() => {
@@ -46,7 +47,11 @@ const CategoriesRoutes = ({
           exact
           path={`${match.path}`}
           render={() => (
-            <CategoriesList categories={categories} loading={loading} />
+            <CategoriesList
+              categories={categories}
+              deleteList={deleteList}
+              loading={loading}
+            />
           )}
         />
         <Route
@@ -69,8 +74,9 @@ const mapStateToProps = (state) => ({
   loading: state.categories.loading,
   confirmMessageData: state.delete,
   singleCategory: state.categories.singleCategory,
-  error: state.categories.error,
+  error: state.categories.singlePageError,
   innerSinglePageLoading: state.categories.innerSinglePageLoading,
+  deleteList: state.categories.deleteList,
 });
 
 const mapDispatchToProps = (dispatch) => ({

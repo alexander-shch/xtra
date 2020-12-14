@@ -15,6 +15,7 @@ const CoursesList = ({
   listLoading,
   categories,
   searchField,
+  deleteList,
 }) => {
   const [checked, setChecked] = useState([]);
 
@@ -64,6 +65,7 @@ const CoursesList = ({
         <h4>רשימת קורסים</h4>
         <TableTop tableProps={['שם הקורס', 'תחום', 'אפשרויות']} />
         <SingleItemContainer
+          deleteList={deleteList}
           SingleComponent={SingleCourse}
           data={filterCourse()}
           categoriesObj={categoriesObj}

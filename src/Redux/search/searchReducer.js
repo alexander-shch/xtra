@@ -1,8 +1,8 @@
-const INTIAL_STATE = {
+const INITIAL_STATE = {
   searchfield: '',
 };
 
-const searchField = (state = INTIAL_STATE, action) => {
+const searchField = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'CHANGE_SEARCH_FIELD':
       return { ...state, searchfield: action.payload };

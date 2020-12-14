@@ -4,8 +4,12 @@ import { SingleItem } from '../../global-style/SettingSection';
 import { withRouter } from 'react-router-dom';
 import DeleteButton from '../../My-button/delete-button/DeleteButton';
 import { alertIcon } from '../../../utils/fontAwesome';
+import DisableOverlay from '../../disable-overlay/DisableOverlay';
 
-const SingleCoupon = ({ match, history, item, width }) => {
+const SingleCoupon = ({ match, history, item, width, ...otherProps }) => {
+  let beforeDelete = otherProps.deleteList
+    ? otherProps.deleteList.includes(item._id)
+    : false;
   let isMobile = width <= 800 ? true : false;
   const setDate = (item) => {
     let date = new Date(item);
@@ -22,7 +26,8 @@ const SingleCoupon = ({ match, history, item, width }) => {
     item.effectiveTo && new Date() > new Date(item.effectiveTo) ? true : false;
 
   return (
-    <SingleItem>
+    <SingleItem $opacity={beforeDelete}>
+      <DisableOverlay disable={beforeDelete} />
       <span className='itemName'>{title}</span>
 
       {!isMobile ? (

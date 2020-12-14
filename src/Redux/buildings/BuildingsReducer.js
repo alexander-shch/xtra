@@ -1,4 +1,4 @@
-const INTIAL_STATE = {
+const INITIAL_STATE = {
   buildings: [],
   loading: true,
   process: false,
@@ -8,7 +8,7 @@ const INTIAL_STATE = {
   deleteList: [],
 };
 
-const BuildingsReducer = (state = INTIAL_STATE, action) => {
+const BuildingsReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'GET_SINGLE_BUILDING_START':
       return { ...state, innerSinglePageLoading: true };
@@ -20,28 +20,28 @@ const BuildingsReducer = (state = INTIAL_STATE, action) => {
     case 'POST_NEW_BUILDING_START':
     case 'UPDATE_BUILDING_START':
       return { ...state, process: true };
-    case 'BUILDING_FETCH_SUCSESS':
+    case 'BUILDING_FETCH_SUCCESS':
       return {
         ...state,
         buildings: action.payload,
         loading: false,
         error: null,
       };
-    case 'GET_SINGLE_BUILDING_SUCSESS':
+    case 'GET_SINGLE_BUILDING_SUCCESS':
       return {
         ...state,
         loading: false,
         singleBuilding: action.payload,
         innerSinglePageLoading: false,
       };
-    case 'POST_NEW_BUILDING_SUCSESS':
+    case 'POST_NEW_BUILDING_SUCCESS':
       return {
         ...state,
         buildings: [...state.buildings, action.payload],
         process: false,
       };
 
-    case 'UPDATE_BUILDING_SUCSESS':
+    case 'UPDATE_BUILDING_SUCCESS':
       const { buildings } = state;
       const index = buildings.findIndex(
         (building) => building._id === action.payload._id
@@ -54,7 +54,7 @@ const BuildingsReducer = (state = INTIAL_STATE, action) => {
         buildings,
         singleBuilding: action.payload,
       };
-    case 'DELETE_BUILDING_SUCSESS':
+    case 'DELETE_BUILDING_SUCCESS':
       const filterList = state.deleteList.filter(
         (item) => item === action.payload._id
       );

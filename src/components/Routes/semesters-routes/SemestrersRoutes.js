@@ -31,6 +31,7 @@ const SemestersRoutes = ({
   deleteSemester,
   closeConfirmMessage,
   confirmMessageData,
+  deleteList,
 }) => {
   useEffect(() => {
     getSemesters();
@@ -52,6 +53,7 @@ const SemestersRoutes = ({
             <SemestersList
               semestersList={semestersList}
               listLoading={listLoading}
+              deleteList={deleteList}
             />
           )}
         />
@@ -88,8 +90,9 @@ const mapStateToProps = (state) => ({
   listLoading: state.semesters.listLoading,
   innerSinglePageLoading: state.semesters.innerSinglePageLoading,
   singleSemester: state.semesters.singleSemester,
-  error: state.semesters.error,
+  error: state.semesters.singlePageError,
   confirmMessageData: state.delete,
+  deleteList: state.semesters.deleteList,
 });
 
 const mapDispatchToProps = (dispatch) => ({

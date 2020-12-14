@@ -11,7 +11,7 @@ export const setUserLog = () => (dispatch) => {
     .then((respons) => respons.json())
     .then((user) => {
       if (user) {
-        dispatch({ type: 'SIGNIN_SUCSESS', payload: user });
+        dispatch({ type: 'SIGNIN_SUCCESS', payload: user });
       }
     })
     .catch((err) => dispatch(signInFailed(err)));
@@ -19,7 +19,7 @@ export const setUserLog = () => (dispatch) => {
 
 export const onsignOut = () => (dispatch) => {
   localStorage.removeItem('token');
-  dispatch({ type: 'SIGNOUT_SUCSESS' });
+  dispatch({ type: 'SIGNOUT_SUCCESS' });
 };
 
 export const getToken = (email, password) => (dispatch) => {

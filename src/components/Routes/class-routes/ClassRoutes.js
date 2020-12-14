@@ -42,6 +42,7 @@ const ClassRoutes = ({
   getSingleClass,
   singleClass,
   jewishHolydays,
+  deleteList,
   ...props
 }) => {
   useEffect(() => {
@@ -68,6 +69,7 @@ const ClassRoutes = ({
               classes={classes}
               buildings={buildings}
               loading={pageLoading}
+              deleteList={deleteList}
             />
           )}
         />
@@ -109,12 +111,13 @@ const mapStateToProps = (state) => ({
   classes: state.classes.classes,
   singleClass: state.classes.singleClass,
   process: state.classes.process,
-  error: state.classes.error,
+  error: state.classes.singlePageError,
   pageLoading: state.classes.loading,
   calenderLoading: state.classes.calenderLoading,
   jewishHolydays: state.classes.jewishHolydays,
   confirmMessageData: state.delete,
   innerSinglePageLoading: state.classes.innerSinglePageLoading,
+  deleteList: state.classes.deleteList,
 });
 
 const mapDispatchToProps = (dispatch) => ({

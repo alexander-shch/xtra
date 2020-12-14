@@ -30,7 +30,7 @@ export const updateLecture = (lectureID, lectureDetails) => (dispatch) => {
 };
 
 export const deleteLecture = (lectureID) => (dispatch) => {
-  dispatch({ type: 'DELETE_LECTURE_START' });
+  dispatch({ type: 'DELETE_LECTURE_START', payload: lectureID });
   callFetch(`${URL}/lecturer/${lectureID}`, 'DELETE')
     .then((data) => {
       if (data.deleted) {

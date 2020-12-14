@@ -15,13 +15,13 @@ const INTAIL_STATE = {
   singleLecture: null,
   error: null,
   deleteList: [],
+  getSingleError: null,
 };
 
 const lecturesReducer = (state = INTAIL_STATE, action) => {
   let { deleteList } = state;
   switch (action.type) {
     case 'GET_LECTURES_START':
-    case 'DELETE_LECTURE_START':
       return { ...state, listLoading: true };
     case 'GET_SINGLE_LECTURE_START':
       return { ...state, innerSinglePageLoading: true };
@@ -32,6 +32,7 @@ const lecturesReducer = (state = INTAIL_STATE, action) => {
       return { ...state, noteLoading: true };
     case 'UPLOAD_CV_START':
       return { ...state, fileSpinner: true };
+    case 'DELETE_LECTURE_START':
     case 'DELETE_NOTE_START':
     case 'DELETE_FILE_START':
       return { ...state, deleteList: [...state.deleteList, action.payload] };
@@ -110,7 +111,6 @@ const lecturesReducer = (state = INTAIL_STATE, action) => {
     case 'DELETE_LECTURE_FAILED':
     case 'SET_AVATAR_IMG_FAILED':
     case 'DELETE_NOTE_FAILED':
-    case 'GET_SINGLE_LECTURE_FAILED':
       return {
         ...state,
         inProcess: false,
@@ -120,12 +120,15 @@ const lecturesReducer = (state = INTAIL_STATE, action) => {
         noteLoading: false,
         downLoadSpinner: false,
       };
+    case 'GET_SINGLE_LECTURE_FAILED':
+      return { ...state, getSingleError: action.payload };
     case 'CLEAR_SINGLE':
       return {
         ...state,
         singleLecture: null,
         error: null,
         innerSinglePageLoading: true,
+        getSingleError: null,
       };
     default:
       return state;
