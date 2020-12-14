@@ -68,7 +68,6 @@ const couponsReducer = (state = INTAIL_STATE, action) => {
     case 'CLEAR_SINGLE':
       return {
         ...state,
-        process: true,
         innerPageLoading: true,
         singleCoupon: null,
         error: null,
