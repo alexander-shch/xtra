@@ -24,4 +24,5 @@ export const DateInputs = Styled.div`
 export const Flex = Styled.div`
 display:flex;
 align-items: flex-end;
+flex-wrap:nowrap;
 `;

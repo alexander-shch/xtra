@@ -55,6 +55,7 @@ const generateStyle = css`
   height: 33px;
   border-radius: 0.25rem 0 0 0.25rem;
   background-color: #5f9ea0;
+  margin-left: 5px;
   &:focus {
     outline: 0;
   }
