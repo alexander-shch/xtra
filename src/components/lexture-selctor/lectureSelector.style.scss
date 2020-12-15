@@ -2,11 +2,19 @@
   display: flex;
   justify-content: space-between;
 
+  @media screen and (max-width: 800px) {
+    flex-direction: column;
+  }
+
   .list-container {
     display: flex;
     flex-direction: column;
     width: 50%;
     margin: 5px;
+    @media screen and (max-width: 800px) {
+      width: 100%;
+      margin: 0;
+    }
     &:last-child {
       justify-content: flex-end;
     }
@@ -14,7 +22,10 @@
       border: 1px solid;
       height: 90px;
       overflow: auto;
-      width: 100%;
+
+      @media screen and (max-width: 800px) {
+        margin: 5px;
+      }
     }
   }
 }
