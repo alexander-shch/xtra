@@ -2,16 +2,18 @@ import React, { useState } from 'react';
 import OptionButton from '../option-button/OptionButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { downLoadFile } from '../../../utils/files.utiles';
+
 const download = <FontAwesomeIcon icon={faDownload} />;
 const spin = <FontAwesomeIcon icon={faSpinner} />;
 
-const DownLoadButton = ({ item, downLoadFunction }) => {
+const DownLoadButton = ({ item }) => {
   const [downLoadSpinner, setDownLoadSpinner] = useState(false);
 
   const startDownLoad = async (item) => {
     setDownLoadSpinner(true);
     try {
-      await downLoadFunction(item);
+      await downLoadFile(item);
     } catch (err) {
       console.log(err);
     } finally {

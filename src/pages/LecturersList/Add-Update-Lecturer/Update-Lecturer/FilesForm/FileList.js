@@ -3,7 +3,6 @@ import TableTop from '../../../../../components/Table-top/Tabletop';
 import MyButton from '../../../../../components/My-button/MyButton';
 import FilePopUp from './Popup/FilePopUp';
 import SingleFile from '../../../../../components/Single-Items/singleFile/SingleFile';
-import { downLoadFile } from '../../../../../Redux/Lectures/lectures.action';
 const FilesLIst = ({ uploadCv, id, fileSpinner, files, deleteList }) => {
   const [filePopUpView, setFilePopUpView] = useState(false);
 
@@ -49,7 +48,6 @@ const FilesLIst = ({ uploadCv, id, fileSpinner, files, deleteList }) => {
         files.map((item) => (
           <SingleFile
             deleteList={deleteList}
-            downLoadFunction={downLoadFile}
             key={item._id}
             item={item}
             additionalData={{

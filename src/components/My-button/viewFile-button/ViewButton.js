@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import OptionButton from '../option-button/OptionButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { viewFile } from '../../../Redux/Lectures/lectures.action';
+import { viewFile } from '../../../utils/files.utiles';
 const eyeView = <FontAwesomeIcon icon={faEye} />;
 const spin = <FontAwesomeIcon icon={faSpinner} />;
 

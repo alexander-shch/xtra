@@ -5,7 +5,7 @@ import DownLoadButton from '../../My-button/download-button/DownLoadButton';
 import ViewButton from '../../My-button/viewFile-button/ViewButton';
 import DisableOverlay from '../../disable-overlay/DisableOverlay';
 
-const SingleFile = ({ downLoadFunction, item, deleteList, additionalData }) => {
+const SingleFile = ({ item, deleteList, additionalData }) => {
   let beforeDelete = deleteList ? deleteList.includes(item._id) : false;
   let itemName = item.name.substring(item.name.indexOf('_') + 1);
   return (
@@ -15,7 +15,7 @@ const SingleFile = ({ downLoadFunction, item, deleteList, additionalData }) => {
         <span className='itemName'>{itemName}</span>
         <div className='buttons'>
           <ViewButton item={item} />
-          <DownLoadButton item={item} downLoadFunction={downLoadFunction} />
+          <DownLoadButton item={item} />
           <DeleteButton item={item} additionalData={additionalData} />
         </div>
       </SingleItem>
