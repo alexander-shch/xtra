@@ -117,4 +117,5 @@ export const ButtonContainer = styled.div`
   display: flex;
   position: relative;
   align-items: center;
+  justify-content: ${(props) => (props.justify ? props.justify : 'flex-start')};
 `;

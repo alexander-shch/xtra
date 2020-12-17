@@ -11,6 +11,7 @@ const NavMenu = ({ signOut, toggleView, settingsView, userName }) => {
   const navMenuArray = [
     { linkTitle: 'לובי', linkUrl: '/', className: 'single-link' },
     { linkTitle: 'קורסים', linkUrl: '/courses', className: 'single-link' },
+    { linkTitle: 'קבוצות', linkUrl: '/groups', className: 'single-link' },
     { linkTitle: 'מרצים', linkUrl: '/lecturers', className: 'single-link' },
     { linkTitle: 'נרשמים', linkUrl: '/a', className: 'single-link' },
     { linkTitle: 'דוחות', linkUrl: '/b', className: 'single-link' },
