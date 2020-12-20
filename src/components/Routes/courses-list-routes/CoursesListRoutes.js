@@ -46,6 +46,7 @@ const CoursesListRoutes = ({
   OnDeleteFunction,
   courseID,
   deleteList,
+  innerSinglePageLoading,
 }) => {
   useEffect(() => {
     getCategories();
@@ -113,6 +114,7 @@ const CoursesListRoutes = ({
             uploadCourseFile={uploadCourseFile}
             deleteCourseFile={deleteCourseFile}
             deleteList={deleteList}
+            loading={innerSinglePageLoading}
           />
         )}
       />
@@ -134,6 +136,7 @@ const mapStateToProps = (state) => ({
   OnDeleteFunction: state.delete.addDeleteFunction,
   courseID: state.delete.pageID,
   deleteList: state.courseList.deleteList,
+  innerSinglePageLoading: state.courseList.innerSinglePageLoading,
 });
 
 const mapDispatchToProps = (dispatch) => ({

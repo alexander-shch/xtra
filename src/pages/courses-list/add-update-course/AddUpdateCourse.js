@@ -8,6 +8,7 @@ import InterestedList from './course-tabs/InterstedList';
 import { withRouter } from 'react-router-dom';
 import MyButton from '../../../components/My-button/MyButton';
 import CustomAlert from '../../../components/custom-alert/CustomAlert';
+import PageSpinner from '../../../components/spinner/page-spinner/PageSpinner';
 
 const AddUpdateCourse = ({
   match,
@@ -26,6 +27,7 @@ const AddUpdateCourse = ({
   uploadCourseFile,
   deleteCourseFile,
   deleteList,
+  loading,
 }) => {
   const courseID = match.params.courseID;
   useEffect(() => {
@@ -285,34 +287,36 @@ const AddUpdateCourse = ({
   };
   return (
     <>
-      <CustomAlert
-        alertView={alertView}
-        alertText={alertText}
-        closeAlert={closeAlert}
-        onConfirm={onAlertConfirm}
-      />
-
-      <UpdatePageContainer>
-        <TabsMenu
-          isUpdatePage={courseID}
-          currentTab={currentTab}
-          tabLinks={tabLinks}
-          changeTab={changeTab}
+      <PageSpinner active={loading}>
+        <CustomAlert
+          alertView={alertView}
+          alertText={alertText}
+          closeAlert={closeAlert}
+          onConfirm={onAlertConfirm}
         />
-        <form onSubmit={handleSubmit}>
-          {toggleTab()}
-          {currentTab === 3 || currentTab === 2 ? null : (
-            <div className='buttons'>
-              <MyButton onClick={() => goBack()} type='button' forgot>
-                חזרה
-              </MyButton>
-              <MyButton save loading={inProcess}>
-                שמור
-              </MyButton>
-            </div>
-          )}
-        </form>
-      </UpdatePageContainer>
+
+        <UpdatePageContainer>
+          <TabsMenu
+            isUpdatePage={courseID}
+            currentTab={currentTab}
+            tabLinks={tabLinks}
+            changeTab={changeTab}
+          />
+          <form onSubmit={handleSubmit}>
+            {toggleTab()}
+            {currentTab === 3 || currentTab === 2 ? null : (
+              <div className='buttons'>
+                <MyButton onClick={() => goBack()} type='button' forgot>
+                  חזרה
+                </MyButton>
+                <MyButton save loading={inProcess}>
+                  שמור
+                </MyButton>
+              </div>
+            )}
+          </form>
+        </UpdatePageContainer>
+      </PageSpinner>
     </>
   );
 };

@@ -1,9 +1,11 @@
 import React from 'react';
+import PageSpinner from '../spinner/page-spinner/PageSpinner';
 
 const Dashboard = () => {
   return (
     <>
-      <h1>Dashboard</h1>
+      <PageSpinner active={true} />
+      <h1>f</h1>
     </>
   );
 };
