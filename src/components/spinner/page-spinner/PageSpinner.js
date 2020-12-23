@@ -2,9 +2,9 @@ import React from 'react';
 import Spinner from '../Spinner';
 import { SpinnerPageContainer } from './pageSpinner.style';
 
-const PageSpinner = ({ active, ...props }) => {
+const PageSpinner = ({ active, height, ...props }) => {
   return active ? (
-    <SpinnerPageContainer>
+    <SpinnerPageContainer height={height}>
       <Spinner />
       <h2>טוען</h2>
     </SpinnerPageContainer>

@@ -6,11 +6,8 @@ import MyButton from '../../../components/My-button/MyButton';
 import TextArea from '../../../components/inputs/text-area/TextArea';
 import { withRouter } from 'react-router-dom';
 import './AddUpdateCategory.style.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSave } from '@fortawesome/free-solid-svg-icons';
-import Spinner from '../../../components/spinner/Spinner';
-
-const element = <FontAwesomeIcon icon={faSave} />;
+import { saveIcon } from '../../../utils/fontAwesome';
+import PageSpinner from '../../../components/spinner/page-spinner/PageSpinner';
 
 const AddUpdateCategory = ({
   history,
@@ -166,163 +163,163 @@ const AddUpdateCategory = ({
     const { name, value } = e.target;
     setDomainDetails({ ...domainDetails, [name]: value });
   };
+  let pageTitle = categoryId ? 'עריכת תחום' : 'הוספת תחום';
+  return (
+    <PageSpinner active={innerSinglePageLoading}>
+      <UpdatePageContainer>
+        <h4> {pageTitle}</h4>
+        <form onSubmit={handleSubmit}>
+          <InputField
+            name='title'
+            type='text'
+            label='כותרת'
+            handleChange={handleChange}
+            hebrew='true'
+            value={title}
+            required
+          />
+          <div className='inputFlex'>
+            <TextArea
+              name='courseGoals'
+              type='text'
+              label='מטרת הקורס'
+              handleChange={handleChange}
+              hebrew='true'
+              small='true'
+              value={courseGoals}
+            />
 
-  return innerSinglePageLoading ? (
-    <Spinner />
-  ) : (
-    <UpdatePageContainer>
-      <h3>הוספת תחום</h3>
-      <form onSubmit={handleSubmit}>
-        <InputField
-          name='title'
-          type='text'
-          label='כותרת'
-          handleChange={handleChange}
-          hebrew='true'
-          value={title}
-          required
-        />
-        <div className='inputFlex'>
+            <InputField
+              name='courseGoalsSiteTitle'
+              type='text'
+              label='כותרת באתר '
+              handleChange={handleChange}
+              hebrew='true'
+              value={courseGoalsSiteTitle}
+            />
+            <InputField
+              name='preliminaryKnowledge'
+              type='text'
+              label='דרישות/ידע מקדים'
+              handleChange={handleChange}
+              hebrew='true'
+              value={preliminaryKnowledge}
+            />
+            <InputField
+              name='preliminaryKnowledgeSiteTitle'
+              type='text'
+              label='כותרת באתר '
+              handleChange={handleChange}
+              hebrew='true'
+              value={preliminaryKnowledgeSiteTitle}
+            />
+            <InputField
+              name='howPromoteYou'
+              type='text'
+              label='איך הקורס יקדם אתכם'
+              handleChange={handleChange}
+              hebrew='true'
+              value={howPromoteYou}
+            />
+            <InputField
+              name='howPromoteYouSiteTitle'
+              type='text'
+              label='כותרת באתר '
+              handleChange={handleChange}
+              hebrew='true'
+              value={howPromoteYouSiteTitle}
+            />
+          </div>
           <TextArea
-            name='courseGoals'
+            name='marketing'
             type='text'
-            label='מטרת הקורס'
+            label='עיגול שיווקי'
             handleChange={handleChange}
             hebrew='true'
-            small='true'
-            value={courseGoals}
+            value={marketing}
           />
-
-          <InputField
-            name='courseGoalsSiteTitle'
-            type='text'
-            label='כותרת באתר '
-            handleChange={handleChange}
-            hebrew='true'
-            value={courseGoalsSiteTitle}
-          />
-          <InputField
-            name='preliminaryKnowledge'
-            type='text'
-            label='דרישות/ידע מקדים'
-            handleChange={handleChange}
-            hebrew='true'
-            value={preliminaryKnowledge}
-          />
-          <InputField
-            name='preliminaryKnowledgeSiteTitle'
-            type='text'
-            label='כותרת באתר '
-            handleChange={handleChange}
-            hebrew='true'
-            value={preliminaryKnowledgeSiteTitle}
-          />
-          <InputField
-            name='howPromoteYou'
-            type='text'
-            label='איך הקורס יקדם אתכם'
-            handleChange={handleChange}
-            hebrew='true'
-            value={howPromoteYou}
-          />
-          <InputField
-            name='howPromoteYouSiteTitle'
-            type='text'
-            label='כותרת באתר '
-            handleChange={handleChange}
-            hebrew='true'
-            value={howPromoteYouSiteTitle}
-          />
-        </div>
-        <TextArea
-          name='marketing'
-          type='text'
-          label='עיגול שיווקי'
-          handleChange={handleChange}
-          hebrew='true'
-          value={marketing}
-        />
-        <div className='inputFlex'>
-          <InputField
-            name='numberOfSessions'
-            type='number'
-            label='מספר מפגשים'
-            handleChange={handleChange}
-            value={numberOfSessions}
-            hebrew='true'
-          />
-          <InputField
-            name='numberOfSessionsSiteTitle'
-            type='text'
-            label='כותרת באתר '
-            handleChange={handleChange}
-            hebrew='true'
-            value={numberOfSessionsSiteTitle}
-          />
-          <InputField
-            name='sessionLength'
-            type='number'
-            label='אורך כל מפגש'
-            handleChange={handleChange}
-            hebrew='true'
-            value={sessionLength}
-          />
-          <InputField
-            name='sessionLengthSiteTitle'
-            type='text'
-            label='כותרת באתר '
-            handleChange={handleChange}
-            hebrew='true'
-            value={sessionLengthSiteTitle}
-          />
-        </div>
-        <div className='inputFlex half'>
-          <InputField
-            name='minStudents'
-            type='number'
-            label='מספר תלמידים מינמלי'
-            handleChange={handleChange}
-            hebrew='true'
-            value={minStudents}
-          />
-          <InputField
-            name='maxStudents'
-            type='number'
-            label='מספר תלמידים מקסימלי'
-            handleChange={handleChange}
-            hebrew='true'
-            value={maxStudents}
-          />
-          <InputField
-            name='studentPrice'
-            type='number'
-            label='מחיר לשעה לסטודנט'
-            handleChange={handleChange}
-            hebrew='true'
-            value={studentPrice}
-          />
-          <InputField
-            name='price'
-            type='number'
-            label='מחיר רגיל'
-            handleChange={handleChange}
-            hebrew='true'
-            value={price}
-          />
-        </div>
-        <SelectInput name='active' handleChange={handleChange} label='פעיל' />
-        <div className='buttons'>
-          <MyButton
-            type='button'
-            onClick={() => history.push('/settings/Categories-list')}
-            forgot
-          >
-            ביטול
-          </MyButton>
-          <MyButton>{element}</MyButton>
-        </div>
-      </form>
-    </UpdatePageContainer>
+          <div className='inputFlex'>
+            <InputField
+              name='numberOfSessions'
+              type='number'
+              label='מספר מפגשים'
+              handleChange={handleChange}
+              value={numberOfSessions}
+              hebrew='true'
+            />
+            <InputField
+              name='numberOfSessionsSiteTitle'
+              type='text'
+              label='כותרת באתר '
+              handleChange={handleChange}
+              hebrew='true'
+              value={numberOfSessionsSiteTitle}
+            />
+            <InputField
+              name='sessionLength'
+              type='number'
+              label='אורך כל מפגש'
+              handleChange={handleChange}
+              hebrew='true'
+              value={sessionLength}
+            />
+            <InputField
+              name='sessionLengthSiteTitle'
+              type='text'
+              label='כותרת באתר '
+              handleChange={handleChange}
+              hebrew='true'
+              value={sessionLengthSiteTitle}
+            />
+          </div>
+          <div className='inputFlex half'>
+            <InputField
+              name='minStudents'
+              type='number'
+              label='מספר תלמידים מינמלי'
+              handleChange={handleChange}
+              hebrew='true'
+              value={minStudents}
+            />
+            <InputField
+              name='maxStudents'
+              type='number'
+              label='מספר תלמידים מקסימלי'
+              handleChange={handleChange}
+              hebrew='true'
+              value={maxStudents}
+            />
+            <InputField
+              name='studentPrice'
+              type='number'
+              label='מחיר לשעה לסטודנט'
+              handleChange={handleChange}
+              hebrew='true'
+              value={studentPrice}
+            />
+            <InputField
+              name='price'
+              type='number'
+              label='מחיר רגיל'
+              handleChange={handleChange}
+              hebrew='true'
+              value={price}
+            />
+          </div>
+          <SelectInput name='active' handleChange={handleChange} label='פעיל' />
+          <div className='buttons'>
+            <MyButton
+              type='button'
+              onClick={() => history.push('/settings/Categories-list')}
+              forgot
+            >
+              ביטול
+            </MyButton>
+            <MyButton>{saveIcon}</MyButton>
+          </div>
+        </form>
+      </UpdatePageContainer>
+    </PageSpinner>
   );
 };
 

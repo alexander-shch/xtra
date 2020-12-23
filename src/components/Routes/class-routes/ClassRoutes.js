@@ -1,4 +1,4 @@
-import React, { useEffect, lazy, Suspense } from 'react';
+import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
@@ -18,11 +18,9 @@ import DeleteBox from '../../delete-box/DeleteBox';
 import { setAlert } from '../../../Redux/My-Alert/myAlert.action';
 import { getBuildingsData } from '../../../Redux/buildings/buildings.actions';
 import { closeSettingMenu } from '../../../Redux/settingsView/settings.actions';
-import Spinner from '../../spinner/Spinner';
-const ClassList = lazy(() => import('../../../pages/class/ClassList'));
-const EditClass = lazy(() =>
-  import('../../../pages/class/edit-class/EditClass')
-);
+
+import EditClass from '../../../pages/class/edit-class/EditClass';
+import ClassList from '../../../pages/class/ClassList';
 
 const ClassRoutes = ({
   getBuildingsData,
@@ -55,53 +53,51 @@ const ClassRoutes = ({
 
   return (
     <>
-      <Suspense fallback={<Spinner />}>
-        <DeleteBox
-          confirmMessageData={confirmMessageData}
-          closeConfirmMessage={closeConfirmMessage}
-          deleteFunction={deleteClass}
-        />
-        <Route
-          exact
-          path={`${match.path}`}
-          render={() => (
-            <ClassList
-              classes={classes}
-              buildings={buildings}
-              loading={pageLoading}
-              deleteList={deleteList}
-            />
-          )}
-        />
-        <Route
-          exact
-          path={`${match.path}/addNewClass`}
-          render={() => (
-            <EditClass
-              classes={classes}
-              buildings={buildings}
-              process={process}
-              addNewClass={addNewClass}
-              setAlert={setAlert}
-            />
-          )}
-        />
-        <Route
-          path={`${match.path}/updateClass/:classID/`}
-          render={() => (
-            <EditClass
-              getSingleClass={getSingleClass}
-              buildings={buildings}
-              singleClass={singleClass}
-              process={process}
-              calenderLoading={calenderLoading}
-              setAlert={setAlert}
-              jewishHolydays={jewishHolydays}
-              {...props}
-            />
-          )}
-        />
-      </Suspense>
+      <DeleteBox
+        confirmMessageData={confirmMessageData}
+        closeConfirmMessage={closeConfirmMessage}
+        deleteFunction={deleteClass}
+      />
+      <Route
+        exact
+        path={`${match.path}`}
+        render={() => (
+          <ClassList
+            classes={classes}
+            buildings={buildings}
+            loading={pageLoading}
+            deleteList={deleteList}
+          />
+        )}
+      />
+      <Route
+        exact
+        path={`${match.path}/addNewClass`}
+        render={() => (
+          <EditClass
+            classes={classes}
+            buildings={buildings}
+            process={process}
+            addNewClass={addNewClass}
+            setAlert={setAlert}
+          />
+        )}
+      />
+      <Route
+        path={`${match.path}/updateClass/:classID/`}
+        render={() => (
+          <EditClass
+            getSingleClass={getSingleClass}
+            buildings={buildings}
+            singleClass={singleClass}
+            process={process}
+            calenderLoading={calenderLoading}
+            setAlert={setAlert}
+            jewishHolydays={jewishHolydays}
+            {...props}
+          />
+        )}
+      />
     </>
   );
 };

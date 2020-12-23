@@ -51,7 +51,6 @@ const GeneralDetails = ({
           hebrew='true'
           value={minStudents}
           handleChange={handleChange}
-          required
         />
         <InputField
           name='maxStudents'
@@ -60,7 +59,6 @@ const GeneralDetails = ({
           hebrew='true'
           value={maxStudents}
           handleChange={handleChange}
-          required
         />
       </div>
       <SelectInput
@@ -68,7 +66,6 @@ const GeneralDetails = ({
         label='מוצג באתר'
         value={active}
         handleChange={handleChange}
-        required
       />
       <TextArea
         name='assignToClassComments'

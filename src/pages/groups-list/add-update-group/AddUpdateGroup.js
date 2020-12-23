@@ -3,17 +3,46 @@ import { withRouter } from 'react-router-dom';
 import { UpdatePageContainer } from '../../../components/global-style/SettingSection';
 import TabsMenu from '../../../components/tabs-menu/TabsMenu';
 import MeetingDates from './group-tabs/meeting-dates/MeetingDates';
+import GroupDetails from './group-tabs/general-details/GroupDetails';
 
-const AddUpdateGroup = ({ match }) => {
+const AddUpdateGroup = ({
+  match,
+  lectures,
+  lectureLoading,
+  couponsList,
+  lecturesLoading,
+  searchField,
+}) => {
   //   const groupID = match.params.groupID;
   const groupID = true;
+  const [groupData, setGroupData] = useState({
+    assignedLecturers: [],
+  });
+  const { assignedLecturers } = groupData;
+  const addLecture = (lectureID) => {
+    if (assignedLecturers.includes(lectureID)) {
+      return;
+    }
+    setGroupData({
+      ...groupData,
+      assignedLecturers: [...assignedLecturers, lectureID],
+    });
+  };
+
+  const removeLecture = (lectureID) => {
+    setGroupData({
+      ...groupData,
+      assignedLecturers: assignedLecturers.filter((item) => item !== lectureID),
+    });
+  };
+
   const [currentTab, setCurrentTab] = useState(0);
   let tabLinks = [
     'פרטים כללים',
     'מועדי מפגשים ',
     'תקציב',
     'בונסים',
-    'רשימת מתעניינים',
+    'מתעניינים',
   ];
 
   const changeTab = (i) => {
@@ -27,7 +56,18 @@ const AddUpdateGroup = ({ match }) => {
   const toggleTab = () => {
     switch (currentTab) {
       case 0:
-        return <h1>פרטים</h1>;
+        return (
+          <GroupDetails
+            lectures={lectures}
+            lectureLoading={lectureLoading}
+            couponsList={couponsList}
+            addLecture={addLecture}
+            removeLecture={removeLecture}
+            groupData={groupData}
+            lecturesLoading={lecturesLoading}
+            searchField={searchField}
+          />
+        );
       case 1:
         return <MeetingDates />;
       case 2:

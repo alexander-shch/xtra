@@ -38,10 +38,7 @@ export const UpdatePageContainer = styled.div`
     width: 100%;
     padding: 0;
   }
-  h4,
-  h3 {
-    text-align: center;
-  }
+
   .buttons {
     display: flex;
     justify-content: center;

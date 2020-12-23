@@ -7,7 +7,7 @@ import { saveIcon } from '../../../utils/fontAwesome';
 import { withRouter } from 'react-router-dom';
 import DateInput from '../../../components/inputs/date-input/DateInput';
 import './semesterForm.style.scss';
-import Spinner from '../../../components/spinner/Spinner';
+import PageSpinner from '../../../components/spinner/page-spinner/PageSpinner';
 
 const AddUpdateSemester = ({
   history,
@@ -87,53 +87,53 @@ const AddUpdateSemester = ({
     history.push('/settings/Semesters');
   };
 
-  return innerSinglePageLoading ? (
-    <Spinner />
-  ) : (
-    <UpdatePageContainer>
-      <form onSubmit={handleSubmit}>
-        <InputField
-          name='name'
-          value={name}
-          type='text'
-          label='כותרת'
-          hebrew='true'
-          handleChange={handleChange}
-          required
-        />
-        <div className='dateInputs'>
-          <DateInput
+  return (
+    <PageSpinner active={innerSinglePageLoading}>
+      <UpdatePageContainer>
+        <form onSubmit={handleSubmit}>
+          <InputField
+            name='name'
+            value={name}
+            type='text'
+            label='כותרת'
+            hebrew='true'
             handleChange={handleChange}
-            name='startDate'
-            value={startDate}
-            label='תאריך התחלה'
+            required
           />
-          <DateInput
+          <div className='dateInputs'>
+            <DateInput
+              handleChange={handleChange}
+              name='startDate'
+              value={startDate}
+              label='תאריך התחלה'
+            />
+            <DateInput
+              handleChange={handleChange}
+              name='endDate'
+              value={endDate}
+              label='תאריך סיום'
+            />
+          </div>
+          <SelectInput
             handleChange={handleChange}
-            name='endDate'
-            value={endDate}
-            label='תאריך סיום'
+            name='active'
+            value={active}
+            label='פעיל'
+            required
           />
-        </div>
-        <SelectInput
-          handleChange={handleChange}
-          name='active'
-          value={active}
-          label='פעיל'
-          required
-        />
-        <div className='buttons'>
-          <MyButton
-            type='button'
-            onClick={() => history.push('/settings/Semesters')}
-            forgot
-          >
-            חזרה
-          </MyButton>
-          <MyButton>{saveIcon}</MyButton>
-        </div>
-      </form>
-    </UpdatePageContainer>
+          <div className='buttons'>
+            <MyButton
+              type='button'
+              onClick={() => history.push('/settings/Semesters')}
+              forgot
+            >
+              חזרה
+            </MyButton>
+            <MyButton>{saveIcon}</MyButton>
+          </div>
+        </form>
+      </UpdatePageContainer>
+    </PageSpinner>
   );
 };
 

@@ -7,7 +7,7 @@ export const InputFlex = Styled.div`
     width: 50%;
     margin-left: auto;
   }
-  .groupInput {
+  .groupInput, .groupDateInput {
     flex: 0 50%;
   }
 

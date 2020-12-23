@@ -9,7 +9,7 @@ import { codeGenerator } from '../../../utils/coupons.utils';
 import { saveIcon } from '../../../utils/fontAwesome';
 import { withRouter } from 'react-router-dom';
 import { setAlert } from '../../../Redux/My-Alert/myAlert.action';
-import Spinner from '../../../components/spinner/Spinner';
+import PageSpinner from '../../../components/spinner/page-spinner/PageSpinner';
 
 const AddUpdateCoupon = ({
   match,
@@ -102,81 +102,81 @@ const AddUpdateCoupon = ({
     effectiveFrom,
     effectiveTo,
   } = couponData;
-  return innerPageLoading ? (
-    <Spinner />
-  ) : (
-    <UpdatePageContainer>
-      <form onSubmit={handleSubmit}>
-        <InputField
-          name='title'
-          type='text'
-          label='כותרת'
-          value={title}
-          handleChange={handleChange}
-          required
-        />
-        <Flex>
+  return (
+    <PageSpinner active={innerPageLoading}>
+      <UpdatePageContainer>
+        <form onSubmit={handleSubmit}>
           <InputField
-            name='code'
+            name='title'
             type='text'
-            label='קוד הטבה'
-            value={code}
+            label='כותרת'
+            value={title}
             handleChange={handleChange}
             required
-            withbutton='true'
           />
-          <MyButton onClick={() => generateCoupon()} type='button' generate>
-            יצר קוד
-          </MyButton>
-        </Flex>
-        <DateInputs>
-          <DateInput
-            name='effectiveFrom'
-            label='מתאריך'
-            value={effectiveFrom}
+          <Flex>
+            <InputField
+              name='code'
+              type='text'
+              label='קוד הטבה'
+              value={code}
+              handleChange={handleChange}
+              required
+              withbutton='true'
+            />
+            <MyButton onClick={() => generateCoupon()} type='button' generate>
+              יצר קוד
+            </MyButton>
+          </Flex>
+          <DateInputs>
+            <DateInput
+              name='effectiveFrom'
+              label='מתאריך'
+              value={effectiveFrom}
+              handleChange={handleChange}
+            />
+            <DateInput
+              name='effectiveTo'
+              label='עד תאריך'
+              value={effectiveTo}
+              handleChange={handleChange}
+            />
+          </DateInputs>
+          <InputField
+            name='discount'
+            type='number'
+            label='הנחה'
+            value={discount}
+            handleChange={handleChange}
+            required
+          />
+          <SelectInput
+            name='isPercent'
+            label='הנחה באחוזים'
+            value={isPercent}
             handleChange={handleChange}
           />
-          <DateInput
-            name='effectiveTo'
-            label='עד תאריך'
-            value={effectiveTo}
+          <SelectInput
+            name='active'
+            label='פעיל'
+            value={active}
             handleChange={handleChange}
           />
-        </DateInputs>
-        <InputField
-          name='discount'
-          type='number'
-          label='הנחה'
-          value={discount}
-          handleChange={handleChange}
-          required
-        />
-        <SelectInput
-          name='isPercent'
-          label='הנחה באחוזים'
-          value={isPercent}
-          handleChange={handleChange}
-        />
-        <SelectInput
-          name='active'
-          label='פעיל'
-          value={active}
-          handleChange={handleChange}
-        />
-        <div className='buttons'>
-          <MyButton
-            onClick={() => history.push('/settings/coupons')}
-            type='button'
-            forgot
-          >
-            חזרה
-          </MyButton>
-          <MyButton save loading={process}>
-            {saveIcon}
-          </MyButton>
-        </div>
-      </form>
-    </UpdatePageContainer>
+          <div className='buttons'>
+            <MyButton
+              onClick={() => history.push('/settings/coupons')}
+              type='button'
+              forgot
+            >
+              חזרה
+            </MyButton>
+            <MyButton save loading={process}>
+              {saveIcon}
+            </MyButton>
+          </div>
+        </form>
+      </UpdatePageContainer>
+    </PageSpinner>
   );
 };
 

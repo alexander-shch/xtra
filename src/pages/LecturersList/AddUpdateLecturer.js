@@ -3,7 +3,7 @@ import AddLecturerForm from './Add-Update-Lecturer/Add-Lecturer/AddLecturerForm'
 import UpdateLectureForm from './Add-Update-Lecturer/Update-Lecturer/UpdateLectureForm';
 import { UpdatePageContainer } from '../../components/global-style/SettingSection';
 import { withRouter } from 'react-router-dom';
-import Spinner from '../../components/spinner/Spinner';
+import PageSpinner from '../../components/spinner/page-spinner/PageSpinner';
 
 const AddUpdateLecturer = ({
   vatList,
@@ -119,26 +119,22 @@ const AddUpdateLecturer = ({
   };
 
   return (
-    <>
-      {innerSinglePageLoading ? (
-        <Spinner />
-      ) : (
-        <UpdatePageContainer>
-          <AddLecturerForm
-            handleChange={handleChange}
-            handleEditorChange={handleEditorChange}
-            handleSubmit={handleSubmit}
-            vatList={vatList}
-            lectureDeteils={lectureDeteils}
-            lecturesLoading={lecturesLoading}
-            lectureID={lectureID}
-            clearSingle={clearSingle}
-            inProcess={inProcess}
-          />
-          {singleLecture ? <UpdateLectureForm id={lectureID} /> : null}
-        </UpdatePageContainer>
-      )}
-    </>
+    <PageSpinner active={innerSinglePageLoading}>
+      <UpdatePageContainer>
+        <AddLecturerForm
+          handleChange={handleChange}
+          handleEditorChange={handleEditorChange}
+          handleSubmit={handleSubmit}
+          vatList={vatList}
+          lectureDeteils={lectureDeteils}
+          lecturesLoading={lecturesLoading}
+          lectureID={lectureID}
+          clearSingle={clearSingle}
+          inProcess={inProcess}
+        />
+        {singleLecture ? <UpdateLectureForm id={lectureID} /> : null}
+      </UpdatePageContainer>
+    </PageSpinner>
   );
 };
 

@@ -4,8 +4,8 @@ import SelectInput from '../../../components/inputs/select-input/SelectInput';
 import { UpdatePageContainer } from '../../../components/global-style/SettingSection';
 import MyButton from '../../../components/My-button/MyButton';
 import { withRouter } from 'react-router-dom';
-import Spinner from '../../../components/spinner/Spinner';
 import { saveIcon } from '../../../utils/fontAwesome';
+import PageSpinner from '../../../components/spinner/page-spinner/PageSpinner';
 
 const AddUpdateBuilding = ({
   history,
@@ -76,36 +76,36 @@ const AddUpdateBuilding = ({
     history.push('/settings/buildings/');
   };
 
-  return innerSinglePageLoading ? (
-    <Spinner />
-  ) : (
-    <UpdatePageContainer>
-      <h3>{buildingID ? 'עריכה' : 'הוספה'}</h3>
-      <form onSubmit={handleSubmit}>
-        <InputField
-          name='name'
-          type='text'
-          label='שם המקום'
-          value={name}
-          handleChange={handleChange}
-          hebrew='true'
-          required
-        />
-        <SelectInput
-          name='active'
-          label='פעיל'
-          value={active}
-          handleChange={handleChange}
-          required
-        />
-        <div className='buttons'>
-          <MyButton>{saveIcon}</MyButton>
-          <MyButton type='button' onClick={() => cancel()} forgot>
-            חזרה
-          </MyButton>
-        </div>
-      </form>
-    </UpdatePageContainer>
+  return (
+    <PageSpinner active={innerSinglePageLoading}>
+      <UpdatePageContainer>
+        <h4>{buildingID ? 'עריכת בניין' : 'הוספת בניין'}</h4>
+        <form onSubmit={handleSubmit}>
+          <InputField
+            name='name'
+            type='text'
+            label='שם המקום'
+            value={name}
+            handleChange={handleChange}
+            hebrew='true'
+            required
+          />
+          <SelectInput
+            name='active'
+            label='פעיל'
+            value={active}
+            handleChange={handleChange}
+            required
+          />
+          <div className='buttons'>
+            <MyButton type='button' onClick={() => cancel()} forgot>
+              חזרה
+            </MyButton>
+            <MyButton>{saveIcon}</MyButton>
+          </div>
+        </form>
+      </UpdatePageContainer>
+    </PageSpinner>
   );
 };
 

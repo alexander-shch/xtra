@@ -3,11 +3,9 @@ import InputField from '../../components/inputs/input-field/InputField';
 import SelectInput from '../../components/inputs/select-input/SelectInput';
 import { UpdatePageContainer } from '../../components/global-style/SettingSection';
 import MyButton from '../../components/My-button/MyButton';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSave } from '@fortawesome/free-solid-svg-icons';
 import { withRouter } from 'react-router-dom';
-import Spinner from '../../components/spinner/Spinner';
-const element = <FontAwesomeIcon icon={faSave} />;
+import PageSpinner from '../../components/spinner/page-spinner/PageSpinner';
+import { saveIcon } from '../../utils/fontAwesome';
 
 const AddUpdateVatList = ({
   history,
@@ -80,52 +78,52 @@ const AddUpdateVatList = ({
     history.push('/settings/VAT-multipliers');
   };
 
-  return innerSinglePageLoading ? (
-    <Spinner />
-  ) : (
-    <UpdatePageContainer>
-      <h3>{vatID ? 'עריכה' : 'הוספה'}</h3>
-      <form onSubmit={handleSubmit}>
-        <InputField
-          name='title'
-          type='text'
-          label='כותרת'
-          value={title}
-          handleChange={handleChange}
-          hebrew='true'
-          required
-        />
-        <InputField
-          name='duplicate'
-          type='number'
-          label='מכפילי שכר'
-          value={duplicate}
-          handleChange={handleChange}
-          hebrew='true'
-          required
-        />
-        <SelectInput
-          name='vat'
-          label='האם להוסיף מעמ'
-          value={vat}
-          handleChange={handleChange}
-          required
-        />
-        <SelectInput
-          name='active'
-          label='פעיל'
-          value={active}
-          handleChange={handleChange}
-          required
-        />
-        <div className='buttons'>
-          <MyButton type='button' onClick={() => cancel()} forgot>
-            ביטול
-          </MyButton>
-          <MyButton>{element}</MyButton>
-        </div>
-      </form>
-    </UpdatePageContainer>
+  return (
+    <PageSpinner active={innerSinglePageLoading}>
+      <UpdatePageContainer>
+        <h3>{vatID ? 'עריכה' : 'הוספה'}</h3>
+        <form onSubmit={handleSubmit}>
+          <InputField
+            name='title'
+            type='text'
+            label='כותרת'
+            value={title}
+            handleChange={handleChange}
+            hebrew='true'
+            required
+          />
+          <InputField
+            name='duplicate'
+            type='number'
+            label='מכפילי שכר'
+            value={duplicate}
+            handleChange={handleChange}
+            hebrew='true'
+            required
+          />
+          <SelectInput
+            name='vat'
+            label='האם להוסיף מעמ'
+            value={vat}
+            handleChange={handleChange}
+            required
+          />
+          <SelectInput
+            name='active'
+            label='פעיל'
+            value={active}
+            handleChange={handleChange}
+            required
+          />
+          <div className='buttons'>
+            <MyButton type='button' onClick={() => cancel()} forgot>
+              ביטול
+            </MyButton>
+            <MyButton>{saveIcon}</MyButton>
+          </div>
+        </form>
+      </UpdatePageContainer>
+    </PageSpinner>
   );
 };
 

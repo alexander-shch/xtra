@@ -10,7 +10,7 @@ flex-direction: column;
 position: relative;
 	z-index: 0;
 	width: 55%;
-	height: 500px;
+	height: ${(p) => (p.height ? p.height : '500px')};
 	border-radius: 10px;
 	overflow: hidden;
     padding: 2rem;
