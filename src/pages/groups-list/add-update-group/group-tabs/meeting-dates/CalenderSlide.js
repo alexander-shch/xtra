@@ -1,10 +1,15 @@
 import React from 'react';
 import MyButton from '../../../../../components/My-button/MyButton';
-import FullCalendar from '@fullcalendar/react';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import interactionPlugin from '@fullcalendar/interaction';
+// import FullCalendar from '@fullcalendar/react';
+// import dayGridPlugin from '@fullcalendar/daygrid';
+// import interactionPlugin from '@fullcalendar/interaction';
 import { CalenderSlideContainer, SlideContainer } from './meetingStyle';
 import { listIcon } from '../../../../../utils/fontAwesome';
+import {
+  CalenderComp,
+  interaction,
+  daysGrid,
+} from '../../../../../utils/calender.utils';
 
 const CalenderSlide = ({ setCurrentSlide, currentSlide }) => {
   let isActive = currentSlide === 'calender' ? true : false;
@@ -15,7 +20,7 @@ const CalenderSlide = ({ setCurrentSlide, currentSlide }) => {
           {listIcon}
         </MyButton>
         <SlideContainer>
-          <FullCalendar
+          <CalenderComp
             headerToolbar={{
               left: 'prev,next today',
               right: 'title',
@@ -32,7 +37,7 @@ const CalenderSlide = ({ setCurrentSlide, currentSlide }) => {
             selectMirror={true}
             dayMaxEvents={true}
             displayEventTime={false}
-            plugins={[dayGridPlugin, interactionPlugin]}
+            plugins={[daysGrid, interaction]}
           />
         </SlideContainer>
       </CalenderSlideContainer>
