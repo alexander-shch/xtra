@@ -1,8 +1,13 @@
 import React from 'react';
 import './calendar.style.scss';
-import FullCalendar from '@fullcalendar/react';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import interactionPlugin from '@fullcalendar/interaction';
+// import FullCalendar from '@fullcalendar/react';
+// import dayGridPlugin from '@fullcalendar/daygrid';
+// import interactionPlugin from '@fullcalendar/interaction';
+import {
+  CalenderComp,
+  interaction,
+  daysGrid,
+} from '../../utils/calender.utils';
 
 const Calendar = ({
   events,
@@ -34,7 +39,7 @@ const Calendar = ({
 
   return (
     <>
-      <FullCalendar
+      <CalenderComp
         headerToolbar={{
           left: 'prev,next today',
           right: 'title',
@@ -52,7 +57,7 @@ const Calendar = ({
         selectMirror={true}
         dayMaxEvents={true}
         displayEventTime={false}
-        plugins={[dayGridPlugin, interactionPlugin]}
+        plugins={[daysGrid, interaction]}
         select={handleDateSelect}
         eventClick={handleEventClick}
         eventSources={[jewishHolydays, eventsToDisplay]}
